@@ -182,6 +182,7 @@
     <Folder Include="clients\" />
     <Folder Include="copyTypes\" />
     <Folder Include="copy\" />
+    <Folder Include="db_project\" />
     <Folder Include="directoryTree\" />
     <Folder Include="docTypes\" />
     <Folder Include="document\" />

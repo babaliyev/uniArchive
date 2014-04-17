@@ -12978,8 +12978,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM ""ARCH"".""ADDRESS_DICTIONARY"" WHERE ((""ID"" = :Original_ID) AND ((:IsNull_PARENT_ID = 1 AND ""PARENT_ID"" IS NULL) OR (""PARENT_ID"" = :Original_PARENT_ID)) AND (""NAME"" = :Original_NAME) AND ((:IsNull_DESCRIPTION = 1 AND ""DESCRIPTION"" IS NULL) OR (""DESCRIPTION"" = :Original_DESCRIPTION)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_ADDRESS_DICTIONARY.DEL_ADDRESS_DICTIONARY";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -12988,56 +12988,49 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_ADDRESS_DICTIONARY.INS_ADDRESS_DICTIONARY_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_PARENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":PARENT_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "PARENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_PARENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "PARENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
+            param.ParameterName = ":NAME";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 500;
             param.IsNullable = true;
             param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
+            param.ParameterName = ":DESCRIPTION";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 2000;
             param.IsNullable = true;
             param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""ADDRESS_DICTIONARY"" SET ""ID"" = :ID, ""PARENT_ID"" = :PARENT_ID, ""NAME"" = :NAME, ""DESCRIPTION"" = :DESCRIPTION WHERE ((""ID"" = :Original_ID) AND ((:IsNull_PARENT_ID = 1 AND ""PARENT_ID"" IS NULL) OR (""PARENT_ID"" = :Original_PARENT_ID)) AND (""NAME"" = :Original_NAME) AND ((:IsNull_DESCRIPTION = 1 AND ""DESCRIPTION"" IS NULL) OR (""DESCRIPTION"" = :Original_DESCRIPTION)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_ADDRESS_DICTIONARY.UPD_ADDRESS_DICTIONARY";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "PARENT_ID";
@@ -13057,54 +13050,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
             param.IsNullable = true;
             param.SourceColumn = "DESCRIPTION";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_PARENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "PARENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_PARENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "PARENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -13182,30 +13127,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, global::System.Nullable<int> Original_PARENT_ID, string Original_NAME, string Original_DESCRIPTION) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_PARENT_ID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_PARENT_ID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_NAME));
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_DESCRIPTION));
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -13225,9 +13148,49 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, global::System.Nullable<decimal> PARENT_ID, string NAME, string DESCRIPTION) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            if ((PARENT_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(PARENT_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((NAME == null)) {
+                throw new global::System.ArgumentNullException("NAME");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(NAME));
+            }
+            if ((DESCRIPTION == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(DESCRIPTION));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, global::System.Nullable<int> PARENT_ID, string NAME, string DESCRIPTION, int Original_ID, global::System.Nullable<int> Original_PARENT_ID, string Original_NAME, string Original_DESCRIPTION) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, global::System.Nullable<int> PARENT_ID, string NAME, string DESCRIPTION) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((PARENT_ID.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(PARENT_ID.Value));
             }
@@ -13246,29 +13209,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(DESCRIPTION));
             }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_ID));
-            if ((Original_PARENT_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_PARENT_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_NAME));
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_DESCRIPTION));
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -13283,14 +13223,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> PARENT_ID, string NAME, string DESCRIPTION, int Original_ID, global::System.Nullable<int> Original_PARENT_ID, string Original_NAME, string Original_DESCRIPTION) {
-            return this.Update(Original_ID, PARENT_ID, NAME, DESCRIPTION, Original_ID, Original_PARENT_ID, Original_NAME, Original_DESCRIPTION);
         }
     }
     
@@ -13423,8 +13355,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM ""ARCH"".""ATTRIBUTES"" WHERE ((""ID"" = :Original_ID) AND (""NAME"" = :Original_NAME) AND ((:IsNull_DESCRIPTION = 1 AND ""DESCRIPTION"" IS NULL) OR (""DESCRIPTION"" = :Original_DESCRIPTION)) AND (""VALUETYPE"" = :Original_VALUETYPE) AND ((:IsNull_REFERENCE_TYPE_ID = 1 AND ""REFERENCE_TYPE_ID"" IS NULL) OR (""REFERENCE_TYPE_ID"" = :Original_REFERENCE_TYPE_ID)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_ATTRIBUTES.DEL_ATTRIBUTES";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -13433,63 +13365,49 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_ATTRIBUTES.INS_ATTRIBUTES";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
+            param.ParameterName = ":NAME";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 500;
             param.IsNullable = true;
             param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":DESCRIPTION";
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 2000;
             param.IsNullable = true;
             param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
+            param.ParameterName = ":VALUETYPE";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_VALUETYPE";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 100;
             param.IsNullable = true;
             param.SourceColumn = "VALUETYPE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_REFERENCE_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":REFERENCE_TYPE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "REFERENCE_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_REFERENCE_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "REFERENCE_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""ATTRIBUTES"" SET ""ID"" = :ID, ""NAME"" = :NAME, ""DESCRIPTION"" = :DESCRIPTION, ""VALUETYPE"" = :VALUETYPE, ""REFERENCE_TYPE_ID"" = :REFERENCE_TYPE_ID WHERE ((""ID"" = :Original_ID) AND (""NAME"" = :Original_NAME) AND ((:IsNull_DESCRIPTION = 1 AND ""DESCRIPTION"" IS NULL) OR (""DESCRIPTION"" = :Original_DESCRIPTION)) AND (""VALUETYPE"" = :Original_VALUETYPE) AND ((:IsNull_REFERENCE_TYPE_ID = 1 AND ""REFERENCE_TYPE_ID"" IS NULL) OR (""REFERENCE_TYPE_ID"" = :Original_REFERENCE_TYPE_ID)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_ATTRIBUTES.UPD_ATTRIBUTES";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "NAME";
@@ -13515,61 +13433,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "REFERENCE_TYPE_ID";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_VALUETYPE";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "VALUETYPE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_REFERENCE_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "REFERENCE_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_REFERENCE_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "REFERENCE_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -13648,30 +13511,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_NAME, string Original_DESCRIPTION, string Original_VALUETYPE, int Original_REFERENCE_TYPE_ID) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_NAME));
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_DESCRIPTION));
-            }
-            if ((Original_VALUETYPE == null)) {
-                throw new global::System.ArgumentNullException("Original_VALUETYPE");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_VALUETYPE));
-            }
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-            this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_REFERENCE_TYPE_ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -13691,9 +13532,54 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string NAME, string DESCRIPTION, string VALUETYPE, global::System.Nullable<decimal> REFERENCE_TYPE_ID) {
+            if ((NAME == null)) {
+                throw new global::System.ArgumentNullException("NAME");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(NAME));
+            }
+            if ((DESCRIPTION == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(DESCRIPTION));
+            }
+            if ((VALUETYPE == null)) {
+                throw new global::System.ArgumentNullException("VALUETYPE");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(VALUETYPE));
+            }
+            if ((REFERENCE_TYPE_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(REFERENCE_TYPE_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, string NAME, string DESCRIPTION, string VALUETYPE, int REFERENCE_TYPE_ID, int Original_ID, string Original_NAME, string Original_DESCRIPTION, string Original_VALUETYPE, int Original_REFERENCE_TYPE_ID) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, string NAME, string DESCRIPTION, string VALUETYPE, int REFERENCE_TYPE_ID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((NAME == null)) {
                 throw new global::System.ArgumentNullException("NAME");
             }
@@ -13713,29 +13599,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(VALUETYPE));
             }
             this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(REFERENCE_TYPE_ID));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_NAME));
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_DESCRIPTION));
-            }
-            if ((Original_VALUETYPE == null)) {
-                throw new global::System.ArgumentNullException("Original_VALUETYPE");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_VALUETYPE));
-            }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_REFERENCE_TYPE_ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -13750,14 +13613,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string NAME, string DESCRIPTION, string VALUETYPE, int REFERENCE_TYPE_ID, int Original_ID, string Original_NAME, string Original_DESCRIPTION, string Original_VALUETYPE, int Original_REFERENCE_TYPE_ID) {
-            return this.Update(Original_ID, NAME, DESCRIPTION, VALUETYPE, REFERENCE_TYPE_ID, Original_ID, Original_NAME, Original_DESCRIPTION, Original_VALUETYPE, Original_REFERENCE_TYPE_ID);
         }
     }
     
@@ -14415,8 +14270,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM ""ARCH"".""CLIENTS"" WHERE ((""ID"" = :Original_ID) AND ((:IsNull_FULL_NAME = 1 AND ""FULL_NAME"" IS NULL) OR (""FULL_NAME"" = :Original_FULL_NAME)) AND ((:IsNull_FIRST_NAME = 1 AND ""FIRST_NAME"" IS NULL) OR (""FIRST_NAME"" = :Original_FIRST_NAME)) AND ((:IsNull_SUR_NAME = 1 AND ""SUR_NAME"" IS NULL) OR (""SUR_NAME"" = :Original_SUR_NAME)) AND ((:IsNull_LAST_NAME = 1 AND ""LAST_NAME"" IS NULL) OR (""LAST_NAME"" = :Original_LAST_NAME)) AND (""CLIENT_TYPE"" = :Original_CLIENT_TYPE) AND (""IDENTIFICATION_NUMBER"" = :Original_IDENTIFICATION_NUMBER) AND ((:IsNull_ADDRESS = 1 AND ""ADDRESS"" IS NULL) OR (""ADDRESS"" = :Original_ADDRESS)) AND ((:IsNull_CONTACTS = 1 AND ""CONTACTS"" IS NULL) OR (""CONTACTS"" = :Original_CONTACTS)) AND (""FULL_ACCESS"" = :Original_FULL_ACCESS))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_CLIENTS.DEL_CLIENTS";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -14425,135 +14280,91 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_CLIENTS.INS_CLIENTS_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_FULL_NAME";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":FULL_NAME";
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 500;
             param.IsNullable = true;
             param.SourceColumn = "FULL_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FULL_NAME";
+            param.ParameterName = ":FIRST_NAME";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "FULL_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_FIRST_NAME";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.Size = 100;
             param.IsNullable = true;
             param.SourceColumn = "FIRST_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FIRST_NAME";
+            param.ParameterName = ":SUR_NAME";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "FIRST_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_SUR_NAME";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.Size = 100;
             param.IsNullable = true;
             param.SourceColumn = "SUR_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_SUR_NAME";
+            param.ParameterName = ":LAST_NAME";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "SUR_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_LAST_NAME";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.Size = 100;
             param.IsNullable = true;
             param.SourceColumn = "LAST_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_LAST_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "LAST_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_CLIENT_TYPE";
+            param.ParameterName = ":CLIENT_TYPE";
             param.DbType = global::System.Data.DbType.Decimal;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "CLIENT_TYPE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_IDENTIFICATION_NUMBER";
+            param.ParameterName = ":IDENTIFICATION_NUMBER";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 20;
             param.IsNullable = true;
             param.SourceColumn = "IDENTIFICATION_NUMBER";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_ADDRESS";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ADDRESS";
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 500;
             param.IsNullable = true;
             param.SourceColumn = "ADDRESS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ADDRESS";
+            param.ParameterName = ":CONTACTS";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "ADDRESS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_CONTACTS";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.Size = 500;
             param.IsNullable = true;
             param.SourceColumn = "CONTACTS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_CONTACTS";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "CONTACTS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FULL_ACCESS";
-            param.DbType = global::System.Data.DbType.Int16;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
+            param.ParameterName = ":FULL_ACCESS";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "FULL_ACCESS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""CLIENTS"" SET ""ID"" = :ID, ""FULL_NAME"" = :FULL_NAME, ""FIRST_NAME"" = :FIRST_NAME, ""SUR_NAME"" = :SUR_NAME, ""LAST_NAME"" = :LAST_NAME, ""CLIENT_TYPE"" = :CLIENT_TYPE, ""IDENTIFICATION_NUMBER"" = :IDENTIFICATION_NUMBER, ""ADDRESS"" = :ADDRESS, ""CONTACTS"" = :CONTACTS, ""FULL_ACCESS"" = :FULL_ACCESS WHERE ((""ID"" = :Original_ID) AND ((:IsNull_FULL_NAME = 1 AND ""FULL_NAME"" IS NULL) OR (""FULL_NAME"" = :Original_FULL_NAME)) AND ((:IsNull_FIRST_NAME = 1 AND ""FIRST_NAME"" IS NULL) OR (""FIRST_NAME"" = :Original_FIRST_NAME)) AND ((:IsNull_SUR_NAME = 1 AND ""SUR_NAME"" IS NULL) OR (""SUR_NAME"" = :Original_SUR_NAME)) AND ((:IsNull_LAST_NAME = 1 AND ""LAST_NAME"" IS NULL) OR (""LAST_NAME"" = :Original_LAST_NAME)) AND (""CLIENT_TYPE"" = :Original_CLIENT_TYPE) AND (""IDENTIFICATION_NUMBER"" = :Original_IDENTIFICATION_NUMBER) AND ((:IsNull_ADDRESS = 1 AND ""ADDRESS"" IS NULL) OR (""ADDRESS"" = :Original_ADDRESS)) AND ((:IsNull_CONTACTS = 1 AND ""CONTACTS"" IS NULL) OR (""CONTACTS"" = :Original_CONTACTS)) AND (""FULL_ACCESS"" = :Original_FULL_ACCESS))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_CLIENTS.UPD_CLIENTS";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "FULL_NAME";
@@ -14610,133 +14421,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
             param.IsNullable = true;
             param.SourceColumn = "FULL_ACCESS";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_FULL_NAME";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "FULL_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FULL_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "FULL_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_FIRST_NAME";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "FIRST_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FIRST_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "FIRST_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_SUR_NAME";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "SUR_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_SUR_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "SUR_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_LAST_NAME";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "LAST_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_LAST_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "LAST_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_CLIENT_TYPE";
-            param.DbType = global::System.Data.DbType.Decimal;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
-            param.IsNullable = true;
-            param.SourceColumn = "CLIENT_TYPE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_IDENTIFICATION_NUMBER";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "IDENTIFICATION_NUMBER";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_ADDRESS";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ADDRESS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ADDRESS";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "ADDRESS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_CONTACTS";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "CONTACTS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_CONTACTS";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "CONTACTS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FULL_ACCESS";
-            param.DbType = global::System.Data.DbType.Int16;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
-            param.IsNullable = true;
-            param.SourceColumn = "FULL_ACCESS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -14815,64 +14499,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_FULL_NAME, string Original_FIRST_NAME, string Original_SUR_NAME, string Original_LAST_NAME, decimal Original_CLIENT_TYPE, string Original_IDENTIFICATION_NUMBER, string Original_ADDRESS, string Original_CONTACTS, short Original_FULL_ACCESS) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_FULL_NAME == null)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_FULL_NAME));
-            }
-            if ((Original_FIRST_NAME == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_FIRST_NAME));
-            }
-            if ((Original_SUR_NAME == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_SUR_NAME));
-            }
-            if ((Original_LAST_NAME == null)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_LAST_NAME));
-            }
-            this.Adapter.DeleteCommand.Parameters[9].Value = ((decimal)(Original_CLIENT_TYPE));
-            if ((Original_IDENTIFICATION_NUMBER == null)) {
-                throw new global::System.ArgumentNullException("Original_IDENTIFICATION_NUMBER");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((string)(Original_IDENTIFICATION_NUMBER));
-            }
-            if ((Original_ADDRESS == null)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((string)(Original_ADDRESS));
-            }
-            if ((Original_CONTACTS == null)) {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((string)(Original_CONTACTS));
-            }
-            this.Adapter.DeleteCommand.Parameters[15].Value = ((short)(Original_FULL_ACCESS));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -14892,29 +14520,75 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, string FULL_NAME, string FIRST_NAME, string SUR_NAME, string LAST_NAME, decimal CLIENT_TYPE, string IDENTIFICATION_NUMBER, string ADDRESS, string CONTACTS, decimal FULL_ACCESS) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            if ((FULL_NAME == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(FULL_NAME));
+            }
+            if ((FIRST_NAME == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(FIRST_NAME));
+            }
+            if ((SUR_NAME == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(SUR_NAME));
+            }
+            if ((LAST_NAME == null)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(LAST_NAME));
+            }
+            this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(CLIENT_TYPE));
+            if ((IDENTIFICATION_NUMBER == null)) {
+                throw new global::System.ArgumentNullException("IDENTIFICATION_NUMBER");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(IDENTIFICATION_NUMBER));
+            }
+            if ((ADDRESS == null)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(ADDRESS));
+            }
+            if ((CONTACTS == null)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((string)(CONTACTS));
+            }
+            this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(FULL_ACCESS));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    int ID, 
-                    string FULL_NAME, 
-                    string FIRST_NAME, 
-                    string SUR_NAME, 
-                    string LAST_NAME, 
-                    decimal CLIENT_TYPE, 
-                    string IDENTIFICATION_NUMBER, 
-                    string ADDRESS, 
-                    string CONTACTS, 
-                    short FULL_ACCESS, 
-                    int Original_ID, 
-                    string Original_FULL_NAME, 
-                    string Original_FIRST_NAME, 
-                    string Original_SUR_NAME, 
-                    string Original_LAST_NAME, 
-                    decimal Original_CLIENT_TYPE, 
-                    string Original_IDENTIFICATION_NUMBER, 
-                    string Original_ADDRESS, 
-                    string Original_CONTACTS, 
-                    short Original_FULL_ACCESS) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, string FULL_NAME, string FIRST_NAME, string SUR_NAME, string LAST_NAME, decimal CLIENT_TYPE, string IDENTIFICATION_NUMBER, string ADDRESS, string CONTACTS, short FULL_ACCESS) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((FULL_NAME == null)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
@@ -14959,63 +14633,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(CONTACTS));
             }
             this.Adapter.UpdateCommand.Parameters[9].Value = ((short)(FULL_ACCESS));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_ID));
-            if ((Original_FULL_NAME == null)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_FULL_NAME));
-            }
-            if ((Original_FIRST_NAME == null)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_FIRST_NAME));
-            }
-            if ((Original_SUR_NAME == null)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_SUR_NAME));
-            }
-            if ((Original_LAST_NAME == null)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_LAST_NAME));
-            }
-            this.Adapter.UpdateCommand.Parameters[19].Value = ((decimal)(Original_CLIENT_TYPE));
-            if ((Original_IDENTIFICATION_NUMBER == null)) {
-                throw new global::System.ArgumentNullException("Original_IDENTIFICATION_NUMBER");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((string)(Original_IDENTIFICATION_NUMBER));
-            }
-            if ((Original_ADDRESS == null)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((string)(Original_ADDRESS));
-            }
-            if ((Original_CONTACTS == null)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((string)(Original_CONTACTS));
-            }
-            this.Adapter.UpdateCommand.Parameters[25].Value = ((short)(Original_FULL_ACCESS));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -15030,33 +14647,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string FULL_NAME, 
-                    string FIRST_NAME, 
-                    string SUR_NAME, 
-                    string LAST_NAME, 
-                    decimal CLIENT_TYPE, 
-                    string IDENTIFICATION_NUMBER, 
-                    string ADDRESS, 
-                    string CONTACTS, 
-                    short FULL_ACCESS, 
-                    int Original_ID, 
-                    string Original_FULL_NAME, 
-                    string Original_FIRST_NAME, 
-                    string Original_SUR_NAME, 
-                    string Original_LAST_NAME, 
-                    decimal Original_CLIENT_TYPE, 
-                    string Original_IDENTIFICATION_NUMBER, 
-                    string Original_ADDRESS, 
-                    string Original_CONTACTS, 
-                    short Original_FULL_ACCESS) {
-            return this.Update(Original_ID, FULL_NAME, FIRST_NAME, SUR_NAME, LAST_NAME, CLIENT_TYPE, IDENTIFICATION_NUMBER, ADDRESS, CONTACTS, FULL_ACCESS, Original_ID, Original_FULL_NAME, Original_FIRST_NAME, Original_SUR_NAME, Original_LAST_NAME, Original_CLIENT_TYPE, Original_IDENTIFICATION_NUMBER, Original_ADDRESS, Original_CONTACTS, Original_FULL_ACCESS);
         }
     }
     
@@ -15193,7 +14783,7 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM ""ARCH"".""COPIES"" WHERE ((""ID"" = :Original_ID) AND (""DOCUMENT_ID"" = :Original_DOCUMENT_ID) AND (""COPY_TYPE_ID"" = :Original_COPY_TYPE_ID) AND (""NAME"" = :Original_NAME) AND (""FILE_NAME"" = :Original_FILE_NAME) AND (""FILE_EXTENTION"" = :Original_FILE_EXTENTION) AND (""PAGES_COUNT"" = :Original_PAGES_COUNT) AND (""FULL_ACCESS"" = :Original_FULL_ACCESS))";
+            this._adapter.DeleteCommand.CommandText = "DML_COPIES.DEL_COPIES";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
@@ -15203,69 +14793,85 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_COPIES.INS_COPIES_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":DOCUMENT_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "DOCUMENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":COPY_TYPE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "COPY_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
+            param.ParameterName = ":NAME";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 500;
             param.IsNullable = true;
             param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FILE_NAME";
+            param.ParameterName = ":FILE_NAME";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 500;
             param.IsNullable = true;
             param.SourceColumn = "FILE_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FILE_EXTENTION";
+            param.ParameterName = ":FILE_EXTENTION";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Varchar2;
+            param.Size = 500;
             param.IsNullable = true;
             param.SourceColumn = "FILE_EXTENTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_PAGES_COUNT";
+            param.ParameterName = ":FILE_BODY";
+            param.DbType = global::System.Data.DbType.Binary;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Blob;
+            param.Size = 1024;
+            param.IsNullable = true;
+            param.SourceColumn = "FILE_BODY";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":PAGES_COUNT";
             param.DbType = global::System.Data.DbType.Decimal;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "PAGES_COUNT";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FULL_ACCESS";
-            param.DbType = global::System.Data.DbType.Int16;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
+            param.ParameterName = ":FULL_ACCESS";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "FULL_ACCESS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""COPIES"" SET ""ID"" = :ID, ""DOCUMENT_ID"" = :DOCUMENT_ID, ""COPY_TYPE_ID"" = :COPY_TYPE_ID, ""NAME"" = :NAME, ""FILE_NAME"" = :FILE_NAME, ""FILE_EXTENTION"" = :FILE_EXTENTION, ""FILE_BODY"" = :FILE_BODY, ""PAGES_COUNT"" = :PAGES_COUNT, ""FULL_ACCESS"" = :FULL_ACCESS WHERE ((""ID"" = :Original_ID) AND (""DOCUMENT_ID"" = :Original_DOCUMENT_ID) AND (""COPY_TYPE_ID"" = :Original_COPY_TYPE_ID) AND (""NAME"" = :Original_NAME) AND (""FILE_NAME"" = :Original_FILE_NAME) AND (""FILE_EXTENTION"" = :Original_FILE_EXTENTION) AND (""PAGES_COUNT"" = :Original_PAGES_COUNT) AND (""FULL_ACCESS"" = :Original_FULL_ACCESS))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_COPIES.UPD_COPIES";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "DOCUMENT_ID";
@@ -15319,67 +14925,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
             param.IsNullable = true;
             param.SourceColumn = "FULL_ACCESS";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DOCUMENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FILE_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "FILE_NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FILE_EXTENTION";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Varchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "FILE_EXTENTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_PAGES_COUNT";
-            param.DbType = global::System.Data.DbType.Decimal;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
-            param.IsNullable = true;
-            param.SourceColumn = "PAGES_COUNT";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FULL_ACCESS";
-            param.DbType = global::System.Data.DbType.Int16;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
-            param.IsNullable = true;
-            param.SourceColumn = "FULL_ACCESS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -15458,30 +15003,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, int Original_DOCUMENT_ID, int Original_COPY_TYPE_ID, string Original_NAME, string Original_FILE_NAME, string Original_FILE_EXTENTION, decimal Original_PAGES_COUNT, short Original_FULL_ACCESS) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_DOCUMENT_ID));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_COPY_TYPE_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_NAME));
-            }
-            if ((Original_FILE_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_FILE_NAME");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_FILE_NAME));
-            }
-            if ((Original_FILE_EXTENTION == null)) {
-                throw new global::System.ArgumentNullException("Original_FILE_EXTENTION");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_FILE_EXTENTION));
-            }
-            this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(Original_PAGES_COUNT));
-            this.Adapter.DeleteCommand.Parameters[7].Value = ((short)(Original_FULL_ACCESS));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -15501,26 +15024,59 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, decimal DOCUMENT_ID, decimal COPY_TYPE_ID, string NAME, string FILE_NAME, string FILE_EXTENTION, byte[] FILE_BODY, decimal PAGES_COUNT, decimal FULL_ACCESS) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(DOCUMENT_ID));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(COPY_TYPE_ID));
+            if ((NAME == null)) {
+                throw new global::System.ArgumentNullException("NAME");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(NAME));
+            }
+            if ((FILE_NAME == null)) {
+                throw new global::System.ArgumentNullException("FILE_NAME");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(FILE_NAME));
+            }
+            if ((FILE_EXTENTION == null)) {
+                throw new global::System.ArgumentNullException("FILE_EXTENTION");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(FILE_EXTENTION));
+            }
+            if ((FILE_BODY == null)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((byte[])(FILE_BODY));
+            }
+            this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(PAGES_COUNT));
+            this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(FULL_ACCESS));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    int ID, 
-                    int DOCUMENT_ID, 
-                    int COPY_TYPE_ID, 
-                    string NAME, 
-                    string FILE_NAME, 
-                    string FILE_EXTENTION, 
-                    object FILE_BODY, 
-                    decimal PAGES_COUNT, 
-                    short FULL_ACCESS, 
-                    int Original_ID, 
-                    int Original_DOCUMENT_ID, 
-                    int Original_COPY_TYPE_ID, 
-                    string Original_NAME, 
-                    string Original_FILE_NAME, 
-                    string Original_FILE_EXTENTION, 
-                    decimal Original_PAGES_COUNT, 
-                    short Original_FULL_ACCESS) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, int DOCUMENT_ID, int COPY_TYPE_ID, string NAME, string FILE_NAME, string FILE_EXTENTION, object FILE_BODY, decimal PAGES_COUNT, short FULL_ACCESS) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(DOCUMENT_ID));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(COPY_TYPE_ID));
             if ((NAME == null)) {
@@ -15549,29 +15105,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             }
             this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(PAGES_COUNT));
             this.Adapter.UpdateCommand.Parameters[8].Value = ((short)(FULL_ACCESS));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_DOCUMENT_ID));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_COPY_TYPE_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_NAME));
-            }
-            if ((Original_FILE_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_FILE_NAME");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_FILE_NAME));
-            }
-            if ((Original_FILE_EXTENTION == null)) {
-                throw new global::System.ArgumentNullException("Original_FILE_EXTENTION");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_FILE_EXTENTION));
-            }
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((decimal)(Original_PAGES_COUNT));
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((short)(Original_FULL_ACCESS));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -15586,30 +15119,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    int DOCUMENT_ID, 
-                    int COPY_TYPE_ID, 
-                    string NAME, 
-                    string FILE_NAME, 
-                    string FILE_EXTENTION, 
-                    object FILE_BODY, 
-                    decimal PAGES_COUNT, 
-                    short FULL_ACCESS, 
-                    int Original_ID, 
-                    int Original_DOCUMENT_ID, 
-                    int Original_COPY_TYPE_ID, 
-                    string Original_NAME, 
-                    string Original_FILE_NAME, 
-                    string Original_FILE_EXTENTION, 
-                    decimal Original_PAGES_COUNT, 
-                    short Original_FULL_ACCESS) {
-            return this.Update(Original_ID, DOCUMENT_ID, COPY_TYPE_ID, NAME, FILE_NAME, FILE_EXTENTION, FILE_BODY, PAGES_COUNT, FULL_ACCESS, Original_ID, Original_DOCUMENT_ID, Original_COPY_TYPE_ID, Original_NAME, Original_FILE_NAME, Original_FILE_EXTENTION, Original_PAGES_COUNT, Original_FULL_ACCESS);
         }
     }
     
@@ -15741,10 +15250,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"ARCH\".\"COPY_TYPE_ATTRIBUTES\" WHERE ((\"ID\" = :Original_ID) AND (\"COPY" +
-                "_TYPE_ID\" = :Original_COPY_TYPE_ID) AND (\"ATTRIBUTE_ID\" = :Original_ATTRIBUTE_ID" +
-                ") AND (\"MANDATORY\" = :Original_MANDATORY))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_COPY_TYPE_ATTRIBUTES.DEL_COPY_TYPE_ATTRIBUTES";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -15753,40 +15260,42 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_COPY_TYPE_ATTRIBUTES.INS_COPY_TYPE_ATTRIBUTES";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":COPY_TYPE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "COPY_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ATTRIBUTE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ATTRIBUTE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "ATTRIBUTE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_MANDATORY";
-            param.DbType = global::System.Data.DbType.Int16;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
+            param.ParameterName = ":MANDATORY";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "MANDATORY";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""COPY_TYPE_ATTRIBUTES"" SET ""ID"" = :ID, ""COPY_TYPE_ID"" = :COPY_TYPE_ID, ""ATTRIBUTE_ID"" = :ATTRIBUTE_ID, ""MANDATORY"" = :MANDATORY WHERE ((""ID"" = :Original_ID) AND (""COPY_TYPE_ID"" = :Original_COPY_TYPE_ID) AND (""ATTRIBUTE_ID"" = :Original_ATTRIBUTE_ID) AND (""MANDATORY"" = :Original_MANDATORY))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_COPY_TYPE_ATTRIBUTES.UPD_COPY_TYPE_ATTRIBUTES";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "COPY_TYPE_ID";
@@ -15808,38 +15317,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
             param.IsNullable = true;
             param.SourceColumn = "MANDATORY";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ATTRIBUTE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ATTRIBUTE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_MANDATORY";
-            param.DbType = global::System.Data.DbType.Int16;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
-            param.IsNullable = true;
-            param.SourceColumn = "MANDATORY";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -15917,11 +15394,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, int Original_COPY_TYPE_ID, int Original_ATTRIBUTE_ID, short Original_MANDATORY) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_COPY_TYPE_ID));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_ATTRIBUTE_ID));
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((short)(Original_MANDATORY));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -15941,16 +15415,36 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal COPY_TYPE_ID, decimal ATTRIBUTE_ID, decimal MANDATORY) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(COPY_TYPE_ID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(ATTRIBUTE_ID));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(MANDATORY));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, int COPY_TYPE_ID, int ATTRIBUTE_ID, short MANDATORY, int Original_ID, int Original_COPY_TYPE_ID, int Original_ATTRIBUTE_ID, short Original_MANDATORY) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, int COPY_TYPE_ID, int ATTRIBUTE_ID, short MANDATORY) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(COPY_TYPE_ID));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(ATTRIBUTE_ID));
             this.Adapter.UpdateCommand.Parameters[3].Value = ((short)(MANDATORY));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_COPY_TYPE_ID));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_ATTRIBUTE_ID));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((short)(Original_MANDATORY));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -15965,14 +15459,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int COPY_TYPE_ID, int ATTRIBUTE_ID, short MANDATORY, int Original_ID, int Original_COPY_TYPE_ID, int Original_ATTRIBUTE_ID, short Original_MANDATORY) {
-            return this.Update(Original_ID, COPY_TYPE_ID, ATTRIBUTE_ID, MANDATORY, Original_ID, Original_COPY_TYPE_ID, Original_ATTRIBUTE_ID, Original_MANDATORY);
         }
     }
     
@@ -16105,8 +15591,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM ""ARCH"".""COPY_TYPES"" WHERE ((""ID"" = :Original_ID) AND (""NAME"" = :Original_NAME) AND ((:IsNull_DESCRIPTION = 1 AND ""DESCRIPTION"" IS NULL) OR (""DESCRIPTION"" = :Original_DESCRIPTION)) AND (""FULL_ACCESS"" = :Original_FULL_ACCESS) AND ((:IsNull_DOCUMENT_TYPE_ID = 1 AND ""DOCUMENT_TYPE_ID"" IS NULL) OR (""DOCUMENT_TYPE_ID"" = :Original_DOCUMENT_TYPE_ID)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_COPY_TYPES.DEL_COPY_TYPES";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -16115,64 +15601,56 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_COPY_TYPES.INS_COPY_TYPES_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
+            param.ParameterName = ":NAME";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 200;
             param.IsNullable = true;
             param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
+            param.ParameterName = ":DESCRIPTION";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 2000;
             param.IsNullable = true;
             param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FULL_ACCESS";
-            param.DbType = global::System.Data.DbType.Int16;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
+            param.ParameterName = ":FULL_ACCESS";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "FULL_ACCESS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DOCUMENT_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":DOCUMENT_TYPE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "DOCUMENT_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DOCUMENT_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""COPY_TYPES"" SET ""ID"" = :ID, ""NAME"" = :NAME, ""DESCRIPTION"" = :DESCRIPTION, ""FULL_ACCESS"" = :FULL_ACCESS, ""DOCUMENT_TYPE_ID"" = :DOCUMENT_TYPE_ID WHERE ((""ID"" = :Original_ID) AND (""NAME"" = :Original_NAME) AND ((:IsNull_DESCRIPTION = 1 AND ""DESCRIPTION"" IS NULL) OR (""DESCRIPTION"" = :Original_DESCRIPTION)) AND (""FULL_ACCESS"" = :Original_FULL_ACCESS) AND ((:IsNull_DOCUMENT_TYPE_ID = 1 AND ""DOCUMENT_TYPE_ID"" IS NULL) OR (""DOCUMENT_TYPE_ID"" = :Original_DOCUMENT_TYPE_ID)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_COPY_TYPES.UPD_COPY_TYPES";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "NAME";
@@ -16199,62 +15677,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "DOCUMENT_TYPE_ID";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FULL_ACCESS";
-            param.DbType = global::System.Data.DbType.Int16;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
-            param.IsNullable = true;
-            param.SourceColumn = "FULL_ACCESS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DOCUMENT_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DOCUMENT_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DOCUMENT_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -16333,31 +15755,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_NAME, string Original_DESCRIPTION, short Original_FULL_ACCESS, global::System.Nullable<int> Original_DOCUMENT_TYPE_ID) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_NAME));
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_DESCRIPTION));
-            }
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((short)(Original_FULL_ACCESS));
-            if ((Original_DOCUMENT_TYPE_ID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_DOCUMENT_TYPE_ID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -16377,9 +15776,50 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string NAME, decimal ID, string DESCRIPTION, decimal FULL_ACCESS, global::System.Nullable<decimal> DOCUMENT_TYPE_ID) {
+            if ((NAME == null)) {
+                throw new global::System.ArgumentNullException("NAME");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(NAME));
+            }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(ID));
+            if ((DESCRIPTION == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(DESCRIPTION));
+            }
+            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(FULL_ACCESS));
+            if ((DOCUMENT_TYPE_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(DOCUMENT_TYPE_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, string NAME, string DESCRIPTION, short FULL_ACCESS, global::System.Nullable<int> DOCUMENT_TYPE_ID, int Original_ID, string Original_NAME, string Original_DESCRIPTION, short Original_FULL_ACCESS, global::System.Nullable<int> Original_DOCUMENT_TYPE_ID) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, string NAME, string DESCRIPTION, short FULL_ACCESS, global::System.Nullable<int> DOCUMENT_TYPE_ID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((NAME == null)) {
                 throw new global::System.ArgumentNullException("NAME");
             }
@@ -16399,30 +15839,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_NAME));
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_DESCRIPTION));
-            }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((short)(Original_FULL_ACCESS));
-            if ((Original_DOCUMENT_TYPE_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_DOCUMENT_TYPE_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -16437,14 +15853,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string NAME, string DESCRIPTION, short FULL_ACCESS, global::System.Nullable<int> DOCUMENT_TYPE_ID, int Original_ID, string Original_NAME, string Original_DESCRIPTION, short Original_FULL_ACCESS, global::System.Nullable<int> Original_DOCUMENT_TYPE_ID) {
-            return this.Update(Original_ID, NAME, DESCRIPTION, FULL_ACCESS, DOCUMENT_TYPE_ID, Original_ID, Original_NAME, Original_DESCRIPTION, Original_FULL_ACCESS, Original_DOCUMENT_TYPE_ID);
         }
     }
     
@@ -16578,8 +15986,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM ""ARCH"".""DOCUMENT_HISTORY"" WHERE ((""ID"" = :Original_ID) AND (""DOCUMENT_ID"" = :Original_DOCUMENT_ID) AND (""USER_ID"" = :Original_USER_ID) AND ((:IsNull_COPY_ID = 1 AND ""COPY_ID"" IS NULL) OR (""COPY_ID"" = :Original_COPY_ID)) AND (""ACTION"" = :Original_ACTION) AND (""ACTION_DATE"" = :Original_ACTION_DATE))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_DOCUMENT_HISTORY.DEL_DOCUMENT_HISTORY";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -16588,64 +15996,56 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_DOCUMENT_HISTORY.INS_DOCUMENT_HISTORY";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":DOCUMENT_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "DOCUMENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_USER_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":USER_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "USER_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":COPY_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ACTION";
+            param.ParameterName = ":ACTION";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 100;
             param.IsNullable = true;
             param.SourceColumn = "ACTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ACTION_DATE";
-            param.DbType = global::System.Data.DbType.Date;
+            param.ParameterName = ":ACTION_DATE";
+            param.DbType = global::System.Data.DbType.DateTime;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Date;
             param.IsNullable = true;
             param.SourceColumn = "ACTION_DATE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""DOCUMENT_HISTORY"" SET ""ID"" = :ID, ""DOCUMENT_ID"" = :DOCUMENT_ID, ""USER_ID"" = :USER_ID, ""COPY_ID"" = :COPY_ID, ""ACTION"" = :ACTION, ""ACTION_DATE"" = :ACTION_DATE WHERE ((""ID"" = :Original_ID) AND (""DOCUMENT_ID"" = :Original_DOCUMENT_ID) AND (""USER_ID"" = :Original_USER_ID) AND ((:IsNull_COPY_ID = 1 AND ""COPY_ID"" IS NULL) OR (""COPY_ID"" = :Original_COPY_ID)) AND (""ACTION"" = :Original_ACTION) AND (""ACTION_DATE"" = :Original_ACTION_DATE))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_DOCUMENT_HISTORY.UPD_DOCUMENT_HISTORY";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "DOCUMENT_ID";
@@ -16680,62 +16080,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Date;
             param.IsNullable = true;
             param.SourceColumn = "ACTION_DATE";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DOCUMENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_USER_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "USER_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ACTION";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "ACTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ACTION_DATE";
-            param.DbType = global::System.Data.DbType.Date;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Date;
-            param.IsNullable = true;
-            param.SourceColumn = "ACTION_DATE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -16814,25 +16158,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, int Original_DOCUMENT_ID, int Original_USER_ID, global::System.Nullable<int> Original_COPY_ID, string Original_ACTION, System.DateTime Original_ACTION_DATE) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_DOCUMENT_ID));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_USER_ID));
-            if ((Original_COPY_ID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_COPY_ID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ACTION == null)) {
-                throw new global::System.ArgumentNullException("Original_ACTION");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_ACTION));
-            }
-            this.Adapter.DeleteCommand.Parameters[6].Value = ((System.DateTime)(Original_ACTION_DATE));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -16852,9 +16179,45 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal DOCUMENT_ID, decimal USER_ID, global::System.Nullable<decimal> COPY_ID, string ACTION, System.DateTime ACTION_DATE) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(DOCUMENT_ID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(USER_ID));
+            if ((COPY_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(COPY_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((ACTION == null)) {
+                throw new global::System.ArgumentNullException("ACTION");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(ACTION));
+            }
+            this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(ACTION_DATE));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, int DOCUMENT_ID, int USER_ID, global::System.Nullable<int> COPY_ID, string ACTION, System.DateTime ACTION_DATE, int Original_ID, int Original_DOCUMENT_ID, int Original_USER_ID, global::System.Nullable<int> Original_COPY_ID, string Original_ACTION, System.DateTime Original_ACTION_DATE) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, int DOCUMENT_ID, int USER_ID, global::System.Nullable<int> COPY_ID, string ACTION, System.DateTime ACTION_DATE) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(DOCUMENT_ID));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(USER_ID));
             if ((COPY_ID.HasValue == true)) {
@@ -16870,24 +16233,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(ACTION));
             }
             this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(ACTION_DATE));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_DOCUMENT_ID));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_USER_ID));
-            if ((Original_COPY_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_COPY_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((Original_ACTION == null)) {
-                throw new global::System.ArgumentNullException("Original_ACTION");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_ACTION));
-            }
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((System.DateTime)(Original_ACTION_DATE));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -16902,14 +16247,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int DOCUMENT_ID, int USER_ID, global::System.Nullable<int> COPY_ID, string ACTION, System.DateTime ACTION_DATE, int Original_ID, int Original_DOCUMENT_ID, int Original_USER_ID, global::System.Nullable<int> Original_COPY_ID, string Original_ACTION, System.DateTime Original_ACTION_DATE) {
-            return this.Update(Original_ID, DOCUMENT_ID, USER_ID, COPY_ID, ACTION, ACTION_DATE, Original_ID, Original_DOCUMENT_ID, Original_USER_ID, Original_COPY_ID, Original_ACTION, Original_ACTION_DATE);
         }
     }
     
@@ -17041,10 +16378,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"ARCH\".\"DOCUMENT_TYPE_ATTRIBUTES\" WHERE ((\"ID\" = :Original_ID) AND (\"" +
-                "DOCUMENT_TYPE_ID\" = :Original_DOCUMENT_TYPE_ID) AND (\"ATTRIBUTE_ID\" = :Original_" +
-                "ATTRIBUTE_ID) AND (\"MANDATORY\" = :Original_MANDATORY))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_DOCUMENT_TYPE_ATTRIBUTES.DEL_DOC_TYPE_ATTRIBUTES";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -17053,40 +16388,49 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_DOCUMENT_TYPE_ATTRIBUTES.INS_DOC_TYPE_ATTRIBUTES_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":DOCUMENT_TYPE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "DOCUMENT_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ATTRIBUTE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ATTRIBUTE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "ATTRIBUTE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_MANDATORY";
-            param.DbType = global::System.Data.DbType.Int16;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
+            param.ParameterName = ":MANDATORY";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "MANDATORY";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""DOCUMENT_TYPE_ATTRIBUTES"" SET ""ID"" = :ID, ""DOCUMENT_TYPE_ID"" = :DOCUMENT_TYPE_ID, ""ATTRIBUTE_ID"" = :ATTRIBUTE_ID, ""MANDATORY"" = :MANDATORY WHERE ((""ID"" = :Original_ID) AND (""DOCUMENT_TYPE_ID"" = :Original_DOCUMENT_TYPE_ID) AND (""ATTRIBUTE_ID"" = :Original_ATTRIBUTE_ID) AND (""MANDATORY"" = :Original_MANDATORY))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_DOCUMENT_TYPE_ATTRIBUTES.UPD_DOC_TYPE_ATTRIBUTES";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "DOCUMENT_TYPE_ID";
@@ -17108,38 +16452,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
             param.IsNullable = true;
             param.SourceColumn = "MANDATORY";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DOCUMENT_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ATTRIBUTE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ATTRIBUTE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_MANDATORY";
-            param.DbType = global::System.Data.DbType.Int16;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
-            param.IsNullable = true;
-            param.SourceColumn = "MANDATORY";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -17218,11 +16530,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, int Original_DOCUMENT_TYPE_ID, int Original_ATTRIBUTE_ID, short Original_MANDATORY) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_DOCUMENT_TYPE_ID));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_ATTRIBUTE_ID));
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((short)(Original_MANDATORY));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17242,16 +16551,37 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, decimal DOCUMENT_TYPE_ID, decimal ATTRIBUTE_ID, decimal MANDATORY) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(DOCUMENT_TYPE_ID));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(ATTRIBUTE_ID));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(MANDATORY));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, int DOCUMENT_TYPE_ID, int ATTRIBUTE_ID, short MANDATORY, int Original_ID, int Original_DOCUMENT_TYPE_ID, int Original_ATTRIBUTE_ID, short Original_MANDATORY) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, int DOCUMENT_TYPE_ID, int ATTRIBUTE_ID, short MANDATORY) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(DOCUMENT_TYPE_ID));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(ATTRIBUTE_ID));
             this.Adapter.UpdateCommand.Parameters[3].Value = ((short)(MANDATORY));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_DOCUMENT_TYPE_ID));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_ATTRIBUTE_ID));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((short)(Original_MANDATORY));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17266,14 +16596,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int DOCUMENT_TYPE_ID, int ATTRIBUTE_ID, short MANDATORY, int Original_ID, int Original_DOCUMENT_TYPE_ID, int Original_ATTRIBUTE_ID, short Original_MANDATORY) {
-            return this.Update(Original_ID, DOCUMENT_TYPE_ID, ATTRIBUTE_ID, MANDATORY, Original_ID, Original_DOCUMENT_TYPE_ID, Original_ATTRIBUTE_ID, Original_MANDATORY);
         }
     }
     
@@ -17406,8 +16728,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM ""ARCH"".""DOCUMENT_TYPES"" WHERE ((""ID"" = :Original_ID) AND (""NAME"" = :Original_NAME) AND ((:IsNull_PARENT_ID = 1 AND ""PARENT_ID"" IS NULL) OR (""PARENT_ID"" = :Original_PARENT_ID)) AND ((:IsNull_DESCRIPTION = 1 AND ""DESCRIPTION"" IS NULL) OR (""DESCRIPTION"" = :Original_DESCRIPTION)) AND (""FULL_ACCESS"" = :Original_FULL_ACCESS))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_DOCUMENT_TYPES.DEL_DOCUMENT_TYPES";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -17416,64 +16738,56 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_DOCUMENT_TYPES.INS_DOCUMENT_TYPES_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":NAME";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 500;
             param.IsNullable = true;
             param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_PARENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":PARENT_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "PARENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_PARENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "PARENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
+            param.ParameterName = ":DESCRIPTION";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 2000;
             param.IsNullable = true;
             param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FULL_ACCESS";
-            param.DbType = global::System.Data.DbType.Int16;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
+            param.ParameterName = ":FULL_ACCESS";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "FULL_ACCESS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""DOCUMENT_TYPES"" SET ""ID"" = :ID, ""NAME"" = :NAME, ""PARENT_ID"" = :PARENT_ID, ""DESCRIPTION"" = :DESCRIPTION, ""FULL_ACCESS"" = :FULL_ACCESS WHERE ((""ID"" = :Original_ID) AND (""NAME"" = :Original_NAME) AND ((:IsNull_PARENT_ID = 1 AND ""PARENT_ID"" IS NULL) OR (""PARENT_ID"" = :Original_PARENT_ID)) AND ((:IsNull_DESCRIPTION = 1 AND ""DESCRIPTION"" IS NULL) OR (""DESCRIPTION"" = :Original_DESCRIPTION)) AND (""FULL_ACCESS"" = :Original_FULL_ACCESS))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_DOCUMENT_TYPES.UPD_DOCUMENT_TYPES";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "NAME";
@@ -17500,62 +16814,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
             param.IsNullable = true;
             param.SourceColumn = "FULL_ACCESS";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_PARENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "PARENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_PARENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "PARENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_FULL_ACCESS";
-            param.DbType = global::System.Data.DbType.Int16;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
-            param.IsNullable = true;
-            param.SourceColumn = "FULL_ACCESS";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -17633,31 +16891,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_NAME, global::System.Nullable<int> Original_PARENT_ID, string Original_DESCRIPTION, short Original_FULL_ACCESS) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_NAME));
-            }
-            if ((Original_PARENT_ID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_PARENT_ID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_DESCRIPTION));
-            }
-            this.Adapter.DeleteCommand.Parameters[6].Value = ((short)(Original_FULL_ACCESS));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17677,9 +16912,50 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, string NAME, global::System.Nullable<decimal> PARENT_ID, string DESCRIPTION, decimal FULL_ACCESS) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            if ((NAME == null)) {
+                throw new global::System.ArgumentNullException("NAME");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(NAME));
+            }
+            if ((PARENT_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(PARENT_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((DESCRIPTION == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(DESCRIPTION));
+            }
+            this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(FULL_ACCESS));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, string NAME, global::System.Nullable<int> PARENT_ID, string DESCRIPTION, short FULL_ACCESS, int Original_ID, string Original_NAME, global::System.Nullable<int> Original_PARENT_ID, string Original_DESCRIPTION, short Original_FULL_ACCESS) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, string NAME, global::System.Nullable<int> PARENT_ID, string DESCRIPTION, short FULL_ACCESS) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((NAME == null)) {
                 throw new global::System.ArgumentNullException("NAME");
             }
@@ -17699,30 +16975,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(DESCRIPTION));
             }
             this.Adapter.UpdateCommand.Parameters[4].Value = ((short)(FULL_ACCESS));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_NAME));
-            }
-            if ((Original_PARENT_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_PARENT_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_DESCRIPTION));
-            }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((short)(Original_FULL_ACCESS));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17737,14 +16989,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string NAME, global::System.Nullable<int> PARENT_ID, string DESCRIPTION, short FULL_ACCESS, int Original_ID, string Original_NAME, global::System.Nullable<int> Original_PARENT_ID, string Original_DESCRIPTION, short Original_FULL_ACCESS) {
-            return this.Update(Original_ID, NAME, PARENT_ID, DESCRIPTION, FULL_ACCESS, Original_ID, Original_NAME, Original_PARENT_ID, Original_DESCRIPTION, Original_FULL_ACCESS);
         }
     }
     
@@ -18302,8 +17546,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM ""ARCH"".""MOVEMENT"" WHERE ((""ID"" = :Original_ID) AND ((:IsNull_COPY_ID = 1 AND ""COPY_ID"" IS NULL) OR (""COPY_ID"" = :Original_COPY_ID)) AND (""CLINET_ID"" = :Original_CLINET_ID) AND (""MOVEMENT_DATE"" = :Original_MOVEMENT_DATE) AND (""PLAN_RETURN_DATE"" = :Original_PLAN_RETURN_DATE) AND ((:IsNull_ACTUAL_RETURN_DATE = 1 AND ""ACTUAL_RETURN_DATE"" IS NULL) OR (""ACTUAL_RETURN_DATE"" = :Original_ACTUAL_RETURN_DATE)) AND ((:IsNull_TAKE_DESCRIPTION = 1 AND ""TAKE_DESCRIPTION"" IS NULL) OR (""TAKE_DESCRIPTION"" = :Original_TAKE_DESCRIPTION)) AND ((:IsNull_RETURN_DESCRIPTION = 1 AND ""RETURN_DESCRIPTION"" IS NULL) OR (""RETURN_DESCRIPTION"" = :Original_RETURN_DESCRIPTION)) AND (""DOCUMENT_ID"" = :Original_DOCUMENT_ID) AND (""TAKE_ADDRESS_ID"" = :Original_TAKE_ADDRESS_ID) AND ((:IsNull_RETURN_ADDRESS_ID = 1 AND ""RETURN_ADDRESS_ID"" IS NULL) OR (""RETURN_ADDRESS_ID"" = :Original_RETURN_ADDRESS_ID)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_MOVEMENT.DEL_MOVEMENT";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -18312,139 +17556,98 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_MOVEMENT.INS_MOVEMENT_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":COPY_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_CLINET_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":CLINET_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "CLINET_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_MOVEMENT_DATE";
-            param.DbType = global::System.Data.DbType.Date;
+            param.ParameterName = ":MOVEMENT_DATE";
+            param.DbType = global::System.Data.DbType.DateTime;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Date;
             param.IsNullable = true;
             param.SourceColumn = "MOVEMENT_DATE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_PLAN_RETURN_DATE";
-            param.DbType = global::System.Data.DbType.Date;
+            param.ParameterName = ":PLAN_RETURN_DATE";
+            param.DbType = global::System.Data.DbType.DateTime;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Date;
             param.IsNullable = true;
             param.SourceColumn = "PLAN_RETURN_DATE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_ACTUAL_RETURN_DATE";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ACTUAL_RETURN_DATE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ACTUAL_RETURN_DATE";
-            param.DbType = global::System.Data.DbType.Date;
+            param.ParameterName = ":ACTUAL_RETURN_DATE";
+            param.DbType = global::System.Data.DbType.DateTime;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Date;
             param.IsNullable = true;
             param.SourceColumn = "ACTUAL_RETURN_DATE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_TAKE_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":TAKE_DESCRIPTION";
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 2000;
             param.IsNullable = true;
             param.SourceColumn = "TAKE_DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_TAKE_DESCRIPTION";
+            param.ParameterName = ":RETURN_DESCRIPTION";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "TAKE_DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_RETURN_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.Size = 2000;
             param.IsNullable = true;
             param.SourceColumn = "RETURN_DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_RETURN_DESCRIPTION";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "RETURN_DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":DOCUMENT_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "DOCUMENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_TAKE_ADDRESS_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":TAKE_ADDRESS_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "TAKE_ADDRESS_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_RETURN_ADDRESS_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":RETURN_ADDRESS_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "RETURN_ADDRESS_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_RETURN_ADDRESS_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "RETURN_ADDRESS_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""MOVEMENT"" SET ""ID"" = :ID, ""COPY_ID"" = :COPY_ID, ""CLINET_ID"" = :CLINET_ID, ""MOVEMENT_DATE"" = :MOVEMENT_DATE, ""PLAN_RETURN_DATE"" = :PLAN_RETURN_DATE, ""ACTUAL_RETURN_DATE"" = :ACTUAL_RETURN_DATE, ""TAKE_DESCRIPTION"" = :TAKE_DESCRIPTION, ""RETURN_DESCRIPTION"" = :RETURN_DESCRIPTION, ""DOCUMENT_ID"" = :DOCUMENT_ID, ""TAKE_ADDRESS_ID"" = :TAKE_ADDRESS_ID, ""RETURN_ADDRESS_ID"" = :RETURN_ADDRESS_ID WHERE ((""ID"" = :Original_ID) AND ((:IsNull_COPY_ID = 1 AND ""COPY_ID"" IS NULL) OR (""COPY_ID"" = :Original_COPY_ID)) AND (""CLINET_ID"" = :Original_CLINET_ID) AND (""MOVEMENT_DATE"" = :Original_MOVEMENT_DATE) AND (""PLAN_RETURN_DATE"" = :Original_PLAN_RETURN_DATE) AND ((:IsNull_ACTUAL_RETURN_DATE = 1 AND ""ACTUAL_RETURN_DATE"" IS NULL) OR (""ACTUAL_RETURN_DATE"" = :Original_ACTUAL_RETURN_DATE)) AND ((:IsNull_TAKE_DESCRIPTION = 1 AND ""TAKE_DESCRIPTION"" IS NULL) OR (""TAKE_DESCRIPTION"" = :Original_TAKE_DESCRIPTION)) AND ((:IsNull_RETURN_DESCRIPTION = 1 AND ""RETURN_DESCRIPTION"" IS NULL) OR (""RETURN_DESCRIPTION"" = :Original_RETURN_DESCRIPTION)) AND (""DOCUMENT_ID"" = :Original_DOCUMENT_ID) AND (""TAKE_ADDRESS_ID"" = :Original_TAKE_ADDRESS_ID) AND ((:IsNull_RETURN_ADDRESS_ID = 1 AND ""RETURN_ADDRESS_ID"" IS NULL) OR (""RETURN_ADDRESS_ID"" = :Original_RETURN_ADDRESS_ID)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_MOVEMENT.UPD_MOVEMENT";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "COPY_ID";
@@ -18513,137 +17716,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "RETURN_ADDRESS_ID";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_CLINET_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "CLINET_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_MOVEMENT_DATE";
-            param.DbType = global::System.Data.DbType.Date;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Date;
-            param.IsNullable = true;
-            param.SourceColumn = "MOVEMENT_DATE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_PLAN_RETURN_DATE";
-            param.DbType = global::System.Data.DbType.Date;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Date;
-            param.IsNullable = true;
-            param.SourceColumn = "PLAN_RETURN_DATE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_ACTUAL_RETURN_DATE";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ACTUAL_RETURN_DATE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ACTUAL_RETURN_DATE";
-            param.DbType = global::System.Data.DbType.Date;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Date;
-            param.IsNullable = true;
-            param.SourceColumn = "ACTUAL_RETURN_DATE";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_TAKE_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "TAKE_DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_TAKE_DESCRIPTION";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "TAKE_DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_RETURN_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "RETURN_DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_RETURN_DESCRIPTION";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "RETURN_DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DOCUMENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_TAKE_ADDRESS_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "TAKE_ADDRESS_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_RETURN_ADDRESS_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "RETURN_ADDRESS_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_RETURN_ADDRESS_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "RETURN_ADDRESS_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -18723,53 +17795,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, global::System.Nullable<int> Original_COPY_ID, int Original_CLINET_ID, System.DateTime Original_MOVEMENT_DATE, System.DateTime Original_PLAN_RETURN_DATE, global::System.Nullable<global::System.DateTime> Original_ACTUAL_RETURN_DATE, string Original_TAKE_DESCRIPTION, string Original_RETURN_DESCRIPTION, int Original_DOCUMENT_ID, int Original_TAKE_ADDRESS_ID, global::System.Nullable<int> Original_RETURN_ADDRESS_ID) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_COPY_ID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_COPY_ID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_CLINET_ID));
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((System.DateTime)(Original_MOVEMENT_DATE));
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((System.DateTime)(Original_PLAN_RETURN_DATE));
-            if ((Original_ACTUAL_RETURN_DATE.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((System.DateTime)(Original_ACTUAL_RETURN_DATE.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Original_TAKE_DESCRIPTION == null)) {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((string)(Original_TAKE_DESCRIPTION));
-            }
-            if ((Original_RETURN_DESCRIPTION == null)) {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((string)(Original_RETURN_DESCRIPTION));
-            }
-            this.Adapter.DeleteCommand.Parameters[12].Value = ((int)(Original_DOCUMENT_ID));
-            this.Adapter.DeleteCommand.Parameters[13].Value = ((int)(Original_TAKE_ADDRESS_ID));
-            if ((Original_RETURN_ADDRESS_ID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((int)(Original_RETURN_ADDRESS_ID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -18789,31 +17816,66 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, global::System.Nullable<decimal> COPY_ID, decimal CLINET_ID, System.DateTime MOVEMENT_DATE, System.DateTime PLAN_RETURN_DATE, global::System.Nullable<global::System.DateTime> ACTUAL_RETURN_DATE, string TAKE_DESCRIPTION, string RETURN_DESCRIPTION, decimal DOCUMENT_ID, decimal TAKE_ADDRESS_ID, global::System.Nullable<decimal> RETURN_ADDRESS_ID) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            if ((COPY_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(COPY_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(CLINET_ID));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(MOVEMENT_DATE));
+            this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(PLAN_RETURN_DATE));
+            if ((ACTUAL_RETURN_DATE.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(ACTUAL_RETURN_DATE.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((TAKE_DESCRIPTION == null)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(TAKE_DESCRIPTION));
+            }
+            if ((RETURN_DESCRIPTION == null)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(RETURN_DESCRIPTION));
+            }
+            this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(DOCUMENT_ID));
+            this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(TAKE_ADDRESS_ID));
+            if ((RETURN_ADDRESS_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((decimal)(RETURN_ADDRESS_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    int ID, 
-                    global::System.Nullable<int> COPY_ID, 
-                    int CLINET_ID, 
-                    System.DateTime MOVEMENT_DATE, 
-                    System.DateTime PLAN_RETURN_DATE, 
-                    global::System.Nullable<global::System.DateTime> ACTUAL_RETURN_DATE, 
-                    string TAKE_DESCRIPTION, 
-                    string RETURN_DESCRIPTION, 
-                    int DOCUMENT_ID, 
-                    int TAKE_ADDRESS_ID, 
-                    global::System.Nullable<int> RETURN_ADDRESS_ID, 
-                    int Original_ID, 
-                    global::System.Nullable<int> Original_COPY_ID, 
-                    int Original_CLINET_ID, 
-                    System.DateTime Original_MOVEMENT_DATE, 
-                    System.DateTime Original_PLAN_RETURN_DATE, 
-                    global::System.Nullable<global::System.DateTime> Original_ACTUAL_RETURN_DATE, 
-                    string Original_TAKE_DESCRIPTION, 
-                    string Original_RETURN_DESCRIPTION, 
-                    int Original_DOCUMENT_ID, 
-                    int Original_TAKE_ADDRESS_ID, 
-                    global::System.Nullable<int> Original_RETURN_ADDRESS_ID) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, global::System.Nullable<int> COPY_ID, int CLINET_ID, System.DateTime MOVEMENT_DATE, System.DateTime PLAN_RETURN_DATE, global::System.Nullable<global::System.DateTime> ACTUAL_RETURN_DATE, string TAKE_DESCRIPTION, string RETURN_DESCRIPTION, int DOCUMENT_ID, int TAKE_ADDRESS_ID, global::System.Nullable<int> RETURN_ADDRESS_ID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((COPY_ID.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(COPY_ID.Value));
             }
@@ -18849,52 +17911,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_ID));
-            if ((Original_COPY_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_COPY_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_CLINET_ID));
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((System.DateTime)(Original_MOVEMENT_DATE));
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((System.DateTime)(Original_PLAN_RETURN_DATE));
-            if ((Original_ACTUAL_RETURN_DATE.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((System.DateTime)(Original_ACTUAL_RETURN_DATE.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
-            }
-            if ((Original_TAKE_DESCRIPTION == null)) {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((string)(Original_TAKE_DESCRIPTION));
-            }
-            if ((Original_RETURN_DESCRIPTION == null)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((string)(Original_RETURN_DESCRIPTION));
-            }
-            this.Adapter.UpdateCommand.Parameters[23].Value = ((int)(Original_DOCUMENT_ID));
-            this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(Original_TAKE_ADDRESS_ID));
-            if ((Original_RETURN_ADDRESS_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((int)(Original_RETURN_ADDRESS_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -18909,35 +17925,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    global::System.Nullable<int> COPY_ID, 
-                    int CLINET_ID, 
-                    System.DateTime MOVEMENT_DATE, 
-                    System.DateTime PLAN_RETURN_DATE, 
-                    global::System.Nullable<global::System.DateTime> ACTUAL_RETURN_DATE, 
-                    string TAKE_DESCRIPTION, 
-                    string RETURN_DESCRIPTION, 
-                    int DOCUMENT_ID, 
-                    int TAKE_ADDRESS_ID, 
-                    global::System.Nullable<int> RETURN_ADDRESS_ID, 
-                    int Original_ID, 
-                    global::System.Nullable<int> Original_COPY_ID, 
-                    int Original_CLINET_ID, 
-                    System.DateTime Original_MOVEMENT_DATE, 
-                    System.DateTime Original_PLAN_RETURN_DATE, 
-                    global::System.Nullable<global::System.DateTime> Original_ACTUAL_RETURN_DATE, 
-                    string Original_TAKE_DESCRIPTION, 
-                    string Original_RETURN_DESCRIPTION, 
-                    int Original_DOCUMENT_ID, 
-                    int Original_TAKE_ADDRESS_ID, 
-                    global::System.Nullable<int> Original_RETURN_ADDRESS_ID) {
-            return this.Update(Original_ID, COPY_ID, CLINET_ID, MOVEMENT_DATE, PLAN_RETURN_DATE, ACTUAL_RETURN_DATE, TAKE_DESCRIPTION, RETURN_DESCRIPTION, DOCUMENT_ID, TAKE_ADDRESS_ID, RETURN_ADDRESS_ID, Original_ID, Original_COPY_ID, Original_CLINET_ID, Original_MOVEMENT_DATE, Original_PLAN_RETURN_DATE, Original_ACTUAL_RETURN_DATE, Original_TAKE_DESCRIPTION, Original_RETURN_DESCRIPTION, Original_DOCUMENT_ID, Original_TAKE_ADDRESS_ID, Original_RETURN_ADDRESS_ID);
         }
     }
     
@@ -19068,10 +18055,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"ARCH\".\"REFERENCE_TYPES\" WHERE ((\"ID\" = :Original_ID) AND (\"NAME\" = :" +
-                "Original_NAME) AND ((:IsNull_DESCRIPTION = 1 AND \"DESCRIPTION\" IS NULL) OR (\"DES" +
-                "CRIPTION\" = :Original_DESCRIPTION)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_REFERENCE_TYPES.DEL_REFERENCE_TYPES";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -19080,42 +18065,42 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_REFERENCE_TYPES.INS_REFERENCE_TYPES_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":NAME";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 500;
             param.IsNullable = true;
             param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
+            param.ParameterName = ":DESCRIPTION";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 2000;
             param.IsNullable = true;
             param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE \"ARCH\".\"REFERENCE_TYPES\" SET \"ID\" = :ID, \"NAME\" = :NAME, \"DESCRIPTION\" = :" +
-                "DESCRIPTION WHERE ((\"ID\" = :Original_ID) AND (\"NAME\" = :Original_NAME) AND ((:Is" +
-                "Null_DESCRIPTION = 1 AND \"DESCRIPTION\" IS NULL) OR (\"DESCRIPTION\" = :Original_DE" +
-                "SCRIPTION)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_REFERENCE_TYPES.UPD_REFERENCE_TYPES";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "NAME";
@@ -19128,37 +18113,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
             param.IsNullable = true;
             param.SourceColumn = "DESCRIPTION";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -19236,22 +18190,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_NAME, string Original_DESCRIPTION) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_NAME));
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_DESCRIPTION));
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -19271,9 +18211,43 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, string NAME, string DESCRIPTION) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            if ((NAME == null)) {
+                throw new global::System.ArgumentNullException("NAME");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(NAME));
+            }
+            if ((DESCRIPTION == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(DESCRIPTION));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, string NAME, string DESCRIPTION, int Original_ID, string Original_NAME, string Original_DESCRIPTION) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, string NAME, string DESCRIPTION) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((NAME == null)) {
                 throw new global::System.ArgumentNullException("NAME");
             }
@@ -19285,21 +18259,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(DESCRIPTION));
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_NAME));
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_DESCRIPTION));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -19315,14 +18274,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string NAME, string DESCRIPTION, int Original_ID, string Original_NAME, string Original_DESCRIPTION) {
-            return this.Update(Original_ID, NAME, DESCRIPTION, Original_ID, Original_NAME, Original_DESCRIPTION);
         }
     }
     
@@ -19453,9 +18404,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"ARCH\".\"ROLE_CLIENT_ACCESS\" WHERE ((\"ID\" = :Original_ID) AND (\"ROLE_I" +
-                "D\" = :Original_ROLE_ID) AND (\"CLIENT_ID\" = :Original_CLIENT_ID))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_ROLE_CLIENT_ACCESS.DEL_ROLE_CLIENT_ACCESS";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -19464,34 +18414,42 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_ROLE_CLIENT_ACCESS.INS_ROLE_CLIENT_ACCESS_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ROLE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":ROLE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "ROLE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_CLIENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":CLIENT_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "CLIENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE \"ARCH\".\"ROLE_CLIENT_ACCESS\" SET \"ID\" = :ID, \"ROLE_ID\" = :ROLE_ID, \"CLIENT_" +
-                "ID\" = :CLIENT_ID WHERE ((\"ID\" = :Original_ID) AND (\"ROLE_ID\" = :Original_ROLE_ID" +
-                ") AND (\"CLIENT_ID\" = :Original_CLIENT_ID))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_ROLE_CLIENT_ACCESS.UPD_ROLE_CLIENT_ACCESS";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "ROLE_ID";
@@ -19506,30 +18464,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "CLIENT_ID";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ROLE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ROLE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_CLIENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "CLIENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -19607,10 +18541,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, int Original_ROLE_ID, int Original_CLIENT_ID) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_ROLE_ID));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_CLIENT_ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -19630,14 +18562,35 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, decimal ROLE_ID, decimal CLIENT_ID) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(ROLE_ID));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(CLIENT_ID));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, int ROLE_ID, int CLIENT_ID, int Original_ID, int Original_ROLE_ID, int Original_CLIENT_ID) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, int ROLE_ID, int CLIENT_ID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(ROLE_ID));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(CLIENT_ID));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_ROLE_ID));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_CLIENT_ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -19652,14 +18605,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ROLE_ID, int CLIENT_ID, int Original_ID, int Original_ROLE_ID, int Original_CLIENT_ID) {
-            return this.Update(Original_ID, ROLE_ID, CLIENT_ID, Original_ID, Original_ROLE_ID, Original_CLIENT_ID);
         }
     }
     
@@ -19791,8 +18736,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM ""ARCH"".""ROLE_DOC_TYPE_ACCESS"" WHERE ((""ID"" = :Original_ID) AND (""ROLE_ID"" = :Original_ROLE_ID) AND (""DOCUMENT_TYPE_ID"" = :Original_DOCUMENT_TYPE_ID) AND ((:IsNull_COPY_TYPE_ID = 1 AND ""COPY_TYPE_ID"" IS NULL) OR (""COPY_TYPE_ID"" = :Original_COPY_TYPE_ID)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_ROLE_DOC_TYPE_ACCESS.DEL_ROLE_DOC_TYPE_ACCESS";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -19801,49 +18746,49 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_ROLE_DOC_TYPE_ACCESS.INS_ROLE_DOC_TYPE_ACCESS_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ROLE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":ROLE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "ROLE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":DOCUMENT_TYPE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "DOCUMENT_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_COPY_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":COPY_TYPE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "COPY_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""ROLE_DOC_TYPE_ACCESS"" SET ""ID"" = :ID, ""ROLE_ID"" = :ROLE_ID, ""DOCUMENT_TYPE_ID"" = :DOCUMENT_TYPE_ID, ""COPY_TYPE_ID"" = :COPY_TYPE_ID WHERE ((""ID"" = :Original_ID) AND (""ROLE_ID"" = :Original_ROLE_ID) AND (""DOCUMENT_TYPE_ID"" = :Original_DOCUMENT_TYPE_ID) AND ((:IsNull_COPY_TYPE_ID = 1 AND ""COPY_TYPE_ID"" IS NULL) OR (""COPY_TYPE_ID"" = :Original_COPY_TYPE_ID)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_ROLE_DOC_TYPE_ACCESS.UPD_ROLE_DOC_TYPE_ACCESS";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "ROLE_ID";
@@ -19865,47 +18810,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "COPY_TYPE_ID";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ROLE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ROLE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DOCUMENT_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_COPY_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -19984,18 +18888,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, int Original_ROLE_ID, int Original_DOCUMENT_TYPE_ID, global::System.Nullable<int> Original_COPY_TYPE_ID) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_ROLE_ID));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_DOCUMENT_TYPE_ID));
-            if ((Original_COPY_TYPE_ID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_COPY_TYPE_ID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -20015,9 +18909,39 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, decimal ROLE_ID, decimal DOCUMENT_TYPE_ID, global::System.Nullable<decimal> COPY_TYPE_ID) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(ROLE_ID));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(DOCUMENT_TYPE_ID));
+            if ((COPY_TYPE_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(COPY_TYPE_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, int ROLE_ID, int DOCUMENT_TYPE_ID, global::System.Nullable<int> COPY_TYPE_ID, int Original_ID, int Original_ROLE_ID, int Original_DOCUMENT_TYPE_ID, global::System.Nullable<int> Original_COPY_TYPE_ID) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, int ROLE_ID, int DOCUMENT_TYPE_ID, global::System.Nullable<int> COPY_TYPE_ID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(ROLE_ID));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(DOCUMENT_TYPE_ID));
             if ((COPY_TYPE_ID.HasValue == true)) {
@@ -20025,17 +18949,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_ROLE_ID));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_DOCUMENT_TYPE_ID));
-            if ((Original_COPY_TYPE_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_COPY_TYPE_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -20051,14 +18964,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ROLE_ID, int DOCUMENT_TYPE_ID, global::System.Nullable<int> COPY_TYPE_ID, int Original_ID, int Original_ROLE_ID, int Original_DOCUMENT_TYPE_ID, global::System.Nullable<int> Original_COPY_TYPE_ID) {
-            return this.Update(Original_ID, ROLE_ID, DOCUMENT_TYPE_ID, COPY_TYPE_ID, Original_ID, Original_ROLE_ID, Original_DOCUMENT_TYPE_ID, Original_COPY_TYPE_ID);
         }
     }
     
@@ -20190,10 +19095,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"ARCH\".\"ROLE_DOCUMENT_ACCESS\" WHERE ((\"ID\" = :Original_ID) AND (\"ROLE" +
-                "_ID\" = :Original_ROLE_ID) AND (\"DOCUMENT_ID\" = :Original_DOCUMENT_ID) AND ((:IsN" +
-                "ull_COPY_ID = 1 AND \"COPY_ID\" IS NULL) OR (\"COPY_ID\" = :Original_COPY_ID)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_ROLE_DOCUMENT_ACCESS.DEL_ROLE_DOCUMENT_ACCESS";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -20202,49 +19105,49 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_ROLE_DOCUMENT_ACCESS.INS_ROLE_DOCUMENT_ACCESS_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ROLE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":ROLE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "ROLE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":DOCUMENT_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "DOCUMENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":COPY_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""ROLE_DOCUMENT_ACCESS"" SET ""ID"" = :ID, ""ROLE_ID"" = :ROLE_ID, ""DOCUMENT_ID"" = :DOCUMENT_ID, ""COPY_ID"" = :COPY_ID WHERE ((""ID"" = :Original_ID) AND (""ROLE_ID"" = :Original_ROLE_ID) AND (""DOCUMENT_ID"" = :Original_DOCUMENT_ID) AND ((:IsNull_COPY_ID = 1 AND ""COPY_ID"" IS NULL) OR (""COPY_ID"" = :Original_COPY_ID)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_ROLE_DOCUMENT_ACCESS.UPD_ROLE_DOCUMENT_ACCESS";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "ROLE_ID";
@@ -20266,47 +19169,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "COPY_ID";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ROLE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ROLE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DOCUMENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -20384,18 +19246,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, int Original_ROLE_ID, int Original_DOCUMENT_ID, global::System.Nullable<int> Original_COPY_ID) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_ROLE_ID));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_DOCUMENT_ID));
-            if ((Original_COPY_ID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_COPY_ID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -20415,9 +19267,39 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, decimal ROLE_ID, decimal DOCUMENT_ID, global::System.Nullable<decimal> COPY_ID) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(ROLE_ID));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(DOCUMENT_ID));
+            if ((COPY_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(COPY_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, int ROLE_ID, int DOCUMENT_ID, global::System.Nullable<int> COPY_ID, int Original_ID, int Original_ROLE_ID, int Original_DOCUMENT_ID, global::System.Nullable<int> Original_COPY_ID) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, int ROLE_ID, int DOCUMENT_ID, global::System.Nullable<int> COPY_ID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(ROLE_ID));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(DOCUMENT_ID));
             if ((COPY_ID.HasValue == true)) {
@@ -20425,17 +19307,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_ROLE_ID));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_DOCUMENT_ID));
-            if ((Original_COPY_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_COPY_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -20451,14 +19322,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ROLE_ID, int DOCUMENT_ID, global::System.Nullable<int> COPY_ID, int Original_ID, int Original_ROLE_ID, int Original_DOCUMENT_ID, global::System.Nullable<int> Original_COPY_ID) {
-            return this.Update(Original_ID, ROLE_ID, DOCUMENT_ID, COPY_ID, Original_ID, Original_ROLE_ID, Original_DOCUMENT_ID, Original_COPY_ID);
         }
     }
     
@@ -20589,10 +19452,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"ARCH\".\"ROLES\" WHERE ((\"ID\" = :Original_ID) AND (\"NAME\" = :Original_N" +
-                "AME) AND ((:IsNull_DESCRIPTION = 1 AND \"DESCRIPTION\" IS NULL) OR (\"DESCRIPTION\" " +
-                "= :Original_DESCRIPTION)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_ROLES.DEL_ROLES";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -20601,42 +19462,42 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_ROLES.INS_ROLES_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":NAME";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 500;
             param.IsNullable = true;
             param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
+            param.ParameterName = ":DESCRIPTION";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 2000;
             param.IsNullable = true;
             param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE \"ARCH\".\"ROLES\" SET \"ID\" = :ID, \"NAME\" = :NAME, \"DESCRIPTION\" = :DESCRIPTIO" +
-                "N WHERE ((\"ID\" = :Original_ID) AND (\"NAME\" = :Original_NAME) AND ((:IsNull_DESCR" +
-                "IPTION = 1 AND \"DESCRIPTION\" IS NULL) OR (\"DESCRIPTION\" = :Original_DESCRIPTION)" +
-                "))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_ROLES.UPD_ROLES";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "NAME";
@@ -20649,37 +19510,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
             param.IsNullable = true;
             param.SourceColumn = "DESCRIPTION";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -20757,22 +19587,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_NAME, string Original_DESCRIPTION) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_NAME));
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_DESCRIPTION));
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -20792,9 +19608,43 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, string NAME, string DESCRIPTION) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            if ((NAME == null)) {
+                throw new global::System.ArgumentNullException("NAME");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(NAME));
+            }
+            if ((DESCRIPTION == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(DESCRIPTION));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, string NAME, string DESCRIPTION, int Original_ID, string Original_NAME, string Original_DESCRIPTION) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, string NAME, string DESCRIPTION) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((NAME == null)) {
                 throw new global::System.ArgumentNullException("NAME");
             }
@@ -20806,21 +19656,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(DESCRIPTION));
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_NAME));
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_DESCRIPTION));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -20836,14 +19671,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string NAME, string DESCRIPTION, int Original_ID, string Original_NAME, string Original_DESCRIPTION) {
-            return this.Update(Original_ID, NAME, DESCRIPTION, Original_ID, Original_NAME, Original_DESCRIPTION);
         }
     }
     
@@ -20974,9 +19801,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"ARCH\".\"USER_CLIENT_ACCESS\" WHERE ((\"ID\" = :Original_ID) AND (\"USER_I" +
-                "D\" = :Original_USER_ID) AND (\"CLIENT_ID\" = :Original_CLIENT_ID))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_USER_CLIENT_ACCESS.DEL_USER_CLIENT_ACCESS";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -20985,34 +19811,42 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_USER_CLIENT_ACCESS.INS_USER_CLIENT_ACCESS_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_USER_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":USER_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "USER_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_CLIENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":CLIENT_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "CLIENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE \"ARCH\".\"USER_CLIENT_ACCESS\" SET \"ID\" = :ID, \"USER_ID\" = :USER_ID, \"CLIENT_" +
-                "ID\" = :CLIENT_ID WHERE ((\"ID\" = :Original_ID) AND (\"USER_ID\" = :Original_USER_ID" +
-                ") AND (\"CLIENT_ID\" = :Original_CLIENT_ID))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_USER_CLIENT_ACCESS.UPD_USER_CLIENT_ACCESS";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "USER_ID";
@@ -21027,30 +19861,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "CLIENT_ID";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_USER_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "USER_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_CLIENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "CLIENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -21128,10 +19938,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, int Original_USER_ID, int Original_CLIENT_ID) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_USER_ID));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_CLIENT_ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -21151,14 +19959,35 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, decimal USER_ID, decimal CLIENT_ID) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(USER_ID));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(CLIENT_ID));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, int USER_ID, int CLIENT_ID, int Original_ID, int Original_USER_ID, int Original_CLIENT_ID) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, int USER_ID, int CLIENT_ID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(USER_ID));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(CLIENT_ID));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_USER_ID));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_CLIENT_ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -21173,14 +20002,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int USER_ID, int CLIENT_ID, int Original_ID, int Original_USER_ID, int Original_CLIENT_ID) {
-            return this.Update(Original_ID, USER_ID, CLIENT_ID, Original_ID, Original_USER_ID, Original_CLIENT_ID);
         }
     }
     
@@ -21312,8 +20133,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM ""ARCH"".""USER_DOC_TYPE_ACCESS"" WHERE ((""ID"" = :Original_ID) AND (""USER_ID"" = :Original_USER_ID) AND (""DOCUMENT_TYPE_ID"" = :Original_DOCUMENT_TYPE_ID) AND ((:IsNull_COPY_TYPE_ID = 1 AND ""COPY_TYPE_ID"" IS NULL) OR (""COPY_TYPE_ID"" = :Original_COPY_TYPE_ID)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_USER_DOC_TYPE_ACCESS.DEL_USER_DOC_TYPE_ACCESS";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -21322,49 +20143,49 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_USER_DOC_TYPE_ACCESS.INS_USER_DOC_TYPE_ACCESS_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_USER_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":USER_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "USER_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":DOCUMENT_TYPE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "DOCUMENT_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_COPY_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":COPY_TYPE_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "COPY_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""USER_DOC_TYPE_ACCESS"" SET ""ID"" = :ID, ""USER_ID"" = :USER_ID, ""DOCUMENT_TYPE_ID"" = :DOCUMENT_TYPE_ID, ""COPY_TYPE_ID"" = :COPY_TYPE_ID WHERE ((""ID"" = :Original_ID) AND (""USER_ID"" = :Original_USER_ID) AND (""DOCUMENT_TYPE_ID"" = :Original_DOCUMENT_TYPE_ID) AND ((:IsNull_COPY_TYPE_ID = 1 AND ""COPY_TYPE_ID"" IS NULL) OR (""COPY_TYPE_ID"" = :Original_COPY_TYPE_ID)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_USER_DOC_TYPE_ACCESS.UPD_USER_DOC_TYPE_ACCESS";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "USER_ID";
@@ -21386,47 +20207,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "COPY_TYPE_ID";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_USER_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "USER_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DOCUMENT_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_COPY_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -21505,18 +20285,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, int Original_USER_ID, int Original_DOCUMENT_TYPE_ID, global::System.Nullable<int> Original_COPY_TYPE_ID) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_USER_ID));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_DOCUMENT_TYPE_ID));
-            if ((Original_COPY_TYPE_ID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_COPY_TYPE_ID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -21536,9 +20306,39 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, decimal USER_ID, decimal DOCUMENT_TYPE_ID, global::System.Nullable<decimal> COPY_TYPE_ID) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(USER_ID));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(DOCUMENT_TYPE_ID));
+            if ((COPY_TYPE_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(COPY_TYPE_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, int USER_ID, int DOCUMENT_TYPE_ID, global::System.Nullable<int> COPY_TYPE_ID, int Original_ID, int Original_USER_ID, int Original_DOCUMENT_TYPE_ID, global::System.Nullable<int> Original_COPY_TYPE_ID) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, int USER_ID, int DOCUMENT_TYPE_ID, global::System.Nullable<int> COPY_TYPE_ID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(USER_ID));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(DOCUMENT_TYPE_ID));
             if ((COPY_TYPE_ID.HasValue == true)) {
@@ -21546,17 +20346,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_USER_ID));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_DOCUMENT_TYPE_ID));
-            if ((Original_COPY_TYPE_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_COPY_TYPE_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -21572,14 +20361,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int USER_ID, int DOCUMENT_TYPE_ID, global::System.Nullable<int> COPY_TYPE_ID, int Original_ID, int Original_USER_ID, int Original_DOCUMENT_TYPE_ID, global::System.Nullable<int> Original_COPY_TYPE_ID) {
-            return this.Update(Original_ID, USER_ID, DOCUMENT_TYPE_ID, COPY_TYPE_ID, Original_ID, Original_USER_ID, Original_DOCUMENT_TYPE_ID, Original_COPY_TYPE_ID);
         }
     }
     
@@ -21711,10 +20492,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"ARCH\".\"USER_DOCUMENT_ACCESS\" WHERE ((\"ID\" = :Original_ID) AND (\"USER" +
-                "_ID\" = :Original_USER_ID) AND (\"DOCUMENT_ID\" = :Original_DOCUMENT_ID) AND ((:IsN" +
-                "ull_COPY_ID = 1 AND \"COPY_ID\" IS NULL) OR (\"COPY_ID\" = :Original_COPY_ID)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_USER_DOCUMENT_ACCESS.DEL_USER_DOCUMENT_ACCESS";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -21723,49 +20502,49 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_USER_DOCUMENT_ACCESS.INS_USER_DOCUMENT_ACCESS_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_USER_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":USER_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "USER_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":DOCUMENT_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "DOCUMENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.ParameterName = ":COPY_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""USER_DOCUMENT_ACCESS"" SET ""ID"" = :ID, ""USER_ID"" = :USER_ID, ""DOCUMENT_ID"" = :DOCUMENT_ID, ""COPY_ID"" = :COPY_ID WHERE ((""ID"" = :Original_ID) AND (""USER_ID"" = :Original_USER_ID) AND (""DOCUMENT_ID"" = :Original_DOCUMENT_ID) AND ((:IsNull_COPY_ID = 1 AND ""COPY_ID"" IS NULL) OR (""COPY_ID"" = :Original_COPY_ID)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_USER_DOCUMENT_ACCESS.UPD_USER_DOCUMENT_ACCESS";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "USER_ID";
@@ -21787,47 +20566,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "COPY_ID";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_USER_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "USER_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DOCUMENT_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DOCUMENT_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_COPY_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "COPY_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -21905,18 +20643,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, int Original_USER_ID, int Original_DOCUMENT_ID, global::System.Nullable<int> Original_COPY_ID) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_USER_ID));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_DOCUMENT_ID));
-            if ((Original_COPY_ID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_COPY_ID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -21936,9 +20664,39 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, decimal USER_ID, decimal DOCUMENT_ID, global::System.Nullable<decimal> COPY_ID) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(USER_ID));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(DOCUMENT_ID));
+            if ((COPY_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(COPY_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, int USER_ID, int DOCUMENT_ID, global::System.Nullable<int> COPY_ID, int Original_ID, int Original_USER_ID, int Original_DOCUMENT_ID, global::System.Nullable<int> Original_COPY_ID) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, int USER_ID, int DOCUMENT_ID, global::System.Nullable<int> COPY_ID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(USER_ID));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(DOCUMENT_ID));
             if ((COPY_ID.HasValue == true)) {
@@ -21946,17 +20704,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_USER_ID));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_DOCUMENT_ID));
-            if ((Original_COPY_ID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_COPY_ID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -21972,14 +20719,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int USER_ID, int DOCUMENT_ID, global::System.Nullable<int> COPY_ID, int Original_ID, int Original_USER_ID, int Original_DOCUMENT_ID, global::System.Nullable<int> Original_COPY_ID) {
-            return this.Update(Original_ID, USER_ID, DOCUMENT_ID, COPY_ID, Original_ID, Original_USER_ID, Original_DOCUMENT_ID, Original_COPY_ID);
         }
     }
     
@@ -22444,25 +21183,33 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "DML_USERS.INS_USERS";
+            this._adapter.InsertCommand.CommandText = "DML_USERS.INS_USERS_WI";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "NAME";
-            param.DbType = global::System.Data.DbType.AnsiString;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":NAME";
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Varchar2;
+            param.Size = 100;
             param.IsNullable = true;
             param.SourceColumn = "NAME";
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "FULL_NAME";
-            param.DbType = global::System.Data.DbType.AnsiString;
+            param.ParameterName = ":FULL_NAME";
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 500;
             param.IsNullable = true;
             param.SourceColumn = "FULL_NAME";
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "BLOCK";
+            param.ParameterName = ":BLOCK";
             param.DbType = global::System.Data.DbType.Decimal;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
-            param.Size = 1;
             param.IsNullable = true;
             param.SourceColumn = "BLOCK";
             this._adapter.InsertCommand.Parameters.Add(param);
@@ -22597,20 +21344,21 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string NAME, string FULL_NAME, decimal BLOCK) {
+        public virtual int Insert(decimal ID, string NAME, string FULL_NAME, decimal BLOCK) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
             if ((NAME == null)) {
                 throw new global::System.ArgumentNullException("NAME");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(NAME));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(NAME));
             }
             if ((FULL_NAME == null)) {
                 throw new global::System.ArgumentNullException("FULL_NAME");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(FULL_NAME));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(FULL_NAME));
             }
-            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(BLOCK));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(BLOCK));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -22791,11 +21539,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM \"ARCH\".\"REFERENCES\" WHERE ((\"ID\" = :Original_ID) AND (\"NAME\" = :Origi" +
-                "nal_NAME) AND ((:IsNull_DESCRIPTION = 1 AND \"DESCRIPTION\" IS NULL) OR (\"DESCRIPT" +
-                "ION\" = :Original_DESCRIPTION)) AND (\"REFENCE_TYPE_ID\" = :Original_REFENCE_TYPE_I" +
-                "D))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.CommandText = "DML_REFERENCES.DEL_REFERENCES";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
@@ -22804,49 +21549,10 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.SourceColumn = "ID";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_REFENCE_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "REFENCE_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO ARCH.\"REFERENCES\"\r\n                         (ID, \"NAME\", DESCRIPTION," +
-                " REFENCE_TYPE_ID)\r\nVALUES   (:ID, :NAME, :DESCRIPTION, :REFENCE_TYPE_ID)";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = ":ID";
-            param.DbType = global::System.Data.DbType.Decimal;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            this._adapter.InsertCommand.Parameters.Add(param);
+            this._adapter.InsertCommand.CommandText = "DML_REFERENCES.INS_REFERENCES";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = ":NAME";
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
@@ -22870,14 +21576,15 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""ARCH"".""REFERENCES"" SET ""ID"" = :ID, ""NAME"" = :NAME, ""DESCRIPTION"" = :DESCRIPTION, ""REFENCE_TYPE_ID"" = :REFENCE_TYPE_ID WHERE ((""ID"" = :Original_ID) AND (""NAME"" = :Original_NAME) AND ((:IsNull_DESCRIPTION = 1 AND ""DESCRIPTION"" IS NULL) OR (""DESCRIPTION"" = :Original_DESCRIPTION)) AND (""REFENCE_TYPE_ID"" = :Original_REFENCE_TYPE_ID))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.CommandText = "DML_REFERENCES.UPD_REFERENCES";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "ID";
+            param.ParameterName = "Original_ID";
             param.DbType = global::System.Data.DbType.Int32;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = "NAME";
@@ -22897,45 +21604,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "REFENCE_TYPE_ID";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "NAME";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "IsNull_DESCRIPTION";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_DESCRIPTION";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.IsNullable = true;
-            param.SourceColumn = "DESCRIPTION";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = "Original_REFENCE_TYPE_ID";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "REFENCE_TYPE_ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -23013,23 +21681,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_NAME, string Original_DESCRIPTION, int Original_REFENCE_TYPE_ID) {
+        public virtual int Delete(int Original_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_NAME));
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_DESCRIPTION));
-            }
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_REFENCE_TYPE_ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -23050,21 +21703,20 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal ID, string NAME, string DESCRIPTION, decimal REFENCE_TYPE_ID) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+        public virtual int Insert(string NAME, string DESCRIPTION, decimal REFENCE_TYPE_ID) {
             if ((NAME == null)) {
                 throw new global::System.ArgumentNullException("NAME");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(NAME));
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(NAME));
             }
             if ((DESCRIPTION == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(DESCRIPTION));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(DESCRIPTION));
             }
-            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(REFENCE_TYPE_ID));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(REFENCE_TYPE_ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -23085,8 +21737,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, string NAME, string DESCRIPTION, int REFENCE_TYPE_ID, int Original_ID, string Original_NAME, string Original_DESCRIPTION, int Original_REFENCE_TYPE_ID) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Update(int Original_ID, string NAME, string DESCRIPTION, int REFENCE_TYPE_ID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((NAME == null)) {
                 throw new global::System.ArgumentNullException("NAME");
             }
@@ -23100,22 +21752,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(DESCRIPTION));
             }
             this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(REFENCE_TYPE_ID));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_ID));
-            if ((Original_NAME == null)) {
-                throw new global::System.ArgumentNullException("Original_NAME");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_NAME));
-            }
-            if ((Original_DESCRIPTION == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_DESCRIPTION));
-            }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_REFENCE_TYPE_ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -23130,14 +21766,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string NAME, string DESCRIPTION, int REFENCE_TYPE_ID, int Original_ID, string Original_NAME, string Original_DESCRIPTION, int Original_REFENCE_TYPE_ID) {
-            return this.Update(Original_ID, NAME, DESCRIPTION, REFENCE_TYPE_ID, Original_ID, Original_NAME, Original_DESCRIPTION, Original_REFENCE_TYPE_ID);
         }
     }
     
