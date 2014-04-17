@@ -87,12 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseAdminManager.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="BaseAdminManager.Designer.cs">
-      <DependentUpon>BaseAdminManager.cs</DependentUpon>
-    </Compile>
+    <Compile Include="DataHelper.cs" />
     <Compile Include="FullDataSet.cs">
       <DependentUpon>FullDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -108,6 +103,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MasterDetailManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MasterDetailManager.Designer.cs">
+      <DependentUpon>MasterDetailManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="users\Users.cs">
@@ -116,11 +117,11 @@
     <Compile Include="users\Users.Designer.cs">
       <DependentUpon>Users.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BaseAdminManager.resx">
-      <DependentUpon>BaseAdminManager.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MasterDetailManager.resx">
+      <DependentUpon>MasterDetailManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

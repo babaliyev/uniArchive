@@ -46,13 +46,13 @@
             this.userRolesGridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colID1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colROLE_ID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.rolesSearchLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
+            this.rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colUSER_ID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.userRolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.userRolesTableAdapter = new UniArchive.FullDataSetTableAdapters.USER_ROLESTableAdapter();
-            this.rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rolesTableAdapter = new UniArchive.FullDataSetTableAdapters.ROLESTableAdapter();
-            this.rolesSearchLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
-            this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
@@ -65,10 +65,10 @@
             this.rolesTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userRolesGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userRolesGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userRolesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rolesSearchLookUpEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userRolesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // fullDataSet
@@ -131,6 +131,7 @@
             this.usersGridView.OptionsView.ShowAutoFilterRow = true;
             this.usersGridView.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.usersGridView.OptionsView.ShowGroupPanel = false;
+            this.usersGridView.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.usersGridView_InitNewRow);
             // 
             // colID
             // 
@@ -163,16 +164,8 @@
             // 
             this.blockCheckEdit.AutoHeight = false;
             this.blockCheckEdit.Name = "blockCheckEdit";
-            this.blockCheckEdit.ValueChecked = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.blockCheckEdit.ValueUnchecked = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
+            this.blockCheckEdit.ValueChecked = ((short)(1));
+            this.blockCheckEdit.ValueUnchecked = ((short)(0));
             // 
             // xtraTabControl1
             // 
@@ -238,6 +231,30 @@
             this.colROLE_ID.Visible = true;
             this.colROLE_ID.VisibleIndex = 0;
             // 
+            // rolesSearchLookUpEdit1
+            // 
+            this.rolesSearchLookUpEdit1.AutoHeight = false;
+            this.rolesSearchLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.rolesSearchLookUpEdit1.DataSource = this.rolesBindingSource;
+            this.rolesSearchLookUpEdit1.DisplayMember = "NAME";
+            this.rolesSearchLookUpEdit1.Name = "rolesSearchLookUpEdit1";
+            this.rolesSearchLookUpEdit1.NullText = "";
+            this.rolesSearchLookUpEdit1.ValueMember = "ID";
+            this.rolesSearchLookUpEdit1.View = this.repositoryItemSearchLookUpEdit1View;
+            // 
+            // rolesBindingSource
+            // 
+            this.rolesBindingSource.DataMember = "ROLES";
+            this.rolesBindingSource.DataSource = this.fullDataSet;
+            // 
+            // repositoryItemSearchLookUpEdit1View
+            // 
+            this.repositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
+            this.repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
             // colUSER_ID
             // 
             this.colUSER_ID.FieldName = "USER_ID";
@@ -252,33 +269,9 @@
             // 
             this.userRolesTableAdapter.ClearBeforeFill = true;
             // 
-            // rolesBindingSource
-            // 
-            this.rolesBindingSource.DataMember = "ROLES";
-            this.rolesBindingSource.DataSource = this.fullDataSet;
-            // 
             // rolesTableAdapter
             // 
             this.rolesTableAdapter.ClearBeforeFill = true;
-            // 
-            // rolesSearchLookUpEdit1
-            // 
-            this.rolesSearchLookUpEdit1.AutoHeight = false;
-            this.rolesSearchLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.rolesSearchLookUpEdit1.DataSource = this.rolesBindingSource;
-            this.rolesSearchLookUpEdit1.DisplayMember = "NAME";
-            this.rolesSearchLookUpEdit1.Name = "rolesSearchLookUpEdit1";
-            this.rolesSearchLookUpEdit1.NullText = "";
-            this.rolesSearchLookUpEdit1.ValueMember = "ID";
-            this.rolesSearchLookUpEdit1.View = this.repositoryItemSearchLookUpEdit1View;
-            // 
-            // repositoryItemSearchLookUpEdit1View
-            // 
-            this.repositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
-            this.repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // Users
             // 
@@ -299,10 +292,10 @@
             this.rolesTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.userRolesGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userRolesGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userRolesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rolesSearchLookUpEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userRolesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

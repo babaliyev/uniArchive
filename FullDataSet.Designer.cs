@@ -21218,11 +21218,12 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.UpdateCommand.CommandText = "DML_USERS.UPD_USERS";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = ":NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Varchar2;
-            param.Size = 100;
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
-            param.SourceColumn = "NAME";
+            param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = ":FULL_NAME";
@@ -21237,14 +21238,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "BLOCK";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = ":ID";
-            param.DbType = global::System.Data.DbType.Decimal;
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
-            param.IsNullable = true;
-            param.SourceColumn = "ID";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
@@ -21379,13 +21372,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string NAME, string FULL_NAME, decimal BLOCK, decimal ID) {
-            if ((NAME == null)) {
-                throw new global::System.ArgumentNullException("NAME");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(NAME));
-            }
+        public virtual int Update(decimal ID, string FULL_NAME, decimal BLOCK) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(ID));
             if ((FULL_NAME == null)) {
                 throw new global::System.ArgumentNullException("FULL_NAME");
             }
@@ -21393,7 +21381,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(FULL_NAME));
             }
             this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(BLOCK));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

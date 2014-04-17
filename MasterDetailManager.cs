@@ -9,9 +9,9 @@ using DevExpress.XtraEditors;
 
 namespace UniArchive
 {
-    public partial class BaseAdminManager : DevExpress.XtraEditors.XtraUserControl
+    public partial class MasterDetailManager : DevExpress.XtraEditors.XtraUserControl
     {
-        public BaseAdminManager()
+        public MasterDetailManager()
         {
             InitializeComponent();
         }

@@ -39,5 +39,11 @@ namespace UniArchive.users
         {
             this.userRolesTableAdapter.Update(this.fullDataSet.USER_ROLES);
         }
+
+        private void usersGridView_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+        {
+            usersGridView.GetDataRow(e.RowHandle)["ID"] = DataHelper.GET_USERS_ID();
+            
+        }
     }
 }
