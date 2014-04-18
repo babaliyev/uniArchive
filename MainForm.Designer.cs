@@ -34,13 +34,24 @@
             this.navbarImageList = new System.Windows.Forms.ImageList(this.components);
             this.barManager = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
+            this.addDocument = new DevExpress.XtraBars.BarButtonItem();
+            this.addClient = new DevExpress.XtraBars.BarButtonItem();
+            this.Search = new DevExpress.XtraBars.BarButtonItem();
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.mFile = new DevExpress.XtraBars.BarSubItem();
             this.iExit = new DevExpress.XtraBars.BarButtonItem();
             this.ChangePassword = new DevExpress.XtraBars.BarButtonItem();
+            this.actionsBarSubItem = new DevExpress.XtraBars.BarSubItem();
             this.executeBarSubItem = new DevExpress.XtraBars.BarSubItem();
+            this.Clients = new DevExpress.XtraBars.BarButtonItem();
             this.Users = new DevExpress.XtraBars.BarButtonItem();
             this.Roles = new DevExpress.XtraBars.BarButtonItem();
+            this.AddressDictionary = new DevExpress.XtraBars.BarButtonItem();
+            this.Reference = new DevExpress.XtraBars.BarButtonItem();
+            this.Attributes = new DevExpress.XtraBars.BarButtonItem();
+            this.DocTypes = new DevExpress.XtraBars.BarButtonItem();
+            this.CopyTypes = new DevExpress.XtraBars.BarButtonItem();
+            this.aboutBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.sItem = new DevExpress.XtraBars.BarStaticItem();
             this.sSecItem = new DevExpress.XtraBars.BarStaticItem();
@@ -50,30 +61,22 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.hideContainerLeft = new DevExpress.XtraBars.Docking.AutoHideContainer();
-            this.directoryDockPanel = new DevExpress.XtraBars.Docking.DockPanel();
-            this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.addressDockPanel = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.addressTree1 = new UniArchive.addressTree.AddressTree();
+            this.directoryDockPanel = new DevExpress.XtraBars.Docking.DockPanel();
+            this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.directoryTree1 = new UniArchive.directoryTree.DirectoryTree();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.iAbout = new DevExpress.XtraBars.BarButtonItem();
-            this.Clients = new DevExpress.XtraBars.BarButtonItem();
-            this.AddressDictionary = new DevExpress.XtraBars.BarButtonItem();
-            this.ReferenceTypes = new DevExpress.XtraBars.BarButtonItem();
-            this.Reference = new DevExpress.XtraBars.BarButtonItem();
-            this.Attributes = new DevExpress.XtraBars.BarButtonItem();
-            this.DocTypes = new DevExpress.XtraBars.BarButtonItem();
-            this.CopyTypes = new DevExpress.XtraBars.BarButtonItem();
-            this.Search = new DevExpress.XtraBars.BarButtonItem();
             this.addDirectory = new DevExpress.XtraBars.BarButtonItem();
             this.editDirectory = new DevExpress.XtraBars.BarButtonItem();
             this.delDirectory = new DevExpress.XtraBars.BarButtonItem();
-            this.addDocument = new DevExpress.XtraBars.BarButtonItem();
             this.editDocument = new DevExpress.XtraBars.BarButtonItem();
             this.delDocument = new DevExpress.XtraBars.BarButtonItem();
             this.addCopy = new DevExpress.XtraBars.BarButtonItem();
             this.editCopy = new DevExpress.XtraBars.BarButtonItem();
             this.delCopy = new DevExpress.XtraBars.BarButtonItem();
-            this.addClient = new DevExpress.XtraBars.BarButtonItem();
             this.editClient = new DevExpress.XtraBars.BarButtonItem();
             this.delClient = new DevExpress.XtraBars.BarButtonItem();
             this.giveDocument = new DevExpress.XtraBars.BarButtonItem();
@@ -85,8 +88,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
-            this.directoryDockPanel.SuspendLayout();
             this.addressDockPanel.SuspendLayout();
+            this.dockPanel1_Container.SuspendLayout();
+            this.directoryDockPanel.SuspendLayout();
+            this.dockPanel2_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView)).BeginInit();
             this.SuspendLayout();
@@ -138,7 +143,6 @@
             this.Users,
             this.Roles,
             this.AddressDictionary,
-            this.ReferenceTypes,
             this.Reference,
             this.Attributes,
             this.DocTypes,
@@ -161,9 +165,11 @@
             this.returnDocument,
             this.giveCopy,
             this.returnCopy,
-            this.executeBarSubItem});
+            this.executeBarSubItem,
+            this.aboutBarButtonItem,
+            this.actionsBarSubItem});
             this.barManager.MainMenu = this.bar1;
-            this.barManager.MaxItemId = 62;
+            this.barManager.MaxItemId = 64;
             this.barManager.StatusBar = this.bar3;
             // 
             // bar2
@@ -180,6 +186,30 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.Search, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.Text = "Tools";
             // 
+            // addDocument
+            // 
+            this.addDocument.Caption = "Yeni sənəd";
+            this.addDocument.CategoryGuid = new System.Guid("6c82e277-637f-4052-bc27-3ba2af92f37f");
+            this.addDocument.Id = 46;
+            this.addDocument.Name = "addDocument";
+            this.addDocument.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.addDocument_ItemClick);
+            // 
+            // addClient
+            // 
+            this.addClient.Caption = "Yeni müştəri";
+            this.addClient.CategoryGuid = new System.Guid("300076e1-b79e-4079-aca2-defe9e638042");
+            this.addClient.Id = 53;
+            this.addClient.Name = "addClient";
+            this.addClient.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.addClient_ItemClick);
+            // 
+            // Search
+            // 
+            this.Search.Caption = "Axtarış";
+            this.Search.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
+            this.Search.Id = 41;
+            this.Search.Name = "Search";
+            this.Search.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Search_ItemClick);
+            // 
             // bar1
             // 
             this.bar1.BarName = "Main menu";
@@ -188,14 +218,16 @@
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.mFile),
-            new DevExpress.XtraBars.LinkPersistInfo(this.executeBarSubItem)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.actionsBarSubItem),
+            new DevExpress.XtraBars.LinkPersistInfo(this.executeBarSubItem),
+            new DevExpress.XtraBars.LinkPersistInfo(this.aboutBarButtonItem)});
             this.bar1.OptionsBar.MultiLine = true;
             this.bar1.OptionsBar.UseWholeRow = true;
             this.bar1.Text = "Main menu";
             // 
             // mFile
             // 
-            this.mFile.Caption = "&File";
+            this.mFile.Caption = "&Fayl";
             this.mFile.Id = 0;
             this.mFile.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.iExit),
@@ -214,6 +246,16 @@
             this.ChangePassword.Caption = "Şifrəni dəyişmək";
             this.ChangePassword.Id = 56;
             this.ChangePassword.Name = "ChangePassword";
+            this.ChangePassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ChangePassword_ItemClick);
+            // 
+            // actionsBarSubItem
+            // 
+            this.actionsBarSubItem.Caption = "Əsas əməliyyatlar";
+            this.actionsBarSubItem.Id = 63;
+            this.actionsBarSubItem.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.addClient),
+            new DevExpress.XtraBars.LinkPersistInfo(this.addDocument)});
+            this.actionsBarSubItem.Name = "actionsBarSubItem";
             // 
             // executeBarSubItem
             // 
@@ -224,13 +266,20 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.Users),
             new DevExpress.XtraBars.LinkPersistInfo(this.Roles),
             new DevExpress.XtraBars.LinkPersistInfo(this.AddressDictionary),
-            new DevExpress.XtraBars.LinkPersistInfo(this.ReferenceTypes),
             new DevExpress.XtraBars.LinkPersistInfo(this.Reference),
             new DevExpress.XtraBars.LinkPersistInfo(this.Attributes),
             new DevExpress.XtraBars.LinkPersistInfo(this.DocTypes),
             new DevExpress.XtraBars.LinkPersistInfo(this.CopyTypes),
             new DevExpress.XtraBars.LinkPersistInfo(this.Search)});
             this.executeBarSubItem.Name = "executeBarSubItem";
+            // 
+            // Clients
+            // 
+            this.Clients.Caption = "Müştərilər";
+            this.Clients.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
+            this.Clients.Id = 31;
+            this.Clients.Name = "Clients";
+            this.Clients.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Clients_ItemClick);
             // 
             // Users
             // 
@@ -247,6 +296,53 @@
             this.Roles.Id = 33;
             this.Roles.Name = "Roles";
             this.Roles.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Roles_ItemClick);
+            // 
+            // AddressDictionary
+            // 
+            this.AddressDictionary.Caption = "Arxivin strukturu";
+            this.AddressDictionary.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
+            this.AddressDictionary.Id = 34;
+            this.AddressDictionary.Name = "AddressDictionary";
+            this.AddressDictionary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.AddressDictionary_ItemClick);
+            // 
+            // Reference
+            // 
+            this.Reference.Caption = "Soraq kitabçası";
+            this.Reference.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
+            this.Reference.Id = 37;
+            this.Reference.Name = "Reference";
+            this.Reference.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Reference_ItemClick);
+            // 
+            // Attributes
+            // 
+            this.Attributes.Caption = "Xassələr";
+            this.Attributes.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
+            this.Attributes.Id = 38;
+            this.Attributes.Name = "Attributes";
+            this.Attributes.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Attributes_ItemClick);
+            // 
+            // DocTypes
+            // 
+            this.DocTypes.Caption = "Sənəd tipləri";
+            this.DocTypes.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
+            this.DocTypes.Id = 39;
+            this.DocTypes.Name = "DocTypes";
+            this.DocTypes.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.DocTypes_ItemClick);
+            // 
+            // CopyTypes
+            // 
+            this.CopyTypes.Caption = "Qoşma tipləri";
+            this.CopyTypes.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
+            this.CopyTypes.Id = 40;
+            this.CopyTypes.Name = "CopyTypes";
+            this.CopyTypes.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CopyTypes_ItemClick);
+            // 
+            // aboutBarButtonItem
+            // 
+            this.aboutBarButtonItem.Caption = "Haqqında";
+            this.aboutBarButtonItem.Id = 62;
+            this.aboutBarButtonItem.Name = "aboutBarButtonItem";
+            this.aboutBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.aboutBarButtonItem_ItemClick);
             // 
             // bar3
             // 
@@ -325,33 +421,12 @@
             // hideContainerLeft
             // 
             this.hideContainerLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
-            this.hideContainerLeft.Controls.Add(this.directoryDockPanel);
             this.hideContainerLeft.Controls.Add(this.addressDockPanel);
+            this.hideContainerLeft.Controls.Add(this.directoryDockPanel);
             this.hideContainerLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.hideContainerLeft.Location = new System.Drawing.Point(0, 51);
             this.hideContainerLeft.Name = "hideContainerLeft";
             this.hideContainerLeft.Size = new System.Drawing.Size(19, 333);
-            // 
-            // directoryDockPanel
-            // 
-            this.directoryDockPanel.Controls.Add(this.dockPanel2_Container);
-            this.directoryDockPanel.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
-            this.directoryDockPanel.ID = new System.Guid("42f1c68e-c4f3-4a65-b1a4-e62c7c221a3b");
-            this.directoryDockPanel.Location = new System.Drawing.Point(0, 0);
-            this.directoryDockPanel.Name = "directoryDockPanel";
-            this.directoryDockPanel.OriginalSize = new System.Drawing.Size(200, 200);
-            this.directoryDockPanel.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Left;
-            this.directoryDockPanel.SavedIndex = 1;
-            this.directoryDockPanel.Size = new System.Drawing.Size(200, 331);
-            this.directoryDockPanel.Text = "Qovluqlar";
-            this.directoryDockPanel.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
-            // 
-            // dockPanel2_Container
-            // 
-            this.dockPanel2_Container.Location = new System.Drawing.Point(4, 23);
-            this.dockPanel2_Container.Name = "dockPanel2_Container";
-            this.dockPanel2_Container.Size = new System.Drawing.Size(192, 304);
-            this.dockPanel2_Container.TabIndex = 0;
             // 
             // addressDockPanel
             // 
@@ -369,10 +444,49 @@
             // 
             // dockPanel1_Container
             // 
+            this.dockPanel1_Container.Controls.Add(this.addressTree1);
             this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
             this.dockPanel1_Container.Size = new System.Drawing.Size(192, 306);
             this.dockPanel1_Container.TabIndex = 0;
+            // 
+            // addressTree1
+            // 
+            this.addressTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addressTree1.Location = new System.Drawing.Point(0, 0);
+            this.addressTree1.Name = "addressTree1";
+            this.addressTree1.Size = new System.Drawing.Size(192, 306);
+            this.addressTree1.TabIndex = 0;
+            // 
+            // directoryDockPanel
+            // 
+            this.directoryDockPanel.Controls.Add(this.dockPanel2_Container);
+            this.directoryDockPanel.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
+            this.directoryDockPanel.ID = new System.Guid("42f1c68e-c4f3-4a65-b1a4-e62c7c221a3b");
+            this.directoryDockPanel.Location = new System.Drawing.Point(0, 0);
+            this.directoryDockPanel.Name = "directoryDockPanel";
+            this.directoryDockPanel.OriginalSize = new System.Drawing.Size(200, 200);
+            this.directoryDockPanel.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Left;
+            this.directoryDockPanel.SavedIndex = 0;
+            this.directoryDockPanel.Size = new System.Drawing.Size(200, 333);
+            this.directoryDockPanel.Text = "Qovluqlar";
+            this.directoryDockPanel.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
+            // 
+            // dockPanel2_Container
+            // 
+            this.dockPanel2_Container.Controls.Add(this.directoryTree1);
+            this.dockPanel2_Container.Location = new System.Drawing.Point(4, 23);
+            this.dockPanel2_Container.Name = "dockPanel2_Container";
+            this.dockPanel2_Container.Size = new System.Drawing.Size(192, 306);
+            this.dockPanel2_Container.TabIndex = 0;
+            // 
+            // directoryTree1
+            // 
+            this.directoryTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.directoryTree1.Location = new System.Drawing.Point(0, 0);
+            this.directoryTree1.Name = "directoryTree1";
+            this.directoryTree1.Size = new System.Drawing.Size(192, 306);
+            this.directoryTree1.TabIndex = 0;
             // 
             // imageList
             // 
@@ -388,70 +502,6 @@
             this.iAbout.Caption = "&About";
             this.iAbout.Id = 8;
             this.iAbout.Name = "iAbout";
-            // 
-            // Clients
-            // 
-            this.Clients.Caption = "Müştərilər";
-            this.Clients.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
-            this.Clients.Id = 31;
-            this.Clients.Name = "Clients";
-            this.Clients.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Clients_ItemClick);
-            // 
-            // AddressDictionary
-            // 
-            this.AddressDictionary.Caption = "Arxivin strukturu";
-            this.AddressDictionary.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
-            this.AddressDictionary.Id = 34;
-            this.AddressDictionary.Name = "AddressDictionary";
-            this.AddressDictionary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.AddressDictionary_ItemClick);
-            // 
-            // ReferenceTypes
-            // 
-            this.ReferenceTypes.Caption = "Soraqlar";
-            this.ReferenceTypes.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
-            this.ReferenceTypes.Id = 36;
-            this.ReferenceTypes.Name = "ReferenceTypes";
-            this.ReferenceTypes.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ReferenceTypes_ItemClick);
-            // 
-            // Reference
-            // 
-            this.Reference.Caption = "Soraq kitabçası";
-            this.Reference.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
-            this.Reference.Id = 37;
-            this.Reference.Name = "Reference";
-            this.Reference.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Reference_ItemClick);
-            // 
-            // Attributes
-            // 
-            this.Attributes.Caption = "Xassələr";
-            this.Attributes.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
-            this.Attributes.Id = 38;
-            this.Attributes.Name = "Attributes";
-            this.Attributes.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Attributes_ItemClick);
-            // 
-            // DocTypes
-            // 
-            this.DocTypes.Caption = "Sənəd tipləri";
-            this.DocTypes.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
-            this.DocTypes.Id = 39;
-            this.DocTypes.Name = "DocTypes";
-            this.DocTypes.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.DocTypes_ItemClick);
-            // 
-            // CopyTypes
-            // 
-            this.CopyTypes.Caption = "Qoşma tipləri";
-            this.CopyTypes.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
-            this.CopyTypes.Id = 40;
-            this.CopyTypes.Name = "CopyTypes";
-            this.CopyTypes.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CopyTypes_ItemClick);
-            // 
-            // Search
-            // 
-            this.Search.Caption = "Axtarış";
-            this.Search.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
-            this.Search.Id = 41;
-            this.Search.Name = "Search";
-            this.Search.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Search_ItemClick);
             // 
             // addDirectory
             // 
@@ -473,13 +523,6 @@
             this.delDirectory.CategoryGuid = new System.Guid("1f6e3277-0f80-4730-8e94-a3079fc52200");
             this.delDirectory.Id = 45;
             this.delDirectory.Name = "delDirectory";
-            // 
-            // addDocument
-            // 
-            this.addDocument.Caption = "Yeni sənəd";
-            this.addDocument.CategoryGuid = new System.Guid("6c82e277-637f-4052-bc27-3ba2af92f37f");
-            this.addDocument.Id = 46;
-            this.addDocument.Name = "addDocument";
             // 
             // editDocument
             // 
@@ -515,13 +558,6 @@
             this.delCopy.CategoryGuid = new System.Guid("2fbaff10-351d-481e-82c7-04e454b52f62");
             this.delCopy.Id = 52;
             this.delCopy.Name = "delCopy";
-            // 
-            // addClient
-            // 
-            this.addClient.Caption = "Yeni müştəri";
-            this.addClient.CategoryGuid = new System.Guid("300076e1-b79e-4079-aca2-defe9e638042");
-            this.addClient.Id = 53;
-            this.addClient.Name = "addClient";
             // 
             // editClient
             // 
@@ -596,8 +632,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
             this.hideContainerLeft.ResumeLayout(false);
-            this.directoryDockPanel.ResumeLayout(false);
             this.addressDockPanel.ResumeLayout(false);
+            this.dockPanel1_Container.ResumeLayout(false);
+            this.directoryDockPanel.ResumeLayout(false);
+            this.dockPanel2_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.documentManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView)).EndInit();
             this.ResumeLayout(false);
@@ -634,7 +672,6 @@
         private DevExpress.XtraBars.BarButtonItem Users;
         private DevExpress.XtraBars.BarButtonItem Roles;
         private DevExpress.XtraBars.BarButtonItem AddressDictionary;
-        private DevExpress.XtraBars.BarButtonItem ReferenceTypes;
         private DevExpress.XtraBars.BarButtonItem Reference;
         private DevExpress.XtraBars.BarButtonItem Attributes;
         private DevExpress.XtraBars.BarButtonItem DocTypes;
@@ -658,6 +695,10 @@
         private DevExpress.XtraBars.BarButtonItem giveCopy;
         private DevExpress.XtraBars.BarButtonItem returnCopy;
         private DevExpress.XtraBars.BarSubItem executeBarSubItem;
+        private addressTree.AddressTree addressTree1;
+        private directoryTree.DirectoryTree directoryTree1;
+        private DevExpress.XtraBars.BarButtonItem aboutBarButtonItem;
+        private DevExpress.XtraBars.BarSubItem actionsBarSubItem;
 
     }
 }

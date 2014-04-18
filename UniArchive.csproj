@@ -87,7 +87,103 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addressDictionary\AddressDictionaryManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="addressDictionary\AddressDictionaryManager.Designer.cs">
+      <DependentUpon>AddressDictionaryManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addressTree\AddressTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="addressTree\AddressTree.Designer.cs">
+      <DependentUpon>AddressTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="attributes\AttributesManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="attributes\AttributesManager.Designer.cs">
+      <DependentUpon>AttributesManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangePasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePasswordForm.Designer.cs">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="clients\ClientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="clients\ClientForm.Designer.cs">
+      <DependentUpon>ClientForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="clients\ClientsManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="clients\ClientsManager.Designer.cs">
+      <DependentUpon>ClientsManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="copyTypes\CopyTypesManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="copyTypes\CopyTypesManager.Designer.cs">
+      <DependentUpon>CopyTypesManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="copy\CopiesManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="copy\CopiesManager.Designer.cs">
+      <DependentUpon>CopiesManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="copy\CopyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="copy\CopyForm.Designer.cs">
+      <DependentUpon>CopyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="copy\CopyManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="copy\CopyManager.Designer.cs">
+      <DependentUpon>CopyManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataHelper.cs" />
+    <Compile Include="directoryTree\DirectoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="directoryTree\DirectoryForm.Designer.cs">
+      <DependentUpon>DirectoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="directoryTree\DirectoryTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="directoryTree\DirectoryTree.Designer.cs">
+      <DependentUpon>DirectoryTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="docTypes\DocTypesManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="docTypes\DocTypesManager.Designer.cs">
+      <DependentUpon>DocTypesManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="document\DocumentManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="document\DocumentManager.Designer.cs">
+      <DependentUpon>DocumentManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="document\MovementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="document\MovementForm.Designer.cs">
+      <DependentUpon>MovementForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FullDataSet.cs">
       <DependentUpon>FullDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -96,6 +192,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FullDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -111,6 +213,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="references\ReferencesManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="references\ReferencesManager.Designer.cs">
+      <DependentUpon>ReferencesManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="roles\RolesManager.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,6 +237,9 @@
     <Compile Include="users\UsersManager.Designer.cs">
       <DependentUpon>UsersManager.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="document\DocumentManager.resx">
+      <DependentUpon>DocumentManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -195,17 +306,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="addressDictionary\" />
-    <Folder Include="addressTree\" />
-    <Folder Include="attributes\" />
-    <Folder Include="clients\" />
-    <Folder Include="copyTypes\" />
-    <Folder Include="copy\" />
     <Folder Include="db_project\" />
-    <Folder Include="directoryTree\" />
-    <Folder Include="docTypes\" />
-    <Folder Include="document\" />
-    <Folder Include="references\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
