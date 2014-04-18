@@ -49,6 +49,7 @@
             // splitContainerControl1
             // 
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
             this.splitContainerControl1.Horizontal = false;
             this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControl1.Name = "splitContainerControl1";
@@ -67,7 +68,7 @@
             this.masterGridControl.Location = new System.Drawing.Point(0, 0);
             this.masterGridControl.MainView = this.masterGridView;
             this.masterGridControl.Name = "masterGridControl";
-            this.masterGridControl.Size = new System.Drawing.Size(620, 222);
+            this.masterGridControl.Size = new System.Drawing.Size(620, 261);
             this.masterGridControl.TabIndex = 0;
             this.masterGridControl.UseEmbeddedNavigator = true;
             this.masterGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -90,7 +91,7 @@
             this.detailsXtraTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.detailsXtraTabControl.Location = new System.Drawing.Point(0, 0);
             this.detailsXtraTabControl.Name = "detailsXtraTabControl";
-            this.detailsXtraTabControl.Size = new System.Drawing.Size(620, 261);
+            this.detailsXtraTabControl.Size = new System.Drawing.Size(620, 222);
             this.detailsXtraTabControl.TabIndex = 0;
             // 
             // MasterDetailManager
@@ -113,9 +114,9 @@
         #endregion
 
         private FullDataSet fullDataSet;
-        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
-        private DevExpress.XtraGrid.GridControl masterGridControl;
-        private DevExpress.XtraGrid.Views.Grid.GridView masterGridView;
-        private DevExpress.XtraTab.XtraTabControl detailsXtraTabControl;
+        protected DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
+        protected DevExpress.XtraGrid.GridControl masterGridControl;
+        public DevExpress.XtraTab.XtraTabControl detailsXtraTabControl;
+        public DevExpress.XtraGrid.Views.Grid.GridView masterGridView;
     }
 }

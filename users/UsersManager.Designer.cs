@@ -1,6 +1,6 @@
 ﻿namespace UniArchive.users
 {
-    partial class Users
+    partial class UsersManager
     {
         /// <summary> 
         /// Required designer variable.

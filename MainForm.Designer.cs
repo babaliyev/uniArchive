@@ -38,10 +38,9 @@
             this.mFile = new DevExpress.XtraBars.BarSubItem();
             this.iExit = new DevExpress.XtraBars.BarButtonItem();
             this.ChangePassword = new DevExpress.XtraBars.BarButtonItem();
-            this.barDockingMenuItem1 = new DevExpress.XtraBars.BarDockingMenuItem();
-            this.mPaintStyle = new DevExpress.XtraBars.BarSubItem();
             this.executeBarSubItem = new DevExpress.XtraBars.BarSubItem();
             this.Users = new DevExpress.XtraBars.BarButtonItem();
+            this.Roles = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.sItem = new DevExpress.XtraBars.BarStaticItem();
             this.sSecItem = new DevExpress.XtraBars.BarStaticItem();
@@ -57,16 +56,7 @@
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.iAbout = new DevExpress.XtraBars.BarButtonItem();
-            this.mOldStyles = new DevExpress.XtraBars.BarSubItem();
-            this.iWXP = new DevExpress.XtraBars.BarCheckItem();
-            this.iOffXP = new DevExpress.XtraBars.BarCheckItem();
-            this.iOff2K = new DevExpress.XtraBars.BarCheckItem();
-            this.iOff2003 = new DevExpress.XtraBars.BarCheckItem();
-            this.iDefault = new DevExpress.XtraBars.BarCheckItem();
-            this.mOfficeSkins = new DevExpress.XtraBars.BarSubItem();
-            this.mBonusSkins = new DevExpress.XtraBars.BarSubItem();
             this.Clients = new DevExpress.XtraBars.BarButtonItem();
-            this.Roles = new DevExpress.XtraBars.BarButtonItem();
             this.AddressDictionary = new DevExpress.XtraBars.BarButtonItem();
             this.ReferenceTypes = new DevExpress.XtraBars.BarButtonItem();
             this.Reference = new DevExpress.XtraBars.BarButtonItem();
@@ -144,16 +134,6 @@
             this.iAbout,
             this.sItem,
             this.sSecItem,
-            this.mPaintStyle,
-            this.mOldStyles,
-            this.mOfficeSkins,
-            this.mBonusSkins,
-            this.iWXP,
-            this.iOffXP,
-            this.iOff2K,
-            this.iOff2003,
-            this.iDefault,
-            this.barDockingMenuItem1,
             this.Clients,
             this.Users,
             this.Roles,
@@ -194,6 +174,10 @@
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.FloatLocation = new System.Drawing.Point(49, 157);
             this.bar2.FloatSize = new System.Drawing.Size(46, 29);
+            this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.addDocument, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.addClient, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.Search, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.Text = "Tools";
             // 
             // bar1
@@ -204,8 +188,6 @@
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.mFile),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barDockingMenuItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.mPaintStyle),
             new DevExpress.XtraBars.LinkPersistInfo(this.executeBarSubItem)});
             this.bar1.OptionsBar.MultiLine = true;
             this.bar1.OptionsBar.UseWholeRow = true;
@@ -225,6 +207,7 @@
             this.iExit.Caption = "E&xit";
             this.iExit.Id = 7;
             this.iExit.Name = "iExit";
+            this.iExit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.iExit_ItemClick);
             // 
             // ChangePassword
             // 
@@ -232,24 +215,21 @@
             this.ChangePassword.Id = 56;
             this.ChangePassword.Name = "ChangePassword";
             // 
-            // barDockingMenuItem1
-            // 
-            this.barDockingMenuItem1.Caption = "Window";
-            this.barDockingMenuItem1.Id = 30;
-            this.barDockingMenuItem1.Name = "barDockingMenuItem1";
-            // 
-            // mPaintStyle
-            // 
-            this.mPaintStyle.Caption = "Paint Style";
-            this.mPaintStyle.Id = 21;
-            this.mPaintStyle.Name = "mPaintStyle";
-            // 
             // executeBarSubItem
             // 
             this.executeBarSubItem.Caption = "Əsas obyektlər";
             this.executeBarSubItem.Id = 61;
             this.executeBarSubItem.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.Users)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.Clients),
+            new DevExpress.XtraBars.LinkPersistInfo(this.Users),
+            new DevExpress.XtraBars.LinkPersistInfo(this.Roles),
+            new DevExpress.XtraBars.LinkPersistInfo(this.AddressDictionary),
+            new DevExpress.XtraBars.LinkPersistInfo(this.ReferenceTypes),
+            new DevExpress.XtraBars.LinkPersistInfo(this.Reference),
+            new DevExpress.XtraBars.LinkPersistInfo(this.Attributes),
+            new DevExpress.XtraBars.LinkPersistInfo(this.DocTypes),
+            new DevExpress.XtraBars.LinkPersistInfo(this.CopyTypes),
+            new DevExpress.XtraBars.LinkPersistInfo(this.Search)});
             this.executeBarSubItem.Name = "executeBarSubItem";
             // 
             // Users
@@ -259,6 +239,14 @@
             this.Users.Id = 32;
             this.Users.Name = "Users";
             this.Users.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Users_ItemClick);
+            // 
+            // Roles
+            // 
+            this.Roles.Caption = "Rollar";
+            this.Roles.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
+            this.Roles.Id = 33;
+            this.Roles.Name = "Roles";
+            this.Roles.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Roles_ItemClick);
             // 
             // bar3
             // 
@@ -401,78 +389,13 @@
             this.iAbout.Id = 8;
             this.iAbout.Name = "iAbout";
             // 
-            // mOldStyles
-            // 
-            this.mOldStyles.Caption = "Old Styles";
-            this.mOldStyles.Id = 22;
-            this.mOldStyles.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.iWXP),
-            new DevExpress.XtraBars.LinkPersistInfo(this.iOffXP),
-            new DevExpress.XtraBars.LinkPersistInfo(this.iOff2K),
-            new DevExpress.XtraBars.LinkPersistInfo(this.iOff2003),
-            new DevExpress.XtraBars.LinkPersistInfo(this.iDefault)});
-            this.mOldStyles.Name = "mOldStyles";
-            // 
-            // iWXP
-            // 
-            this.iWXP.Caption = "WindowsXP";
-            this.iWXP.Description = "WindowsXP";
-            this.iWXP.Id = 25;
-            this.iWXP.Name = "iWXP";
-            // 
-            // iOffXP
-            // 
-            this.iOffXP.Caption = "OfficeXP";
-            this.iOffXP.Description = "OfficeXP";
-            this.iOffXP.Id = 26;
-            this.iOffXP.Name = "iOffXP";
-            // 
-            // iOff2K
-            // 
-            this.iOff2K.Caption = "Office2000";
-            this.iOff2K.Description = "Office2000";
-            this.iOff2K.Id = 27;
-            this.iOff2K.Name = "iOff2K";
-            // 
-            // iOff2003
-            // 
-            this.iOff2003.Caption = "Office2003";
-            this.iOff2003.Description = "Office2003";
-            this.iOff2003.Id = 28;
-            this.iOff2003.Name = "iOff2003";
-            // 
-            // iDefault
-            // 
-            this.iDefault.Caption = "Default";
-            this.iDefault.Description = "Default";
-            this.iDefault.Id = 29;
-            this.iDefault.Name = "iDefault";
-            // 
-            // mOfficeSkins
-            // 
-            this.mOfficeSkins.Caption = "Office Skins";
-            this.mOfficeSkins.Id = 23;
-            this.mOfficeSkins.Name = "mOfficeSkins";
-            // 
-            // mBonusSkins
-            // 
-            this.mBonusSkins.Caption = "Bonus Skins";
-            this.mBonusSkins.Id = 24;
-            this.mBonusSkins.Name = "mBonusSkins";
-            // 
             // Clients
             // 
             this.Clients.Caption = "Müştərilər";
             this.Clients.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
             this.Clients.Id = 31;
             this.Clients.Name = "Clients";
-            // 
-            // Roles
-            // 
-            this.Roles.Caption = "Rollar";
-            this.Roles.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
-            this.Roles.Id = 33;
-            this.Roles.Name = "Roles";
+            this.Clients.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Clients_ItemClick);
             // 
             // AddressDictionary
             // 
@@ -480,6 +403,7 @@
             this.AddressDictionary.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
             this.AddressDictionary.Id = 34;
             this.AddressDictionary.Name = "AddressDictionary";
+            this.AddressDictionary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.AddressDictionary_ItemClick);
             // 
             // ReferenceTypes
             // 
@@ -487,6 +411,7 @@
             this.ReferenceTypes.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
             this.ReferenceTypes.Id = 36;
             this.ReferenceTypes.Name = "ReferenceTypes";
+            this.ReferenceTypes.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ReferenceTypes_ItemClick);
             // 
             // Reference
             // 
@@ -494,6 +419,7 @@
             this.Reference.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
             this.Reference.Id = 37;
             this.Reference.Name = "Reference";
+            this.Reference.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Reference_ItemClick);
             // 
             // Attributes
             // 
@@ -501,6 +427,7 @@
             this.Attributes.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
             this.Attributes.Id = 38;
             this.Attributes.Name = "Attributes";
+            this.Attributes.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Attributes_ItemClick);
             // 
             // DocTypes
             // 
@@ -508,6 +435,7 @@
             this.DocTypes.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
             this.DocTypes.Id = 39;
             this.DocTypes.Name = "DocTypes";
+            this.DocTypes.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.DocTypes_ItemClick);
             // 
             // CopyTypes
             // 
@@ -515,6 +443,7 @@
             this.CopyTypes.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
             this.CopyTypes.Id = 40;
             this.CopyTypes.Name = "CopyTypes";
+            this.CopyTypes.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CopyTypes_ItemClick);
             // 
             // Search
             // 
@@ -522,6 +451,7 @@
             this.Search.CategoryGuid = new System.Guid("aa9c8294-2188-411a-8877-3795a1136ba2");
             this.Search.Id = 41;
             this.Search.Name = "Search";
+            this.Search.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.Search_ItemClick);
             // 
             // addDirectory
             // 
@@ -663,7 +593,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UniArchive";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
             this.hideContainerLeft.ResumeLayout(false);
@@ -690,19 +619,9 @@
         private DevExpress.XtraBars.BarButtonItem iAbout;
         private DevExpress.XtraBars.BarStaticItem sItem;
         private DevExpress.XtraBars.BarStaticItem sSecItem;
-        private DevExpress.XtraBars.BarSubItem mPaintStyle;
-        private DevExpress.XtraBars.BarSubItem mOldStyles;
-        private DevExpress.XtraBars.BarSubItem mOfficeSkins;
-        private DevExpress.XtraBars.BarSubItem mBonusSkins;
-        private DevExpress.XtraBars.BarCheckItem iWXP;
-        private DevExpress.XtraBars.BarCheckItem iOffXP;
-        private DevExpress.XtraBars.BarCheckItem iOff2K;
-        private DevExpress.XtraBars.BarCheckItem iOff2003;
-        private DevExpress.XtraBars.BarCheckItem iDefault;
         private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.ImageList navbarImageList;
         private System.Windows.Forms.ImageList navbarImageListLarge;
-        private DevExpress.XtraBars.BarDockingMenuItem barDockingMenuItem1;
         private DevExpress.XtraBars.Docking.DockManager dockManager;
         private DevExpress.XtraBars.Docking.DockPanel directoryDockPanel;
         private DevExpress.XtraBars.Docking.ControlContainer dockPanel2_Container;

@@ -111,11 +111,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="users\Users.cs">
+    <Compile Include="roles\RolesManager.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="users\Users.Designer.cs">
-      <DependentUpon>Users.cs</DependentUpon>
+    <Compile Include="roles\RolesManager.Designer.cs">
+      <DependentUpon>RolesManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="search\SearchManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="search\SearchManager.Designer.cs">
+      <DependentUpon>SearchManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="users\UsersManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="users\UsersManager.Designer.cs">
+      <DependentUpon>UsersManager.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -134,8 +146,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="users\Users.resx">
-      <DependentUpon>Users.cs</DependentUpon>
+    <EmbeddedResource Include="roles\RolesManager.resx">
+      <DependentUpon>RolesManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="search\SearchManager.resx">
+      <DependentUpon>SearchManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="users\UsersManager.resx">
+      <DependentUpon>UsersManager.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="FullDataSet.xsc">
@@ -188,8 +206,6 @@
     <Folder Include="docTypes\" />
     <Folder Include="document\" />
     <Folder Include="references\" />
-    <Folder Include="roles\" />
-    <Folder Include="search\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

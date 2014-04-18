@@ -9,16 +9,22 @@ using DevExpress.XtraEditors;
 
 namespace UniArchive.users
 {
-    public partial class Users : DevExpress.XtraEditors.XtraUserControl
+    public partial class UsersManager : DevExpress.XtraEditors.XtraUserControl
     {
-        public Users()
+        public UsersManager()
         {
             InitializeComponent();
-            loadData();
         }
 
         public void loadData()
         {
+
+            this.fullDataSet.USERS.USERSRowChanged -= FullDataSet_UsersRowChanged;
+            this.fullDataSet.USERS.USERSRowDeleted -= FullDataSet_UsersRowChanged;
+
+            this.fullDataSet.USER_ROLES.USER_ROLESRowChanged -= FullDataSet_UserRolesRowChanged;
+            this.fullDataSet.USER_ROLES.USER_ROLESRowDeleted -= FullDataSet_UserRolesRowChanged;
+
             this.usersTableAdapter.Fill(this.fullDataSet.USERS);
             this.rolesTableAdapter.Fill(this.fullDataSet.ROLES);
             this.userRolesTableAdapter.Fill(this.fullDataSet.USER_ROLES);
