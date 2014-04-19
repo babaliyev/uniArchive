@@ -409,6 +409,8 @@
             this.hideContainerLeft});
             this.dockManager.Form = this;
             this.dockManager.MenuManager = this.barManager;
+            this.dockManager.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
+            this.directoryDockPanel});
             this.dockManager.TopZIndexControls.AddRange(new string[] {
             "DevExpress.XtraBars.BarDockControl",
             "DevExpress.XtraBars.StandaloneBarDockControl",
@@ -422,7 +424,6 @@
             // 
             this.hideContainerLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
             this.hideContainerLeft.Controls.Add(this.addressDockPanel);
-            this.hideContainerLeft.Controls.Add(this.directoryDockPanel);
             this.hideContainerLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.hideContainerLeft.Location = new System.Drawing.Point(0, 51);
             this.hideContainerLeft.Name = "hideContainerLeft";
@@ -463,21 +464,18 @@
             this.directoryDockPanel.Controls.Add(this.dockPanel2_Container);
             this.directoryDockPanel.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.directoryDockPanel.ID = new System.Guid("42f1c68e-c4f3-4a65-b1a4-e62c7c221a3b");
-            this.directoryDockPanel.Location = new System.Drawing.Point(0, 0);
+            this.directoryDockPanel.Location = new System.Drawing.Point(19, 51);
             this.directoryDockPanel.Name = "directoryDockPanel";
-            this.directoryDockPanel.OriginalSize = new System.Drawing.Size(200, 200);
-            this.directoryDockPanel.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Left;
-            this.directoryDockPanel.SavedIndex = 0;
-            this.directoryDockPanel.Size = new System.Drawing.Size(200, 333);
+            this.directoryDockPanel.OriginalSize = new System.Drawing.Size(233, 200);
+            this.directoryDockPanel.Size = new System.Drawing.Size(233, 333);
             this.directoryDockPanel.Text = "Qovluqlar";
-            this.directoryDockPanel.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
             // 
             // dockPanel2_Container
             // 
             this.dockPanel2_Container.Controls.Add(this.directoryTree1);
             this.dockPanel2_Container.Location = new System.Drawing.Point(4, 23);
             this.dockPanel2_Container.Name = "dockPanel2_Container";
-            this.dockPanel2_Container.Size = new System.Drawing.Size(192, 306);
+            this.dockPanel2_Container.Size = new System.Drawing.Size(225, 306);
             this.dockPanel2_Container.TabIndex = 0;
             // 
             // directoryTree1
@@ -485,7 +483,7 @@
             this.directoryTree1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.directoryTree1.Location = new System.Drawing.Point(0, 0);
             this.directoryTree1.Name = "directoryTree1";
-            this.directoryTree1.Size = new System.Drawing.Size(192, 306);
+            this.directoryTree1.Size = new System.Drawing.Size(225, 306);
             this.directoryTree1.TabIndex = 0;
             // 
             // imageList
@@ -620,6 +618,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(809, 409);
+            this.Controls.Add(this.directoryDockPanel);
             this.Controls.Add(this.hideContainerLeft);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);

@@ -70,6 +70,8 @@ namespace UniArchive {
         
         private REFERENCESDataTable tableREFERENCES;
         
+        private DIRECTORIESDataTable tableDIRECTORIES;
+        
         private global::System.Data.DataRelation relationADDRESS_DICTIONARY_FK1;
         
         private global::System.Data.DataRelation relationATTRIBUTES_VALUES_FK1;
@@ -155,6 +157,8 @@ namespace UniArchive {
         private global::System.Data.DataRelation relationATTRIBUTES_VALUES_FK4;
         
         private global::System.Data.DataRelation relationREFERENCES_FK1;
+        
+        private global::System.Data.DataRelation relationDIRECTORIES_DOCUMENTS;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -252,6 +256,9 @@ namespace UniArchive {
                 }
                 if ((ds.Tables["REFERENCES"] != null)) {
                     base.Tables.Add(new REFERENCESDataTable(ds.Tables["REFERENCES"]));
+                }
+                if ((ds.Tables["DIRECTORIES"] != null)) {
+                    base.Tables.Add(new DIRECTORIESDataTable(ds.Tables["DIRECTORIES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -503,6 +510,16 @@ namespace UniArchive {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public DIRECTORIESDataTable DIRECTORIES {
+            get {
+                return this.tableDIRECTORIES;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -636,6 +653,9 @@ namespace UniArchive {
                 }
                 if ((ds.Tables["REFERENCES"] != null)) {
                     base.Tables.Add(new REFERENCESDataTable(ds.Tables["REFERENCES"]));
+                }
+                if ((ds.Tables["DIRECTORIES"] != null)) {
+                    base.Tables.Add(new DIRECTORIESDataTable(ds.Tables["DIRECTORIES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -808,6 +828,12 @@ namespace UniArchive {
                     this.tableREFERENCES.InitVars();
                 }
             }
+            this.tableDIRECTORIES = ((DIRECTORIESDataTable)(base.Tables["DIRECTORIES"]));
+            if ((initTable == true)) {
+                if ((this.tableDIRECTORIES != null)) {
+                    this.tableDIRECTORIES.InitVars();
+                }
+            }
             this.relationADDRESS_DICTIONARY_FK1 = this.Relations["ADDRESS_DICTIONARY_FK1"];
             this.relationATTRIBUTES_VALUES_FK1 = this.Relations["ATTRIBUTES_VALUES_FK1"];
             this.relationATTRIBUTES_VALUES_FK2 = this.Relations["ATTRIBUTES_VALUES_FK2"];
@@ -851,6 +877,7 @@ namespace UniArchive {
             this.relationUSER_ROLES_FK2 = this.Relations["USER_ROLES_FK2"];
             this.relationATTRIBUTES_VALUES_FK4 = this.Relations["ATTRIBUTES_VALUES_FK4"];
             this.relationREFERENCES_FK1 = this.Relations["REFERENCES_FK1"];
+            this.relationDIRECTORIES_DOCUMENTS = this.Relations["DIRECTORIES_DOCUMENTS"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -907,6 +934,8 @@ namespace UniArchive {
             base.Tables.Add(this.tableUSERS);
             this.tableREFERENCES = new REFERENCESDataTable();
             base.Tables.Add(this.tableREFERENCES);
+            this.tableDIRECTORIES = new DIRECTORIESDataTable();
+            base.Tables.Add(this.tableDIRECTORIES);
             this.relationADDRESS_DICTIONARY_FK1 = new global::System.Data.DataRelation("ADDRESS_DICTIONARY_FK1", new global::System.Data.DataColumn[] {
                         this.tableADDRESS_DICTIONARY.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableADDRESS_DICTIONARY.PARENT_IDColumn}, false);
@@ -1079,6 +1108,10 @@ namespace UniArchive {
                         this.tableREFERENCE_TYPES.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableREFERENCES.REFENCE_TYPE_IDColumn}, false);
             this.Relations.Add(this.relationREFERENCES_FK1);
+            this.relationDIRECTORIES_DOCUMENTS = new global::System.Data.DataRelation("DIRECTORIES_DOCUMENTS", new global::System.Data.DataColumn[] {
+                        this.tableDIRECTORIES.IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDOCUMENTS.PARENT_IDColumn}, false);
+            this.Relations.Add(this.relationDIRECTORIES_DOCUMENTS);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1221,6 +1254,12 @@ namespace UniArchive {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeDIRECTORIES() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -1342,6 +1381,9 @@ namespace UniArchive {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void REFERENCESRowChangeEventHandler(object sender, REFERENCESRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void DIRECTORIESRowChangeEventHandler(object sender, DIRECTORIESRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2635,6 +2677,7 @@ namespace UniArchive {
                 this.columnADDRESS.MaxLength = 500;
                 this.columnCONTACTS.MaxLength = 500;
                 this.columnFULL_ACCESS.AllowDBNull = false;
+                this.columnFULL_ACCESS.DefaultValue = ((short)(1));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4770,6 +4813,8 @@ namespace UniArchive {
             
             private global::System.Data.DataColumn columnFULL_ACCESS;
             
+            private global::System.Data.DataColumn columnPARENT_ID;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DOCUMENTSDataTable() {
@@ -4861,6 +4906,14 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PARENT_IDColumn {
+                get {
+                    return this.columnPARENT_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4896,7 +4949,7 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DOCUMENTSRow AddDOCUMENTSRow(int ID, DOCUMENT_TYPESRow parentDOCUMENT_TYPESRowByDOCUMENTS_FK3, CLIENTSRow parentCLIENTSRowByDOCUMENTS_FK1, string DOCUMENT_NUMBER, System.DateTime DOCUMENT_DATE, ADDRESS_DICTIONARYRow parentADDRESS_DICTIONARYRowByDOCUMENTS_FK2, short FULL_ACCESS) {
+            public DOCUMENTSRow AddDOCUMENTSRow(int ID, DOCUMENT_TYPESRow parentDOCUMENT_TYPESRowByDOCUMENTS_FK3, CLIENTSRow parentCLIENTSRowByDOCUMENTS_FK1, string DOCUMENT_NUMBER, System.DateTime DOCUMENT_DATE, ADDRESS_DICTIONARYRow parentADDRESS_DICTIONARYRowByDOCUMENTS_FK2, short FULL_ACCESS, DIRECTORIESRow parentDIRECTORIESRowByDIRECTORIES_DOCUMENTS) {
                 DOCUMENTSRow rowDOCUMENTSRow = ((DOCUMENTSRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID,
@@ -4905,7 +4958,8 @@ namespace UniArchive {
                         DOCUMENT_NUMBER,
                         DOCUMENT_DATE,
                         null,
-                        FULL_ACCESS};
+                        FULL_ACCESS,
+                        null};
                 if ((parentDOCUMENT_TYPESRowByDOCUMENTS_FK3 != null)) {
                     columnValuesArray[1] = parentDOCUMENT_TYPESRowByDOCUMENTS_FK3[0];
                 }
@@ -4914,6 +4968,9 @@ namespace UniArchive {
                 }
                 if ((parentADDRESS_DICTIONARYRowByDOCUMENTS_FK2 != null)) {
                     columnValuesArray[5] = parentADDRESS_DICTIONARYRowByDOCUMENTS_FK2[0];
+                }
+                if ((parentDIRECTORIESRowByDIRECTORIES_DOCUMENTS != null)) {
+                    columnValuesArray[7] = parentDIRECTORIESRowByDIRECTORIES_DOCUMENTS[0];
                 }
                 rowDOCUMENTSRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDOCUMENTSRow);
@@ -4951,6 +5008,7 @@ namespace UniArchive {
                 this.columnDOCUMENT_DATE = base.Columns["DOCUMENT_DATE"];
                 this.columnADDRESS_ID = base.Columns["ADDRESS_ID"];
                 this.columnFULL_ACCESS = base.Columns["FULL_ACCESS"];
+                this.columnPARENT_ID = base.Columns["PARENT_ID"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4970,6 +5028,8 @@ namespace UniArchive {
                 base.Columns.Add(this.columnADDRESS_ID);
                 this.columnFULL_ACCESS = new global::System.Data.DataColumn("FULL_ACCESS", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFULL_ACCESS);
+                this.columnPARENT_ID = new global::System.Data.DataColumn("PARENT_ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPARENT_ID);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AllowDBNull = false;
@@ -8853,6 +8913,309 @@ namespace UniArchive {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class DIRECTORIESDataTable : global::System.Data.TypedTableBase<DIRECTORIESRow> {
+            
+            private global::System.Data.DataColumn columnID;
+            
+            private global::System.Data.DataColumn columnDOCUMENT_NUMBER;
+            
+            private global::System.Data.DataColumn columnFULL_ACCESS;
+            
+            private global::System.Data.DataColumn columnPARENT_ID;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DIRECTORIESDataTable() {
+                this.TableName = "DIRECTORIES";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal DIRECTORIESDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected DIRECTORIESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDColumn {
+                get {
+                    return this.columnID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DOCUMENT_NUMBERColumn {
+                get {
+                    return this.columnDOCUMENT_NUMBER;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FULL_ACCESSColumn {
+                get {
+                    return this.columnFULL_ACCESS;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PARENT_IDColumn {
+                get {
+                    return this.columnPARENT_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DIRECTORIESRow this[int index] {
+                get {
+                    return ((DIRECTORIESRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DIRECTORIESRowChangeEventHandler DIRECTORIESRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DIRECTORIESRowChangeEventHandler DIRECTORIESRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DIRECTORIESRowChangeEventHandler DIRECTORIESRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event DIRECTORIESRowChangeEventHandler DIRECTORIESRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddDIRECTORIESRow(DIRECTORIESRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DIRECTORIESRow AddDIRECTORIESRow(int ID, string DOCUMENT_NUMBER, short FULL_ACCESS, int PARENT_ID) {
+                DIRECTORIESRow rowDIRECTORIESRow = ((DIRECTORIESRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        ID,
+                        DOCUMENT_NUMBER,
+                        FULL_ACCESS,
+                        PARENT_ID};
+                rowDIRECTORIESRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDIRECTORIESRow);
+                return rowDIRECTORIESRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DIRECTORIESRow FindByID(int ID) {
+                return ((DIRECTORIESRow)(this.Rows.Find(new object[] {
+                            ID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                DIRECTORIESDataTable cln = ((DIRECTORIESDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new DIRECTORIESDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnID = base.Columns["ID"];
+                this.columnDOCUMENT_NUMBER = base.Columns["DOCUMENT_NUMBER"];
+                this.columnFULL_ACCESS = base.Columns["FULL_ACCESS"];
+                this.columnPARENT_ID = base.Columns["PARENT_ID"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID);
+                this.columnDOCUMENT_NUMBER = new global::System.Data.DataColumn("DOCUMENT_NUMBER", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDOCUMENT_NUMBER);
+                this.columnFULL_ACCESS = new global::System.Data.DataColumn("FULL_ACCESS", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFULL_ACCESS);
+                this.columnPARENT_ID = new global::System.Data.DataColumn("PARENT_ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPARENT_ID);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnID}, true));
+                this.columnID.AllowDBNull = false;
+                this.columnID.Unique = true;
+                this.columnDOCUMENT_NUMBER.AllowDBNull = false;
+                this.columnDOCUMENT_NUMBER.MaxLength = 500;
+                this.columnFULL_ACCESS.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DIRECTORIESRow NewDIRECTORIESRow() {
+                return ((DIRECTORIESRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new DIRECTORIESRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(DIRECTORIESRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.DIRECTORIESRowChanged != null)) {
+                    this.DIRECTORIESRowChanged(this, new DIRECTORIESRowChangeEvent(((DIRECTORIESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.DIRECTORIESRowChanging != null)) {
+                    this.DIRECTORIESRowChanging(this, new DIRECTORIESRowChangeEvent(((DIRECTORIESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.DIRECTORIESRowDeleted != null)) {
+                    this.DIRECTORIESRowDeleted(this, new DIRECTORIESRowChangeEvent(((DIRECTORIESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.DIRECTORIESRowDeleting != null)) {
+                    this.DIRECTORIESRowDeleting(this, new DIRECTORIESRowChangeEvent(((DIRECTORIESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveDIRECTORIESRow(DIRECTORIESRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FullDataSet ds = new FullDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "DIRECTORIESDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class ADDRESS_DICTIONARYRow : global::System.Data.DataRow {
@@ -10635,6 +10998,22 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int PARENT_ID {
+                get {
+                    try {
+                        return ((int)(this[this.tableDOCUMENTS.PARENT_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PARENT_ID\' in table \'DOCUMENTS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDOCUMENTS.PARENT_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public CLIENTSRow CLIENTSRow {
                 get {
                     return ((CLIENTSRow)(this.GetParentRow(this.Table.ParentRelations["DOCUMENTS_FK1"])));
@@ -10668,6 +11047,17 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DIRECTORIESRow DIRECTORIESRow {
+                get {
+                    return ((DIRECTORIESRow)(this.GetParentRow(this.Table.ParentRelations["DIRECTORIES_DOCUMENTS"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["DIRECTORIES_DOCUMENTS"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsADDRESS_IDNull() {
                 return this.IsNull(this.tableDOCUMENTS.ADDRESS_IDColumn);
             }
@@ -10676,6 +11066,18 @@ namespace UniArchive {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetADDRESS_IDNull() {
                 this[this.tableDOCUMENTS.ADDRESS_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPARENT_IDNull() {
+                return this.IsNull(this.tableDOCUMENTS.PARENT_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPARENT_IDNull() {
+                this[this.tableDOCUMENTS.PARENT_IDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12065,6 +12467,93 @@ namespace UniArchive {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class DIRECTORIESRow : global::System.Data.DataRow {
+            
+            private DIRECTORIESDataTable tableDIRECTORIES;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal DIRECTORIESRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDIRECTORIES = ((DIRECTORIESDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ID {
+                get {
+                    return ((int)(this[this.tableDIRECTORIES.IDColumn]));
+                }
+                set {
+                    this[this.tableDIRECTORIES.IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DOCUMENT_NUMBER {
+                get {
+                    return ((string)(this[this.tableDIRECTORIES.DOCUMENT_NUMBERColumn]));
+                }
+                set {
+                    this[this.tableDIRECTORIES.DOCUMENT_NUMBERColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public short FULL_ACCESS {
+                get {
+                    return ((short)(this[this.tableDIRECTORIES.FULL_ACCESSColumn]));
+                }
+                set {
+                    this[this.tableDIRECTORIES.FULL_ACCESSColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int PARENT_ID {
+                get {
+                    try {
+                        return ((int)(this[this.tableDIRECTORIES.PARENT_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PARENT_ID\' in table \'DIRECTORIES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDIRECTORIES.PARENT_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPARENT_IDNull() {
+                return this.IsNull(this.tableDIRECTORIES.PARENT_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPARENT_IDNull() {
+                this[this.tableDIRECTORIES.PARENT_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DOCUMENTSRow[] GetDOCUMENTSRows() {
+                if ((this.Table.ChildRelations["DIRECTORIES_DOCUMENTS"] == null)) {
+                    return new DOCUMENTSRow[0];
+                }
+                else {
+                    return ((DOCUMENTSRow[])(base.GetChildRows(this.Table.ChildRelations["DIRECTORIES_DOCUMENTS"])));
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -12832,6 +13321,40 @@ namespace UniArchive {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public REFERENCESRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class DIRECTORIESRowChangeEvent : global::System.EventArgs {
+            
+            private DIRECTORIESRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DIRECTORIESRowChangeEvent(DIRECTORIESRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DIRECTORIESRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -14434,12 +14957,24 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[1];
+            this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[2];
             this._commandCollection[0] = new global::Oracle.DataAccess.Client.OracleCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, FULL_NAME, FIRST_NAME, SUR_NAME, LAST_NAME, CLIENT_TYPE, IDENTIFICATIO" +
                 "N_NUMBER, ADDRESS, CONTACTS, FULL_ACCESS FROM ARCH.CLIENTS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT ID, FULL_NAME, FIRST_NAME, SUR_NAME, LAST_NAME, CLIENT_TYPE, IDENTIFICATIO" +
+                "N_NUMBER, ADDRESS, CONTACTS, FULL_ACCESS FROM ARCH.CLIENTS\r\nwhere ID=:Id";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":Id";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._commandCollection[1].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14461,6 +14996,32 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual FullDataSet.CLIENTSDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            FullDataSet.CLIENTSDataTable dataTable = new FullDataSet.CLIENTSDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByID(FullDataSet.CLIENTSDataTable dataTable, decimal Id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(Id));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual FullDataSet.CLIENTSDataTable GetDataByID(decimal Id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(Id));
             FullDataSet.CLIENTSDataTable dataTable = new FullDataSet.CLIENTSDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -17120,6 +17681,7 @@ namespace UniArchive.FullDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("DOCUMENT_DATE", "DOCUMENT_DATE");
             tableMapping.ColumnMappings.Add("ADDRESS_ID", "ADDRESS_ID");
             tableMapping.ColumnMappings.Add("FULL_ACCESS", "FULL_ACCESS");
+            tableMapping.ColumnMappings.Add("PARENT_ID", "PARENT_ID");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -17186,6 +17748,13 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.IsNullable = true;
             param.SourceColumn = "FULL_ACCESS";
             this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":PARENT_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "PARENT_ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "DML_DOCUMENTS.UPD_DOCUMENTS";
@@ -17239,6 +17808,13 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.IsNullable = true;
             param.SourceColumn = "FULL_ACCESS";
             this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = "PARENT_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "PARENT_ID";
+            this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -17254,8 +17830,9 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[1];
             this._commandCollection[0] = new global::Oracle.DataAccess.Client.OracleCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT ID, DOCUMENT_TYPE_ID, CLIENT_ID, DOCUMENT_NUMBER, DOCUMENT_DATE, ADDRESS_I" +
-                "D, FULL_ACCESS FROM ARCH.DOCUMENTS";
+            this._commandCollection[0].CommandText = "SELECT   ID, DOCUMENT_TYPE_ID, CLIENT_ID, DOCUMENT_NUMBER, DOCUMENT_DATE, ADDRESS" +
+                "_ID, FULL_ACCESS, \r\n                         PARENT_ID\r\nFROM         ARCH.DOCUME" +
+                "NTS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -17338,7 +17915,7 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal ID, decimal DOCUMENT_TYPE_ID, decimal CLIENT_ID, string DOCUMENT_NUMBER, System.DateTime DOCUMENT_DATE, global::System.Nullable<decimal> ADDRESS_ID, decimal FULL_ACCESS) {
+        public virtual int Insert(decimal ID, decimal DOCUMENT_TYPE_ID, decimal CLIENT_ID, string DOCUMENT_NUMBER, System.DateTime DOCUMENT_DATE, global::System.Nullable<decimal> ADDRESS_ID, decimal FULL_ACCESS, global::System.Nullable<decimal> PARENT_ID) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
             this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(DOCUMENT_TYPE_ID));
             this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(CLIENT_ID));
@@ -17356,6 +17933,12 @@ namespace UniArchive.FullDataSetTableAdapters {
                 this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(FULL_ACCESS));
+            if ((PARENT_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(PARENT_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17376,7 +17959,7 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int Original_ID, int DOCUMENT_TYPE_ID, int CLIENT_ID, string DOCUMENT_NUMBER, System.DateTime DOCUMENT_DATE, global::System.Nullable<int> ADDRESS_ID, short FULL_ACCESS) {
+        public virtual int Update(int Original_ID, int DOCUMENT_TYPE_ID, int CLIENT_ID, string DOCUMENT_NUMBER, System.DateTime DOCUMENT_DATE, global::System.Nullable<int> ADDRESS_ID, short FULL_ACCESS, global::System.Nullable<decimal> PARENT_ID) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(DOCUMENT_TYPE_ID));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(CLIENT_ID));
@@ -17394,6 +17977,12 @@ namespace UniArchive.FullDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             this.Adapter.UpdateCommand.Parameters[6].Value = ((short)(FULL_ACCESS));
+            if ((PARENT_ID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(PARENT_ID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -21757,6 +22346,414 @@ namespace UniArchive.FullDataSetTableAdapters {
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class DIRECTORIESTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::Oracle.DataAccess.Client.OracleDataAdapter _adapter;
+        
+        private global::Oracle.DataAccess.Client.OracleConnection _connection;
+        
+        private global::Oracle.DataAccess.Client.OracleTransaction _transaction;
+        
+        private global::Oracle.DataAccess.Client.OracleCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public DIRECTORIESTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::Oracle.DataAccess.Client.OracleDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::Oracle.DataAccess.Client.OracleConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::Oracle.DataAccess.Client.OracleCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::Oracle.DataAccess.Client.OracleTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::Oracle.DataAccess.Client.OracleCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::Oracle.DataAccess.Client.OracleDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "DIRECTORIES";
+            tableMapping.ColumnMappings.Add("ID", "ID");
+            tableMapping.ColumnMappings.Add("DOCUMENT_NUMBER", "DOCUMENT_NUMBER");
+            tableMapping.ColumnMappings.Add("FULL_ACCESS", "FULL_ACCESS");
+            tableMapping.ColumnMappings.Add("PARENT_ID", "PARENT_ID");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DML_DOCUMENTS.DEL_DIRECTORY";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
+            global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = "Original_ID";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "DML_DOCUMENTS.INS_DIRECTORY_WI";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":DOCUMENT_NUMBER";
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 500;
+            param.IsNullable = true;
+            param.SourceColumn = "DOCUMENT_NUMBER";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":FULL_ACCESS";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "FULL_ACCESS";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":PARENT_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.Size = 9;
+            param.IsNullable = true;
+            param.SourceColumn = "PARENT_ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            this._adapter.UpdateCommand = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "DML_DOCUMENTS.UPD_DIRECTORY";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = "Original_ID";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int32;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = "DOCUMENT_NUMBER";
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.IsNullable = true;
+            param.SourceColumn = "DOCUMENT_NUMBER";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = "FULL_ACCESS";
+            param.DbType = global::System.Data.DbType.Int16;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Int16;
+            param.IsNullable = true;
+            param.SourceColumn = "FULL_ACCESS";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = "PARENT_ID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.Size = 9;
+            param.IsNullable = true;
+            param.SourceColumn = "PARENT_ID";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::Oracle.DataAccess.Client.OracleConnection();
+            this._connection.ConnectionString = global::UniArchive.Properties.Settings.Default.archConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[2];
+            this._commandCollection[0] = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT   ID, DOCUMENT_NUMBER, FULL_ACCESS, PARENT_ID\r\nFROM         ARCH.DOCUMENTS" +
+                "";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT   ID, DOCUMENT_NUMBER, FULL_ACCESS, PARENT_ID\r\nFROM         ARCH.DOCUMENTS" +
+                "\r\nwhere ID=:Id";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":Id";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._commandCollection[1].Parameters.Add(param);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FullDataSet.DIRECTORIESDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FullDataSet.DIRECTORIESDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FullDataSet.DIRECTORIESDataTable dataTable = new FullDataSet.DIRECTORIESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByID(FullDataSet.DIRECTORIESDataTable dataTable, decimal Id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(Id));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual FullDataSet.DIRECTORIESDataTable GetDataByID(decimal Id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(Id));
+            FullDataSet.DIRECTORIESDataTable dataTable = new FullDataSet.DIRECTORIESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FullDataSet.DIRECTORIESDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FullDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "DIRECTORIES");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_ID) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ID, string DOCUMENT_NUMBER, decimal FULL_ACCESS, global::System.Nullable<decimal> PARENT_ID) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
+            if ((DOCUMENT_NUMBER == null)) {
+                throw new global::System.ArgumentNullException("DOCUMENT_NUMBER");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(DOCUMENT_NUMBER));
+            }
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(FULL_ACCESS));
+            if ((PARENT_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(PARENT_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int Original_ID, string DOCUMENT_NUMBER, short FULL_ACCESS, global::System.Nullable<decimal> PARENT_ID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Original_ID));
+            if ((DOCUMENT_NUMBER == null)) {
+                throw new global::System.ArgumentNullException("DOCUMENT_NUMBER");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(DOCUMENT_NUMBER));
+            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((short)(FULL_ACCESS));
+            if ((PARENT_ID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(PARENT_ID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -21813,6 +22810,8 @@ namespace UniArchive.FullDataSetTableAdapters {
         private USERSTableAdapter _uSERSTableAdapter;
         
         private REFERENCESTableAdapter _rEFERENCESTableAdapter;
+        
+        private DIRECTORIESTableAdapter _dIRECTORIESTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -22153,6 +23152,20 @@ namespace UniArchive.FullDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public DIRECTORIESTableAdapter DIRECTORIESTableAdapter {
+            get {
+                return this._dIRECTORIESTableAdapter;
+            }
+            set {
+                this._dIRECTORIESTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -22262,6 +23275,10 @@ namespace UniArchive.FullDataSetTableAdapters {
                             && (this._rEFERENCESTableAdapter.Connection != null))) {
                     return this._rEFERENCESTableAdapter.Connection;
                 }
+                if (((this._dIRECTORIESTableAdapter != null) 
+                            && (this._dIRECTORIESTableAdapter.Connection != null))) {
+                    return this._dIRECTORIESTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -22344,6 +23361,9 @@ namespace UniArchive.FullDataSetTableAdapters {
                 if ((this._rEFERENCESTableAdapter != null)) {
                     count = (count + 1);
                 }
+                if ((this._dIRECTORIESTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -22365,15 +23385,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._cLIENTSTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.CLIENTS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._cLIENTSTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._dOCUMENT_TYPESTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.DOCUMENT_TYPES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -22384,21 +23395,21 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._rEFERENCE_TYPESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.REFERENCE_TYPES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._cLIENTSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.CLIENTS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._rEFERENCE_TYPESTableAdapter.Update(updatedRows));
+                    result = (result + this._cLIENTSTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._dOCUMENTSTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.DOCUMENTS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._dIRECTORIESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DIRECTORIES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._dOCUMENTSTableAdapter.Update(updatedRows));
+                    result = (result + this._dIRECTORIESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -22411,30 +23422,21 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._rOLESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.ROLES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._dOCUMENTSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DOCUMENTS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._rOLESTableAdapter.Update(updatedRows));
+                    result = (result + this._dOCUMENTSTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._uSERSTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.USERS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._rEFERENCE_TYPESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.REFERENCE_TYPES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._uSERSTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._rEFERENCESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.REFERENCES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._rEFERENCESTableAdapter.Update(updatedRows));
+                    result = (result + this._rEFERENCE_TYPESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -22447,6 +23449,15 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._uSERSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.USERS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._uSERSTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._aTTRIBUTESTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.ATTRIBUTES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -22456,30 +23467,57 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._dOCUMENT_HISTORYTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.DOCUMENT_HISTORY.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._rEFERENCESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.REFERENCES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._dOCUMENT_HISTORYTableAdapter.Update(updatedRows));
+                    result = (result + this._rEFERENCESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._cOPY_TYPE_ATTRIBUTESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.COPY_TYPE_ATTRIBUTES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._rOLESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.ROLES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._cOPY_TYPE_ATTRIBUTESTableAdapter.Update(updatedRows));
+                    result = (result + this._rOLESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._aTTRIBUTES_VALUESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.ATTRIBUTES_VALUES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._uSER_ROLESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.USER_ROLES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._aTTRIBUTES_VALUESTableAdapter.Update(updatedRows));
+                    result = (result + this._uSER_ROLESTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._uSER_DOCUMENT_ACCESSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.USER_DOCUMENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._uSER_DOCUMENT_ACCESSTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._uSER_DOC_TYPE_ACCESSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.USER_DOC_TYPE_ACCESS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._uSER_DOC_TYPE_ACCESSTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._uSER_CLIENT_ACCESSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.USER_CLIENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._uSER_CLIENT_ACCESSTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -22501,48 +23539,12 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._rOLE_DOCUMENT_ACCESSTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.ROLE_DOCUMENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._aTTRIBUTES_VALUESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.ATTRIBUTES_VALUES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._rOLE_DOCUMENT_ACCESSTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._uSER_CLIENT_ACCESSTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.USER_CLIENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._uSER_CLIENT_ACCESSTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._uSER_DOC_TYPE_ACCESSTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.USER_DOC_TYPE_ACCESS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._uSER_DOC_TYPE_ACCESSTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._uSER_DOCUMENT_ACCESSTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.USER_DOCUMENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._uSER_DOCUMENT_ACCESSTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._uSER_ROLESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.USER_ROLES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._uSER_ROLESTableAdapter.Update(updatedRows));
+                    result = (result + this._aTTRIBUTES_VALUESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -22552,6 +23554,33 @@ namespace UniArchive.FullDataSetTableAdapters {
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._dOCUMENT_TYPE_ATTRIBUTESTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._dOCUMENT_HISTORYTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DOCUMENT_HISTORY.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._dOCUMENT_HISTORYTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._cOPY_TYPE_ATTRIBUTESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.COPY_TYPE_ATTRIBUTES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._cOPY_TYPE_ATTRIBUTESTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._rOLE_DOCUMENT_ACCESSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.ROLE_DOCUMENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._rOLE_DOCUMENT_ACCESSTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -22583,14 +23612,6 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._cLIENTSTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.CLIENTS.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._cLIENTSTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._dOCUMENT_TYPESTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.DOCUMENT_TYPES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -22600,19 +23621,19 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._rEFERENCE_TYPESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.REFERENCE_TYPES.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._cLIENTSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.CLIENTS.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._rEFERENCE_TYPESTableAdapter.Update(addedRows));
+                    result = (result + this._cLIENTSTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._dOCUMENTSTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.DOCUMENTS.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._dIRECTORIESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DIRECTORIES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._dOCUMENTSTableAdapter.Update(addedRows));
+                    result = (result + this._dIRECTORIESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -22624,27 +23645,19 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._rOLESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.ROLES.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._dOCUMENTSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DOCUMENTS.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._rOLESTableAdapter.Update(addedRows));
+                    result = (result + this._dOCUMENTSTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._uSERSTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.USERS.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._rEFERENCE_TYPESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.REFERENCE_TYPES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._uSERSTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._rEFERENCESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.REFERENCES.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._rEFERENCESTableAdapter.Update(addedRows));
+                    result = (result + this._rEFERENCE_TYPESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -22656,6 +23669,14 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._uSERSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.USERS.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._uSERSTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._aTTRIBUTESTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.ATTRIBUTES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -22664,27 +23685,51 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._dOCUMENT_HISTORYTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.DOCUMENT_HISTORY.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._rEFERENCESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.REFERENCES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._dOCUMENT_HISTORYTableAdapter.Update(addedRows));
+                    result = (result + this._rEFERENCESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._cOPY_TYPE_ATTRIBUTESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.COPY_TYPE_ATTRIBUTES.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._rOLESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.ROLES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._cOPY_TYPE_ATTRIBUTESTableAdapter.Update(addedRows));
+                    result = (result + this._rOLESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._aTTRIBUTES_VALUESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.ATTRIBUTES_VALUES.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._uSER_ROLESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.USER_ROLES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._aTTRIBUTES_VALUESTableAdapter.Update(addedRows));
+                    result = (result + this._uSER_ROLESTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._uSER_DOCUMENT_ACCESSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.USER_DOCUMENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._uSER_DOCUMENT_ACCESSTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._uSER_DOC_TYPE_ACCESSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.USER_DOC_TYPE_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._uSER_DOC_TYPE_ACCESSTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._uSER_CLIENT_ACCESSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.USER_CLIENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._uSER_CLIENT_ACCESSTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -22704,43 +23749,11 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._rOLE_DOCUMENT_ACCESSTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.ROLE_DOCUMENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._aTTRIBUTES_VALUESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.ATTRIBUTES_VALUES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._rOLE_DOCUMENT_ACCESSTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._uSER_CLIENT_ACCESSTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.USER_CLIENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._uSER_CLIENT_ACCESSTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._uSER_DOC_TYPE_ACCESSTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.USER_DOC_TYPE_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._uSER_DOC_TYPE_ACCESSTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._uSER_DOCUMENT_ACCESSTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.USER_DOCUMENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._uSER_DOCUMENT_ACCESSTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._uSER_ROLESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.USER_ROLES.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._uSER_ROLESTableAdapter.Update(addedRows));
+                    result = (result + this._aTTRIBUTES_VALUESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -22749,6 +23762,30 @@ namespace UniArchive.FullDataSetTableAdapters {
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._dOCUMENT_TYPE_ATTRIBUTESTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._dOCUMENT_HISTORYTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DOCUMENT_HISTORY.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._dOCUMENT_HISTORYTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._cOPY_TYPE_ATTRIBUTESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.COPY_TYPE_ATTRIBUTES.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._cOPY_TYPE_ATTRIBUTESTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._rOLE_DOCUMENT_ACCESSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.ROLE_DOCUMENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._rOLE_DOCUMENT_ACCESSTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -22778,75 +23815,11 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._dOCUMENT_TYPE_ATTRIBUTESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.DOCUMENT_TYPE_ATTRIBUTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._dOCUMENT_TYPE_ATTRIBUTESTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._uSER_ROLESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.USER_ROLES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._uSER_ROLESTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._uSER_DOCUMENT_ACCESSTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.USER_DOCUMENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._uSER_DOCUMENT_ACCESSTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._uSER_DOC_TYPE_ACCESSTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.USER_DOC_TYPE_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._uSER_DOC_TYPE_ACCESSTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._uSER_CLIENT_ACCESSTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.USER_CLIENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._uSER_CLIENT_ACCESSTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._rOLE_DOCUMENT_ACCESSTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.ROLE_DOCUMENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._rOLE_DOCUMENT_ACCESSTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._rOLE_DOC_TYPE_ACCESSTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.ROLE_DOC_TYPE_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._rOLE_DOC_TYPE_ACCESSTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._rOLE_CLIENT_ACCESSTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.ROLE_CLIENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._rOLE_CLIENT_ACCESSTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._aTTRIBUTES_VALUESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.ATTRIBUTES_VALUES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._aTTRIBUTES_VALUESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -22866,35 +23839,67 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._aTTRIBUTESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.ATTRIBUTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._dOCUMENT_TYPE_ATTRIBUTESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.DOCUMENT_TYPE_ATTRIBUTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._aTTRIBUTESTableAdapter.Update(deletedRows));
+                    result = (result + this._dOCUMENT_TYPE_ATTRIBUTESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._cOPIESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.COPIES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._aTTRIBUTES_VALUESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ATTRIBUTES_VALUES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._cOPIESTableAdapter.Update(deletedRows));
+                    result = (result + this._aTTRIBUTES_VALUESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._rEFERENCESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.REFERENCES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._rOLE_DOC_TYPE_ACCESSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ROLE_DOC_TYPE_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._rEFERENCESTableAdapter.Update(deletedRows));
+                    result = (result + this._rOLE_DOC_TYPE_ACCESSTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._uSERSTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.USERS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._rOLE_CLIENT_ACCESSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ROLE_CLIENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._uSERSTableAdapter.Update(deletedRows));
+                    result = (result + this._rOLE_CLIENT_ACCESSTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._uSER_CLIENT_ACCESSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.USER_CLIENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._uSER_CLIENT_ACCESSTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._uSER_DOC_TYPE_ACCESSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.USER_DOC_TYPE_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._uSER_DOC_TYPE_ACCESSTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._uSER_DOCUMENT_ACCESSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.USER_DOCUMENT_ACCESS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._uSER_DOCUMENT_ACCESSTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._uSER_ROLESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.USER_ROLES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._uSER_ROLESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -22906,19 +23911,35 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._cOPY_TYPESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.COPY_TYPES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._rEFERENCESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.REFERENCES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._cOPY_TYPESTableAdapter.Update(deletedRows));
+                    result = (result + this._rEFERENCESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._dOCUMENTSTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.DOCUMENTS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._aTTRIBUTESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ATTRIBUTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._dOCUMENTSTableAdapter.Update(deletedRows));
+                    result = (result + this._aTTRIBUTESTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._uSERSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.USERS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._uSERSTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._cOPIESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.COPIES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._cOPIESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -22930,12 +23951,27 @@ namespace UniArchive.FullDataSetTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._dOCUMENT_TYPESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.DOCUMENT_TYPES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._dOCUMENTSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.DOCUMENTS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    this.SortSelfReferenceRows(deletedRows, dataSet.Relations["DOCUMENT_TYPES_FK1"], true);
-                    result = (result + this._dOCUMENT_TYPESTableAdapter.Update(deletedRows));
+                    result = (result + this._dOCUMENTSTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._cOPY_TYPESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.COPY_TYPES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._cOPY_TYPESTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._dIRECTORIESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.DIRECTORIES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._dIRECTORIESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -22944,6 +23980,15 @@ namespace UniArchive.FullDataSetTableAdapters {
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._cLIENTSTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._dOCUMENT_TYPESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.DOCUMENT_TYPES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    this.SortSelfReferenceRows(deletedRows, dataSet.Relations["DOCUMENT_TYPES_FK1"], true);
+                    result = (result + this._dOCUMENT_TYPESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -23107,6 +24152,11 @@ namespace UniArchive.FullDataSetTableAdapters {
             }
             if (((this._rEFERENCESTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._rEFERENCESTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._dIRECTORIESTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._dIRECTORIESTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -23349,6 +24399,15 @@ namespace UniArchive.FullDataSetTableAdapters {
                         adaptersWithAcceptChangesDuringUpdate.Add(this._rEFERENCESTableAdapter.Adapter);
                     }
                 }
+                if ((this._dIRECTORIESTableAdapter != null)) {
+                    revertConnections.Add(this._dIRECTORIESTableAdapter, this._dIRECTORIESTableAdapter.Connection);
+                    this._dIRECTORIESTableAdapter.Connection = ((global::Oracle.DataAccess.Client.OracleConnection)(workConnection));
+                    this._dIRECTORIESTableAdapter.Transaction = ((global::Oracle.DataAccess.Client.OracleTransaction)(workTransaction));
+                    if (this._dIRECTORIESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._dIRECTORIESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._dIRECTORIESTableAdapter.Adapter);
+                    }
+                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -23498,6 +24557,10 @@ namespace UniArchive.FullDataSetTableAdapters {
                 if ((this._rEFERENCESTableAdapter != null)) {
                     this._rEFERENCESTableAdapter.Connection = ((global::Oracle.DataAccess.Client.OracleConnection)(revertConnections[this._rEFERENCESTableAdapter]));
                     this._rEFERENCESTableAdapter.Transaction = null;
+                }
+                if ((this._dIRECTORIESTableAdapter != null)) {
+                    this._dIRECTORIESTableAdapter.Connection = ((global::Oracle.DataAccess.Client.OracleConnection)(revertConnections[this._dIRECTORIESTableAdapter]));
+                    this._dIRECTORIESTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

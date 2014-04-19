@@ -237,6 +237,36 @@
     <Compile Include="users\UsersManager.Designer.cs">
       <DependentUpon>UsersManager.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="addressDictionary\AddressDictionaryManager.resx">
+      <DependentUpon>AddressDictionaryManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addressTree\AddressTree.resx">
+      <DependentUpon>AddressTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="clients\ClientForm.resx">
+      <DependentUpon>ClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="clients\ClientsManager.resx">
+      <DependentUpon>ClientsManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="copyTypes\CopyTypesManager.resx">
+      <DependentUpon>CopyTypesManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="copy\CopiesManager.resx">
+      <DependentUpon>CopiesManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="copy\CopyManager.resx">
+      <DependentUpon>CopyManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="directoryTree\DirectoryForm.resx">
+      <DependentUpon>DirectoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="directoryTree\DirectoryTree.resx">
+      <DependentUpon>DirectoryTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="docTypes\DocTypesManager.resx">
+      <DependentUpon>DocTypesManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="document\DocumentManager.resx">
       <DependentUpon>DocumentManager.cs</DependentUpon>
     </EmbeddedResource>
