@@ -33,26 +33,45 @@
             this.copiesGridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
+            this.addBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
+            this.editBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
+            this.deleteBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
+            this.downloadBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
+            this.showBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.copyTypesTableAdapter = new UniArchive.FullDataSetTableAdapters.COPY_TYPESTableAdapter();
+            this.copyTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fullDataSet = new UniArchive.FullDataSet();
+            this.copiesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.copiesTableAdapter = new UniArchive.FullDataSetTableAdapters.COPIESTableAdapter();
+            this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCOPY_TYPE_ID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNAME = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.documentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.documentsTableAdapter = new UniArchive.FullDataSetTableAdapters.DOCUMENTSTableAdapter();
+            this.copyTypesLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.copiesGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.copiesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.copiesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.copyTypesLookUpEdit)).BeginInit();
             this.SuspendLayout();
             // 
             // copiesGridControl
             // 
+            this.copiesGridControl.DataSource = this.copiesBindingSource;
             this.copiesGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.copiesGridControl.Location = new System.Drawing.Point(0, 29);
             this.copiesGridControl.MainView = this.copiesGridView;
             this.copiesGridControl.Name = "copiesGridControl";
+            this.copiesGridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.copyTypesLookUpEdit});
             this.copiesGridControl.Size = new System.Drawing.Size(619, 483);
             this.copiesGridControl.TabIndex = 5;
             this.copiesGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -60,6 +79,10 @@
             // 
             // copiesGridView
             // 
+            this.copiesGridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colID,
+            this.colCOPY_TYPE_ID,
+            this.colNAME});
             this.copiesGridView.GridControl = this.copiesGridControl;
             this.copiesGridView.Name = "copiesGridView";
             this.copiesGridView.OptionsCustomization.AllowGroup = false;
@@ -79,11 +102,11 @@
             this.barManager1.DockControls.Add(this.barDockControlRight);
             this.barManager1.Form = this;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.barButtonItem1,
-            this.barButtonItem2,
-            this.barButtonItem3,
-            this.barButtonItem4,
-            this.barButtonItem6});
+            this.addBarButtonItem,
+            this.editBarButtonItem,
+            this.deleteBarButtonItem,
+            this.downloadBarButtonItem,
+            this.showBarButtonItem});
             this.barManager1.MaxItemId = 6;
             // 
             // bar1
@@ -93,11 +116,11 @@
             this.bar1.DockRow = 0;
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem1, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem2, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem3, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem4, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem6)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.addBarButtonItem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.editBarButtonItem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.deleteBarButtonItem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.downloadBarButtonItem, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.showBarButtonItem)});
             this.bar1.OptionsBar.AllowQuickCustomization = false;
             this.bar1.OptionsBar.DrawBorder = false;
             this.bar1.OptionsBar.DrawDragBorder = false;
@@ -105,35 +128,38 @@
             this.bar1.OptionsBar.UseWholeRow = true;
             this.bar1.Text = "Tools";
             // 
-            // barButtonItem1
+            // addBarButtonItem
             // 
-            this.barButtonItem1.Caption = "Əlavə etmək";
-            this.barButtonItem1.Id = 0;
-            this.barButtonItem1.Name = "barButtonItem1";
+            this.addBarButtonItem.Caption = "Əlavə etmək";
+            this.addBarButtonItem.Id = 0;
+            this.addBarButtonItem.Name = "addBarButtonItem";
+            this.addBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.addBarButtonItem_ItemClick);
             // 
-            // barButtonItem2
+            // editBarButtonItem
             // 
-            this.barButtonItem2.Caption = "Dəyişmək";
-            this.barButtonItem2.Id = 1;
-            this.barButtonItem2.Name = "barButtonItem2";
+            this.editBarButtonItem.Caption = "Dəyişmək";
+            this.editBarButtonItem.Id = 1;
+            this.editBarButtonItem.Name = "editBarButtonItem";
+            this.editBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.editBarButtonItem_ItemClick);
             // 
-            // barButtonItem3
+            // deleteBarButtonItem
             // 
-            this.barButtonItem3.Caption = "Silmək";
-            this.barButtonItem3.Id = 2;
-            this.barButtonItem3.Name = "barButtonItem3";
+            this.deleteBarButtonItem.Caption = "Silmək";
+            this.deleteBarButtonItem.Id = 2;
+            this.deleteBarButtonItem.Name = "deleteBarButtonItem";
+            this.deleteBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.deleteBarButtonItem_ItemClick);
             // 
-            // barButtonItem4
+            // downloadBarButtonItem
             // 
-            this.barButtonItem4.Caption = "Kompyuterə endirmək";
-            this.barButtonItem4.Id = 3;
-            this.barButtonItem4.Name = "barButtonItem4";
+            this.downloadBarButtonItem.Caption = "Kompyuterə endirmək";
+            this.downloadBarButtonItem.Id = 3;
+            this.downloadBarButtonItem.Name = "downloadBarButtonItem";
             // 
-            // barButtonItem6
+            // showBarButtonItem
             // 
-            this.barButtonItem6.Caption = "Qoşmaya baxmaq";
-            this.barButtonItem6.Id = 5;
-            this.barButtonItem6.Name = "barButtonItem6";
+            this.showBarButtonItem.Caption = "Qoşmaya baxmaq";
+            this.showBarButtonItem.Id = 5;
+            this.showBarButtonItem.Name = "showBarButtonItem";
             // 
             // barDockControlTop
             // 
@@ -163,6 +189,72 @@
             this.barDockControlRight.Location = new System.Drawing.Point(619, 29);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 483);
             // 
+            // copyTypesTableAdapter
+            // 
+            this.copyTypesTableAdapter.ClearBeforeFill = true;
+            // 
+            // copyTypesBindingSource
+            // 
+            this.copyTypesBindingSource.DataMember = "COPY_TYPES";
+            this.copyTypesBindingSource.DataSource = this.fullDataSet;
+            // 
+            // fullDataSet
+            // 
+            this.fullDataSet.DataSetName = "FullDataSet";
+            this.fullDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // copiesBindingSource
+            // 
+            this.copiesBindingSource.DataMember = "COPIES";
+            this.copiesBindingSource.DataSource = this.fullDataSet;
+            // 
+            // copiesTableAdapter
+            // 
+            this.copiesTableAdapter.ClearBeforeFill = true;
+            // 
+            // colID
+            // 
+            this.colID.FieldName = "ID";
+            this.colID.Name = "colID";
+            // 
+            // colCOPY_TYPE_ID
+            // 
+            this.colCOPY_TYPE_ID.Caption = "Qoşmanın tipi";
+            this.colCOPY_TYPE_ID.ColumnEdit = this.copyTypesLookUpEdit;
+            this.colCOPY_TYPE_ID.FieldName = "COPY_TYPE_ID";
+            this.colCOPY_TYPE_ID.Name = "colCOPY_TYPE_ID";
+            this.colCOPY_TYPE_ID.Visible = true;
+            this.colCOPY_TYPE_ID.VisibleIndex = 0;
+            this.colCOPY_TYPE_ID.Width = 226;
+            // 
+            // colNAME
+            // 
+            this.colNAME.Caption = "Açıqlama";
+            this.colNAME.FieldName = "NAME";
+            this.colNAME.Name = "colNAME";
+            this.colNAME.Visible = true;
+            this.colNAME.VisibleIndex = 1;
+            this.colNAME.Width = 375;
+            // 
+            // documentsBindingSource
+            // 
+            this.documentsBindingSource.DataMember = "DOCUMENTS";
+            this.documentsBindingSource.DataSource = this.fullDataSet;
+            // 
+            // documentsTableAdapter
+            // 
+            this.documentsTableAdapter.ClearBeforeFill = true;
+            // 
+            // copyTypesLookUpEdit
+            // 
+            this.copyTypesLookUpEdit.AutoHeight = false;
+            this.copyTypesLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.copyTypesLookUpEdit.DataSource = this.copyTypesBindingSource;
+            this.copyTypesLookUpEdit.DisplayMember = "NAME";
+            this.copyTypesLookUpEdit.Name = "copyTypesLookUpEdit";
+            this.copyTypesLookUpEdit.ValueMember = "ID";
+            // 
             // CopiesManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -177,6 +269,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.copiesGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.copiesGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.copiesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.copyTypesLookUpEdit)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -187,14 +284,25 @@
         public DevExpress.XtraGrid.Views.Grid.GridView copiesGridView;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.Bar bar1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem6;
+        private DevExpress.XtraBars.BarButtonItem addBarButtonItem;
+        private DevExpress.XtraBars.BarButtonItem editBarButtonItem;
+        private DevExpress.XtraBars.BarButtonItem deleteBarButtonItem;
+        private DevExpress.XtraBars.BarButtonItem downloadBarButtonItem;
+        private DevExpress.XtraBars.BarButtonItem showBarButtonItem;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private FullDataSetTableAdapters.COPY_TYPESTableAdapter copyTypesTableAdapter;
+        private System.Windows.Forms.BindingSource copyTypesBindingSource;
+        private FullDataSet fullDataSet;
+        private System.Windows.Forms.BindingSource copiesBindingSource;
+        private DevExpress.XtraGrid.Columns.GridColumn colID;
+        private DevExpress.XtraGrid.Columns.GridColumn colCOPY_TYPE_ID;
+        private DevExpress.XtraGrid.Columns.GridColumn colNAME;
+        private FullDataSetTableAdapters.COPIESTableAdapter copiesTableAdapter;
+        private System.Windows.Forms.BindingSource documentsBindingSource;
+        private FullDataSetTableAdapters.DOCUMENTSTableAdapter documentsTableAdapter;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit copyTypesLookUpEdit;
     }
 }

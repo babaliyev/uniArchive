@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
+            this.saveBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
+            this.deleteBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
+            this.giveGarButtonItem = new DevExpress.XtraBars.BarButtonItem();
+            this.returnBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
+            this.downloadBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -43,48 +43,65 @@
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
+            this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
+            this.copiesManager1 = new UniArchive.copy.CopiesManager();
             this.checkEdit2 = new DevExpress.XtraEditors.CheckEdit();
+            this.documentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fullDataSet = new UniArchive.FullDataSet();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.searchLookUpEdit5 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.documentTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.searchLookUpEdit6 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
             this.searchLookUpEdit7 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.addressDictionaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.searchLookUpEdit8 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.directoriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
             this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
             this.dateEdit2 = new DevExpress.XtraEditors.DateEdit();
-            this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
-            this.copiesManager1 = new UniArchive.copy.CopiesManager();
+            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
+            this.clientsTableAdapter = new UniArchive.FullDataSetTableAdapters.CLIENTSTableAdapter();
+            this.documentTypesTableAdapter = new UniArchive.FullDataSetTableAdapters.DOCUMENT_TYPESTableAdapter();
+            this.directoriesTableAdapter = new UniArchive.FullDataSetTableAdapters.DIRECTORIESTableAdapter();
+            this.addressDictionaryTableAdapter = new UniArchive.FullDataSetTableAdapters.ADDRESS_DICTIONARYTableAdapter();
+            this.documentsTableAdapter = new UniArchive.FullDataSetTableAdapters.DOCUMENTSTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
+            this.groupControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit5.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentTypesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit6.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit7.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addressDictionaryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit8.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.directoriesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
-            this.groupControl5.SuspendLayout();
             this.SuspendLayout();
             // 
             // barManager1
@@ -97,11 +114,11 @@
             this.barManager1.DockControls.Add(this.barDockControlRight);
             this.barManager1.Form = this;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.barButtonItem1,
-            this.barButtonItem2,
-            this.barButtonItem3,
-            this.barButtonItem4,
-            this.barButtonItem5});
+            this.saveBarButtonItem,
+            this.deleteBarButtonItem,
+            this.giveGarButtonItem,
+            this.returnBarButtonItem,
+            this.downloadBarButtonItem});
             this.barManager1.MaxItemId = 5;
             // 
             // bar1
@@ -111,11 +128,11 @@
             this.bar1.DockRow = 0;
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem1, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem2, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem3, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem4, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem5, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.saveBarButtonItem, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.deleteBarButtonItem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.giveGarButtonItem, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.returnBarButtonItem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.downloadBarButtonItem, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar1.OptionsBar.AllowQuickCustomization = false;
             this.bar1.OptionsBar.DrawBorder = false;
             this.bar1.OptionsBar.DrawDragBorder = false;
@@ -123,35 +140,36 @@
             this.bar1.OptionsBar.UseWholeRow = true;
             this.bar1.Text = "Tools";
             // 
-            // barButtonItem1
+            // saveBarButtonItem
             // 
-            this.barButtonItem1.Caption = "Saxlamaq";
-            this.barButtonItem1.Id = 0;
-            this.barButtonItem1.Name = "barButtonItem1";
+            this.saveBarButtonItem.Caption = "Saxlamaq";
+            this.saveBarButtonItem.Id = 0;
+            this.saveBarButtonItem.Name = "saveBarButtonItem";
+            this.saveBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.saveBarButtonItem_ItemClick);
             // 
-            // barButtonItem2
+            // deleteBarButtonItem
             // 
-            this.barButtonItem2.Caption = "Silmək";
-            this.barButtonItem2.Id = 1;
-            this.barButtonItem2.Name = "barButtonItem2";
+            this.deleteBarButtonItem.Caption = "Silmək";
+            this.deleteBarButtonItem.Id = 1;
+            this.deleteBarButtonItem.Name = "deleteBarButtonItem";
             // 
-            // barButtonItem3
+            // giveGarButtonItem
             // 
-            this.barButtonItem3.Caption = "Başqa adama vermək";
-            this.barButtonItem3.Id = 2;
-            this.barButtonItem3.Name = "barButtonItem3";
+            this.giveGarButtonItem.Caption = "Başqa adama vermək";
+            this.giveGarButtonItem.Id = 2;
+            this.giveGarButtonItem.Name = "giveGarButtonItem";
             // 
-            // barButtonItem4
+            // returnBarButtonItem
             // 
-            this.barButtonItem4.Caption = "Geri qaytarmaq";
-            this.barButtonItem4.Id = 3;
-            this.barButtonItem4.Name = "barButtonItem4";
+            this.returnBarButtonItem.Caption = "Geri qaytarmaq";
+            this.returnBarButtonItem.Id = 3;
+            this.returnBarButtonItem.Name = "returnBarButtonItem";
             // 
-            // barButtonItem5
+            // downloadBarButtonItem
             // 
-            this.barButtonItem5.Caption = "Bir fayl kimi yükləmək";
-            this.barButtonItem5.Id = 4;
-            this.barButtonItem5.Name = "barButtonItem5";
+            this.downloadBarButtonItem.Caption = "Bir fayl kimi yükləmək";
+            this.downloadBarButtonItem.Id = 4;
+            this.downloadBarButtonItem.Name = "downloadBarButtonItem";
             // 
             // barDockControlTop
             // 
@@ -200,7 +218,7 @@
             this.xtraTabControl1.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom;
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 29);
             this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage2;
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage4;
             this.xtraTabControl1.Size = new System.Drawing.Size(807, 389);
             this.xtraTabControl1.TabIndex = 19;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
@@ -213,12 +231,6 @@
             this.xtraTabPage2.Name = "xtraTabPage2";
             this.xtraTabPage2.Size = new System.Drawing.Size(801, 361);
             this.xtraTabPage2.Text = "Məxfilik";
-            // 
-            // xtraTabPage3
-            // 
-            this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(801, 361);
-            this.xtraTabPage3.Text = "Tarix";
             // 
             // xtraTabPage4
             // 
@@ -242,8 +254,29 @@
             this.xtraTabPage4.Size = new System.Drawing.Size(801, 361);
             this.xtraTabPage4.Text = "Əsas sənəd";
             // 
+            // groupControl5
+            // 
+            this.groupControl5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupControl5.Controls.Add(this.copiesManager1);
+            this.groupControl5.Location = new System.Drawing.Point(297, 175);
+            this.groupControl5.Name = "groupControl5";
+            this.groupControl5.Size = new System.Drawing.Size(487, 171);
+            this.groupControl5.TabIndex = 17;
+            this.groupControl5.Text = "Qoşma fayllar";
+            // 
+            // copiesManager1
+            // 
+            this.copiesManager1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.copiesManager1.Location = new System.Drawing.Point(2, 21);
+            this.copiesManager1.Name = "copiesManager1";
+            this.copiesManager1.Size = new System.Drawing.Size(483, 148);
+            this.copiesManager1.TabIndex = 0;
+            // 
             // checkEdit2
             // 
+            this.checkEdit2.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "FULL_ACCESS", true));
             this.checkEdit2.EditValue = true;
             this.checkEdit2.Location = new System.Drawing.Point(446, 17);
             this.checkEdit2.MenuManager = this.barManager1;
@@ -251,6 +284,16 @@
             this.checkEdit2.Properties.Caption = "";
             this.checkEdit2.Size = new System.Drawing.Size(210, 19);
             this.checkEdit2.TabIndex = 16;
+            // 
+            // documentsBindingSource
+            // 
+            this.documentsBindingSource.DataMember = "DOCUMENTS";
+            this.documentsBindingSource.DataSource = this.fullDataSet;
+            // 
+            // fullDataSet
+            // 
+            this.fullDataSet.DataSetName = "FullDataSet";
+            this.fullDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // labelControl8
             // 
@@ -270,14 +313,23 @@
             // 
             // searchLookUpEdit5
             // 
+            this.searchLookUpEdit5.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "DOCUMENT_TYPE_ID", true));
             this.searchLookUpEdit5.Location = new System.Drawing.Point(132, 16);
             this.searchLookUpEdit5.Name = "searchLookUpEdit5";
             this.searchLookUpEdit5.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.searchLookUpEdit5.Properties.DataSource = this.documentTypesBindingSource;
+            this.searchLookUpEdit5.Properties.DisplayMember = "NAME";
             this.searchLookUpEdit5.Properties.NullText = "Seçilməyib";
+            this.searchLookUpEdit5.Properties.ValueMember = "ID";
             this.searchLookUpEdit5.Properties.View = this.gridView2;
             this.searchLookUpEdit5.Size = new System.Drawing.Size(208, 20);
             this.searchLookUpEdit5.TabIndex = 14;
+            // 
+            // documentTypesBindingSource
+            // 
+            this.documentTypesBindingSource.DataMember = "DOCUMENT_TYPES";
+            this.documentTypesBindingSource.DataSource = this.fullDataSet;
             // 
             // gridView2
             // 
@@ -298,14 +350,23 @@
             // 
             // searchLookUpEdit6
             // 
+            this.searchLookUpEdit6.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "CLIENT_ID", true));
             this.searchLookUpEdit6.Location = new System.Drawing.Point(132, 79);
             this.searchLookUpEdit6.Name = "searchLookUpEdit6";
             this.searchLookUpEdit6.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.searchLookUpEdit6.Properties.DataSource = this.clientsBindingSource;
+            this.searchLookUpEdit6.Properties.DisplayMember = "FULL_NAME";
             this.searchLookUpEdit6.Properties.NullText = "Seçilməyib";
+            this.searchLookUpEdit6.Properties.ValueMember = "ID";
             this.searchLookUpEdit6.Properties.View = this.gridView3;
             this.searchLookUpEdit6.Size = new System.Drawing.Size(524, 20);
             this.searchLookUpEdit6.TabIndex = 12;
+            // 
+            // clientsBindingSource
+            // 
+            this.clientsBindingSource.DataMember = "CLIENTS";
+            this.clientsBindingSource.DataSource = this.fullDataSet;
             // 
             // gridView3
             // 
@@ -332,14 +393,23 @@
             // 
             // searchLookUpEdit7
             // 
+            this.searchLookUpEdit7.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "ADDRESS_ID", true));
             this.searchLookUpEdit7.Location = new System.Drawing.Point(132, 139);
             this.searchLookUpEdit7.Name = "searchLookUpEdit7";
             this.searchLookUpEdit7.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.searchLookUpEdit7.Properties.DataSource = this.addressDictionaryBindingSource;
+            this.searchLookUpEdit7.Properties.DisplayMember = "FULL_PATH";
             this.searchLookUpEdit7.Properties.NullText = "Seçilməyib";
+            this.searchLookUpEdit7.Properties.ValueMember = "ID";
             this.searchLookUpEdit7.Properties.View = this.gridView5;
             this.searchLookUpEdit7.Size = new System.Drawing.Size(524, 20);
             this.searchLookUpEdit7.TabIndex = 10;
+            // 
+            // addressDictionaryBindingSource
+            // 
+            this.addressDictionaryBindingSource.DataMember = "ADDRESS_DICTIONARY";
+            this.addressDictionaryBindingSource.DataSource = this.fullDataSet;
             // 
             // gridView5
             // 
@@ -358,14 +428,23 @@
             // 
             // searchLookUpEdit8
             // 
+            this.searchLookUpEdit8.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "PARENT_ID", true));
             this.searchLookUpEdit8.Location = new System.Drawing.Point(132, 110);
             this.searchLookUpEdit8.Name = "searchLookUpEdit8";
             this.searchLookUpEdit8.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.searchLookUpEdit8.Properties.DataSource = this.directoriesBindingSource;
+            this.searchLookUpEdit8.Properties.DisplayMember = "FULL_PATH";
             this.searchLookUpEdit8.Properties.NullText = "Seçilməyib";
+            this.searchLookUpEdit8.Properties.ValueMember = "ID";
             this.searchLookUpEdit8.Properties.View = this.gridView6;
             this.searchLookUpEdit8.Size = new System.Drawing.Size(524, 20);
             this.searchLookUpEdit8.TabIndex = 9;
+            // 
+            // directoriesBindingSource
+            // 
+            this.directoriesBindingSource.DataMember = "DIRECTORIES";
+            this.directoriesBindingSource.DataSource = this.fullDataSet;
             // 
             // gridView6
             // 
@@ -384,6 +463,7 @@
             // 
             // textEdit2
             // 
+            this.textEdit2.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "DOCUMENT_NUMBER", true));
             this.textEdit2.Location = new System.Drawing.Point(132, 50);
             this.textEdit2.Name = "textEdit2";
             this.textEdit2.Size = new System.Drawing.Size(208, 20);
@@ -399,6 +479,7 @@
             // 
             // dateEdit2
             // 
+            this.dateEdit2.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "DOCUMENT_DATE", true));
             this.dateEdit2.EditValue = null;
             this.dateEdit2.Location = new System.Drawing.Point(448, 50);
             this.dateEdit2.Name = "dateEdit2";
@@ -409,25 +490,31 @@
             this.dateEdit2.Size = new System.Drawing.Size(208, 20);
             this.dateEdit2.TabIndex = 7;
             // 
-            // groupControl5
+            // xtraTabPage3
             // 
-            this.groupControl5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupControl5.Controls.Add(this.copiesManager1);
-            this.groupControl5.Location = new System.Drawing.Point(297, 175);
-            this.groupControl5.Name = "groupControl5";
-            this.groupControl5.Size = new System.Drawing.Size(487, 171);
-            this.groupControl5.TabIndex = 17;
-            this.groupControl5.Text = "Qoşma fayllar";
+            this.xtraTabPage3.Name = "xtraTabPage3";
+            this.xtraTabPage3.Size = new System.Drawing.Size(801, 361);
+            this.xtraTabPage3.Text = "Tarix";
             // 
-            // copiesManager1
+            // clientsTableAdapter
             // 
-            this.copiesManager1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.copiesManager1.Location = new System.Drawing.Point(2, 21);
-            this.copiesManager1.Name = "copiesManager1";
-            this.copiesManager1.Size = new System.Drawing.Size(483, 148);
-            this.copiesManager1.TabIndex = 0;
+            this.clientsTableAdapter.ClearBeforeFill = true;
+            // 
+            // documentTypesTableAdapter
+            // 
+            this.documentTypesTableAdapter.ClearBeforeFill = true;
+            // 
+            // directoriesTableAdapter
+            // 
+            this.directoriesTableAdapter.ClearBeforeFill = true;
+            // 
+            // addressDictionaryTableAdapter
+            // 
+            this.addressDictionaryTableAdapter.ClearBeforeFill = true;
+            // 
+            // documentsTableAdapter
+            // 
+            this.documentsTableAdapter.ClearBeforeFill = true;
             // 
             // DocumentManager
             // 
@@ -445,21 +532,27 @@
             this.xtraTabControl1.ResumeLayout(false);
             this.xtraTabPage4.ResumeLayout(false);
             this.xtraTabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
+            this.groupControl5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit5.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentTypesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit6.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit7.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addressDictionaryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit8.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.directoriesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
-            this.groupControl5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -468,16 +561,16 @@
 
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.Bar bar1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem saveBarButtonItem;
+        private DevExpress.XtraBars.BarButtonItem deleteBarButtonItem;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraBars.Bar bar2;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem5;
+        private DevExpress.XtraBars.BarButtonItem giveGarButtonItem;
+        private DevExpress.XtraBars.BarButtonItem returnBarButtonItem;
+        private DevExpress.XtraBars.BarButtonItem downloadBarButtonItem;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
@@ -504,5 +597,16 @@
         private DevExpress.XtraEditors.DateEdit dateEdit2;
         private DevExpress.XtraEditors.GroupControl groupControl5;
         private copy.CopiesManager copiesManager1;
+        private FullDataSet fullDataSet;
+        private System.Windows.Forms.BindingSource clientsBindingSource;
+        private FullDataSetTableAdapters.CLIENTSTableAdapter clientsTableAdapter;
+        private FullDataSetTableAdapters.DOCUMENT_TYPESTableAdapter documentTypesTableAdapter;
+        private System.Windows.Forms.BindingSource documentTypesBindingSource;
+        private System.Windows.Forms.BindingSource directoriesBindingSource;
+        private FullDataSetTableAdapters.DIRECTORIESTableAdapter directoriesTableAdapter;
+        private FullDataSetTableAdapters.ADDRESS_DICTIONARYTableAdapter addressDictionaryTableAdapter;
+        private System.Windows.Forms.BindingSource addressDictionaryBindingSource;
+        private System.Windows.Forms.BindingSource documentsBindingSource;
+        private FullDataSetTableAdapters.DOCUMENTSTableAdapter documentsTableAdapter;
     }
 }

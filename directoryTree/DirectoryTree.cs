@@ -14,6 +14,7 @@ namespace UniArchive.directoryTree
         public DirectoryTree()
         {
             InitializeComponent();
+            this.directoriesTableAdapter.Fill(fullDataSet.DIRECTORIES);
         }
 
         private void deleteBarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -65,6 +66,31 @@ namespace UniArchive.directoryTree
             if (directoryForm.ShowDialog() == DialogResult.OK)
             {
                 this.directoriesTableAdapter.Fill(fullDataSet.DIRECTORIES);
+            }
+        }
+
+        public event EventHandler OnOpenDocument;
+
+        private void treeList1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (directoriesBindingSource.Count > 0)
+            {
+                if (directoriesBindingSource.Current != null)
+                {
+                    int pos = directoriesBindingSource.Position;
+                    DataRow row = (DataRow)((DataRowView)directoriesBindingSource.Current).Row;
+
+                    decimal isDirectory = Convert.ToDecimal(row["IS_DIRECTORY"]);
+
+                    if (isDirectory == 0)
+                    {
+                        if (OnOpenDocument != null)
+                        {
+                            decimal id = Convert.ToDecimal(row["ID"]);
+                            OnOpenDocument(id, EventArgs.Empty); 
+                        }
+                    }
+                }
             }
         }
     }

@@ -147,6 +147,7 @@
             this.treeList1.ParentFieldName = "PARENT_ID";
             this.treeList1.Size = new System.Drawing.Size(477, 424);
             this.treeList1.TabIndex = 4;
+            this.treeList1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeList1_MouseDoubleClick);
             // 
             // colDOCUMENT_NUMBER
             // 

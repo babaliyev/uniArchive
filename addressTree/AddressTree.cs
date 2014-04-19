@@ -14,6 +14,7 @@ namespace UniArchive.addressTree
         public AddressTree()
         {
             InitializeComponent();
+            this.addressDictionaryTableAdapter.Fill(this.fullDataSet.ADDRESS_DICTIONARY);
         }
     }
 }

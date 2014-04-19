@@ -1400,6 +1400,8 @@ namespace UniArchive {
             
             private global::System.Data.DataColumn columnDESCRIPTION;
             
+            private global::System.Data.DataColumn columnFULL_PATH;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ADDRESS_DICTIONARYDataTable() {
@@ -1467,6 +1469,14 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FULL_PATHColumn {
+                get {
+                    return this.columnFULL_PATH;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1502,13 +1512,14 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ADDRESS_DICTIONARYRow AddADDRESS_DICTIONARYRow(int ID, ADDRESS_DICTIONARYRow parentADDRESS_DICTIONARYRowByADDRESS_DICTIONARY_FK1, string NAME, string DESCRIPTION) {
+            public ADDRESS_DICTIONARYRow AddADDRESS_DICTIONARYRow(int ID, ADDRESS_DICTIONARYRow parentADDRESS_DICTIONARYRowByADDRESS_DICTIONARY_FK1, string NAME, string DESCRIPTION, string FULL_PATH) {
                 ADDRESS_DICTIONARYRow rowADDRESS_DICTIONARYRow = ((ADDRESS_DICTIONARYRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID,
                         null,
                         NAME,
-                        DESCRIPTION};
+                        DESCRIPTION,
+                        FULL_PATH};
                 if ((parentADDRESS_DICTIONARYRowByADDRESS_DICTIONARY_FK1 != null)) {
                     columnValuesArray[1] = parentADDRESS_DICTIONARYRowByADDRESS_DICTIONARY_FK1[0];
                 }
@@ -1545,6 +1556,7 @@ namespace UniArchive {
                 this.columnPARENT_ID = base.Columns["PARENT_ID"];
                 this.columnNAME = base.Columns["NAME"];
                 this.columnDESCRIPTION = base.Columns["DESCRIPTION"];
+                this.columnFULL_PATH = base.Columns["FULL_PATH"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1558,6 +1570,8 @@ namespace UniArchive {
                 base.Columns.Add(this.columnNAME);
                 this.columnDESCRIPTION = new global::System.Data.DataColumn("DESCRIPTION", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDESCRIPTION);
+                this.columnFULL_PATH = new global::System.Data.DataColumn("FULL_PATH", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFULL_PATH);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AllowDBNull = false;
@@ -1565,6 +1579,7 @@ namespace UniArchive {
                 this.columnNAME.AllowDBNull = false;
                 this.columnNAME.MaxLength = 500;
                 this.columnDESCRIPTION.MaxLength = 2000;
+                this.columnFULL_PATH.MaxLength = 4000;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2823,11 +2838,11 @@ namespace UniArchive {
             
             private global::System.Data.DataColumn columnFILE_EXTENTION;
             
-            private global::System.Data.DataColumn columnFILE_BODY;
-            
             private global::System.Data.DataColumn columnPAGES_COUNT;
             
             private global::System.Data.DataColumn columnFULL_ACCESS;
+            
+            private global::System.Data.DataColumn columnFILE_BODY;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -2912,14 +2927,6 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn FILE_BODYColumn {
-                get {
-                    return this.columnFILE_BODY;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn PAGES_COUNTColumn {
                 get {
                     return this.columnPAGES_COUNT;
@@ -2931,6 +2938,14 @@ namespace UniArchive {
             public global::System.Data.DataColumn FULL_ACCESSColumn {
                 get {
                     return this.columnFULL_ACCESS;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FILE_BODYColumn {
+                get {
+                    return this.columnFILE_BODY;
                 }
             }
             
@@ -2971,7 +2986,7 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public COPIESRow AddCOPIESRow(int ID, DOCUMENTSRow parentDOCUMENTSRowByCOPIES_FK2, COPY_TYPESRow parentCOPY_TYPESRowByCOPIES_FK1, string NAME, string FILE_NAME, string FILE_EXTENTION, byte[] FILE_BODY, decimal PAGES_COUNT, short FULL_ACCESS) {
+            public COPIESRow AddCOPIESRow(int ID, DOCUMENTSRow parentDOCUMENTSRowByCOPIES_FK2, COPY_TYPESRow parentCOPY_TYPESRowByCOPIES_FK1, string NAME, string FILE_NAME, string FILE_EXTENTION, decimal PAGES_COUNT, short FULL_ACCESS, byte[] FILE_BODY) {
                 COPIESRow rowCOPIESRow = ((COPIESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID,
@@ -2980,9 +2995,9 @@ namespace UniArchive {
                         NAME,
                         FILE_NAME,
                         FILE_EXTENTION,
-                        FILE_BODY,
                         PAGES_COUNT,
-                        FULL_ACCESS};
+                        FULL_ACCESS,
+                        FILE_BODY};
                 if ((parentDOCUMENTSRowByCOPIES_FK2 != null)) {
                     columnValuesArray[1] = parentDOCUMENTSRowByCOPIES_FK2[0];
                 }
@@ -3024,9 +3039,9 @@ namespace UniArchive {
                 this.columnNAME = base.Columns["NAME"];
                 this.columnFILE_NAME = base.Columns["FILE_NAME"];
                 this.columnFILE_EXTENTION = base.Columns["FILE_EXTENTION"];
-                this.columnFILE_BODY = base.Columns["FILE_BODY"];
                 this.columnPAGES_COUNT = base.Columns["PAGES_COUNT"];
                 this.columnFULL_ACCESS = base.Columns["FULL_ACCESS"];
+                this.columnFILE_BODY = base.Columns["FILE_BODY"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3044,12 +3059,12 @@ namespace UniArchive {
                 base.Columns.Add(this.columnFILE_NAME);
                 this.columnFILE_EXTENTION = new global::System.Data.DataColumn("FILE_EXTENTION", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFILE_EXTENTION);
-                this.columnFILE_BODY = new global::System.Data.DataColumn("FILE_BODY", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFILE_BODY);
                 this.columnPAGES_COUNT = new global::System.Data.DataColumn("PAGES_COUNT", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPAGES_COUNT);
                 this.columnFULL_ACCESS = new global::System.Data.DataColumn("FULL_ACCESS", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFULL_ACCESS);
+                this.columnFILE_BODY = new global::System.Data.DataColumn("FILE_BODY", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFILE_BODY);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AllowDBNull = false;
@@ -8927,6 +8942,10 @@ namespace UniArchive {
             
             private global::System.Data.DataColumn columnPARENT_ID;
             
+            private global::System.Data.DataColumn columnIS_DIRECTORY;
+            
+            private global::System.Data.DataColumn columnFULL_PATH;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DIRECTORIESDataTable() {
@@ -8994,6 +9013,22 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IS_DIRECTORYColumn {
+                get {
+                    return this.columnIS_DIRECTORY;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FULL_PATHColumn {
+                get {
+                    return this.columnFULL_PATH;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -9029,13 +9064,15 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DIRECTORIESRow AddDIRECTORIESRow(int ID, string DOCUMENT_NUMBER, short FULL_ACCESS, int PARENT_ID) {
+            public DIRECTORIESRow AddDIRECTORIESRow(int ID, string DOCUMENT_NUMBER, short FULL_ACCESS, int PARENT_ID, short IS_DIRECTORY, string FULL_PATH) {
                 DIRECTORIESRow rowDIRECTORIESRow = ((DIRECTORIESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID,
                         DOCUMENT_NUMBER,
                         FULL_ACCESS,
-                        PARENT_ID};
+                        PARENT_ID,
+                        IS_DIRECTORY,
+                        FULL_PATH};
                 rowDIRECTORIESRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDIRECTORIESRow);
                 return rowDIRECTORIESRow;
@@ -9069,6 +9106,8 @@ namespace UniArchive {
                 this.columnDOCUMENT_NUMBER = base.Columns["DOCUMENT_NUMBER"];
                 this.columnFULL_ACCESS = base.Columns["FULL_ACCESS"];
                 this.columnPARENT_ID = base.Columns["PARENT_ID"];
+                this.columnIS_DIRECTORY = base.Columns["IS_DIRECTORY"];
+                this.columnFULL_PATH = base.Columns["FULL_PATH"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9082,6 +9121,10 @@ namespace UniArchive {
                 base.Columns.Add(this.columnFULL_ACCESS);
                 this.columnPARENT_ID = new global::System.Data.DataColumn("PARENT_ID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPARENT_ID);
+                this.columnIS_DIRECTORY = new global::System.Data.DataColumn("IS_DIRECTORY", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIS_DIRECTORY);
+                this.columnFULL_PATH = new global::System.Data.DataColumn("FULL_PATH", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFULL_PATH);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AllowDBNull = false;
@@ -9089,6 +9132,8 @@ namespace UniArchive {
                 this.columnDOCUMENT_NUMBER.AllowDBNull = false;
                 this.columnDOCUMENT_NUMBER.MaxLength = 500;
                 this.columnFULL_ACCESS.AllowDBNull = false;
+                this.columnIS_DIRECTORY.AllowDBNull = false;
+                this.columnFULL_PATH.MaxLength = 4000;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9285,6 +9330,22 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FULL_PATH {
+                get {
+                    try {
+                        return ((string)(this[this.tableADDRESS_DICTIONARY.FULL_PATHColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FULL_PATH\' in table \'ADDRESS_DICTIONARY\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableADDRESS_DICTIONARY.FULL_PATHColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ADDRESS_DICTIONARYRow ADDRESS_DICTIONARYRowParent {
                 get {
                     return ((ADDRESS_DICTIONARYRow)(this.GetParentRow(this.Table.ParentRelations["ADDRESS_DICTIONARY_FK1"])));
@@ -9316,6 +9377,18 @@ namespace UniArchive {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDESCRIPTIONNull() {
                 this[this.tableADDRESS_DICTIONARY.DESCRIPTIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFULL_PATHNull() {
+                return this.IsNull(this.tableADDRESS_DICTIONARY.FULL_PATHColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFULL_PATHNull() {
+                this[this.tableADDRESS_DICTIONARY.FULL_PATHColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10141,22 +10214,6 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public byte[] FILE_BODY {
-                get {
-                    try {
-                        return ((byte[])(this[this.tableCOPIES.FILE_BODYColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'FILE_BODY\' in table \'COPIES\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCOPIES.FILE_BODYColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public decimal PAGES_COUNT {
                 get {
                     return ((decimal)(this[this.tableCOPIES.PAGES_COUNTColumn]));
@@ -10174,6 +10231,22 @@ namespace UniArchive {
                 }
                 set {
                     this[this.tableCOPIES.FULL_ACCESSColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte[] FILE_BODY {
+                get {
+                    try {
+                        return ((byte[])(this[this.tableCOPIES.FILE_BODYColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FILE_BODY\' in table \'COPIES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCOPIES.FILE_BODYColumn] = value;
                 }
             }
             
@@ -12531,6 +12604,33 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public short IS_DIRECTORY {
+                get {
+                    return ((short)(this[this.tableDIRECTORIES.IS_DIRECTORYColumn]));
+                }
+                set {
+                    this[this.tableDIRECTORIES.IS_DIRECTORYColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FULL_PATH {
+                get {
+                    try {
+                        return ((string)(this[this.tableDIRECTORIES.FULL_PATHColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FULL_PATH\' in table \'DIRECTORIES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDIRECTORIES.FULL_PATHColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsPARENT_IDNull() {
                 return this.IsNull(this.tableDIRECTORIES.PARENT_IDColumn);
             }
@@ -12539,6 +12639,18 @@ namespace UniArchive {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetPARENT_IDNull() {
                 this[this.tableDIRECTORIES.PARENT_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFULL_PATHNull() {
+                return this.IsNull(this.tableDIRECTORIES.FULL_PATHColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFULL_PATHNull() {
+                this[this.tableDIRECTORIES.FULL_PATHColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13498,6 +13610,7 @@ namespace UniArchive.FullDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("PARENT_ID", "PARENT_ID");
             tableMapping.ColumnMappings.Add("NAME", "NAME");
             tableMapping.ColumnMappings.Add("DESCRIPTION", "DESCRIPTION");
+            tableMapping.ColumnMappings.Add("FULL_PATH", "FULL_PATH");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -13586,11 +13699,17 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[1];
+            this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[2];
             this._commandCollection[0] = new global::Oracle.DataAccess.Client.OracleCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT ID, PARENT_ID, \"NAME\", DESCRIPTION FROM ARCH.ADDRESS_DICTIONARY";
+            this._commandCollection[0].CommandText = "SELECT   ID, PARENT_ID, \"NAME\", DESCRIPTION, \"NAME\" AS FULL_PATH\r\nFROM         AR" +
+                "CH.ADDRESS_DICTIONARY";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT   ID, PARENT_ID, \"NAME\", DESCRIPTION, \"NAME\" AS FULL_PATH\r\nFROM         AR" +
+                "CH.ADDRESS_DICTIONARY";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13612,6 +13731,30 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual FullDataSet.ADDRESS_DICTIONARYDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            FullDataSet.ADDRESS_DICTIONARYDataTable dataTable = new FullDataSet.ADDRESS_DICTIONARYDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillWithFullPath(FullDataSet.ADDRESS_DICTIONARYDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual FullDataSet.ADDRESS_DICTIONARYDataTable GetDataWithFullPath() {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
             FullDataSet.ADDRESS_DICTIONARYDataTable dataTable = new FullDataSet.ADDRESS_DICTIONARYDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -15338,9 +15481,9 @@ namespace UniArchive.FullDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("NAME", "NAME");
             tableMapping.ColumnMappings.Add("FILE_NAME", "FILE_NAME");
             tableMapping.ColumnMappings.Add("FILE_EXTENTION", "FILE_EXTENTION");
-            tableMapping.ColumnMappings.Add("FILE_BODY", "FILE_BODY");
             tableMapping.ColumnMappings.Add("PAGES_COUNT", "PAGES_COUNT");
             tableMapping.ColumnMappings.Add("FULL_ACCESS", "FULL_ACCESS");
+            tableMapping.ColumnMappings.Add("FILE_BODY", "FILE_BODY");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -15499,12 +15642,37 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[1];
+            this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[3];
             this._commandCollection[0] = new global::Oracle.DataAccess.Client.OracleCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT ID, DOCUMENT_ID, COPY_TYPE_ID, \"NAME\", FILE_NAME, FILE_EXTENTION, FILE_BOD" +
-                "Y, PAGES_COUNT, FULL_ACCESS FROM ARCH.COPIES";
+            this._commandCollection[0].CommandText = "SELECT   ID, DOCUMENT_ID, COPY_TYPE_ID, \"NAME\", FILE_NAME, FILE_EXTENTION, PAGES_" +
+                "COUNT, FULL_ACCESS, FILE_BODY\r\nFROM         ARCH.COPIES";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT   ID, DOCUMENT_ID, COPY_TYPE_ID, \"NAME\", FILE_NAME, FILE_EXTENTION, PAGES_" +
+                "COUNT, FULL_ACCESS\r\nFROM         ARCH.COPIES\r\nWHERE     (DOCUMENT_ID = :Document" +
+                "ID)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":DocumentID";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "DOCUMENT_ID";
+            this._commandCollection[1].Parameters.Add(param);
+            this._commandCollection[2] = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT ID, DOCUMENT_ID, COPY_TYPE_ID, \"NAME\", FILE_NAME, FILE_EXTENTION, FILE_BOD" +
+                "Y, PAGES_COUNT, FULL_ACCESS FROM ARCH.COPIES\r\nwhere ID=:Id";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":Id";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._commandCollection[2].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15526,6 +15694,58 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual FullDataSet.COPIESDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            FullDataSet.COPIESDataTable dataTable = new FullDataSet.COPIESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByDocumentID(FullDataSet.COPIESDataTable dataTable, decimal DocumentID) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(DocumentID));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual FullDataSet.COPIESDataTable GetDataByDocumentID(decimal DocumentID) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(DocumentID));
+            FullDataSet.COPIESDataTable dataTable = new FullDataSet.COPIESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByID(FullDataSet.COPIESDataTable dataTable, decimal Id) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(Id));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual FullDataSet.COPIESDataTable GetDataByID(decimal Id) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(Id));
             FullDataSet.COPIESDataTable dataTable = new FullDataSet.COPIESDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -16167,18 +16387,18 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._adapter.InsertCommand.CommandText = "DML_COPY_TYPES.INS_COPY_TYPES_WI";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.StoredProcedure;
             param = new global::Oracle.DataAccess.Client.OracleParameter();
-            param.ParameterName = ":NAME";
-            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
-            param.Size = 200;
-            param.IsNullable = true;
-            param.SourceColumn = "NAME";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = ":ID";
             param.DbType = global::System.Data.DbType.Decimal;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "ID";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":NAME";
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.NVarchar2;
+            param.Size = 200;
+            param.IsNullable = true;
+            param.SourceColumn = "NAME";
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::Oracle.DataAccess.Client.OracleParameter();
             param.ParameterName = ":DESCRIPTION";
@@ -16338,14 +16558,14 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string NAME, decimal ID, string DESCRIPTION, decimal FULL_ACCESS, global::System.Nullable<decimal> DOCUMENT_TYPE_ID) {
+        public virtual int Insert(decimal ID, string NAME, string DESCRIPTION, decimal FULL_ACCESS, global::System.Nullable<decimal> DOCUMENT_TYPE_ID) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ID));
             if ((NAME == null)) {
                 throw new global::System.ArgumentNullException("NAME");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(NAME));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(NAME));
             }
-            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(ID));
             if ((DESCRIPTION == null)) {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
@@ -17827,13 +18047,26 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[1];
+            this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[2];
             this._commandCollection[0] = new global::Oracle.DataAccess.Client.OracleCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT   ID, DOCUMENT_TYPE_ID, CLIENT_ID, DOCUMENT_NUMBER, DOCUMENT_DATE, ADDRESS" +
                 "_ID, FULL_ACCESS, \r\n                         PARENT_ID\r\nFROM         ARCH.DOCUME" +
                 "NTS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT   ID, DOCUMENT_TYPE_ID, CLIENT_ID, DOCUMENT_NUMBER, DOCUMENT_DATE, ADDRESS" +
+                "_ID, FULL_ACCESS, \r\n                         PARENT_ID\r\nFROM         ARCH.DOCUME" +
+                "NTS\r\nwhere ID=:Id";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            global::Oracle.DataAccess.Client.OracleParameter param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":Id";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "ID";
+            this._commandCollection[1].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -17855,6 +18088,32 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual FullDataSet.DOCUMENTSDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            FullDataSet.DOCUMENTSDataTable dataTable = new FullDataSet.DOCUMENTSDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByID(FullDataSet.DOCUMENTSDataTable dataTable, decimal Id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(Id));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual FullDataSet.DOCUMENTSDataTable GetDataByID(decimal Id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(Id));
             FullDataSet.DOCUMENTSDataTable dataTable = new FullDataSet.DOCUMENTSDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -22470,6 +22729,8 @@ namespace UniArchive.FullDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("DOCUMENT_NUMBER", "DOCUMENT_NUMBER");
             tableMapping.ColumnMappings.Add("FULL_ACCESS", "FULL_ACCESS");
             tableMapping.ColumnMappings.Add("PARENT_ID", "PARENT_ID");
+            tableMapping.ColumnMappings.Add("IS_DIRECTORY", "IS_DIRECTORY");
+            tableMapping.ColumnMappings.Add("FULL_PATH", "FULL_PATH");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::Oracle.DataAccess.Client.OracleCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -22561,11 +22822,11 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[2];
+            this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[3];
             this._commandCollection[0] = new global::Oracle.DataAccess.Client.OracleCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT   ID, DOCUMENT_NUMBER, FULL_ACCESS, PARENT_ID\r\nFROM         ARCH.DOCUMENTS" +
-                "";
+            this._commandCollection[0].CommandText = "SELECT   ID, DOCUMENT_NUMBER, FULL_ACCESS, PARENT_ID, IS_DIRECTORY, DOCUMENT_NUMB" +
+                "ER AS FULL_PATH\r\nFROM         ARCH.DOCUMENTS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::Oracle.DataAccess.Client.OracleCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -22579,6 +22840,11 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.IsNullable = true;
             param.SourceColumn = "ID";
             this._commandCollection[1].Parameters.Add(param);
+            this._commandCollection[2] = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT   ID, DOCUMENT_NUMBER, FULL_ACCESS, PARENT_ID, IS_DIRECTORY, DOCUMENT_NUMB" +
+                "ER AS FULL_PATH\r\nFROM         ARCH.DOCUMENTS\r\nWHERE     (IS_DIRECTORY = 1)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -22626,6 +22892,30 @@ namespace UniArchive.FullDataSetTableAdapters {
         public virtual FullDataSet.DIRECTORIESDataTable GetDataByID(decimal Id) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
             this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(Id));
+            FullDataSet.DIRECTORIESDataTable dataTable = new FullDataSet.DIRECTORIESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillWithFullPath(FullDataSet.DIRECTORIESDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual FullDataSet.DIRECTORIESDataTable GetDataWithFullPath() {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
             FullDataSet.DIRECTORIESDataTable dataTable = new FullDataSet.DIRECTORIESDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;

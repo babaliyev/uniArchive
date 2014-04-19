@@ -11,9 +11,30 @@ namespace UniArchive.copy
 {
     public partial class CopyForm : DevExpress.XtraEditors.XtraForm
     {
-        public CopyForm()
+        
+
+        public CopyForm(FullDataSet fds, decimal documentId, decimal id)
         {
+            this.documentId = documentId;
             InitializeComponent();
+            copyManager1.setDataSet(fds);
+            copyManager1.edit(id);
+            copyManager1.OnSave += SaveEvent;
+        }
+
+        public CopyForm(FullDataSet fds, decimal documentId)
+        {
+            this.documentId = documentId;
+            InitializeComponent();
+            copyManager1.setDataSet(fds);
+            copyManager1.addNew();
+            copyManager1.OnSave += SaveEvent;
+        }
+
+        public void SaveEvent(object sender, EventArgs args)
+        {
+            DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

@@ -153,6 +153,12 @@
     <Compile Include="copy\CopyManager.Designer.cs">
       <DependentUpon>CopyManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="copy\StandaloneCopyManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="copy\StandaloneCopyManager.Designer.cs">
+      <DependentUpon>StandaloneCopyManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataHelper.cs" />
     <Compile Include="directoryTree\DirectoryForm.cs">
       <SubType>Form</SubType>
@@ -255,8 +261,14 @@
     <EmbeddedResource Include="copy\CopiesManager.resx">
       <DependentUpon>CopiesManager.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="copy\CopyForm.resx">
+      <DependentUpon>CopyForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="copy\CopyManager.resx">
       <DependentUpon>CopyManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="copy\StandaloneCopyManager.resx">
+      <DependentUpon>StandaloneCopyManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="directoryTree\DirectoryForm.resx">
       <DependentUpon>DirectoryForm.cs</DependentUpon>

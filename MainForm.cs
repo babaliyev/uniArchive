@@ -25,6 +25,8 @@ namespace UniArchive
         {
             InitializeComponent();
             barManager.ForceInitialize();
+
+            directoryTree1.OnOpenDocument += OpenDocument;
         }
 
         private void openDocument(Control c)
@@ -276,5 +278,9 @@ namespace UniArchive
             newClient();
         }
 
+        public void OpenDocument(object sender, EventArgs args)
+        {
+            showDocument((decimal)sender, sender.ToString());
+        }
     }
 }
