@@ -30,7 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             this.copiesGridControl = new DevExpress.XtraGrid.GridControl();
+            this.copiesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fullDataSet = new UniArchive.FullDataSet();
             this.copiesGridView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCOPY_TYPE_ID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.copyTypesLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.copyTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.colNAME = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPAGES_COUNT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.addBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
@@ -43,24 +51,20 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.copyTypesTableAdapter = new UniArchive.FullDataSetTableAdapters.COPY_TYPESTableAdapter();
-            this.copyTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fullDataSet = new UniArchive.FullDataSet();
-            this.copiesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.copiesTableAdapter = new UniArchive.FullDataSetTableAdapters.COPIESTableAdapter();
-            this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCOPY_TYPE_ID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNAME = new DevExpress.XtraGrid.Columns.GridColumn();
             this.documentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.documentsTableAdapter = new UniArchive.FullDataSetTableAdapters.DOCUMENTSTableAdapter();
-            this.copyTypesLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.filesTableAdapter = new UniArchive.FullDataSetTableAdapters.FILESTableAdapter();
+            this.filesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.copiesGridControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.copiesGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.copiesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.copiesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.copyTypesLookUpEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // copiesGridControl
@@ -77,12 +81,23 @@
             this.copiesGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.copiesGridView});
             // 
+            // copiesBindingSource
+            // 
+            this.copiesBindingSource.DataMember = "COPIES";
+            this.copiesBindingSource.DataSource = this.fullDataSet;
+            // 
+            // fullDataSet
+            // 
+            this.fullDataSet.DataSetName = "FullDataSet";
+            this.fullDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // copiesGridView
             // 
             this.copiesGridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colID,
             this.colCOPY_TYPE_ID,
-            this.colNAME});
+            this.colNAME,
+            this.colPAGES_COUNT});
             this.copiesGridView.GridControl = this.copiesGridControl;
             this.copiesGridView.Name = "copiesGridView";
             this.copiesGridView.OptionsCustomization.AllowGroup = false;
@@ -91,6 +106,53 @@
             this.copiesGridView.OptionsDetail.SmartDetailExpand = false;
             this.copiesGridView.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.copiesGridView.OptionsView.ShowGroupPanel = false;
+            // 
+            // colID
+            // 
+            this.colID.FieldName = "ID";
+            this.colID.Name = "colID";
+            // 
+            // colCOPY_TYPE_ID
+            // 
+            this.colCOPY_TYPE_ID.Caption = "Qoşmanın tipi";
+            this.colCOPY_TYPE_ID.ColumnEdit = this.copyTypesLookUpEdit;
+            this.colCOPY_TYPE_ID.FieldName = "COPY_TYPE_ID";
+            this.colCOPY_TYPE_ID.Name = "colCOPY_TYPE_ID";
+            this.colCOPY_TYPE_ID.Visible = true;
+            this.colCOPY_TYPE_ID.VisibleIndex = 0;
+            this.colCOPY_TYPE_ID.Width = 226;
+            // 
+            // copyTypesLookUpEdit
+            // 
+            this.copyTypesLookUpEdit.AutoHeight = false;
+            this.copyTypesLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.copyTypesLookUpEdit.DataSource = this.copyTypesBindingSource;
+            this.copyTypesLookUpEdit.DisplayMember = "NAME";
+            this.copyTypesLookUpEdit.Name = "copyTypesLookUpEdit";
+            this.copyTypesLookUpEdit.ValueMember = "ID";
+            // 
+            // copyTypesBindingSource
+            // 
+            this.copyTypesBindingSource.DataMember = "COPY_TYPES";
+            this.copyTypesBindingSource.DataSource = this.fullDataSet;
+            // 
+            // colNAME
+            // 
+            this.colNAME.Caption = "Açıqlama";
+            this.colNAME.FieldName = "NAME";
+            this.colNAME.Name = "colNAME";
+            this.colNAME.Visible = true;
+            this.colNAME.VisibleIndex = 1;
+            this.colNAME.Width = 375;
+            // 
+            // colPAGES_COUNT
+            // 
+            this.colPAGES_COUNT.Caption = "Səhifə sayı";
+            this.colPAGES_COUNT.FieldName = "PAGES_COUNT";
+            this.colPAGES_COUNT.Name = "colPAGES_COUNT";
+            this.colPAGES_COUNT.Visible = true;
+            this.colPAGES_COUNT.VisibleIndex = 2;
             // 
             // barManager1
             // 
@@ -160,6 +222,7 @@
             this.showBarButtonItem.Caption = "Qoşmaya baxmaq";
             this.showBarButtonItem.Id = 5;
             this.showBarButtonItem.Name = "showBarButtonItem";
+            this.showBarButtonItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
             // barDockControlTop
             // 
@@ -193,48 +256,9 @@
             // 
             this.copyTypesTableAdapter.ClearBeforeFill = true;
             // 
-            // copyTypesBindingSource
-            // 
-            this.copyTypesBindingSource.DataMember = "COPY_TYPES";
-            this.copyTypesBindingSource.DataSource = this.fullDataSet;
-            // 
-            // fullDataSet
-            // 
-            this.fullDataSet.DataSetName = "FullDataSet";
-            this.fullDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // copiesBindingSource
-            // 
-            this.copiesBindingSource.DataMember = "COPIES";
-            this.copiesBindingSource.DataSource = this.fullDataSet;
-            // 
             // copiesTableAdapter
             // 
             this.copiesTableAdapter.ClearBeforeFill = true;
-            // 
-            // colID
-            // 
-            this.colID.FieldName = "ID";
-            this.colID.Name = "colID";
-            // 
-            // colCOPY_TYPE_ID
-            // 
-            this.colCOPY_TYPE_ID.Caption = "Qoşmanın tipi";
-            this.colCOPY_TYPE_ID.ColumnEdit = this.copyTypesLookUpEdit;
-            this.colCOPY_TYPE_ID.FieldName = "COPY_TYPE_ID";
-            this.colCOPY_TYPE_ID.Name = "colCOPY_TYPE_ID";
-            this.colCOPY_TYPE_ID.Visible = true;
-            this.colCOPY_TYPE_ID.VisibleIndex = 0;
-            this.colCOPY_TYPE_ID.Width = 226;
-            // 
-            // colNAME
-            // 
-            this.colNAME.Caption = "Açıqlama";
-            this.colNAME.FieldName = "NAME";
-            this.colNAME.Name = "colNAME";
-            this.colNAME.Visible = true;
-            this.colNAME.VisibleIndex = 1;
-            this.colNAME.Width = 375;
             // 
             // documentsBindingSource
             // 
@@ -245,15 +269,14 @@
             // 
             this.documentsTableAdapter.ClearBeforeFill = true;
             // 
-            // copyTypesLookUpEdit
+            // filesTableAdapter
             // 
-            this.copyTypesLookUpEdit.AutoHeight = false;
-            this.copyTypesLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.copyTypesLookUpEdit.DataSource = this.copyTypesBindingSource;
-            this.copyTypesLookUpEdit.DisplayMember = "NAME";
-            this.copyTypesLookUpEdit.Name = "copyTypesLookUpEdit";
-            this.copyTypesLookUpEdit.ValueMember = "ID";
+            this.filesTableAdapter.ClearBeforeFill = true;
+            // 
+            // filesBindingSource
+            // 
+            this.filesBindingSource.DataMember = "FILES";
+            this.filesBindingSource.DataSource = this.fullDataSet;
             // 
             // CopiesManager
             // 
@@ -267,13 +290,14 @@
             this.Name = "CopiesManager";
             this.Size = new System.Drawing.Size(619, 512);
             ((System.ComponentModel.ISupportInitialize)(this.copiesGridControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.copiesGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.copiesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.copiesGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.copyTypesLookUpEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -304,5 +328,8 @@
         private System.Windows.Forms.BindingSource documentsBindingSource;
         private FullDataSetTableAdapters.DOCUMENTSTableAdapter documentsTableAdapter;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit copyTypesLookUpEdit;
+        private DevExpress.XtraGrid.Columns.GridColumn colPAGES_COUNT;
+        private FullDataSetTableAdapters.FILESTableAdapter filesTableAdapter;
+        private System.Windows.Forms.BindingSource filesBindingSource;
     }
 }

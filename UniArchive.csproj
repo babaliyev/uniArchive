@@ -153,6 +153,12 @@
     <Compile Include="copy\CopyManager.Designer.cs">
       <DependentUpon>CopyManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="copy\FilesManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="copy\FilesManager.Designer.cs">
+      <DependentUpon>FilesManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="copy\StandaloneCopyManager.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -266,6 +272,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="copy\CopyManager.resx">
       <DependentUpon>CopyManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="copy\FilesManager.resx">
+      <DependentUpon>FilesManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="copy\StandaloneCopyManager.resx">
       <DependentUpon>StandaloneCopyManager.cs</DependentUpon>

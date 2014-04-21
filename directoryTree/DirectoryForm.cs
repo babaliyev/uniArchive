@@ -21,6 +21,7 @@ namespace UniArchive.directoryTree
             DataRow newRow = ((DataRowView)directoriesBindingSource.AddNew()).Row;
             newRow["ID"] = DataHelper.GET_DOCUMENTS_ID();
             newRow["FULL_ACCESS"] = 1;
+            newRow["IS_DIRECTORY"] = 1;
             newRow["PARENT_ID"] = parentId == null ? (object)DBNull.Value : (object)parentId;
         }
 

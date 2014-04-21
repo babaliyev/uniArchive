@@ -33,8 +33,6 @@
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.saveBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
-            this.setBodyBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
-            this.deleteBodyBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             this.downloadBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -69,7 +67,7 @@
             this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
             this.copiesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fullDataSet = new UniArchive.FullDataSet();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.documentLinkLabel = new System.Windows.Forms.LinkLabel();
             this.checkEdit3 = new DevExpress.XtraEditors.CheckEdit();
             this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
@@ -80,7 +78,7 @@
             this.colDESCRIPTION = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
-            this.fileBodyPictureEdit = new DevExpress.XtraEditors.PictureEdit();
+            this.filesManager1 = new UniArchive.copy.FilesManager();
             this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
             this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
@@ -118,7 +116,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fileBodyPictureEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -143,9 +140,7 @@
             this.barManager1.Form = this;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.downloadBarButtonItem,
-            this.saveBarButtonItem,
-            this.setBodyBarButtonItem,
-            this.deleteBodyBarButtonItem});
+            this.saveBarButtonItem});
             this.barManager1.MaxItemId = 8;
             // 
             // bar1
@@ -156,8 +151,6 @@
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.saveBarButtonItem, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.setBodyBarButtonItem, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.deleteBodyBarButtonItem),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.downloadBarButtonItem, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar1.OptionsBar.AllowQuickCustomization = false;
             this.bar1.OptionsBar.DrawBorder = false;
@@ -172,20 +165,6 @@
             this.saveBarButtonItem.Id = 5;
             this.saveBarButtonItem.Name = "saveBarButtonItem";
             this.saveBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.saveBarButtonItem_ItemClick);
-            // 
-            // setBodyBarButtonItem
-            // 
-            this.setBodyBarButtonItem.Caption = "Fayl yükləmək";
-            this.setBodyBarButtonItem.Id = 6;
-            this.setBodyBarButtonItem.Name = "setBodyBarButtonItem";
-            this.setBodyBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.setBodyBarButtonItem_ItemClick);
-            // 
-            // deleteBodyBarButtonItem
-            // 
-            this.deleteBodyBarButtonItem.Caption = "Faylı silmək";
-            this.deleteBodyBarButtonItem.Id = 7;
-            this.deleteBodyBarButtonItem.Name = "deleteBodyBarButtonItem";
-            this.deleteBodyBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.deleteBodyBarButtonItem_ItemClick);
             // 
             // downloadBarButtonItem
             // 
@@ -465,7 +444,7 @@
             // xtraTabPage7
             // 
             this.xtraTabPage7.Controls.Add(this.textEdit3);
-            this.xtraTabPage7.Controls.Add(this.linkLabel1);
+            this.xtraTabPage7.Controls.Add(this.documentLinkLabel);
             this.xtraTabPage7.Controls.Add(this.checkEdit3);
             this.xtraTabPage7.Controls.Add(this.labelControl15);
             this.xtraTabPage7.Controls.Add(this.labelControl16);
@@ -497,16 +476,17 @@
             this.fullDataSet.DataSetName = "FullDataSet";
             this.fullDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // linkLabel1
+            // documentLinkLabel
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.copiesBindingSource, "DOCUMENT_ID", true));
-            this.linkLabel1.Location = new System.Drawing.Point(129, 50);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(53, 13);
-            this.linkLabel1.TabIndex = 17;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "linkLabel1";
+            this.documentLinkLabel.AutoSize = true;
+            this.documentLinkLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.copiesBindingSource, "DOCUMENT_ID", true));
+            this.documentLinkLabel.Location = new System.Drawing.Point(129, 50);
+            this.documentLinkLabel.Name = "documentLinkLabel";
+            this.documentLinkLabel.Size = new System.Drawing.Size(61, 13);
+            this.documentLinkLabel.TabIndex = 17;
+            this.documentLinkLabel.TabStop = true;
+            this.documentLinkLabel.Text = "docNumber";
+            this.documentLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.documentLinkLabel_LinkClicked);
             // 
             // checkEdit3
             // 
@@ -594,23 +574,20 @@
             this.groupControl5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupControl5.Controls.Add(this.fileBodyPictureEdit);
+            this.groupControl5.Controls.Add(this.filesManager1);
             this.groupControl5.Location = new System.Drawing.Point(292, 114);
             this.groupControl5.Name = "groupControl5";
             this.groupControl5.Size = new System.Drawing.Size(438, 304);
             this.groupControl5.TabIndex = 1;
-            this.groupControl5.Text = "Qoşmanın görünüşü";
+            this.groupControl5.Text = "Fayllar";
             // 
-            // fileBodyPictureEdit
+            // filesManager1
             // 
-            this.fileBodyPictureEdit.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.copiesBindingSource, "FILE_BODY", true));
-            this.fileBodyPictureEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileBodyPictureEdit.Location = new System.Drawing.Point(2, 21);
-            this.fileBodyPictureEdit.MenuManager = this.barManager1;
-            this.fileBodyPictureEdit.Name = "fileBodyPictureEdit";
-            this.fileBodyPictureEdit.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
-            this.fileBodyPictureEdit.Size = new System.Drawing.Size(434, 281);
-            this.fileBodyPictureEdit.TabIndex = 0;
+            this.filesManager1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.filesManager1.Location = new System.Drawing.Point(2, 21);
+            this.filesManager1.Name = "filesManager1";
+            this.filesManager1.Size = new System.Drawing.Size(434, 281);
+            this.filesManager1.TabIndex = 0;
             // 
             // labelControl17
             // 
@@ -690,7 +667,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
             this.groupControl5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fileBodyPictureEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -737,7 +713,7 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage5;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage7;
         private DevExpress.XtraEditors.TextEdit textEdit3;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel documentLinkLabel;
         private DevExpress.XtraEditors.CheckEdit checkEdit3;
         private DevExpress.XtraEditors.LabelControl labelControl15;
         private DevExpress.XtraEditors.LabelControl labelControl16;
@@ -745,17 +721,15 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private DevExpress.XtraEditors.GroupControl groupControl4;
         private DevExpress.XtraEditors.GroupControl groupControl5;
-        private DevExpress.XtraEditors.PictureEdit fileBodyPictureEdit;
         private DevExpress.XtraEditors.LabelControl labelControl17;
         private DevExpress.XtraEditors.LabelControl labelControl18;
-        private DevExpress.XtraBars.BarButtonItem setBodyBarButtonItem;
-        private DevExpress.XtraBars.BarButtonItem deleteBodyBarButtonItem;
         private System.Windows.Forms.BindingSource copyTypesBindingSource;
         private FullDataSet fullDataSet;
         private System.Windows.Forms.BindingSource copiesBindingSource;
         private System.Windows.Forms.BindingSource documentsBindingSource;
         private DevExpress.XtraGrid.Columns.GridColumn colNAME;
         private DevExpress.XtraGrid.Columns.GridColumn colDESCRIPTION;
+        private FilesManager filesManager1;
 
     }
 }

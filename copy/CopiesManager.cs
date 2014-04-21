@@ -27,6 +27,7 @@ namespace UniArchive.copy
                 {
                     this.copiesBindingSource.EndEdit();
                     this.copiesTableAdapter.Update(this.fullDataSet.COPIES);
+                    this.filesTableAdapter.Update(fullDataSet.FILES);
                 }
                 catch (Exception ex)
                 {

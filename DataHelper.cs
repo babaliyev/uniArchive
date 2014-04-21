@@ -31,6 +31,7 @@ namespace UniArchive
         private static string _SEQ_USER_DOCUMENT_ACCESS = "USER_DOCUMENT_ACCESS_SEQ";
         private static string _SEQ_USER_ROLES = "USER_ROLES_SEQ";
         private static string _SEQ_USERS = "USERS_SEQ";
+        private static string _SEQ_FILES = "FILES_SEQ";
 
         public static int GET_ADDRESS_DICTIONARY_ID()
         {
@@ -145,6 +146,11 @@ namespace UniArchive
         public static int GET_USERS_ID()
         {
             return GetSequenceValue(_SEQ_USERS);
+        }
+
+        public static int GET_FILES_ID()
+        {
+            return GetSequenceValue(_SEQ_FILES);
         }
 
         public static int GetSequenceValue(string _SequenceValue)

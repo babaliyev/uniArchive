@@ -15,18 +15,16 @@ namespace UniArchive.copy
 
         public CopyForm(FullDataSet fds, decimal documentId, decimal id)
         {
-            this.documentId = documentId;
             InitializeComponent();
-            copyManager1.setDataSet(fds);
+            copyManager1.setData(fds, documentId);
             copyManager1.edit(id);
             copyManager1.OnSave += SaveEvent;
         }
 
         public CopyForm(FullDataSet fds, decimal documentId)
         {
-            this.documentId = documentId;
             InitializeComponent();
-            copyManager1.setDataSet(fds);
+            copyManager1.setData(fds, documentId);
             copyManager1.addNew();
             copyManager1.OnSave += SaveEvent;
         }

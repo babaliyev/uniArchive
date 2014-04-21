@@ -15,27 +15,30 @@ namespace UniArchive.copy
         protected decimal id;
         protected decimal documentId;
 
-        public CopyManager(decimal documentId)
+        public CopyManager()
         {
-            InitializeComponent();            
-            this.documentId = documentId;            
+            InitializeComponent();  
         }
         
-        public void setDataSet(FullDataSet fds)
+        public void setData(FullDataSet fds, decimal documentId)
         {
-            documentsBindingSource.DataSource = fds;
-            copyTypesBindingSource.DataSource = fds;
-            copiesBindingSource.DataSource = fds;
+            this.documentId = documentId; 
+            fullDataSet = fds;
+
+            documentsBindingSource.DataSource = fullDataSet;
+            copyTypesBindingSource.DataSource = fullDataSet;
+            copiesBindingSource.DataSource = fullDataSet;
 
             documentsBindingSource.ResetBindings(true);
             copyTypesBindingSource.ResetBindings(true);
-            copiesBindingSource.ResetBindings(true);
+            copiesBindingSource.ResetBindings(true);            
         }
 
         public void edit(decimal id)
         {
             this.id = id;
             copiesBindingSource.Position = copiesBindingSource.Find("ID", id);
+            filesManager1.setCopyId(fullDataSet, id);
         }
 
         public void addNew()
@@ -44,7 +47,9 @@ namespace UniArchive.copy
             id = DataHelper.GET_COPIES_ID();
             newRow["ID"] = id;
             newRow["FULL_ACCESS"] = 1;
-            newRow["DOCUMENT_ID"] = this.documentId;   
+            newRow["DOCUMENT_ID"] = this.documentId;
+
+            filesManager1.setCopyId(fullDataSet, id);
         }
               
         private void saveBarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -53,6 +58,8 @@ namespace UniArchive.copy
             {
                 try
                 {
+                    DataRow newRow = ((DataRowView)copiesBindingSource.Current).Row;
+                    newRow["PAGES_COUNT"] = filesManager1.filesCount;
                     this.copiesBindingSource.EndEdit();
 
                     if(OnSave!=null)
@@ -64,25 +71,15 @@ namespace UniArchive.copy
                 }
             }
         }
-
-        private void setBodyBarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            OpenFileDialog openFile = new OpenFileDialog();
-            if (openFile.ShowDialog() == DialogResult.OK)
-            {
-                fileBodyPictureEdit.Image = Image.FromFile(openFile.FileName);
-                DataRow row = ((DataRowView)copiesBindingSource.Current).Row;
-                row["FILE_NAME"] = Path.GetFileNameWithoutExtension(openFile.FileName);
-                row["FILE_EXTENTION"] = Path.GetExtension(openFile.FileName);
-                row["PAGES_COUNT"] = 1;
-            }
-        }
-
-        private void deleteBodyBarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            fileBodyPictureEdit.Image = null;
-        }
+        
 
         public event EventHandler OnSave;
+        public event EventHandler OnDocumentClick;
+
+        private void documentLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (OnDocumentClick != null)
+                OnDocumentClick(documentLinkLabel.Tag, EventArgs.Empty);
+        }
     }
 }

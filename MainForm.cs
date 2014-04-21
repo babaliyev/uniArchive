@@ -195,7 +195,7 @@ namespace UniArchive
 
         private void showCopy(decimal id, string num)
         {
-            copy.CopyManager copy = new UniArchive.copy.CopyManager(id);
+            copy.StandaloneCopyManager copy = new UniArchive.copy.StandaloneCopyManager(null,id);
             copy.Tag = num;
             openDocument(copy);
         }

@@ -36,10 +36,13 @@
             this.copiesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.copiesTableAdapter = new UniArchive.FullDataSetTableAdapters.COPIESTableAdapter();
             this.documentsTableAdapter = new UniArchive.FullDataSetTableAdapters.DOCUMENTSTableAdapter();
+            this.filesTableAdapter = new UniArchive.FullDataSetTableAdapters.FILESTableAdapter();
+            this.filesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.copiesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // fullDataSet
@@ -74,6 +77,15 @@
             // 
             this.documentsTableAdapter.ClearBeforeFill = true;
             // 
+            // filesTableAdapter
+            // 
+            this.filesTableAdapter.ClearBeforeFill = true;
+            // 
+            // filesBindingSource
+            // 
+            this.filesBindingSource.DataMember = "FILES";
+            this.filesBindingSource.DataSource = this.fullDataSet;
+            // 
             // StandaloneCopyManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -82,6 +94,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.copiesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -95,5 +108,7 @@
         private System.Windows.Forms.BindingSource copiesBindingSource;
         private FullDataSetTableAdapters.COPIESTableAdapter copiesTableAdapter;
         private FullDataSetTableAdapters.DOCUMENTSTableAdapter documentsTableAdapter;
+        private FullDataSetTableAdapters.FILESTableAdapter filesTableAdapter;
+        private System.Windows.Forms.BindingSource filesBindingSource;
     }
 }
