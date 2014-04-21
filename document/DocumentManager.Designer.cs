@@ -42,35 +42,37 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
             this.copiesManager1 = new UniArchive.copy.CopiesManager();
-            this.checkEdit2 = new DevExpress.XtraEditors.CheckEdit();
+            this.fullAccessCheckEdit = new DevExpress.XtraEditors.CheckEdit();
             this.documentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fullDataSet = new UniArchive.FullDataSet();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
-            this.searchLookUpEdit5 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.docTypeSearchLookUpEdit = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.documentTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colNAME = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDESCRIPTION = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.searchLookUpEdit6 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.clientSearchLookUpEdit = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
-            this.searchLookUpEdit7 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.addressSearchLookUpEdit = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.addressDictionaryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
-            this.searchLookUpEdit8 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.directorySearchLookUpEdit = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.directoriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
+            this.docNumTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
-            this.dateEdit2 = new DevExpress.XtraEditors.DateEdit();
+            this.docDateDateEdit = new DevExpress.XtraEditors.DateEdit();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.clientsTableAdapter = new UniArchive.FullDataSetTableAdapters.CLIENTSTableAdapter();
             this.documentTypesTableAdapter = new UniArchive.FullDataSetTableAdapters.DOCUMENT_TYPESTableAdapter();
@@ -83,25 +85,25 @@
             this.xtraTabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullAccessCheckEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit5.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.docTypeSearchLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentTypesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit6.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientSearchLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit7.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addressSearchLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addressDictionaryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit8.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.directorySearchLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.directoriesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.VistaTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.docNumTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.docDateDateEdit.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.docDateDateEdit.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -152,6 +154,7 @@
             this.deleteBarButtonItem.Caption = "Silmək";
             this.deleteBarButtonItem.Id = 1;
             this.deleteBarButtonItem.Name = "deleteBarButtonItem";
+            this.deleteBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.deleteBarButtonItem_ItemClick);
             // 
             // giveGarButtonItem
             // 
@@ -170,6 +173,7 @@
             this.downloadBarButtonItem.Caption = "Bir fayl kimi yükləmək";
             this.downloadBarButtonItem.Id = 4;
             this.downloadBarButtonItem.Name = "downloadBarButtonItem";
+            this.downloadBarButtonItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
             // barDockControlTop
             // 
@@ -226,30 +230,24 @@
             this.xtraTabPage2,
             this.xtraTabPage3});
             // 
-            // xtraTabPage2
-            // 
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(801, 361);
-            this.xtraTabPage2.Text = "Məxfilik";
-            // 
             // xtraTabPage4
             // 
             this.xtraTabPage4.Controls.Add(this.groupControl5);
-            this.xtraTabPage4.Controls.Add(this.checkEdit2);
+            this.xtraTabPage4.Controls.Add(this.fullAccessCheckEdit);
             this.xtraTabPage4.Controls.Add(this.labelControl8);
             this.xtraTabPage4.Controls.Add(this.labelControl9);
-            this.xtraTabPage4.Controls.Add(this.searchLookUpEdit5);
+            this.xtraTabPage4.Controls.Add(this.docTypeSearchLookUpEdit);
             this.xtraTabPage4.Controls.Add(this.groupControl3);
-            this.xtraTabPage4.Controls.Add(this.searchLookUpEdit6);
+            this.xtraTabPage4.Controls.Add(this.clientSearchLookUpEdit);
             this.xtraTabPage4.Controls.Add(this.labelControl10);
             this.xtraTabPage4.Controls.Add(this.labelControl11);
-            this.xtraTabPage4.Controls.Add(this.searchLookUpEdit7);
+            this.xtraTabPage4.Controls.Add(this.addressSearchLookUpEdit);
             this.xtraTabPage4.Controls.Add(this.labelControl12);
-            this.xtraTabPage4.Controls.Add(this.searchLookUpEdit8);
+            this.xtraTabPage4.Controls.Add(this.directorySearchLookUpEdit);
             this.xtraTabPage4.Controls.Add(this.labelControl13);
-            this.xtraTabPage4.Controls.Add(this.textEdit2);
+            this.xtraTabPage4.Controls.Add(this.docNumTextEdit);
             this.xtraTabPage4.Controls.Add(this.labelControl14);
-            this.xtraTabPage4.Controls.Add(this.dateEdit2);
+            this.xtraTabPage4.Controls.Add(this.docDateDateEdit);
             this.xtraTabPage4.Name = "xtraTabPage4";
             this.xtraTabPage4.Size = new System.Drawing.Size(801, 361);
             this.xtraTabPage4.Text = "Əsas sənəd";
@@ -274,16 +272,18 @@
             this.copiesManager1.Size = new System.Drawing.Size(483, 148);
             this.copiesManager1.TabIndex = 0;
             // 
-            // checkEdit2
+            // fullAccessCheckEdit
             // 
-            this.checkEdit2.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "FULL_ACCESS", true));
-            this.checkEdit2.EditValue = true;
-            this.checkEdit2.Location = new System.Drawing.Point(446, 17);
-            this.checkEdit2.MenuManager = this.barManager1;
-            this.checkEdit2.Name = "checkEdit2";
-            this.checkEdit2.Properties.Caption = "";
-            this.checkEdit2.Size = new System.Drawing.Size(210, 19);
-            this.checkEdit2.TabIndex = 16;
+            this.fullAccessCheckEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "FULL_ACCESS", true));
+            this.fullAccessCheckEdit.EditValue = true;
+            this.fullAccessCheckEdit.Location = new System.Drawing.Point(446, 17);
+            this.fullAccessCheckEdit.MenuManager = this.barManager1;
+            this.fullAccessCheckEdit.Name = "fullAccessCheckEdit";
+            this.fullAccessCheckEdit.Properties.Caption = "";
+            this.fullAccessCheckEdit.Properties.ValueChecked = ((short)(1));
+            this.fullAccessCheckEdit.Properties.ValueUnchecked = ((short)(0));
+            this.fullAccessCheckEdit.Size = new System.Drawing.Size(210, 19);
+            this.fullAccessCheckEdit.TabIndex = 16;
             // 
             // documentsBindingSource
             // 
@@ -311,20 +311,24 @@
             this.labelControl9.TabIndex = 4;
             this.labelControl9.Text = "Sənədin tipi:";
             // 
-            // searchLookUpEdit5
+            // docTypeSearchLookUpEdit
             // 
-            this.searchLookUpEdit5.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "DOCUMENT_TYPE_ID", true));
-            this.searchLookUpEdit5.Location = new System.Drawing.Point(132, 16);
-            this.searchLookUpEdit5.Name = "searchLookUpEdit5";
-            this.searchLookUpEdit5.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.docTypeSearchLookUpEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "DOCUMENT_TYPE_ID", true));
+            this.docTypeSearchLookUpEdit.Location = new System.Drawing.Point(132, 16);
+            this.docTypeSearchLookUpEdit.Name = "docTypeSearchLookUpEdit";
+            this.docTypeSearchLookUpEdit.Properties.AllowFocused = false;
+            this.docTypeSearchLookUpEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.docTypeSearchLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.searchLookUpEdit5.Properties.DataSource = this.documentTypesBindingSource;
-            this.searchLookUpEdit5.Properties.DisplayMember = "NAME";
-            this.searchLookUpEdit5.Properties.NullText = "Seçilməyib";
-            this.searchLookUpEdit5.Properties.ValueMember = "ID";
-            this.searchLookUpEdit5.Properties.View = this.gridView2;
-            this.searchLookUpEdit5.Size = new System.Drawing.Size(208, 20);
-            this.searchLookUpEdit5.TabIndex = 14;
+            this.docTypeSearchLookUpEdit.Properties.DataSource = this.documentTypesBindingSource;
+            this.docTypeSearchLookUpEdit.Properties.DisplayMember = "NAME";
+            this.docTypeSearchLookUpEdit.Properties.NullText = "Seçilməyib";
+            this.docTypeSearchLookUpEdit.Properties.NullValuePrompt = "Mütləq xanadır!";
+            this.docTypeSearchLookUpEdit.Properties.NullValuePromptShowForEmptyValue = true;
+            this.docTypeSearchLookUpEdit.Properties.ValueMember = "ID";
+            this.docTypeSearchLookUpEdit.Properties.View = this.gridView2;
+            this.docTypeSearchLookUpEdit.Size = new System.Drawing.Size(208, 20);
+            this.docTypeSearchLookUpEdit.TabIndex = 14;
             // 
             // documentTypesBindingSource
             // 
@@ -333,10 +337,29 @@
             // 
             // gridView2
             // 
+            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colNAME,
+            this.colDESCRIPTION});
             this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
+            // colNAME
+            // 
+            this.colNAME.Caption = "Sənədin tipi";
+            this.colNAME.FieldName = "NAME";
+            this.colNAME.Name = "colNAME";
+            this.colNAME.Visible = true;
+            this.colNAME.VisibleIndex = 0;
+            // 
+            // colDESCRIPTION
+            // 
+            this.colDESCRIPTION.Caption = "Açıqlama";
+            this.colDESCRIPTION.FieldName = "DESCRIPTION";
+            this.colDESCRIPTION.Name = "colDESCRIPTION";
+            this.colDESCRIPTION.Visible = true;
+            this.colDESCRIPTION.VisibleIndex = 1;
             // 
             // groupControl3
             // 
@@ -348,20 +371,23 @@
             this.groupControl3.TabIndex = 0;
             this.groupControl3.Text = "Xassələri";
             // 
-            // searchLookUpEdit6
+            // clientSearchLookUpEdit
             // 
-            this.searchLookUpEdit6.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "CLIENT_ID", true));
-            this.searchLookUpEdit6.Location = new System.Drawing.Point(132, 79);
-            this.searchLookUpEdit6.Name = "searchLookUpEdit6";
-            this.searchLookUpEdit6.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.clientSearchLookUpEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "CLIENT_ID", true));
+            this.clientSearchLookUpEdit.Location = new System.Drawing.Point(132, 79);
+            this.clientSearchLookUpEdit.Name = "clientSearchLookUpEdit";
+            this.clientSearchLookUpEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.clientSearchLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.searchLookUpEdit6.Properties.DataSource = this.clientsBindingSource;
-            this.searchLookUpEdit6.Properties.DisplayMember = "FULL_NAME";
-            this.searchLookUpEdit6.Properties.NullText = "Seçilməyib";
-            this.searchLookUpEdit6.Properties.ValueMember = "ID";
-            this.searchLookUpEdit6.Properties.View = this.gridView3;
-            this.searchLookUpEdit6.Size = new System.Drawing.Size(524, 20);
-            this.searchLookUpEdit6.TabIndex = 12;
+            this.clientSearchLookUpEdit.Properties.DataSource = this.clientsBindingSource;
+            this.clientSearchLookUpEdit.Properties.DisplayMember = "FULL_NAME";
+            this.clientSearchLookUpEdit.Properties.NullText = "Seçilməyib";
+            this.clientSearchLookUpEdit.Properties.NullValuePrompt = "Mütləq xanadır!";
+            this.clientSearchLookUpEdit.Properties.NullValuePromptShowForEmptyValue = true;
+            this.clientSearchLookUpEdit.Properties.ValueMember = "ID";
+            this.clientSearchLookUpEdit.Properties.View = this.gridView3;
+            this.clientSearchLookUpEdit.Size = new System.Drawing.Size(524, 20);
+            this.clientSearchLookUpEdit.TabIndex = 12;
             // 
             // clientsBindingSource
             // 
@@ -391,20 +417,20 @@
             this.labelControl11.TabIndex = 2;
             this.labelControl11.Text = "Sənədin nömrəsi:";
             // 
-            // searchLookUpEdit7
+            // addressSearchLookUpEdit
             // 
-            this.searchLookUpEdit7.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "ADDRESS_ID", true));
-            this.searchLookUpEdit7.Location = new System.Drawing.Point(132, 139);
-            this.searchLookUpEdit7.Name = "searchLookUpEdit7";
-            this.searchLookUpEdit7.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.addressSearchLookUpEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "ADDRESS_ID", true));
+            this.addressSearchLookUpEdit.Location = new System.Drawing.Point(132, 139);
+            this.addressSearchLookUpEdit.Name = "addressSearchLookUpEdit";
+            this.addressSearchLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.searchLookUpEdit7.Properties.DataSource = this.addressDictionaryBindingSource;
-            this.searchLookUpEdit7.Properties.DisplayMember = "FULL_PATH";
-            this.searchLookUpEdit7.Properties.NullText = "Seçilməyib";
-            this.searchLookUpEdit7.Properties.ValueMember = "ID";
-            this.searchLookUpEdit7.Properties.View = this.gridView5;
-            this.searchLookUpEdit7.Size = new System.Drawing.Size(524, 20);
-            this.searchLookUpEdit7.TabIndex = 10;
+            this.addressSearchLookUpEdit.Properties.DataSource = this.addressDictionaryBindingSource;
+            this.addressSearchLookUpEdit.Properties.DisplayMember = "FULL_PATH";
+            this.addressSearchLookUpEdit.Properties.NullText = "";
+            this.addressSearchLookUpEdit.Properties.ValueMember = "ID";
+            this.addressSearchLookUpEdit.Properties.View = this.gridView5;
+            this.addressSearchLookUpEdit.Size = new System.Drawing.Size(524, 20);
+            this.addressSearchLookUpEdit.TabIndex = 10;
             // 
             // addressDictionaryBindingSource
             // 
@@ -426,20 +452,23 @@
             this.labelControl12.TabIndex = 3;
             this.labelControl12.Text = "Sənədin tarixi:";
             // 
-            // searchLookUpEdit8
+            // directorySearchLookUpEdit
             // 
-            this.searchLookUpEdit8.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "PARENT_ID", true));
-            this.searchLookUpEdit8.Location = new System.Drawing.Point(132, 110);
-            this.searchLookUpEdit8.Name = "searchLookUpEdit8";
-            this.searchLookUpEdit8.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.directorySearchLookUpEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "PARENT_ID", true));
+            this.directorySearchLookUpEdit.Location = new System.Drawing.Point(132, 110);
+            this.directorySearchLookUpEdit.Name = "directorySearchLookUpEdit";
+            this.directorySearchLookUpEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.directorySearchLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.searchLookUpEdit8.Properties.DataSource = this.directoriesBindingSource;
-            this.searchLookUpEdit8.Properties.DisplayMember = "FULL_PATH";
-            this.searchLookUpEdit8.Properties.NullText = "Seçilməyib";
-            this.searchLookUpEdit8.Properties.ValueMember = "ID";
-            this.searchLookUpEdit8.Properties.View = this.gridView6;
-            this.searchLookUpEdit8.Size = new System.Drawing.Size(524, 20);
-            this.searchLookUpEdit8.TabIndex = 9;
+            this.directorySearchLookUpEdit.Properties.DataSource = this.directoriesBindingSource;
+            this.directorySearchLookUpEdit.Properties.DisplayMember = "FULL_PATH";
+            this.directorySearchLookUpEdit.Properties.NullText = "Seçilməyib";
+            this.directorySearchLookUpEdit.Properties.NullValuePrompt = "Mütləq xanadır!";
+            this.directorySearchLookUpEdit.Properties.NullValuePromptShowForEmptyValue = true;
+            this.directorySearchLookUpEdit.Properties.ValueMember = "ID";
+            this.directorySearchLookUpEdit.Properties.View = this.gridView6;
+            this.directorySearchLookUpEdit.Size = new System.Drawing.Size(524, 20);
+            this.directorySearchLookUpEdit.TabIndex = 9;
             // 
             // directoriesBindingSource
             // 
@@ -461,13 +490,16 @@
             this.labelControl13.TabIndex = 5;
             this.labelControl13.Text = "Daxil olduğu qovluq:";
             // 
-            // textEdit2
+            // docNumTextEdit
             // 
-            this.textEdit2.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "DOCUMENT_NUMBER", true));
-            this.textEdit2.Location = new System.Drawing.Point(132, 50);
-            this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(208, 20);
-            this.textEdit2.TabIndex = 8;
+            this.docNumTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "DOCUMENT_NUMBER", true));
+            this.docNumTextEdit.Location = new System.Drawing.Point(132, 50);
+            this.docNumTextEdit.Name = "docNumTextEdit";
+            this.docNumTextEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.docNumTextEdit.Properties.NullValuePrompt = "Mütləq xanadır!";
+            this.docNumTextEdit.Properties.NullValuePromptShowForEmptyValue = true;
+            this.docNumTextEdit.Size = new System.Drawing.Size(208, 20);
+            this.docNumTextEdit.TabIndex = 8;
             // 
             // labelControl14
             // 
@@ -477,18 +509,27 @@
             this.labelControl14.TabIndex = 6;
             this.labelControl14.Text = "Yerləşdiyi fiziki ünvan:";
             // 
-            // dateEdit2
+            // docDateDateEdit
             // 
-            this.dateEdit2.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "DOCUMENT_DATE", true));
-            this.dateEdit2.EditValue = null;
-            this.dateEdit2.Location = new System.Drawing.Point(448, 50);
-            this.dateEdit2.Name = "dateEdit2";
-            this.dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.docDateDateEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "DOCUMENT_DATE", true));
+            this.docDateDateEdit.EditValue = null;
+            this.docDateDateEdit.Location = new System.Drawing.Point(448, 50);
+            this.docDateDateEdit.Name = "docDateDateEdit";
+            this.docDateDateEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.docDateDateEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit2.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.docDateDateEdit.Properties.NullValuePrompt = "Mütləq xanadır!";
+            this.docDateDateEdit.Properties.NullValuePromptShowForEmptyValue = true;
+            this.docDateDateEdit.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dateEdit2.Size = new System.Drawing.Size(208, 20);
-            this.dateEdit2.TabIndex = 7;
+            this.docDateDateEdit.Size = new System.Drawing.Size(208, 20);
+            this.docDateDateEdit.TabIndex = 7;
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(801, 361);
+            this.xtraTabPage2.Text = "Məxfilik";
             // 
             // xtraTabPage3
             // 
@@ -534,25 +575,25 @@
             this.xtraTabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
             this.groupControl5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullAccessCheckEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit5.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.docTypeSearchLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentTypesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit6.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientSearchLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit7.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addressSearchLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.addressDictionaryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit8.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.directorySearchLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.directoriesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.VistaTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.docNumTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.docDateDateEdit.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.docDateDateEdit.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -576,25 +617,25 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage4;
-        private DevExpress.XtraEditors.CheckEdit checkEdit2;
+        private DevExpress.XtraEditors.CheckEdit fullAccessCheckEdit;
         private DevExpress.XtraEditors.LabelControl labelControl8;
         private DevExpress.XtraEditors.LabelControl labelControl9;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEdit5;
+        private DevExpress.XtraEditors.SearchLookUpEdit docTypeSearchLookUpEdit;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
         private DevExpress.XtraEditors.GroupControl groupControl3;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEdit6;
+        private DevExpress.XtraEditors.SearchLookUpEdit clientSearchLookUpEdit;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
         private DevExpress.XtraEditors.LabelControl labelControl10;
         private DevExpress.XtraEditors.LabelControl labelControl11;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEdit7;
+        private DevExpress.XtraEditors.SearchLookUpEdit addressSearchLookUpEdit;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
         private DevExpress.XtraEditors.LabelControl labelControl12;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEdit8;
+        private DevExpress.XtraEditors.SearchLookUpEdit directorySearchLookUpEdit;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
         private DevExpress.XtraEditors.LabelControl labelControl13;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
+        private DevExpress.XtraEditors.TextEdit docNumTextEdit;
         private DevExpress.XtraEditors.LabelControl labelControl14;
-        private DevExpress.XtraEditors.DateEdit dateEdit2;
+        private DevExpress.XtraEditors.DateEdit docDateDateEdit;
         private DevExpress.XtraEditors.GroupControl groupControl5;
         private copy.CopiesManager copiesManager1;
         private FullDataSet fullDataSet;
@@ -608,5 +649,7 @@
         private System.Windows.Forms.BindingSource addressDictionaryBindingSource;
         private System.Windows.Forms.BindingSource documentsBindingSource;
         private FullDataSetTableAdapters.DOCUMENTSTableAdapter documentsTableAdapter;
+        private DevExpress.XtraGrid.Columns.GridColumn colNAME;
+        private DevExpress.XtraGrid.Columns.GridColumn colDESCRIPTION;
     }
 }

@@ -31,17 +31,17 @@
             this.components = new System.ComponentModel.Container();
             this.cancelSimpleButton = new DevExpress.XtraEditors.SimpleButton();
             this.okSimpleButton = new DevExpress.XtraEditors.SimpleButton();
-            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
-            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.fullDataSet = new UniArchive.FullDataSet();
+            this.fullAccessCheckEdit = new DevExpress.XtraEditors.CheckEdit();
             this.directoriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fullDataSet = new UniArchive.FullDataSet();
+            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
+            this.nameTextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.directoriesTableAdapter = new UniArchive.FullDataSetTableAdapters.DIRECTORIESTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullAccessCheckEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.directoriesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nameTextEdit.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // cancelSimpleButton
@@ -64,18 +64,28 @@
             this.okSimpleButton.Text = "Saxla";
             this.okSimpleButton.Click += new System.EventHandler(this.okSimpleButton_Click);
             // 
-            // checkEdit1
+            // fullAccessCheckEdit
             // 
-            this.checkEdit1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.directoriesBindingSource, "FULL_ACCESS", true));
-            this.checkEdit1.Location = new System.Drawing.Point(105, 46);
-            this.checkEdit1.Name = "checkEdit1";
-            this.checkEdit1.Properties.Caption = "";
-            this.checkEdit1.Properties.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Inactive;
-            this.checkEdit1.Properties.ValueChecked = ((short)(1));
-            this.checkEdit1.Properties.ValueUnchecked = ((short)(0));
-            this.checkEdit1.Size = new System.Drawing.Size(21, 19);
-            this.checkEdit1.TabIndex = 15;
+            this.fullAccessCheckEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fullAccessCheckEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.directoriesBindingSource, "FULL_ACCESS", true));
+            this.fullAccessCheckEdit.Location = new System.Drawing.Point(105, 46);
+            this.fullAccessCheckEdit.Name = "fullAccessCheckEdit";
+            this.fullAccessCheckEdit.Properties.Caption = "";
+            this.fullAccessCheckEdit.Properties.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Inactive;
+            this.fullAccessCheckEdit.Properties.ValueChecked = ((short)(1));
+            this.fullAccessCheckEdit.Properties.ValueUnchecked = ((short)(0));
+            this.fullAccessCheckEdit.Size = new System.Drawing.Size(21, 19);
+            this.fullAccessCheckEdit.TabIndex = 15;
+            // 
+            // directoriesBindingSource
+            // 
+            this.directoriesBindingSource.DataMember = "DIRECTORIES";
+            this.directoriesBindingSource.DataSource = this.fullDataSet;
+            // 
+            // fullDataSet
+            // 
+            this.fullDataSet.DataSetName = "FullDataSet";
+            this.fullDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // labelControl6
             // 
@@ -86,13 +96,16 @@
             this.labelControl6.TabIndex = 14;
             this.labelControl6.Text = "Hamıya görünsün:";
             // 
-            // textEdit1
+            // nameTextEdit
             // 
-            this.textEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.directoriesBindingSource, "DOCUMENT_NUMBER", true));
-            this.textEdit1.Location = new System.Drawing.Point(107, 9);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(196, 20);
-            this.textEdit1.TabIndex = 18;
+            this.nameTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.directoriesBindingSource, "DOCUMENT_NUMBER", true));
+            this.nameTextEdit.Location = new System.Drawing.Point(107, 9);
+            this.nameTextEdit.Name = "nameTextEdit";
+            this.nameTextEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.nameTextEdit.Properties.NullValuePrompt = "Mütləq xanadır!";
+            this.nameTextEdit.Properties.NullValuePromptShowForEmptyValue = true;
+            this.nameTextEdit.Size = new System.Drawing.Size(196, 20);
+            this.nameTextEdit.TabIndex = 18;
             // 
             // labelControl2
             // 
@@ -101,16 +114,6 @@
             this.labelControl2.Size = new System.Drawing.Size(67, 13);
             this.labelControl2.TabIndex = 16;
             this.labelControl2.Text = "Qovluğun adı:";
-            // 
-            // fullDataSet
-            // 
-            this.fullDataSet.DataSetName = "FullDataSet";
-            this.fullDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // directoriesBindingSource
-            // 
-            this.directoriesBindingSource.DataMember = "DIRECTORIES";
-            this.directoriesBindingSource.DataSource = this.fullDataSet;
             // 
             // directoriesTableAdapter
             // 
@@ -121,9 +124,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(315, 82);
-            this.Controls.Add(this.textEdit1);
+            this.Controls.Add(this.nameTextEdit);
             this.Controls.Add(this.labelControl2);
-            this.Controls.Add(this.checkEdit1);
+            this.Controls.Add(this.fullAccessCheckEdit);
             this.Controls.Add(this.labelControl6);
             this.Controls.Add(this.cancelSimpleButton);
             this.Controls.Add(this.okSimpleButton);
@@ -135,10 +138,10 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DirectoryForm";
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullAccessCheckEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.directoriesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nameTextEdit.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -148,9 +151,9 @@
 
         private DevExpress.XtraEditors.SimpleButton cancelSimpleButton;
         private DevExpress.XtraEditors.SimpleButton okSimpleButton;
-        private DevExpress.XtraEditors.CheckEdit checkEdit1;
+        private DevExpress.XtraEditors.CheckEdit fullAccessCheckEdit;
         private DevExpress.XtraEditors.LabelControl labelControl6;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraEditors.TextEdit nameTextEdit;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private FullDataSet fullDataSet;
         private System.Windows.Forms.BindingSource directoriesBindingSource;

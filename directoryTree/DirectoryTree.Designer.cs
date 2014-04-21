@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DirectoryTree));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.addBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
@@ -38,15 +39,13 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.treeList1 = new DevExpress.XtraTreeList.TreeList();
-            this.colDOCUMENT_NUMBER = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.colFULL_ACCESS = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.directoriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fullDataSet = new UniArchive.FullDataSet();
             this.directoriesTableAdapter = new UniArchive.FullDataSetTableAdapters.DIRECTORIESTableAdapter();
+            this.documentsTableAdapter = new UniArchive.FullDataSetTableAdapters.DOCUMENTSTableAdapter();
+            this.copiesTableAdapter = new UniArchive.FullDataSetTableAdapters.COPIESTableAdapter();
+            this.directoryImageList = new System.Windows.Forms.ImageList(this.components);
+            this.directoryTreeView = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.directoriesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,44 +130,6 @@
             this.barDockControlRight.Location = new System.Drawing.Point(477, 29);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 424);
             // 
-            // treeList1
-            // 
-            this.treeList1.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-            this.colDOCUMENT_NUMBER,
-            this.colFULL_ACCESS});
-            this.treeList1.DataSource = this.directoriesBindingSource;
-            this.treeList1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeList1.Location = new System.Drawing.Point(0, 29);
-            this.treeList1.Name = "treeList1";
-            this.treeList1.OptionsBehavior.DragNodes = true;
-            this.treeList1.OptionsBehavior.Editable = false;
-            this.treeList1.OptionsView.ShowAutoFilterRow = true;
-            this.treeList1.OptionsView.ShowColumns = false;
-            this.treeList1.ParentFieldName = "PARENT_ID";
-            this.treeList1.Size = new System.Drawing.Size(477, 424);
-            this.treeList1.TabIndex = 4;
-            this.treeList1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeList1_MouseDoubleClick);
-            // 
-            // colDOCUMENT_NUMBER
-            // 
-            this.colDOCUMENT_NUMBER.Caption = "Navigasiya";
-            this.colDOCUMENT_NUMBER.FieldName = "DOCUMENT_NUMBER";
-            this.colDOCUMENT_NUMBER.Name = "colDOCUMENT_NUMBER";
-            this.colDOCUMENT_NUMBER.Visible = true;
-            this.colDOCUMENT_NUMBER.VisibleIndex = 0;
-            this.colDOCUMENT_NUMBER.Width = 153;
-            // 
-            // colFULL_ACCESS
-            // 
-            this.colFULL_ACCESS.FieldName = "FULL_ACCESS";
-            this.colFULL_ACCESS.Name = "colFULL_ACCESS";
-            this.colFULL_ACCESS.Width = 153;
-            // 
-            // directoriesBindingSource
-            // 
-            this.directoriesBindingSource.DataMember = "DIRECTORIES";
-            this.directoriesBindingSource.DataSource = this.fullDataSet;
-            // 
             // fullDataSet
             // 
             this.fullDataSet.DataSetName = "FullDataSet";
@@ -178,11 +139,44 @@
             // 
             this.directoriesTableAdapter.ClearBeforeFill = true;
             // 
+            // documentsTableAdapter
+            // 
+            this.documentsTableAdapter.ClearBeforeFill = true;
+            // 
+            // copiesTableAdapter
+            // 
+            this.copiesTableAdapter.ClearBeforeFill = true;
+            // 
+            // directoryImageList
+            // 
+            this.directoryImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("directoryImageList.ImageStream")));
+            this.directoryImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.directoryImageList.Images.SetKeyName(0, "folder.png");
+            this.directoryImageList.Images.SetKeyName(1, "folder_document.png");
+            this.directoryImageList.Images.SetKeyName(2, "document.png");
+            this.directoryImageList.Images.SetKeyName(3, "paperclip.png");
+            this.directoryImageList.Images.SetKeyName(4, "document_attachment.png");
+            this.directoryImageList.Images.SetKeyName(5, "folder_closed.png");
+            // 
+            // directoryTreeView
+            // 
+            this.directoryTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.directoryTreeView.HotTracking = true;
+            this.directoryTreeView.ImageIndex = 0;
+            this.directoryTreeView.ImageList = this.directoryImageList;
+            this.directoryTreeView.Location = new System.Drawing.Point(0, 29);
+            this.directoryTreeView.Name = "directoryTreeView";
+            this.directoryTreeView.SelectedImageIndex = 0;
+            this.directoryTreeView.ShowRootLines = false;
+            this.directoryTreeView.Size = new System.Drawing.Size(477, 424);
+            this.directoryTreeView.TabIndex = 9;
+            this.directoryTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.dictionaryTreeView_AfterSelect);
+            // 
             // DirectoryTree
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.treeList1);
+            this.Controls.Add(this.directoryTreeView);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
@@ -190,8 +184,6 @@
             this.Name = "DirectoryTree";
             this.Size = new System.Drawing.Size(477, 453);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.treeList1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.directoriesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).EndInit();
             this.ResumeLayout(false);
 
@@ -205,14 +197,14 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
-        private DevExpress.XtraTreeList.TreeList treeList1;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn colDOCUMENT_NUMBER;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn colFULL_ACCESS;
-        private System.Windows.Forms.BindingSource directoriesBindingSource;
         private FullDataSet fullDataSet;
         private FullDataSetTableAdapters.DIRECTORIESTableAdapter directoriesTableAdapter;
         private DevExpress.XtraBars.BarButtonItem addBarButtonItem;
         private DevExpress.XtraBars.BarButtonItem editBarButtonItem;
         private DevExpress.XtraBars.BarButtonItem deleteBarButtonItem;
+        private FullDataSetTableAdapters.DOCUMENTSTableAdapter documentsTableAdapter;
+        private FullDataSetTableAdapters.COPIESTableAdapter copiesTableAdapter;
+        private System.Windows.Forms.ImageList directoryImageList;
+        private System.Windows.Forms.TreeView directoryTreeView;
     }
 }

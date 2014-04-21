@@ -436,10 +436,10 @@
             this.addressDockPanel.ID = new System.Guid("c49d9910-8eb8-4d86-b07b-82cd4413957b");
             this.addressDockPanel.Location = new System.Drawing.Point(0, 0);
             this.addressDockPanel.Name = "addressDockPanel";
-            this.addressDockPanel.OriginalSize = new System.Drawing.Size(200, 200);
+            this.addressDockPanel.OriginalSize = new System.Drawing.Size(233, 200);
             this.addressDockPanel.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.addressDockPanel.SavedIndex = 0;
-            this.addressDockPanel.Size = new System.Drawing.Size(200, 333);
+            this.addressDockPanel.Size = new System.Drawing.Size(233, 333);
             this.addressDockPanel.Text = "Ünvan";
             this.addressDockPanel.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
             // 
@@ -448,7 +448,7 @@
             this.dockPanel1_Container.Controls.Add(this.addressTree1);
             this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 306);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(225, 306);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // addressTree1
@@ -456,7 +456,7 @@
             this.addressTree1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.addressTree1.Location = new System.Drawing.Point(0, 0);
             this.addressTree1.Name = "addressTree1";
-            this.addressTree1.Size = new System.Drawing.Size(192, 306);
+            this.addressTree1.Size = new System.Drawing.Size(225, 306);
             this.addressTree1.TabIndex = 0;
             // 
             // directoryDockPanel

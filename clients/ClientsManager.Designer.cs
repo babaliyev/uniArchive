@@ -89,6 +89,7 @@
             this.colADDRESS,
             this.colCONTACTS,
             this.colFULL_ACCESS});
+            this.masterGridView.OptionsBehavior.Editable = false;
             this.masterGridView.OptionsCustomization.AllowGroup = false;
             this.masterGridView.OptionsDetail.EnableMasterViewMode = false;
             this.masterGridView.OptionsDetail.ShowDetailTabs = false;
@@ -213,6 +214,7 @@
             this.colFULL_NAME.Name = "colFULL_NAME";
             this.colFULL_NAME.Visible = true;
             this.colFULL_NAME.VisibleIndex = 0;
+            this.colFULL_NAME.Width = 120;
             // 
             // colCLIENT_TYPE
             // 
@@ -227,6 +229,7 @@
             this.colIDENTIFICATION_NUMBER.Name = "colIDENTIFICATION_NUMBER";
             this.colIDENTIFICATION_NUMBER.Visible = true;
             this.colIDENTIFICATION_NUMBER.VisibleIndex = 1;
+            this.colIDENTIFICATION_NUMBER.Width = 120;
             // 
             // colADDRESS
             // 
@@ -235,6 +238,7 @@
             this.colADDRESS.Name = "colADDRESS";
             this.colADDRESS.Visible = true;
             this.colADDRESS.VisibleIndex = 2;
+            this.colADDRESS.Width = 120;
             // 
             // colCONTACTS
             // 
@@ -243,6 +247,7 @@
             this.colCONTACTS.Name = "colCONTACTS";
             this.colCONTACTS.Visible = true;
             this.colCONTACTS.VisibleIndex = 3;
+            this.colCONTACTS.Width = 160;
             // 
             // colFULL_ACCESS
             // 
@@ -252,6 +257,7 @@
             this.colFULL_ACCESS.Name = "colFULL_ACCESS";
             this.colFULL_ACCESS.Visible = true;
             this.colFULL_ACCESS.VisibleIndex = 4;
+            this.colFULL_ACCESS.Width = 82;
             // 
             // fullAccessCheckEdit
             // 

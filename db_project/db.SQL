@@ -7,7 +7,7 @@
 --   DB Connect String         : LOCALHOST:1521/XE 
 --   Schema                    : ARCH 
 --   Script Created by         : ARCH 
---   Script Created at         : 21/04/2014 17:25:35 
+--   Script Created at         : 22/04/2014 0:59:52 
 --   Physical Location         :  
 --   Notes                     :  
 --
@@ -25,7 +25,7 @@
 --   Package Bodies: 24 Lines of Code: 1932 
 --   Procedures: 1      Lines of Code: 16 
 --   Sequences: 24 
---   Tables: 24         Columns: 364        Constraints: 444    
+--   Tables: 24         Columns: 365        Constraints: 444    
 --   Triggers: 48 
 
 
@@ -862,7 +862,7 @@ CREATE SEQUENCE ARCH.ATTRIBUTES_VALUES_SEQ
 -- CLIENTS_SEQ  (Sequence) 
 --
 CREATE SEQUENCE ARCH.CLIENTS_SEQ
-  START WITH 21
+  START WITH 41
   MAXVALUE 9999999999999999999999999999
   MINVALUE 1
   NOCYCLE
@@ -5814,7 +5814,8 @@ CREATE TABLE ARCH.ATTRIBUTES_VALUES
   AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
   AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL,
   AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL
+  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
+  VALUE                   NVARCHAR2(2000)
 )
 TABLESPACE SYSTEM
 RESULT_CACHE (MODE DEFAULT)

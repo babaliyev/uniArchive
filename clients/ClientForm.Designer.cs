@@ -37,23 +37,23 @@
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            this.radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
-            this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
-            this.memoEdit2 = new DevExpress.XtraEditors.MemoEdit();
-            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
+            this.clientTypeRadioGroup = new DevExpress.XtraEditors.RadioGroup();
             this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fullDataSet = new UniArchive.FullDataSet();
+            this.nameTextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.identificationTextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.contactsMemoEdit = new DevExpress.XtraEditors.MemoEdit();
+            this.addressMemoEdit = new DevExpress.XtraEditors.MemoEdit();
+            this.fullAccessCheckEdit = new DevExpress.XtraEditors.CheckEdit();
             this.clientsTableAdapter = new UniArchive.FullDataSetTableAdapters.CLIENTSTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memoEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientTypeRadioGroup.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nameTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.identificationTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.contactsMemoEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addressMemoEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullAccessCheckEdit.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // okSimpleButton
@@ -124,15 +124,15 @@
             this.labelControl6.TabIndex = 7;
             this.labelControl6.Text = "Hamıya görünsün:";
             // 
-            // radioGroup1
+            // clientTypeRadioGroup
             // 
-            this.radioGroup1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.clientsBindingSource, "CLIENT_TYPE", true));
-            this.radioGroup1.Location = new System.Drawing.Point(106, 12);
-            this.radioGroup1.Name = "radioGroup1";
-            this.radioGroup1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.radioGroup1.Properties.Appearance.Options.UseBackColor = true;
-            this.radioGroup1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            this.clientTypeRadioGroup.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.clientsBindingSource, "CLIENT_TYPE", true));
+            this.clientTypeRadioGroup.Location = new System.Drawing.Point(106, 12);
+            this.clientTypeRadioGroup.Name = "clientTypeRadioGroup";
+            this.clientTypeRadioGroup.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.clientTypeRadioGroup.Properties.Appearance.Options.UseBackColor = true;
+            this.clientTypeRadioGroup.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.clientTypeRadioGroup.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(new decimal(new int[] {
                             0,
                             0,
@@ -143,52 +143,8 @@
                             0,
                             0,
                             0}), "Hüquqi şəxs")});
-            this.radioGroup1.Size = new System.Drawing.Size(169, 23);
-            this.radioGroup1.TabIndex = 8;
-            // 
-            // textEdit1
-            // 
-            this.textEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.clientsBindingSource, "FULL_NAME", true));
-            this.textEdit1.Location = new System.Drawing.Point(106, 41);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(318, 20);
-            this.textEdit1.TabIndex = 9;
-            // 
-            // textEdit2
-            // 
-            this.textEdit2.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.clientsBindingSource, "IDENTIFICATION_NUMBER", true));
-            this.textEdit2.Location = new System.Drawing.Point(106, 67);
-            this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(169, 20);
-            this.textEdit2.TabIndex = 10;
-            // 
-            // memoEdit1
-            // 
-            this.memoEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.clientsBindingSource, "CONTACTS", true));
-            this.memoEdit1.Location = new System.Drawing.Point(106, 93);
-            this.memoEdit1.Name = "memoEdit1";
-            this.memoEdit1.Size = new System.Drawing.Size(318, 60);
-            this.memoEdit1.TabIndex = 11;
-            // 
-            // memoEdit2
-            // 
-            this.memoEdit2.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.clientsBindingSource, "ADDRESS", true));
-            this.memoEdit2.Location = new System.Drawing.Point(106, 159);
-            this.memoEdit2.Name = "memoEdit2";
-            this.memoEdit2.Size = new System.Drawing.Size(318, 66);
-            this.memoEdit2.TabIndex = 12;
-            // 
-            // checkEdit1
-            // 
-            this.checkEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.clientsBindingSource, "FULL_ACCESS", true));
-            this.checkEdit1.Location = new System.Drawing.Point(403, 16);
-            this.checkEdit1.Name = "checkEdit1";
-            this.checkEdit1.Properties.Caption = "";
-            this.checkEdit1.Properties.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Inactive;
-            this.checkEdit1.Properties.ValueChecked = ((short)(1));
-            this.checkEdit1.Properties.ValueUnchecked = ((short)(0));
-            this.checkEdit1.Size = new System.Drawing.Size(21, 19);
-            this.checkEdit1.TabIndex = 13;
+            this.clientTypeRadioGroup.Size = new System.Drawing.Size(169, 23);
+            this.clientTypeRadioGroup.TabIndex = 8;
             // 
             // clientsBindingSource
             // 
@@ -200,6 +156,53 @@
             this.fullDataSet.DataSetName = "FullDataSet";
             this.fullDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // nameTextEdit
+            // 
+            this.nameTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.clientsBindingSource, "FULL_NAME", true));
+            this.nameTextEdit.Location = new System.Drawing.Point(106, 41);
+            this.nameTextEdit.Name = "nameTextEdit";
+            this.nameTextEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.nameTextEdit.Properties.NullValuePrompt = "Mütləq xanadır!";
+            this.nameTextEdit.Properties.NullValuePromptShowForEmptyValue = true;
+            this.nameTextEdit.Size = new System.Drawing.Size(318, 20);
+            this.nameTextEdit.TabIndex = 9;
+            // 
+            // identificationTextEdit
+            // 
+            this.identificationTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.clientsBindingSource, "IDENTIFICATION_NUMBER", true));
+            this.identificationTextEdit.Location = new System.Drawing.Point(106, 67);
+            this.identificationTextEdit.Name = "identificationTextEdit";
+            this.identificationTextEdit.Size = new System.Drawing.Size(169, 20);
+            this.identificationTextEdit.TabIndex = 10;
+            // 
+            // contactsMemoEdit
+            // 
+            this.contactsMemoEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.clientsBindingSource, "CONTACTS", true));
+            this.contactsMemoEdit.Location = new System.Drawing.Point(106, 93);
+            this.contactsMemoEdit.Name = "contactsMemoEdit";
+            this.contactsMemoEdit.Size = new System.Drawing.Size(318, 60);
+            this.contactsMemoEdit.TabIndex = 11;
+            // 
+            // addressMemoEdit
+            // 
+            this.addressMemoEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.clientsBindingSource, "ADDRESS", true));
+            this.addressMemoEdit.Location = new System.Drawing.Point(106, 159);
+            this.addressMemoEdit.Name = "addressMemoEdit";
+            this.addressMemoEdit.Size = new System.Drawing.Size(318, 66);
+            this.addressMemoEdit.TabIndex = 12;
+            // 
+            // fullAccessCheckEdit
+            // 
+            this.fullAccessCheckEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.clientsBindingSource, "FULL_ACCESS", true));
+            this.fullAccessCheckEdit.Location = new System.Drawing.Point(403, 16);
+            this.fullAccessCheckEdit.Name = "fullAccessCheckEdit";
+            this.fullAccessCheckEdit.Properties.Caption = "";
+            this.fullAccessCheckEdit.Properties.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Inactive;
+            this.fullAccessCheckEdit.Properties.ValueChecked = ((short)(1));
+            this.fullAccessCheckEdit.Properties.ValueUnchecked = ((short)(0));
+            this.fullAccessCheckEdit.Size = new System.Drawing.Size(21, 19);
+            this.fullAccessCheckEdit.TabIndex = 13;
+            // 
             // clientsTableAdapter
             // 
             this.clientsTableAdapter.ClearBeforeFill = true;
@@ -209,12 +212,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(435, 276);
-            this.Controls.Add(this.checkEdit1);
-            this.Controls.Add(this.memoEdit2);
-            this.Controls.Add(this.memoEdit1);
-            this.Controls.Add(this.textEdit2);
-            this.Controls.Add(this.textEdit1);
-            this.Controls.Add(this.radioGroup1);
+            this.Controls.Add(this.fullAccessCheckEdit);
+            this.Controls.Add(this.addressMemoEdit);
+            this.Controls.Add(this.contactsMemoEdit);
+            this.Controls.Add(this.identificationTextEdit);
+            this.Controls.Add(this.nameTextEdit);
+            this.Controls.Add(this.clientTypeRadioGroup);
             this.Controls.Add(this.labelControl6);
             this.Controls.Add(this.labelControl5);
             this.Controls.Add(this.labelControl4);
@@ -231,14 +234,14 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Müştəri";
-            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memoEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientTypeRadioGroup.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nameTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.identificationTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.contactsMemoEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addressMemoEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullAccessCheckEdit.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,11 +260,11 @@
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.LabelControl labelControl6;
-        private DevExpress.XtraEditors.RadioGroup radioGroup1;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
-        private DevExpress.XtraEditors.MemoEdit memoEdit1;
-        private DevExpress.XtraEditors.MemoEdit memoEdit2;
-        private DevExpress.XtraEditors.CheckEdit checkEdit1;
+        private DevExpress.XtraEditors.RadioGroup clientTypeRadioGroup;
+        private DevExpress.XtraEditors.TextEdit nameTextEdit;
+        private DevExpress.XtraEditors.TextEdit identificationTextEdit;
+        private DevExpress.XtraEditors.MemoEdit contactsMemoEdit;
+        private DevExpress.XtraEditors.MemoEdit addressMemoEdit;
+        private DevExpress.XtraEditors.CheckEdit fullAccessCheckEdit;
     }
 }

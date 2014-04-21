@@ -48,5 +48,13 @@ namespace UniArchive.directoryTree
                 }
             }
         }
+
+        public bool Validate()
+        {
+            bool validateResult = true;
+            validateResult = validateResult && UIHelper.requiredField_Validating(nameTextEdit);
+            validateResult = validateResult && UIHelper.requiredField_Validating(fullAccessCheckEdit);
+            return validateResult;
+        }
     }
 }

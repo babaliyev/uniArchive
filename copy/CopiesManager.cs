@@ -80,5 +80,10 @@ namespace UniArchive.copy
                 this.copiesBindingSource.EndEdit();
             }
         }
+
+        private void copiesGridControl_DoubleClick(object sender, EventArgs e)
+        {
+            editBarButtonItem_ItemClick(null, null);
+        }
     }
 }

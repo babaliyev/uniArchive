@@ -42,5 +42,14 @@ namespace UniArchive.clients
                 }
             }
         }
+
+        public bool Validate()
+        {
+            bool validateResult = true;
+            validateResult = validateResult && UIHelper.requiredField_Validating(clientTypeRadioGroup);
+            validateResult = validateResult && UIHelper.requiredField_Validating(nameTextEdit);
+            validateResult = validateResult && UIHelper.requiredField_Validating(fullAccessCheckEdit);
+            return validateResult;
+        }
     }
 }

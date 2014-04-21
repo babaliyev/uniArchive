@@ -39,6 +39,8 @@
             this.copyTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.colNAME = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPAGES_COUNT = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFULL_ACCESS = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.fullAccessCheckEdit = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.addBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
@@ -62,6 +64,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.copiesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.copyTypesLookUpEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullAccessCheckEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filesBindingSource)).BeginInit();
@@ -75,11 +78,13 @@
             this.copiesGridControl.MainView = this.copiesGridView;
             this.copiesGridControl.Name = "copiesGridControl";
             this.copiesGridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.copyTypesLookUpEdit});
+            this.copyTypesLookUpEdit,
+            this.fullAccessCheckEdit});
             this.copiesGridControl.Size = new System.Drawing.Size(619, 483);
             this.copiesGridControl.TabIndex = 5;
             this.copiesGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.copiesGridView});
+            this.copiesGridControl.DoubleClick += new System.EventHandler(this.copiesGridControl_DoubleClick);
             // 
             // copiesBindingSource
             // 
@@ -97,9 +102,11 @@
             this.colID,
             this.colCOPY_TYPE_ID,
             this.colNAME,
-            this.colPAGES_COUNT});
+            this.colPAGES_COUNT,
+            this.colFULL_ACCESS});
             this.copiesGridView.GridControl = this.copiesGridControl;
             this.copiesGridView.Name = "copiesGridView";
+            this.copiesGridView.OptionsBehavior.Editable = false;
             this.copiesGridView.OptionsCustomization.AllowGroup = false;
             this.copiesGridView.OptionsDetail.EnableMasterViewMode = false;
             this.copiesGridView.OptionsDetail.ShowDetailTabs = false;
@@ -154,6 +161,22 @@
             this.colPAGES_COUNT.Visible = true;
             this.colPAGES_COUNT.VisibleIndex = 2;
             // 
+            // colFULL_ACCESS
+            // 
+            this.colFULL_ACCESS.Caption = "Hamıya görünsün";
+            this.colFULL_ACCESS.ColumnEdit = this.fullAccessCheckEdit;
+            this.colFULL_ACCESS.FieldName = "FULL_ACCESS";
+            this.colFULL_ACCESS.Name = "colFULL_ACCESS";
+            this.colFULL_ACCESS.Visible = true;
+            this.colFULL_ACCESS.VisibleIndex = 3;
+            // 
+            // fullAccessCheckEdit
+            // 
+            this.fullAccessCheckEdit.AutoHeight = false;
+            this.fullAccessCheckEdit.Name = "fullAccessCheckEdit";
+            this.fullAccessCheckEdit.ValueChecked = ((short)(1));
+            this.fullAccessCheckEdit.ValueUnchecked = ((short)(0));
+            // 
             // barManager1
             // 
             this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
@@ -180,9 +203,9 @@
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.addBarButtonItem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.editBarButtonItem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.showBarButtonItem),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.deleteBarButtonItem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.downloadBarButtonItem, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.showBarButtonItem)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.downloadBarButtonItem, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar1.OptionsBar.AllowQuickCustomization = false;
             this.bar1.OptionsBar.DrawBorder = false;
             this.bar1.OptionsBar.DrawDragBorder = false;
@@ -216,10 +239,11 @@
             this.downloadBarButtonItem.Caption = "Kompyuterə endirmək";
             this.downloadBarButtonItem.Id = 3;
             this.downloadBarButtonItem.Name = "downloadBarButtonItem";
+            this.downloadBarButtonItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
             // showBarButtonItem
             // 
-            this.showBarButtonItem.Caption = "Qoşmaya baxmaq";
+            this.showBarButtonItem.Caption = "Baxmaq";
             this.showBarButtonItem.Id = 5;
             this.showBarButtonItem.Name = "showBarButtonItem";
             this.showBarButtonItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -295,6 +319,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.copiesGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.copyTypesLookUpEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullAccessCheckEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.filesBindingSource)).EndInit();
@@ -331,5 +356,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colPAGES_COUNT;
         private FullDataSetTableAdapters.FILESTableAdapter filesTableAdapter;
         private System.Windows.Forms.BindingSource filesBindingSource;
+        private DevExpress.XtraGrid.Columns.GridColumn colFULL_ACCESS;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit fullAccessCheckEdit;
     }
 }

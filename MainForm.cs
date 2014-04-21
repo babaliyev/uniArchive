@@ -26,7 +26,11 @@ namespace UniArchive
             InitializeComponent();
             barManager.ForceInitialize();
 
-            directoryTree1.OnOpenDocument += OpenDocument;
+            directoryTree1.OnDocumentClick += OpenDocument;
+            directoryTree1.OnCopyClick += OpenCopy;
+
+            addressTree1.OnDocumentClick += OpenDocument;
+            addressTree1.OnCopyClick += OpenCopy;
         }
 
         private void openDocument(Control c)
@@ -183,6 +187,7 @@ namespace UniArchive
         {
             document.DocumentManager document = new UniArchive.document.DocumentManager(id);
             document.Tag = num;
+            document.OnDocumentDeleted += CloseDocument;
             openDocument(document);
         }
 
@@ -190,6 +195,7 @@ namespace UniArchive
         {
             document.DocumentManager document = new UniArchive.document.DocumentManager();
             document.Tag = "Yeni sənəd";
+            document.OnDocumentDeleted += CloseDocument;
             openDocument(document);
         }
 
@@ -197,6 +203,7 @@ namespace UniArchive
         {
             copy.StandaloneCopyManager copy = new UniArchive.copy.StandaloneCopyManager(null,id);
             copy.Tag = num;
+            copy.OnDocumentClick += OpenDocument;
             openDocument(copy);
         }
 
@@ -280,7 +287,20 @@ namespace UniArchive
 
         public void OpenDocument(object sender, EventArgs args)
         {
-            showDocument((decimal)sender, sender.ToString());
+            showDocument(Convert.ToDecimal(sender), sender.ToString());
         }
+
+         public void CloseDocument(object sender, EventArgs args)
+        {
+            BaseDocument _doc = documentManager.GetDocument(sender as Control);            
+            tabbedView.RemoveDocument(sender as Control);
+            _doc.Dispose();
+        }
+
+         public void OpenCopy(object sender, EventArgs args)
+         {
+             showCopy(Convert.ToDecimal(sender), sender.ToString());
+         }
+       
     }
 }

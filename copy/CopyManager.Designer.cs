@@ -64,14 +64,14 @@
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage7 = new DevExpress.XtraTab.XtraTabPage();
-            this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
+            this.nameTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.copiesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fullDataSet = new UniArchive.FullDataSet();
             this.documentLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.checkEdit3 = new DevExpress.XtraEditors.CheckEdit();
+            this.fullAccessCheckEdit = new DevExpress.XtraEditors.CheckEdit();
             this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
-            this.searchLookUpEdit9 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.copyTypeSearchLookUpEdit = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.copyTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colNAME = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -106,11 +106,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nameTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.copiesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit9.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullAccessCheckEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.copyTypeSearchLookUpEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
@@ -443,12 +443,12 @@
             // 
             // xtraTabPage7
             // 
-            this.xtraTabPage7.Controls.Add(this.textEdit3);
+            this.xtraTabPage7.Controls.Add(this.nameTextEdit);
             this.xtraTabPage7.Controls.Add(this.documentLinkLabel);
-            this.xtraTabPage7.Controls.Add(this.checkEdit3);
+            this.xtraTabPage7.Controls.Add(this.fullAccessCheckEdit);
             this.xtraTabPage7.Controls.Add(this.labelControl15);
             this.xtraTabPage7.Controls.Add(this.labelControl16);
-            this.xtraTabPage7.Controls.Add(this.searchLookUpEdit9);
+            this.xtraTabPage7.Controls.Add(this.copyTypeSearchLookUpEdit);
             this.xtraTabPage7.Controls.Add(this.groupControl4);
             this.xtraTabPage7.Controls.Add(this.groupControl5);
             this.xtraTabPage7.Controls.Add(this.labelControl17);
@@ -457,14 +457,17 @@
             this.xtraTabPage7.Size = new System.Drawing.Size(745, 433);
             this.xtraTabPage7.Text = "Əsas sənəd";
             // 
-            // textEdit3
+            // nameTextEdit
             // 
-            this.textEdit3.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.copiesBindingSource, "NAME", true));
-            this.textEdit3.Location = new System.Drawing.Point(132, 74);
-            this.textEdit3.MenuManager = this.barManager1;
-            this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(329, 20);
-            this.textEdit3.TabIndex = 18;
+            this.nameTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.copiesBindingSource, "NAME", true));
+            this.nameTextEdit.Location = new System.Drawing.Point(132, 74);
+            this.nameTextEdit.MenuManager = this.barManager1;
+            this.nameTextEdit.Name = "nameTextEdit";
+            this.nameTextEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.nameTextEdit.Properties.NullValuePrompt = "Mütləq xanadır!";
+            this.nameTextEdit.Properties.NullValuePromptShowForEmptyValue = true;
+            this.nameTextEdit.Size = new System.Drawing.Size(329, 20);
+            this.nameTextEdit.TabIndex = 18;
             // 
             // copiesBindingSource
             // 
@@ -480,6 +483,7 @@
             // 
             this.documentLinkLabel.AutoSize = true;
             this.documentLinkLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.copiesBindingSource, "DOCUMENT_ID", true));
+            this.documentLinkLabel.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.copiesBindingSource, "DOCUMENT_ID", true));
             this.documentLinkLabel.Location = new System.Drawing.Point(129, 50);
             this.documentLinkLabel.Name = "documentLinkLabel";
             this.documentLinkLabel.Size = new System.Drawing.Size(61, 13);
@@ -488,16 +492,18 @@
             this.documentLinkLabel.Text = "docNumber";
             this.documentLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.documentLinkLabel_LinkClicked);
             // 
-            // checkEdit3
+            // fullAccessCheckEdit
             // 
-            this.checkEdit3.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.copiesBindingSource, "FULL_ACCESS", true));
-            this.checkEdit3.EditValue = true;
-            this.checkEdit3.Location = new System.Drawing.Point(446, 17);
-            this.checkEdit3.MenuManager = this.barManager1;
-            this.checkEdit3.Name = "checkEdit3";
-            this.checkEdit3.Properties.Caption = "";
-            this.checkEdit3.Size = new System.Drawing.Size(210, 19);
-            this.checkEdit3.TabIndex = 16;
+            this.fullAccessCheckEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.copiesBindingSource, "FULL_ACCESS", true));
+            this.fullAccessCheckEdit.EditValue = true;
+            this.fullAccessCheckEdit.Location = new System.Drawing.Point(446, 17);
+            this.fullAccessCheckEdit.MenuManager = this.barManager1;
+            this.fullAccessCheckEdit.Name = "fullAccessCheckEdit";
+            this.fullAccessCheckEdit.Properties.Caption = "";
+            this.fullAccessCheckEdit.Properties.ValueChecked = ((short)(1));
+            this.fullAccessCheckEdit.Properties.ValueUnchecked = ((short)(0));
+            this.fullAccessCheckEdit.Size = new System.Drawing.Size(210, 19);
+            this.fullAccessCheckEdit.TabIndex = 16;
             // 
             // labelControl15
             // 
@@ -515,20 +521,24 @@
             this.labelControl16.TabIndex = 4;
             this.labelControl16.Text = "Qoşmanın tipi:";
             // 
-            // searchLookUpEdit9
+            // copyTypeSearchLookUpEdit
             // 
-            this.searchLookUpEdit9.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.copiesBindingSource, "COPY_TYPE_ID", true));
-            this.searchLookUpEdit9.Location = new System.Drawing.Point(132, 16);
-            this.searchLookUpEdit9.Name = "searchLookUpEdit9";
-            this.searchLookUpEdit9.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.copyTypeSearchLookUpEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.copiesBindingSource, "COPY_TYPE_ID", true));
+            this.copyTypeSearchLookUpEdit.Location = new System.Drawing.Point(132, 16);
+            this.copyTypeSearchLookUpEdit.Name = "copyTypeSearchLookUpEdit";
+            this.copyTypeSearchLookUpEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.copyTypeSearchLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.searchLookUpEdit9.Properties.DataSource = this.copyTypesBindingSource;
-            this.searchLookUpEdit9.Properties.DisplayMember = "NAME";
-            this.searchLookUpEdit9.Properties.NullText = "Seçilməyib";
-            this.searchLookUpEdit9.Properties.ValueMember = "ID";
-            this.searchLookUpEdit9.Properties.View = this.gridView4;
-            this.searchLookUpEdit9.Size = new System.Drawing.Size(208, 20);
-            this.searchLookUpEdit9.TabIndex = 14;
+            this.copyTypeSearchLookUpEdit.Properties.DataSource = this.copyTypesBindingSource;
+            this.copyTypeSearchLookUpEdit.Properties.DisplayMember = "NAME";
+            this.copyTypeSearchLookUpEdit.Properties.NullText = "Seçilməyib";
+            this.copyTypeSearchLookUpEdit.Properties.NullValuePrompt = "Mütləq xanadır!";
+            this.copyTypeSearchLookUpEdit.Properties.NullValuePromptShowForEmptyValue = true;
+            this.copyTypeSearchLookUpEdit.Properties.ValueMember = "ID";
+            this.copyTypeSearchLookUpEdit.Properties.View = this.gridView4;
+            this.copyTypeSearchLookUpEdit.Size = new System.Drawing.Size(208, 20);
+            this.copyTypeSearchLookUpEdit.TabIndex = 14;
+            this.copyTypeSearchLookUpEdit.TextChanged += new System.EventHandler(this.copyTypeSearchLookUpEdit_TextChanged);
             // 
             // copyTypesBindingSource
             // 
@@ -547,6 +557,7 @@
             // 
             // colNAME
             // 
+            this.colNAME.Caption = "Qoşma tipi";
             this.colNAME.FieldName = "NAME";
             this.colNAME.Name = "colNAME";
             this.colNAME.Visible = true;
@@ -554,6 +565,7 @@
             // 
             // colDESCRIPTION
             // 
+            this.colDESCRIPTION.Caption = "Açıqlama";
             this.colDESCRIPTION.FieldName = "DESCRIPTION";
             this.colDESCRIPTION.Name = "colDESCRIPTION";
             this.colDESCRIPTION.Visible = true;
@@ -657,11 +669,11 @@
             this.xtraTabControl1.ResumeLayout(false);
             this.xtraTabPage7.ResumeLayout(false);
             this.xtraTabPage7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nameTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.copiesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit9.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fullAccessCheckEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.copyTypeSearchLookUpEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
@@ -712,12 +724,12 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage4;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage5;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage7;
-        private DevExpress.XtraEditors.TextEdit textEdit3;
+        private DevExpress.XtraEditors.TextEdit nameTextEdit;
         private System.Windows.Forms.LinkLabel documentLinkLabel;
-        private DevExpress.XtraEditors.CheckEdit checkEdit3;
+        private DevExpress.XtraEditors.CheckEdit fullAccessCheckEdit;
         private DevExpress.XtraEditors.LabelControl labelControl15;
         private DevExpress.XtraEditors.LabelControl labelControl16;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEdit9;
+        private DevExpress.XtraEditors.SearchLookUpEdit copyTypeSearchLookUpEdit;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private DevExpress.XtraEditors.GroupControl groupControl4;
         private DevExpress.XtraEditors.GroupControl groupControl5;

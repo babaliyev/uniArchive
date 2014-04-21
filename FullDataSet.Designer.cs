@@ -164,6 +164,10 @@ namespace UniArchive {
         
         private global::System.Data.DataRelation relationFILES_FK2;
         
+        private global::System.Data.DataRelation relationDIRECTORIES_DIRECTORIES;
+        
+        private global::System.Data.DataRelation relationDIRECTORIES_DIRECTORIES1;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -905,6 +909,8 @@ namespace UniArchive {
             this.relationREFERENCES_FK1 = this.Relations["REFERENCES_FK1"];
             this.relationDIRECTORIES_DOCUMENTS = this.Relations["DIRECTORIES_DOCUMENTS"];
             this.relationFILES_FK2 = this.Relations["FILES_FK2"];
+            this.relationDIRECTORIES_DIRECTORIES = this.Relations["DIRECTORIES_DIRECTORIES"];
+            this.relationDIRECTORIES_DIRECTORIES1 = this.Relations["DIRECTORIES_DIRECTORIES1"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1145,6 +1151,14 @@ namespace UniArchive {
                         this.tableCOPIES.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableFILES.COPY_IDColumn}, false);
             this.Relations.Add(this.relationFILES_FK2);
+            this.relationDIRECTORIES_DIRECTORIES = new global::System.Data.DataRelation("DIRECTORIES_DIRECTORIES", new global::System.Data.DataColumn[] {
+                        this.tableDIRECTORIES.PARENT_IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDIRECTORIES.IDColumn}, false);
+            this.Relations.Add(this.relationDIRECTORIES_DIRECTORIES);
+            this.relationDIRECTORIES_DIRECTORIES1 = new global::System.Data.DataRelation("DIRECTORIES_DIRECTORIES1", new global::System.Data.DataColumn[] {
+                        this.tableDIRECTORIES.IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDIRECTORIES.PARENT_IDColumn}, false);
+            this.Relations.Add(this.relationDIRECTORIES_DIRECTORIES1);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9060,15 +9074,21 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DIRECTORIESRow AddDIRECTORIESRow(int ID, string DOCUMENT_NUMBER, short FULL_ACCESS, int PARENT_ID, short IS_DIRECTORY, string FULL_PATH) {
+            public DIRECTORIESRow AddDIRECTORIESRow(DIRECTORIESRow parentDIRECTORIESRowByDIRECTORIES_DIRECTORIES, string DOCUMENT_NUMBER, short FULL_ACCESS, DIRECTORIESRow parentDIRECTORIESRowByDIRECTORIES_DIRECTORIES1, short IS_DIRECTORY, string FULL_PATH) {
                 DIRECTORIESRow rowDIRECTORIESRow = ((DIRECTORIESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        ID,
+                        null,
                         DOCUMENT_NUMBER,
                         FULL_ACCESS,
-                        PARENT_ID,
+                        null,
                         IS_DIRECTORY,
                         FULL_PATH};
+                if ((parentDIRECTORIESRowByDIRECTORIES_DIRECTORIES != null)) {
+                    columnValuesArray[0] = parentDIRECTORIESRowByDIRECTORIES_DIRECTORIES[3];
+                }
+                if ((parentDIRECTORIESRowByDIRECTORIES_DIRECTORIES1 != null)) {
+                    columnValuesArray[3] = parentDIRECTORIESRowByDIRECTORIES_DIRECTORIES1[0];
+                }
                 rowDIRECTORIESRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDIRECTORIESRow);
                 return rowDIRECTORIESRow;
@@ -9128,7 +9148,6 @@ namespace UniArchive {
                 this.columnDOCUMENT_NUMBER.AllowDBNull = false;
                 this.columnDOCUMENT_NUMBER.MaxLength = 500;
                 this.columnFULL_ACCESS.AllowDBNull = false;
-                this.columnIS_DIRECTORY.AllowDBNull = false;
                 this.columnFULL_PATH.MaxLength = 4000;
             }
             
@@ -12900,7 +12919,12 @@ namespace UniArchive {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public short IS_DIRECTORY {
                 get {
-                    return ((short)(this[this.tableDIRECTORIES.IS_DIRECTORYColumn]));
+                    try {
+                        return ((short)(this[this.tableDIRECTORIES.IS_DIRECTORYColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IS_DIRECTORY\' in table \'DIRECTORIES\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableDIRECTORIES.IS_DIRECTORYColumn] = value;
@@ -12925,6 +12949,28 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DIRECTORIESRow DIRECTORIESRowParent {
+                get {
+                    return ((DIRECTORIESRow)(this.GetParentRow(this.Table.ParentRelations["DIRECTORIES_DIRECTORIES"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["DIRECTORIES_DIRECTORIES"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DIRECTORIESRow DIRECTORIESRowParentByDIRECTORIES_DIRECTORIES1 {
+                get {
+                    return ((DIRECTORIESRow)(this.GetParentRow(this.Table.ParentRelations["DIRECTORIES_DIRECTORIES1"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["DIRECTORIES_DIRECTORIES1"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsPARENT_IDNull() {
                 return this.IsNull(this.tableDIRECTORIES.PARENT_IDColumn);
             }
@@ -12933,6 +12979,18 @@ namespace UniArchive {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetPARENT_IDNull() {
                 this[this.tableDIRECTORIES.PARENT_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIS_DIRECTORYNull() {
+                return this.IsNull(this.tableDIRECTORIES.IS_DIRECTORYColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIS_DIRECTORYNull() {
+                this[this.tableDIRECTORIES.IS_DIRECTORYColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12955,6 +13013,28 @@ namespace UniArchive {
                 }
                 else {
                     return ((DOCUMENTSRow[])(base.GetChildRows(this.Table.ChildRelations["DIRECTORIES_DOCUMENTS"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DIRECTORIESRow[] GetDIRECTORIESRows() {
+                if ((this.Table.ChildRelations["DIRECTORIES_DIRECTORIES"] == null)) {
+                    return new DIRECTORIESRow[0];
+                }
+                else {
+                    return ((DIRECTORIESRow[])(base.GetChildRows(this.Table.ChildRelations["DIRECTORIES_DIRECTORIES"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DIRECTORIESRow[] GetDIRECTORIESRowsByDIRECTORIES_DIRECTORIES1() {
+                if ((this.Table.ChildRelations["DIRECTORIES_DIRECTORIES1"] == null)) {
+                    return new DIRECTORIESRow[0];
+                }
+                else {
+                    return ((DIRECTORIESRow[])(base.GetChildRows(this.Table.ChildRelations["DIRECTORIES_DIRECTORIES1"])));
                 }
             }
         }
@@ -18408,7 +18488,7 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT   ID, DOCUMENT_TYPE_ID, CLIENT_ID, DOCUMENT_NUMBER, DOCUMENT_DATE, ADDRESS" +
                 "_ID, FULL_ACCESS, \r\n                         PARENT_ID\r\nFROM         ARCH.DOCUME" +
-                "NTS";
+                "NTS\r\nWHERE     (IS_DIRECTORY = 0)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::Oracle.DataAccess.Client.OracleCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -23182,7 +23262,7 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._commandCollection[0] = new global::Oracle.DataAccess.Client.OracleCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT   ID, DOCUMENT_NUMBER, FULL_ACCESS, PARENT_ID, IS_DIRECTORY, DOCUMENT_NUMB" +
-                "ER AS FULL_PATH\r\nFROM         ARCH.DOCUMENTS";
+                "ER AS FULL_PATH\r\nFROM         ARCH.DOCUMENTS\r\nWHERE     (IS_DIRECTORY = 1)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::Oracle.DataAccess.Client.OracleCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -24509,6 +24589,9 @@ namespace UniArchive.FullDataSetTableAdapters {
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
+                    this.SortSelfReferenceRows(updatedRows, dataSet.Relations["DIRECTORIES_DIRECTORIES"], false);
+                    // Note: More than one self-referenced relation found.  The generated code may not work correctly.
+                    this.SortSelfReferenceRows(updatedRows, dataSet.Relations["DIRECTORIES_DIRECTORIES1"], false);
                     result = (result + this._dIRECTORIESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
@@ -24744,6 +24827,9 @@ namespace UniArchive.FullDataSetTableAdapters {
                 global::System.Data.DataRow[] addedRows = dataSet.DIRECTORIES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
+                    this.SortSelfReferenceRows(addedRows, dataSet.Relations["DIRECTORIES_DIRECTORIES"], false);
+                    // Note: More than one self-referenced relation found.  The generated code may not work correctly.
+                    this.SortSelfReferenceRows(addedRows, dataSet.Relations["DIRECTORIES_DIRECTORIES1"], false);
                     result = (result + this._dIRECTORIESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
@@ -25132,6 +25218,9 @@ namespace UniArchive.FullDataSetTableAdapters {
                 global::System.Data.DataRow[] deletedRows = dataSet.DIRECTORIES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
+                    this.SortSelfReferenceRows(deletedRows, dataSet.Relations["DIRECTORIES_DIRECTORIES"], true);
+                    // Note: More than one self-referenced relation found.  The generated code may not work correctly.
+                    this.SortSelfReferenceRows(deletedRows, dataSet.Relations["DIRECTORIES_DIRECTORIES1"], true);
                     result = (result + this._dIRECTORIESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }

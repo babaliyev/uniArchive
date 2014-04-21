@@ -81,5 +81,19 @@ namespace UniArchive.copy
             if (OnDocumentClick != null)
                 OnDocumentClick(documentLinkLabel.Tag, EventArgs.Empty);
         }
+
+        public bool Validate()
+        {
+            bool validateResult = true;
+            validateResult = validateResult && UIHelper.requiredField_Validating(copyTypeSearchLookUpEdit);
+            validateResult = validateResult && UIHelper.requiredField_Validating(fullAccessCheckEdit);
+            validateResult = validateResult && UIHelper.requiredField_Validating(nameTextEdit);
+            return validateResult;
+        }
+
+        private void copyTypeSearchLookUpEdit_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(nameTextEdit.Text)) nameTextEdit.Text = copyTypeSearchLookUpEdit.Text;
+        }
     }
 }

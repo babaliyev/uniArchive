@@ -243,6 +243,7 @@
     <Compile Include="search\SearchManager.Designer.cs">
       <DependentUpon>SearchManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIHelper.cs" />
     <Compile Include="users\UsersManager.cs">
       <SubType>UserControl</SubType>
     </Compile>

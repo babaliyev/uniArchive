@@ -42,13 +42,13 @@
             this.fullDataSet = new UniArchive.FullDataSet();
             this.copyTypesLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.filesGridView = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.filesGridControl = new DevExpress.XtraGrid.GridControl();
-            this.filesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.filesTableAdapter = new UniArchive.FullDataSetTableAdapters.FILESTableAdapter();
             this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFILE_NAME = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFILE_EXTENTION = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFILE_SIZE = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.filesGridControl = new DevExpress.XtraGrid.GridControl();
+            this.filesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.filesTableAdapter = new UniArchive.FullDataSetTableAdapters.FILESTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fullDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.copyTypesLookUpEdit)).BeginInit();
@@ -170,35 +170,13 @@
             this.colFILE_SIZE});
             this.filesGridView.GridControl = this.filesGridControl;
             this.filesGridView.Name = "filesGridView";
+            this.filesGridView.OptionsBehavior.Editable = false;
             this.filesGridView.OptionsCustomization.AllowGroup = false;
             this.filesGridView.OptionsDetail.EnableMasterViewMode = false;
             this.filesGridView.OptionsDetail.ShowDetailTabs = false;
             this.filesGridView.OptionsDetail.SmartDetailExpand = false;
             this.filesGridView.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.filesGridView.OptionsView.ShowGroupPanel = false;
-            // 
-            // filesGridControl
-            // 
-            this.filesGridControl.DataSource = this.filesBindingSource;
-            this.filesGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.filesGridControl.Location = new System.Drawing.Point(0, 29);
-            this.filesGridControl.MainView = this.filesGridView;
-            this.filesGridControl.Name = "filesGridControl";
-            this.filesGridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.copyTypesLookUpEdit});
-            this.filesGridControl.Size = new System.Drawing.Size(536, 412);
-            this.filesGridControl.TabIndex = 6;
-            this.filesGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.filesGridView});
-            // 
-            // filesBindingSource
-            // 
-            this.filesBindingSource.DataMember = "FILES";
-            this.filesBindingSource.DataSource = this.fullDataSet;
-            // 
-            // filesTableAdapter
-            // 
-            this.filesTableAdapter.ClearBeforeFill = true;
             // 
             // colID
             // 
@@ -231,6 +209,29 @@
             this.colFILE_SIZE.Visible = true;
             this.colFILE_SIZE.VisibleIndex = 2;
             this.colFILE_SIZE.Width = 127;
+            // 
+            // filesGridControl
+            // 
+            this.filesGridControl.DataSource = this.filesBindingSource;
+            this.filesGridControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.filesGridControl.Location = new System.Drawing.Point(0, 29);
+            this.filesGridControl.MainView = this.filesGridView;
+            this.filesGridControl.Name = "filesGridControl";
+            this.filesGridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.copyTypesLookUpEdit});
+            this.filesGridControl.Size = new System.Drawing.Size(536, 412);
+            this.filesGridControl.TabIndex = 6;
+            this.filesGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.filesGridView});
+            // 
+            // filesBindingSource
+            // 
+            this.filesBindingSource.DataMember = "FILES";
+            this.filesBindingSource.DataSource = this.fullDataSet;
+            // 
+            // filesTableAdapter
+            // 
+            this.filesTableAdapter.ClearBeforeFill = true;
             // 
             // FilesManager
             // 
