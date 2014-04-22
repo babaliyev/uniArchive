@@ -301,6 +301,16 @@ namespace UniArchive
          {
              showCopy(Convert.ToDecimal(sender), sender.ToString());
          }
+
+         private void importBarButtonItem_ItemClick(object sender, ItemClickEventArgs e)
+         {
+             ImportForm impForm = new ImportForm();
+             if (impForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+             {
+                 addressTree1.load();
+                 directoryTree1.load();
+             }
+         }
        
     }
 }

@@ -85,6 +85,7 @@
             this.returnCopy = new DevExpress.XtraBars.BarButtonItem();
             this.documentManager = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
+            this.importBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
@@ -167,9 +168,10 @@
             this.returnCopy,
             this.executeBarSubItem,
             this.aboutBarButtonItem,
-            this.actionsBarSubItem});
+            this.actionsBarSubItem,
+            this.importBarButtonItem});
             this.barManager.MainMenu = this.bar1;
-            this.barManager.MaxItemId = 64;
+            this.barManager.MaxItemId = 65;
             this.barManager.StatusBar = this.bar3;
             // 
             // bar2
@@ -254,7 +256,9 @@
             this.actionsBarSubItem.Id = 63;
             this.actionsBarSubItem.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.addClient),
-            new DevExpress.XtraBars.LinkPersistInfo(this.addDocument)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.addDocument),
+            new DevExpress.XtraBars.LinkPersistInfo(this.importBarButtonItem),
+            new DevExpress.XtraBars.LinkPersistInfo(this.Search, true)});
             this.actionsBarSubItem.Name = "actionsBarSubItem";
             // 
             // executeBarSubItem
@@ -613,6 +617,14 @@
             this.tabbedView.UseDocumentSelector = DevExpress.Utils.DefaultBoolean.True;
             this.tabbedView.DocumentAdded += new DevExpress.XtraBars.Docking2010.Views.DocumentEventHandler(this.tabbedView_DocumentAdded);
             // 
+            // importBarButtonItem
+            // 
+            this.importBarButtonItem.Caption = "Import";
+            this.importBarButtonItem.CategoryGuid = new System.Guid("6c82e277-637f-4052-bc27-3ba2af92f37f");
+            this.importBarButtonItem.Id = 64;
+            this.importBarButtonItem.Name = "importBarButtonItem";
+            this.importBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.importBarButtonItem_ItemClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -698,6 +710,7 @@
         private directoryTree.DirectoryTree directoryTree1;
         private DevExpress.XtraBars.BarButtonItem aboutBarButtonItem;
         private DevExpress.XtraBars.BarSubItem actionsBarSubItem;
+        private DevExpress.XtraBars.BarButtonItem importBarButtonItem;
 
     }
 }

@@ -23655,7 +23655,6 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.ParameterName = ":FILE_BODY";
             param.DbType = global::System.Data.DbType.Binary;
             param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Blob;
-            param.Size = 1024;
             param.IsNullable = true;
             param.SourceColumn = "FILE_BODY";
             this._adapter.InsertCommand.Parameters.Add(param);
