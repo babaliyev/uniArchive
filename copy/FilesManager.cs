@@ -105,5 +105,23 @@ namespace UniArchive.copy
                 }
             }
         }
+
+        private void showBarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (this.filesBindingSource.Current != null)
+            {
+                FullDataSet.FILESRow fileRow = (FullDataSet.FILESRow)((DataRowView)filesBindingSource.Current).Row;
+
+                PreviewFilesForm previewForm = new PreviewFilesForm();
+                previewForm.loadByCopy(fileRow.COPY_ID);
+                previewForm.setCurrentFile(fileRow.ID);
+                previewForm.ShowDialog();
+            }
+        }
+
+        private void filesGridControl_DoubleClick(object sender, EventArgs e)
+        {
+            showBarButtonItem_ItemClick(null, null);
+        }
     }
 }

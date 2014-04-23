@@ -95,5 +95,16 @@ namespace UniArchive.copy
         {
             if (string.IsNullOrEmpty(nameTextEdit.Text)) nameTextEdit.Text = copyTypeSearchLookUpEdit.Text;
         }
+
+        private void showFilesBarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (copiesBindingSource.Current != null)
+            {
+                FullDataSet.COPIESRow row = (FullDataSet.COPIESRow)((DataRowView)copiesBindingSource.Current).Row;
+                PreviewFilesForm previewForm = new PreviewFilesForm();
+                previewForm.loadByCopy(row.ID);
+                previewForm.ShowDialog();
+            }
+        }
     }
 }

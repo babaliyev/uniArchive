@@ -8,6 +8,8 @@ namespace UniArchive
 {
     static class DataHelper
     {
+        #region sequences
+
         private static string _SEQ_ADDRESS_DICTIONARY = "ADDRESS_DICTIONARY_SEQ";
         private static string _SEQ_ATTRIBUTES = "ATTRIBUTES_SEQ";
         private static string _SEQ_ATTRIBUTES_VALUES = "ATTRIBUTES_VALUES_SEQ";
@@ -176,6 +178,62 @@ namespace UniArchive
                 _con.Close();
             }
             return _ItemValue;
+        }
+
+        #endregion
+
+        static public string getDocNum(decimal id)
+        {
+            OracleCommand _command = new OracleCommand();
+            string _value = "";
+            OracleConnection _con = new OracleConnection(Properties.Settings.Default.archConnectionString);
+            try
+            {
+                _con.Open();
+                _command.Connection = _con;
+                string _QueryString = "select DOCUMENT_NUMBER from ARCH.DOCUMENTS where ID=:id";
+                _command.CommandText = _QueryString;
+                _command.Parameters.Add(":id", id);
+                _value = _command.ExecuteScalar().ToString();
+                _con.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _con.Close();
+            }
+            return _value;
+        }
+
+        static public string getCopyNameWithDocNum(decimal id)
+        {
+            OracleCommand _command = new OracleCommand();
+            string _value = "";
+            OracleConnection _con = new OracleConnection(Properties.Settings.Default.archConnectionString);
+            try
+            {
+                _con.Open();
+                _command.Connection = _con;
+                string _QueryString = @"select ARCH.DOCUMENTS.DOCUMENT_NUMBER||'/'||ARCH.COPIES.NAME from ARCH.DOCUMENTS inner join ARCH.COPIES on 
+                                        ARCH.DOCUMENTS.ID = ARCH.COPIES.DOCUMENT_ID
+                                        where ARCH.COPIES.ID=:id";
+                _command.CommandText = _QueryString;
+                _command.Parameters.Add(":id", id);
+                _value = _command.ExecuteScalar().ToString();
+                _con.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _con.Close();
+            }
+            return _value;
         }
     }
 }

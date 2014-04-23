@@ -105,5 +105,16 @@ namespace UniArchive.document
             return validateResult;
         }
 
+        private void showFilesBarButtonItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (documentsBindingSource.Current != null)
+            {
+                FullDataSet.DOCUMENTSRow row = (FullDataSet.DOCUMENTSRow)((DataRowView)documentsBindingSource.Current).Row;
+                copy.PreviewFilesForm previewForm = new copy.PreviewFilesForm();
+                previewForm.loadByDocument(row.ID);
+                previewForm.ShowDialog();
+            }
+        }
+
     }
 }

@@ -84,6 +84,7 @@
             this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage5 = new DevExpress.XtraTab.XtraTabPage();
             this.documentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.showFilesBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.xtraTabPage1.SuspendLayout();
@@ -140,8 +141,9 @@
             this.barManager1.Form = this;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.downloadBarButtonItem,
-            this.saveBarButtonItem});
-            this.barManager1.MaxItemId = 8;
+            this.saveBarButtonItem,
+            this.showFilesBarButtonItem});
+            this.barManager1.MaxItemId = 9;
             // 
             // bar1
             // 
@@ -151,7 +153,8 @@
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.saveBarButtonItem, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.downloadBarButtonItem, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.showFilesBarButtonItem, true),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.downloadBarButtonItem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar1.OptionsBar.AllowQuickCustomization = false;
             this.bar1.OptionsBar.DrawBorder = false;
             this.bar1.OptionsBar.DrawDragBorder = false;
@@ -634,6 +637,13 @@
             this.documentsBindingSource.DataMember = "DOCUMENTS";
             this.documentsBindingSource.DataSource = this.fullDataSet;
             // 
+            // showFilesBarButtonItem
+            // 
+            this.showFilesBarButtonItem.Caption = "Qoşma fayllara baxmaq";
+            this.showFilesBarButtonItem.Id = 8;
+            this.showFilesBarButtonItem.Name = "showFilesBarButtonItem";
+            this.showFilesBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.showFilesBarButtonItem_ItemClick);
+            // 
             // CopyManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -742,6 +752,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colNAME;
         private DevExpress.XtraGrid.Columns.GridColumn colDESCRIPTION;
         private FilesManager filesManager1;
+        private DevExpress.XtraBars.BarButtonItem showFilesBarButtonItem;
 
     }
 }

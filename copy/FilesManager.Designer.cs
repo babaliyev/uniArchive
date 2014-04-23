@@ -90,7 +90,7 @@
             this.showBarButtonItem.Caption = "Qoşmaya baxmaq";
             this.showBarButtonItem.Id = 5;
             this.showBarButtonItem.Name = "showBarButtonItem";
-            this.showBarButtonItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            this.showBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.showBarButtonItem_ItemClick);
             // 
             // downloadBarButtonItem
             // 
@@ -223,6 +223,7 @@
             this.filesGridControl.TabIndex = 6;
             this.filesGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.filesGridView});
+            this.filesGridControl.DoubleClick += new System.EventHandler(this.filesGridControl_DoubleClick);
             // 
             // filesBindingSource
             // 

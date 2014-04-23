@@ -79,6 +79,7 @@
             this.directoriesTableAdapter = new UniArchive.FullDataSetTableAdapters.DIRECTORIESTableAdapter();
             this.addressDictionaryTableAdapter = new UniArchive.FullDataSetTableAdapters.ADDRESS_DICTIONARYTableAdapter();
             this.documentsTableAdapter = new UniArchive.FullDataSetTableAdapters.DOCUMENTSTableAdapter();
+            this.showFilesBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
@@ -120,8 +121,9 @@
             this.deleteBarButtonItem,
             this.giveGarButtonItem,
             this.returnBarButtonItem,
-            this.downloadBarButtonItem});
-            this.barManager1.MaxItemId = 5;
+            this.downloadBarButtonItem,
+            this.showFilesBarButtonItem});
+            this.barManager1.MaxItemId = 6;
             // 
             // bar1
             // 
@@ -134,7 +136,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.deleteBarButtonItem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.giveGarButtonItem, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.returnBarButtonItem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.downloadBarButtonItem, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.showFilesBarButtonItem, true),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.downloadBarButtonItem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar1.OptionsBar.AllowQuickCustomization = false;
             this.bar1.OptionsBar.DrawBorder = false;
             this.bar1.OptionsBar.DrawDragBorder = false;
@@ -557,6 +560,13 @@
             // 
             this.documentsTableAdapter.ClearBeforeFill = true;
             // 
+            // showFilesBarButtonItem
+            // 
+            this.showFilesBarButtonItem.Caption = "Qoşma fayllara baxmaq";
+            this.showFilesBarButtonItem.Id = 5;
+            this.showFilesBarButtonItem.Name = "showFilesBarButtonItem";
+            this.showFilesBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.showFilesBarButtonItem_ItemClick);
+            // 
             // DocumentManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -651,5 +661,6 @@
         private FullDataSetTableAdapters.DOCUMENTSTableAdapter documentsTableAdapter;
         private DevExpress.XtraGrid.Columns.GridColumn colNAME;
         private DevExpress.XtraGrid.Columns.GridColumn colDESCRIPTION;
+        private DevExpress.XtraBars.BarButtonItem showFilesBarButtonItem;
     }
 }

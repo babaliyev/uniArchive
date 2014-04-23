@@ -183,10 +183,10 @@ namespace UniArchive
             openDocument(addressDictionaryManager);
         }
 
-        private void showDocument(decimal id, string num)
+        private void showDocument(decimal id)
         {
             document.DocumentManager document = new UniArchive.document.DocumentManager(id);
-            document.Tag = num;
+            document.Tag = DataHelper.getDocNum(id);
             document.OnDocumentDeleted += CloseDocument;
             openDocument(document);
         }
@@ -199,10 +199,10 @@ namespace UniArchive
             openDocument(document);
         }
 
-        private void showCopy(decimal id, string num)
+        private void showCopy(decimal id)
         {
             copy.StandaloneCopyManager copy = new UniArchive.copy.StandaloneCopyManager(null,id);
-            copy.Tag = num;
+            copy.Tag = DataHelper.getCopyNameWithDocNum(id);
             copy.OnDocumentClick += OpenDocument;
             openDocument(copy);
         }
@@ -287,7 +287,7 @@ namespace UniArchive
 
         public void OpenDocument(object sender, EventArgs args)
         {
-            showDocument(Convert.ToDecimal(sender), sender.ToString());
+            showDocument(Convert.ToDecimal(sender));
         }
 
          public void CloseDocument(object sender, EventArgs args)
@@ -299,7 +299,7 @@ namespace UniArchive
 
          public void OpenCopy(object sender, EventArgs args)
          {
-             showCopy(Convert.ToDecimal(sender), sender.ToString());
+             showCopy(Convert.ToDecimal(sender));
          }
 
          private void importBarButtonItem_ItemClick(object sender, ItemClickEventArgs e)

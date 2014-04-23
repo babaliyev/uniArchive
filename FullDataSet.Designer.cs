@@ -23722,7 +23722,7 @@ namespace UniArchive.FullDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[2];
+            this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[3];
             this._commandCollection[0] = new global::Oracle.DataAccess.Client.OracleCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT   ID, COPY_ID, FILE_NAME, FILE_EXTENTION, FILE_BODY, FILE_SIZE\r\nFROM      " +
@@ -23740,6 +23740,21 @@ namespace UniArchive.FullDataSetTableAdapters {
             param.IsNullable = true;
             param.SourceColumn = "COPY_ID";
             this._commandCollection[1].Parameters.Add(param);
+            this._commandCollection[2] = new global::Oracle.DataAccess.Client.OracleCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = @"SELECT   ARCH.FILES.ID, ARCH.FILES.COPY_ID, ARCH.FILES.FILE_NAME, ARCH.FILES.FILE_EXTENTION, ARCH.FILES.FILE_BODY, 
+                         ARCH.FILES.FILE_SIZE
+FROM         ARCH.FILES INNER JOIN
+                         ARCH.COPIES ON ARCH.FILES.COPY_ID = ARCH.COPIES.ID
+WHERE     (ARCH.COPIES.DOCUMENT_ID = :docId)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            param = new global::Oracle.DataAccess.Client.OracleParameter();
+            param.ParameterName = ":docId";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.OracleDbTypeEx = global::Oracle.DataAccess.Client.OracleDbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "DOCUMENT_ID";
+            this._commandCollection[2].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -23787,6 +23802,32 @@ namespace UniArchive.FullDataSetTableAdapters {
         public virtual FullDataSet.FILESDataTable GetDataByCopyId(decimal CopyId) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
             this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(CopyId));
+            FullDataSet.FILESDataTable dataTable = new FullDataSet.FILESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByDocId(FullDataSet.FILESDataTable dataTable, decimal docId) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(docId));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual FullDataSet.FILESDataTable GetDataByDocId(decimal docId) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(docId));
             FullDataSet.FILESDataTable dataTable = new FullDataSet.FILESDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
