@@ -23,14 +23,23 @@ namespace UniArchive
 
         public MainForm()
         {
-            InitializeComponent();
-            barManager.ForceInitialize();
+            try
+            {
+                InitializeComponent();
+                barManager.ForceInitialize();
 
-            directoryTree1.OnDocumentClick += OpenDocument;
-            directoryTree1.OnCopyClick += OpenCopy;
+                directoryTree1.OnDocumentClick += OpenDocument;
+                directoryTree1.OnCopyClick += OpenCopy;
 
-            addressTree1.OnDocumentClick += OpenDocument;
-            addressTree1.OnCopyClick += OpenCopy;
+                addressTree1.OnDocumentClick += OpenDocument;
+                addressTree1.OnCopyClick += OpenCopy;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                if (ex.InnerException != null)
+                    MessageBox.Show(ex.InnerException.Message);
+            }
         }
 
         private void openDocument(Control c)

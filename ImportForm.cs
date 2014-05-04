@@ -39,6 +39,10 @@ namespace UniArchive
                     filesTableAdapter.Transaction = tran;
                     try
                     {
+                        directoriesTableAdapter.Fill(fullDataSet.DIRECTORIES);
+                        documentsTableAdapter.Fill(fullDataSet.DOCUMENTS);
+                        copiesTableAdapter.Fill(fullDataSet.COPIES);
+
                         processDirectory(folderBrowserDialog.SelectedPath, null);
 
                         directoriesTableAdapter.Update(fullDataSet.DIRECTORIES);
@@ -70,7 +74,9 @@ namespace UniArchive
                     decimal copyId = createCopy("qoşma", docId);
                     foreach (String file in Directory.GetFiles(dir))
                     {
-                        decimal fileİd = createFile(file, copyId);
+                        infoLabelControl.Text = file;
+                        Application.DoEvents();
+                        decimal fileId = createFile(file, copyId);
                         filesTableAdapter.Update(fullDataSet.FILES);
                         fullDataSet.FILES.Clear();
                     }
@@ -87,31 +93,49 @@ namespace UniArchive
 
         private decimal createDirectory(string name, decimal? parentId)
         {
-            DataRow newRow = ((DataRowView)directoriesBindingSource.AddNew()).Row;
-            decimal id = DataHelper.GET_DOCUMENTS_ID();
-            newRow["ID"] = id;
-            newRow["FULL_ACCESS"] = 1;
-            newRow["IS_DIRECTORY"] = 1;
-            newRow["PARENT_ID"] = parentId == null ? (object)DBNull.Value : (object)parentId;
-            newRow["DOCUMENT_NUMBER"] = name;
-            directoriesBindingSource.EndEdit();
-            directoriesTableAdapter.Update(fullDataSet.DIRECTORIES);
+            FullDataSet.DIRECTORIESRow[] rows = (FullDataSet.DIRECTORIESRow[])fullDataSet.DIRECTORIES.Select("DOCUMENT_NUMBER ='" + name.Replace("'","\'")+ "' and " + (parentId == null ? "PARENT_ID is null" : "PARENT_ID=" + parentId.ToString()));
+            decimal id;
+            if (rows.Length == 0)
+            {
+                DataRow newRow = ((DataRowView)directoriesBindingSource.AddNew()).Row;
+                id = DataHelper.GET_DOCUMENTS_ID();
+                newRow["ID"] = id;
+                newRow["FULL_ACCESS"] = 1;
+                newRow["IS_DIRECTORY"] = 1;
+                newRow["PARENT_ID"] = parentId == null ? (object)DBNull.Value : (object)parentId;
+                newRow["DOCUMENT_NUMBER"] = name;
+                directoriesBindingSource.EndEdit();
+                directoriesTableAdapter.Update(fullDataSet.DIRECTORIES);
+            }
+            else
+            {
+                id = rows[0].ID;
+            }
             return id;
         }
 
         private decimal createDocument(string name, decimal parentId)
         {
-            DataRow newRow = ((DataRowView)documentsBindingSource.AddNew()).Row;
-            decimal id = DataHelper.GET_DOCUMENTS_ID();
-            newRow["ID"] = id;
-            newRow["FULL_ACCESS"] = 1;
-            newRow["PARENT_ID"] = parentId;
-            newRow["DOCUMENT_NUMBER"] = name;
-            newRow["DOCUMENT_DATE"] = DateTime.Now;
-            newRow["CLIENT_ID"] = 0;
-            newRow["DOCUMENT_TYPE_ID"] = 2;
-            documentsBindingSource.EndEdit();
-            documentsTableAdapter.Update(fullDataSet.DOCUMENTS);
+            FullDataSet.DOCUMENTSRow[] rows = (FullDataSet.DOCUMENTSRow[])fullDataSet.DOCUMENTS.Select("DOCUMENT_NUMBER='" + name.Replace("'", "\'") + "' and PARENT_ID=" + parentId.ToString());
+            decimal id;
+            if (rows.Length == 0)
+            {
+                DataRow newRow = ((DataRowView)documentsBindingSource.AddNew()).Row;
+                id = DataHelper.GET_DOCUMENTS_ID();
+                newRow["ID"] = id;
+                newRow["FULL_ACCESS"] = 1;
+                newRow["PARENT_ID"] = parentId;
+                newRow["DOCUMENT_NUMBER"] = name;
+                newRow["DOCUMENT_DATE"] = DateTime.Now;
+                newRow["CLIENT_ID"] = 0;
+                newRow["DOCUMENT_TYPE_ID"] = 2;
+                documentsBindingSource.EndEdit();
+                documentsTableAdapter.Update(fullDataSet.DOCUMENTS);
+            }
+            else
+            {
+                id = rows[0].ID;
+            }
             return id;
         }
 

@@ -49,6 +49,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v12.2, Version=12.2.6.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL" />
@@ -104,6 +105,12 @@
     </Compile>
     <Compile Include="addressTree\AddressTree.Designer.cs">
       <DependentUpon>AddressTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="attributes\AttributesEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="attributes\AttributesEditor.Designer.cs">
+      <DependentUpon>AttributesEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="attributes\AttributesManager.cs">
       <SubType>UserControl</SubType>
@@ -268,6 +275,12 @@
     <EmbeddedResource Include="addressTree\AddressTree.resx">
       <DependentUpon>AddressTree.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="attributes\AttributesEditor.resx">
+      <DependentUpon>AttributesEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="attributes\AttributesManager.resx">
+      <DependentUpon>AttributesManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="clients\ClientForm.resx">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -327,6 +340,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="references\ReferencesManager.resx">
+      <DependentUpon>ReferencesManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="roles\RolesManager.resx">
       <DependentUpon>RolesManager.cs</DependentUpon>
     </EmbeddedResource>
@@ -336,7 +352,9 @@
     <EmbeddedResource Include="users\UsersManager.resx">
       <DependentUpon>UsersManager.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="FullDataSet.xsc">
       <DependentUpon>FullDataSet.xsd</DependentUpon>
     </None>

@@ -16,9 +16,9 @@ namespace UniArchive
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            DevExpress.Skins.SkinManager.EnableFormSkins();
-            DevExpress.UserSkins.BonusSkins.Register();
-            UserLookAndFeel.Default.SetSkinStyle("Office 2007 Blue");
+            //DevExpress.Skins.SkinManager.EnableFormSkins();
+            //DevExpress.UserSkins.BonusSkins.Register();
+            //UserLookAndFeel.Default.SetSkinStyle("Office 2007 Blue");
 
             Application.Run(new MainForm());
         }

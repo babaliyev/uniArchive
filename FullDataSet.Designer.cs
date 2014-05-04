@@ -22891,8 +22891,9 @@ namespace UniArchive.FullDataSetTableAdapters {
             this._commandCollection = new global::Oracle.DataAccess.Client.OracleCommand[1];
             this._commandCollection[0] = new global::Oracle.DataAccess.Client.OracleCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "ARCH.GET_REFERENCES";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
+            this._commandCollection[0].CommandText = "SELECT   ID, \"NAME\", DESCRIPTION, REFENCE_TYPE_ID\r\nFROM         ARCH.\"REFERENCES\"" +
+                "";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
