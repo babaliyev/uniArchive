@@ -106,18 +106,21 @@
     <Compile Include="addressTree\AddressTree.Designer.cs">
       <DependentUpon>AddressTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="attributes\Attribute.cs" />
     <Compile Include="attributes\AttributesEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="attributes\AttributesEditor.Designer.cs">
       <DependentUpon>AttributesEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="attributes\AttributesEditorDAO.cs" />
     <Compile Include="attributes\AttributesManager.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="attributes\AttributesManager.Designer.cs">
       <DependentUpon>AttributesManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="attributes\AttributeValue.cs" />
     <Compile Include="ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
