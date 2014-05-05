@@ -24,6 +24,7 @@ namespace UniArchive.document
             this.documentsTableAdapter.FillByID(this.fullDataSet.DOCUMENTS, id);
             this.id = id;
             this.copiesManager1.setDocumentId(id);
+            this.attributesEditor1.loadForDoc(id, ((FullDataSet.DOCUMENTSRow)this.fullDataSet.DOCUMENTS.Rows[0]).DOCUMENT_TYPE_ID);
         }
 
         public DocumentManager()
@@ -57,6 +58,7 @@ namespace UniArchive.document
                     DataRowState state = this.fullDataSet.DOCUMENTS.Rows[0].RowState;
                     this.documentsTableAdapter.Update(this.fullDataSet.DOCUMENTS);
                     this.copiesManager1.save();
+                    this.attributesEditor1.save(id);
 
                     switch (state)
                     {
@@ -114,6 +116,12 @@ namespace UniArchive.document
                 previewForm.loadByDocument(row.ID);
                 previewForm.ShowDialog();
             }
+        }
+
+        private void docTypeSearchLookUpEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            if (docTypeSearchLookUpEdit.EditValue != null && docTypeSearchLookUpEdit.EditValue != DBNull.Value)
+                this.attributesEditor1.loadForDoc(id,Convert.ToDecimal(docTypeSearchLookUpEdit.EditValue));
         }
 
     }

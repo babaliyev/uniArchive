@@ -55,9 +55,9 @@ namespace UniArchive.attributes
             insertAttributeCmd.Parameters[":DATE_VALUE"].Value = DBNull.Value;
             insertAttributeCmd.Parameters[":BOOLEAN_VALUE"].Value = DBNull.Value;
             insertAttributeCmd.Parameters[":REFERENCE_VALUE"].Value = DBNull.Value;
-            insertAttributeCmd.Parameters[":ATTRIBUTE_ID"].Value = value.Attibute.ID;
+            insertAttributeCmd.Parameters[":ATTRIBUTE_ID"].Value = value.Attribute.ID;
 
-            switch (value.Attibute.ValueType)
+            switch (value.Attribute.ValueType)
             {
                 case AttributeType.String:
                     insertAttributeCmd.Parameters[":STRING_VALUE"].Value = value.Value;
@@ -96,16 +96,16 @@ namespace UniArchive.attributes
             List<AttributeValue> values = new List<AttributeValue>();
             fillDocSavedAttributes(ref values, docId);
             if (values.Count == 0)
-                fillDocTypeAttributes(ref values, docTypeID);
+                fillDocTypeAttributes(ref values, docId, docTypeID);
             return values;
         }
 
-        public List<AttributeValue> getCopyAttributes(decimal copyId, decimal copyTypeID)
+        public List<AttributeValue> getCopyAttributes(decimal docId, decimal copyId, decimal copyTypeID)
         {
             List<AttributeValue> values = new List<AttributeValue>();
             fillCopySavedAttributes(ref values, copyId);
             if (values.Count == 0)
-                fillCopyTypeAttributes(ref values, copyTypeID);
+                fillCopyTypeAttributes(ref values,docId,copyId,copyTypeID);
             return values;
         }
 
@@ -118,11 +118,11 @@ namespace UniArchive.attributes
                                                             attv.ID as V_ID, att.ID as A_ID, DOCUMENT_ID,
                                                             COPY_ID, STRING_VALUE, DECIMAL_VALUE, INT_VALUE, 
                                                            DATE_VALUE, BOOLEAN_VALUE, REFERENCE_VALUE, 
-                                                           ATTRIBUTE_ID, NAME, DESCRIPTION, VALUETYPE
+                                                           ATTRIBUTE_ID, NAME, DESCRIPTION, VALUETYPE,
                                                            REFERENCE_TYPE_ID
                                                         FROM ARCH.ATTRIBUTES_VALUES attv inner join ARCH.ATTRIBUTES att 
                                                         on attv.ATTRIBUTE_ID = att.ID
-                                                        where DOCUMENT_ID = :DOCUMENT_ID and COPY_ID is null;", conn);
+                                                        where DOCUMENT_ID = :DOCUMENT_ID and COPY_ID is null", conn);
                 cmd.Parameters.Add(":DOCUMENT_ID", docId);
 
                 OracleDataReader reader = cmd.ExecuteReader();
@@ -133,12 +133,12 @@ namespace UniArchive.attributes
                     Attribute attr = new Attribute();
                     attr.ID = reader.GetDecimal(1);
                     attr.Name = reader.GetString(11);
-                    attr.Description = reader.GetString(12);
+                    //attr.Description = reader.GetString(12);
                     attr.ValueTypeName = reader.GetString(13);
                     if (attr.ValueType == AttributeType.Reference)
                         attr.ReferenceType = reader.GetDecimal(14);
 
-                    value.Attibute = attr;
+                    value.Attribute = attr;
                     value.ID = reader.GetDecimal(0);
                     value.DocumentID = reader.GetDecimal(2);
                     if (reader["COPY_ID"] != DBNull.Value)
@@ -165,6 +165,8 @@ namespace UniArchive.attributes
                             value.Value = reader["REFERENCE_VALUE"];
                             break;
                     }
+
+                    values.Add(value);
                 }
                 reader.Close();
                 conn.Close();
@@ -180,11 +182,11 @@ namespace UniArchive.attributes
                                                             attv.ID as V_ID, att.ID as A_ID, DOCUMENT_ID,
                                                             COPY_ID, STRING_VALUE, DECIMAL_VALUE, INT_VALUE, 
                                                            DATE_VALUE, BOOLEAN_VALUE, REFERENCE_VALUE, 
-                                                           ATTRIBUTE_ID, NAME, DESCRIPTION, VALUETYPE
+                                                           ATTRIBUTE_ID, NAME, DESCRIPTION, VALUETYPE,
                                                            REFERENCE_TYPE_ID
                                                         FROM ARCH.ATTRIBUTES_VALUES attv inner join ARCH.ATTRIBUTES att 
                                                         on attv.ATTRIBUTE_ID = att.ID
-                                                        where COPY_ID = :COPY_ID;", conn);
+                                                        where COPY_ID = :COPY_ID", conn);
                 cmd.Parameters.Add(":COPY_ID", copyId);
 
                 OracleDataReader reader = cmd.ExecuteReader();
@@ -195,12 +197,12 @@ namespace UniArchive.attributes
                     Attribute attr = new Attribute();
                     attr.ID = reader.GetDecimal(1);
                     attr.Name = reader.GetString(11);
-                    attr.Description = reader.GetString(12);
+                    //attr.Description = reader.GetString(12);
                     attr.ValueTypeName = reader.GetString(13);
                     if (attr.ValueType == AttributeType.Reference)
                         attr.ReferenceType = reader.GetDecimal(14);
 
-                    value.Attibute = attr;
+                    value.Attribute = attr;
                     value.ID = reader.GetDecimal(0);
                     value.DocumentID = reader.GetDecimal(2);
                     if (reader["COPY_ID"] != DBNull.Value)
@@ -227,20 +229,83 @@ namespace UniArchive.attributes
                             value.Value = reader["REFERENCE_VALUE"];
                             break;
                     }
+
+                    values.Add(value);
                 }
                 reader.Close();
                 conn.Close();
             }
         }
 
-        private void fillDocTypeAttributes(ref List<AttributeValue> values, decimal docTypeID)
+        private void fillDocTypeAttributes(ref List<AttributeValue> values,decimal docId, decimal docTypeID)
         {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand(@"SELECT ATTRIBUTE_ID as A_ID,MANDATORY,NAME, DESCRIPTION, VALUETYPE,REFERENCE_TYPE_ID
+                                                        FROM ARCH.DOCUMENT_TYPE_ATTRIBUTES dtattr inner join ARCH.ATTRIBUTES att 
+                                                        on dtattr.ATTRIBUTE_ID = att.ID
+                                                        where DOCUMENT_TYPE_ID=:ID", conn);
+                cmd.Parameters.Add(":ID", docTypeID);
 
+                OracleDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    AttributeValue value = new AttributeValue();
+
+                    Attribute attr = new Attribute();
+                    attr.ID = reader.GetDecimal(0);
+                    attr.Name = reader.GetString(2);
+                   // attr.Description = reader.GetString(3);
+                    attr.ValueTypeName = reader.GetString(4);
+                    if (attr.ValueType == AttributeType.Reference)
+                        attr.ReferenceType = reader.GetDecimal(5);
+
+                    value.Attribute = attr;
+                    value.ID = DataHelper.GET_ATTRIBUTES_VALUES_ID();
+                    value.DocumentID = docId;
+
+                    values.Add(value);
+                }
+                reader.Close();
+                conn.Close();
+            }
         }
 
-        private void fillCopyTypeAttributes(ref List<AttributeValue> values, decimal copyTypeID)
+        private void fillCopyTypeAttributes(ref List<AttributeValue> values, decimal docId, decimal copyId, decimal copyTypeID)
         {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand(@"SELECT ATTRIBUTE_ID as A_ID,MANDATORY,NAME, DESCRIPTION, VALUETYPE,REFERENCE_TYPE_ID
+                                                        FROM ARCH.COPY_TYPE_ATTRIBUTES ctattr inner join ARCH.ATTRIBUTES att 
+                                                        on ctattr.ATTRIBUTE_ID = att.ID
+                                                        where COPY_TYPE_ID=:ID", conn);
+                cmd.Parameters.Add(":ID", copyTypeID);
 
+                OracleDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    AttributeValue value = new AttributeValue();
+
+                    Attribute attr = new Attribute();
+                    attr.ID = reader.GetDecimal(0);
+                    attr.Name = reader.GetString(2);
+                    //attr.Description = reader.GetString(3);
+                    attr.ValueTypeName = reader.GetString(4);
+                    if (attr.ValueType == AttributeType.Reference)
+                        attr.ReferenceType = reader.GetDecimal(5);
+
+                    value.Attribute = attr;
+                    value.ID = DataHelper.GET_ATTRIBUTES_VALUES_ID();
+                    value.DocumentID = docId;
+                    value.CopyID = copyId;
+
+                    values.Add(value);
+                }
+                reader.Close();
+                conn.Close();
+            }
         }
 
         public void saveAttributes(List<AttributeValue> values, decimal docId, decimal? copyId)
@@ -249,6 +314,15 @@ namespace UniArchive.attributes
             {
                 conn.Open();
                 OracleTransaction tran = conn.BeginTransaction();
+
+                delAttributesByDocCmd.Connection = conn;
+                delAttributesByDocCmd.Transaction = tran;
+
+                delAttributesByCopyCmd.Connection = conn;
+                delAttributesByCopyCmd.Transaction = tran;
+
+                insertAttributeCmd.Connection = conn;
+                insertAttributeCmd.Transaction = tran;
 
                 try
                 {
@@ -280,9 +354,7 @@ namespace UniArchive.attributes
                 {
                     conn.Close();
                 }
-
             }
-
         }
 
 

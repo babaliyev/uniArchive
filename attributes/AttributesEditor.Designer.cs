@@ -33,8 +33,8 @@
             this.colTermName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colValue = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colType = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colGroupName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colReferenceType = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.termValueGridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.termValueGridView)).BeginInit();
             this.SuspendLayout();
@@ -57,15 +57,12 @@
             this.termValueGridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colTermName,
             this.colValue,
+            this.colReferenceType,
             this.colType,
-            this.colGroupName,
             this.ID});
             this.termValueGridView.GridControl = this.termValueGridControl;
-            this.termValueGridView.GroupCount = 1;
             this.termValueGridView.Name = "termValueGridView";
             this.termValueGridView.OptionsView.ShowGroupPanel = false;
-            this.termValueGridView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colGroupName, DevExpress.Data.ColumnSortOrder.Ascending)});
             // 
             // colTermName
             // 
@@ -92,22 +89,20 @@
             // colType
             // 
             this.colType.Caption = "Type";
-            this.colType.FieldName = "Term.Type";
+            this.colType.FieldName = "Attribute.ValueType";
             this.colType.Name = "colType";
-            // 
-            // colGroupName
-            // 
-            this.colGroupName.Caption = "Term Type Name";
-            this.colGroupName.FieldName = "TermTypeName";
-            this.colGroupName.Name = "colGroupName";
-            this.colGroupName.Visible = true;
-            this.colGroupName.VisibleIndex = 1;
             // 
             // ID
             // 
             this.ID.Caption = "ID";
             this.ID.FieldName = "ID";
             this.ID.Name = "ID";
+            // 
+            // colReferenceType
+            // 
+            this.colReferenceType.Caption = "ReferenceType";
+            this.colReferenceType.FieldName = "Attribute.ReferenceType";
+            this.colReferenceType.Name = "colReferenceType";
             // 
             // AttributesEditor
             // 
@@ -129,7 +124,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTermName;
         private DevExpress.XtraGrid.Columns.GridColumn colValue;
         private DevExpress.XtraGrid.Columns.GridColumn colType;
-        private DevExpress.XtraGrid.Columns.GridColumn colGroupName;
         private DevExpress.XtraGrid.Columns.GridColumn ID;
+        private DevExpress.XtraGrid.Columns.GridColumn colReferenceType;
     }
 }

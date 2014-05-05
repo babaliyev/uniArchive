@@ -33,6 +33,7 @@
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.saveBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
+            this.showFilesBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             this.downloadBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -84,7 +85,7 @@
             this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage5 = new DevExpress.XtraTab.XtraTabPage();
             this.documentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.showFilesBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
+            this.attributesEditor1 = new UniArchive.attributes.AttributesEditor();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.xtraTabPage1.SuspendLayout();
@@ -115,6 +116,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
+            this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).BeginInit();
@@ -168,6 +170,13 @@
             this.saveBarButtonItem.Id = 5;
             this.saveBarButtonItem.Name = "saveBarButtonItem";
             this.saveBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.saveBarButtonItem_ItemClick);
+            // 
+            // showFilesBarButtonItem
+            // 
+            this.showFilesBarButtonItem.Caption = "Qoşma fayllara baxmaq";
+            this.showFilesBarButtonItem.Id = 8;
+            this.showFilesBarButtonItem.Name = "showFilesBarButtonItem";
+            this.showFilesBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.showFilesBarButtonItem_ItemClick);
             // 
             // downloadBarButtonItem
             // 
@@ -578,6 +587,7 @@
             // 
             this.groupControl4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupControl4.Controls.Add(this.attributesEditor1);
             this.groupControl4.Location = new System.Drawing.Point(17, 114);
             this.groupControl4.Name = "groupControl4";
             this.groupControl4.Size = new System.Drawing.Size(259, 304);
@@ -637,12 +647,15 @@
             this.documentsBindingSource.DataMember = "DOCUMENTS";
             this.documentsBindingSource.DataSource = this.fullDataSet;
             // 
-            // showFilesBarButtonItem
+            // attributesEditor1
             // 
-            this.showFilesBarButtonItem.Caption = "Qoşma fayllara baxmaq";
-            this.showFilesBarButtonItem.Id = 8;
-            this.showFilesBarButtonItem.Name = "showFilesBarButtonItem";
-            this.showFilesBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.showFilesBarButtonItem_ItemClick);
+            this.attributesEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.attributesEditor1.Editable = true;
+            this.attributesEditor1.Location = new System.Drawing.Point(2, 21);
+            this.attributesEditor1.Name = "attributesEditor1";
+            this.attributesEditor1.ReadOnly = false;
+            this.attributesEditor1.Size = new System.Drawing.Size(255, 281);
+            this.attributesEditor1.TabIndex = 0;
             // 
             // CopyManager
             // 
@@ -687,6 +700,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.copyTypesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
+            this.groupControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
             this.groupControl5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.documentsBindingSource)).EndInit();
@@ -753,6 +767,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colDESCRIPTION;
         private FilesManager filesManager1;
         private DevExpress.XtraBars.BarButtonItem showFilesBarButtonItem;
+        private attributes.AttributesEditor attributesEditor1;
 
     }
 }

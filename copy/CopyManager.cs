@@ -61,7 +61,7 @@ namespace UniArchive.copy
                     DataRow newRow = ((DataRowView)copiesBindingSource.Current).Row;
                     newRow["PAGES_COUNT"] = filesManager1.filesCount;
                     this.copiesBindingSource.EndEdit();
-
+                    //this.attributesEditor1.save(this.documentId, id);
                     if(OnSave!=null)
                         OnSave(this, EventArgs.Empty);                    
                 }

@@ -10,7 +10,7 @@ namespace UniArchive.attributes
         public decimal ID { get; set; }
         public decimal DocumentID { get; set; }
         public decimal? CopyID { get; set; }
-        public Attribute Attibute { get; set; }
+        public Attribute Attribute { get; set; }
         public object Value { get; set; }
         
         public override bool Equals(object obj)
