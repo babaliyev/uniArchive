@@ -78,6 +78,7 @@
             this.colNAME = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDESCRIPTION = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
+            this.attributesEditor1 = new UniArchive.attributes.AttributesEditor();
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
             this.filesManager1 = new UniArchive.copy.FilesManager();
             this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
@@ -85,7 +86,6 @@
             this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage5 = new DevExpress.XtraTab.XtraTabPage();
             this.documentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.attributesEditor1 = new UniArchive.attributes.AttributesEditor();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.xtraTabPage1.SuspendLayout();
@@ -594,6 +594,16 @@
             this.groupControl4.TabIndex = 0;
             this.groupControl4.Text = "Xassələri";
             // 
+            // attributesEditor1
+            // 
+            this.attributesEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.attributesEditor1.Editable = true;
+            this.attributesEditor1.Location = new System.Drawing.Point(2, 21);
+            this.attributesEditor1.Name = "attributesEditor1";
+            this.attributesEditor1.ReadOnly = false;
+            this.attributesEditor1.Size = new System.Drawing.Size(255, 281);
+            this.attributesEditor1.TabIndex = 0;
+            // 
             // groupControl5
             // 
             this.groupControl5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -633,12 +643,14 @@
             // xtraTabPage4
             // 
             this.xtraTabPage4.Name = "xtraTabPage4";
+            this.xtraTabPage4.PageVisible = false;
             this.xtraTabPage4.Size = new System.Drawing.Size(745, 433);
             this.xtraTabPage4.Text = "Məxfilik";
             // 
             // xtraTabPage5
             // 
             this.xtraTabPage5.Name = "xtraTabPage5";
+            this.xtraTabPage5.PageVisible = false;
             this.xtraTabPage5.Size = new System.Drawing.Size(745, 433);
             this.xtraTabPage5.Text = "Tarix";
             // 
@@ -646,16 +658,6 @@
             // 
             this.documentsBindingSource.DataMember = "DOCUMENTS";
             this.documentsBindingSource.DataSource = this.fullDataSet;
-            // 
-            // attributesEditor1
-            // 
-            this.attributesEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.attributesEditor1.Editable = true;
-            this.attributesEditor1.Location = new System.Drawing.Point(2, 21);
-            this.attributesEditor1.Name = "attributesEditor1";
-            this.attributesEditor1.ReadOnly = false;
-            this.attributesEditor1.Size = new System.Drawing.Size(255, 281);
-            this.attributesEditor1.TabIndex = 0;
             // 
             // CopyManager
             // 

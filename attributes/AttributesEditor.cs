@@ -109,7 +109,7 @@ namespace UniArchive.attributes
                         case AttributeType.Integer:
                             e.RepositoryItem = spinRitem;
                             break;
-                        case AttributeType.DateTime:
+                        case AttributeType.Date:
                             e.RepositoryItem = dateRitem;
                             break;
                         case AttributeType.Boolean:

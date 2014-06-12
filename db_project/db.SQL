@@ -1,42 +1,56 @@
 --
--- Create Schema Script 
+-- Create Database Script 
 --   Database Version          : 11.2.0.2.0 
 --   Database Compatible Level : 11.2.0.0.0 
---   Script Compatible Level   : 11.2.0.0.0 
 --   Toad Version              : 11.6.0.43 
 --   DB Connect String         : LOCALHOST:1521/XE 
---   Schema                    : ARCH 
 --   Script Created by         : ARCH 
---   Script Created at         : 22/04/2014 0:59:52 
+--   Script Created at         : 12/06/2014 13:10:18 
 --   Physical Location         :  
 --   Notes                     :  
 --
 
--- Object Counts: 
---   Roles: 2           Sys Privs: 203      Roles: 12            
---   Users: 1           Sys Privs: 206      Roles: 2             
---   Tablespaces: 2     DataFiles: 1        TempFiles: 1 
--- 
---   Directories: 4 
---   Functions: 2       Lines of Code: 28 
---   Indexes: 25        Columns: 25         
---   Object Privileges: 2 
---   Packages: 24       Lines of Code: 854 
---   Package Bodies: 24 Lines of Code: 1932 
---   Procedures: 1      Lines of Code: 16 
---   Sequences: 24 
---   Tables: 24         Columns: 365        Constraints: 444    
---   Triggers: 48 
+/* Init.ora file begins here. 
+
+#####################################################
+# Created by TOAD 
+# 12/06/2014 13:10:18
+# Note: Only non-default parameters are listed here. 
+#####################################################
+
+audit_file_dest = "C:\ORACLEXE\APP\ORACLE\ADMIN\XE\ADUMP" 
+compatible = "11.2.0.0.0" 
+control_files = (C:\ORACLEXE\APP\ORACLE\ORADATA\XE\CONTROL.DBF) 
+db_name = "XE" 
+db_recovery_file_dest = "C:\oraclexe\app\oracle\fast_recovery_area" 
+db_recovery_file_dest_size = 10737418240 
+diagnostic_dest = "C:\ORACLEXE\APP\ORACLE" 
+dispatchers = "(PROTOCOL=TCP) (SERVICE=XEXDB)" 
+job_queue_processes = 4 
+memory_target = 1073741824 
+open_cursors = 300 
+remote_login_passwordfile = "EXCLUSIVE" 
+sessions = 172 
+shared_servers = 4 
+spfile = "C:\ORACLEXE\APP\ORACLE\PRODUCT\11.2.0\SERVER\DBS\SPFILEXE.ORA" 
+undo_management = "AUTO" 
+undo_tablespace = "UNDOTBS1" 
+
+Init.ora file ends here. */
 
 
--- "Set define off" turns off substitution variables. 
-Set define off; 
+CREATE TABLESPACE SYSAUX DATAFILE 
+  'C:\ORACLEXE\APP\ORACLE\ORADATA\XE\UNDOTBS1.DBF' SIZE 680M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED
+LOGGING
+ONLINE
+EXTENT MANAGEMENT LOCAL AUTOALLOCATE
+BLOCKSIZE 8K
+SEGMENT SPACE MANAGEMENT AUTO
+FLASHBACK ON;
 
---
--- SYSTEM  (Tablespace) 
---
+
 CREATE TABLESPACE SYSTEM DATAFILE 
-  'C:\ORACLEXE\APP\ORACLE\ORADATA\XE\SYSTEM.DBF' SIZE 360M AUTOEXTEND ON NEXT 10M MAXSIZE 600M
+  'C:\ORACLEXE\APP\ORACLE\ORADATA\XE\SYSTEM.DBF' SIZE 600M AUTOEXTEND ON NEXT 10M MAXSIZE 600M
 LOGGING
 ONLINE
 EXTENT MANAGEMENT LOCAL AUTOALLOCATE
@@ -44,18 +58,40 @@ BLOCKSIZE 8K
 FLASHBACK ON;
 
 
---
--- TEMP  (Tablespace) 
---
 CREATE TEMPORARY TABLESPACE TEMP TEMPFILE 
   'C:\ORACLEXE\APP\ORACLE\ORADATA\XE\TEMP.DBF' SIZE 20M AUTOEXTEND ON NEXT 640K MAXSIZE UNLIMITED
 TABLESPACE GROUP ''
 EXTENT MANAGEMENT LOCAL UNIFORM SIZE 1M;
 
 
---
--- "DEFAULT"  (Profile) 
---
+CREATE UNDO TABLESPACE UNDOTBS1 DATAFILE 
+  'C:\ORACLEXE\APP\ORACLE\ORADATA\XE\SYSAUX.DBF' SIZE 30M AUTOEXTEND ON NEXT 5M MAXSIZE UNLIMITED
+ONLINE
+RETENTION NOGUARANTEE
+BLOCKSIZE 8K
+FLASHBACK ON;
+
+
+CREATE TABLESPACE USERS DATAFILE 
+  'C:\ORACLEXE\APP\ORACLE\ORADATA\XE\USERS.DBF' SIZE 100M AUTOEXTEND ON NEXT 10M MAXSIZE 11264M
+LOGGING
+ONLINE
+EXTENT MANAGEMENT LOCAL AUTOALLOCATE
+BLOCKSIZE 8K
+SEGMENT SPACE MANAGEMENT AUTO
+FLASHBACK ON;
+
+
+ALTER DATABASE ADD LOGFILE GROUP 1(
+  'C:\ORACLEXE\APP\ORACLE\FAST_RECOVERY_AREA\XE\ONLINELOG\O1_MF_1_9NO9GRJV_.LOG')
+    SIZE 50M;
+
+
+ALTER DATABASE ADD LOGFILE GROUP 2(
+  'C:\ORACLEXE\APP\ORACLE\FAST_RECOVERY_AREA\XE\ONLINELOG\O1_MF_2_9NO9GRPL_.LOG')
+    SIZE 50M;
+
+
 CREATE PROFILE "DEFAULT" LIMIT
   SESSIONS_PER_USER UNLIMITED
   CPU_PER_SESSION UNLIMITED
@@ -75,74 +111,2336 @@ CREATE PROFILE "DEFAULT" LIMIT
   PASSWORD_VERIFY_FUNCTION NULL;
 
 
---
--- CONNECT  (Role) 
---
-CREATE ROLE CONNECT NOT IDENTIFIED;
+CREATE PROFILE MONITORING_PROFILE LIMIT
+  SESSIONS_PER_USER DEFAULT
+  CPU_PER_SESSION DEFAULT
+  CPU_PER_CALL DEFAULT
+  CONNECT_TIME DEFAULT
+  IDLE_TIME DEFAULT
+  LOGICAL_READS_PER_SESSION DEFAULT
+  LOGICAL_READS_PER_CALL DEFAULT
+  COMPOSITE_LIMIT DEFAULT
+  PRIVATE_SGA DEFAULT
+  FAILED_LOGIN_ATTEMPTS UNLIMITED
+  PASSWORD_LIFE_TIME DEFAULT
+  PASSWORD_REUSE_TIME DEFAULT
+  PASSWORD_REUSE_MAX DEFAULT
+  PASSWORD_LOCK_TIME DEFAULT
+  PASSWORD_GRACE_TIME DEFAULT
+  PASSWORD_VERIFY_FUNCTION DEFAULT;
 
-GRANT CREATE SESSION TO CONNECT;
+
+CREATE ROLE ADM_PARALLEL_EXECUTE_TASK NOT IDENTIFIED;
 
 
---
--- DBA  (Role) 
---
-CREATE ROLE DBA NOT IDENTIFIED;
 
-GRANT DROP ANY CUBE BUILD PROCESS TO DBA WITH ADMIN OPTION;
-GRANT CREATE CUBE TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY MINING MODEL TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY MINING MODEL TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY EDITION TO DBA WITH ADMIN OPTION;
-GRANT CHANGE NOTIFICATION TO DBA WITH ADMIN OPTION;
-GRANT ADMINISTER ANY SQL TUNING SET TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY SQL PROFILE TO DBA WITH ADMIN OPTION;
+CREATE ROLE APEX_ADMINISTRATOR_ROLE NOT IDENTIFIED;
+
+
+
+CREATE ROLE AQ_ADMINISTRATOR_ROLE NOT IDENTIFIED;
+
 BEGIN
 SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
-  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_RULE_OBJ,
-  GRANTEE      => 'DBA',
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_EVALUATION_CONTEXT_OBJ,
+  GRANTEE      => 'AQ_ADMINISTRATOR_ROLE',
   GRANT_OPTION => TRUE);
 END;
 /
-GRANT EXPORT FULL DATABASE TO DBA WITH ADMIN OPTION;
 BEGIN
 SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
-  PRIVILEGE    => SYS.DBMS_RULE_ADM.EXECUTE_ANY_EVALUATION_CONTEXT,
-  GRANTEE      => 'DBA',
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_RULE_OBJ,
+  GRANTEE      => 'AQ_ADMINISTRATOR_ROLE',
+  GRANT_OPTION => TRUE);
+END;
+/
+BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_RULE_SET_OBJ,
+  GRANTEE      => 'AQ_ADMINISTRATOR_ROLE',
   GRANT_OPTION => TRUE);
 END;
 /
 BEGIN
 SYS.DBMS_AQADM.GRANT_SYSTEM_PRIVILEGE (
   PRIVILEGE    => 'DEQUEUE_ANY',
-  GRANTEE      => 'DBA',
+  GRANTEE      => 'AQ_ADMINISTRATOR_ROLE',
   ADMIN_OPTION => TRUE);
 END;
 /
-GRANT DROP ANY INDEXTYPE TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY INDEXTYPE TO DBA WITH ADMIN OPTION;
-GRANT EXECUTE ANY LIBRARY TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY LIBRARY TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY DIRECTORY TO DBA WITH ADMIN OPTION;
-GRANT ALTER PROFILE TO DBA WITH ADMIN OPTION;
-GRANT EXECUTE ANY PROCEDURE TO DBA WITH ADMIN OPTION;
-GRANT CREATE ROLE TO DBA WITH ADMIN OPTION;
-GRANT SELECT ANY SEQUENCE TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY INDEX TO DBA WITH ADMIN OPTION;
-GRANT UPDATE ANY TABLE TO DBA WITH ADMIN OPTION;
-GRANT INSERT ANY TABLE TO DBA WITH ADMIN OPTION;
-GRANT SELECT ANY TABLE TO DBA WITH ADMIN OPTION;
-GRANT DROP ROLLBACK SEGMENT TO DBA WITH ADMIN OPTION;
-GRANT BECOME USER TO DBA WITH ADMIN OPTION;
-GRANT DROP TABLESPACE TO DBA WITH ADMIN OPTION;
-GRANT ALTER SESSION TO DBA WITH ADMIN OPTION;
-GRANT CREATE SESSION TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY MEASURE FOLDER TO DBA WITH ADMIN OPTION;
-GRANT SELECT ANY CUBE TO DBA WITH ADMIN OPTION;
+BEGIN
+SYS.DBMS_AQADM.GRANT_SYSTEM_PRIVILEGE (
+  PRIVILEGE    => 'ENQUEUE_ANY',
+  GRANTEE      => 'AQ_ADMINISTRATOR_ROLE',
+  ADMIN_OPTION => TRUE);
+END;
+/
+BEGIN
+SYS.DBMS_AQADM.GRANT_SYSTEM_PRIVILEGE (
+  PRIVILEGE    => 'MANAGE_ANY',
+  GRANTEE      => 'AQ_ADMINISTRATOR_ROLE',
+  ADMIN_OPTION => TRUE);
+END;
+/
+
+
+CREATE ROLE AQ_USER_ROLE NOT IDENTIFIED;
+
+
+
+CREATE ROLE AUTHENTICATEDUSER NOT IDENTIFIED;
+
+
+
+CREATE ROLE CONNECT NOT IDENTIFIED;
+
+GRANT CREATE SESSION TO CONNECT;
+
+
+CREATE ROLE CTXAPP NOT IDENTIFIED;
+
+
+
+CREATE ROLE DBFS_ROLE NOT IDENTIFIED;
+
+
+
+CREATE ROLE DELETE_CATALOG_ROLE NOT IDENTIFIED;
+
+
+
+CREATE ROLE GATHER_SYSTEM_STATISTICS NOT IDENTIFIED;
+
+
+
+CREATE ROLE HS_ADMIN_EXECUTE_ROLE NOT IDENTIFIED;
+
+
+
+CREATE ROLE HS_ADMIN_SELECT_ROLE NOT IDENTIFIED;
+
+
+
+CREATE ROLE OEM_ADVISOR NOT IDENTIFIED;
+
+GRANT ADMINISTER SQL TUNING SET TO OEM_ADVISOR;
+GRANT ADVISOR TO OEM_ADVISOR;
+GRANT CREATE JOB TO OEM_ADVISOR;
+
+
+CREATE ROLE PLUSTRACE NOT IDENTIFIED;
+
+
+
+CREATE ROLE RECOVERY_CATALOG_OWNER NOT IDENTIFIED;
+
+GRANT ALTER SESSION TO RECOVERY_CATALOG_OWNER;
+GRANT CREATE CLUSTER TO RECOVERY_CATALOG_OWNER;
+GRANT CREATE DATABASE LINK TO RECOVERY_CATALOG_OWNER;
+GRANT CREATE PROCEDURE TO RECOVERY_CATALOG_OWNER;
+GRANT CREATE SEQUENCE TO RECOVERY_CATALOG_OWNER;
+GRANT CREATE SESSION TO RECOVERY_CATALOG_OWNER;
+GRANT CREATE SYNONYM TO RECOVERY_CATALOG_OWNER;
+GRANT CREATE TABLE TO RECOVERY_CATALOG_OWNER;
+GRANT CREATE TRIGGER TO RECOVERY_CATALOG_OWNER;
+GRANT CREATE TYPE TO RECOVERY_CATALOG_OWNER;
+GRANT CREATE VIEW TO RECOVERY_CATALOG_OWNER;
+
+
+CREATE ROLE RESOURCE NOT IDENTIFIED;
+
+GRANT CREATE CLUSTER TO RESOURCE;
+GRANT CREATE INDEXTYPE TO RESOURCE;
+GRANT CREATE OPERATOR TO RESOURCE;
+GRANT CREATE PROCEDURE TO RESOURCE;
+GRANT CREATE SEQUENCE TO RESOURCE;
+GRANT CREATE TABLE TO RESOURCE;
+GRANT CREATE TRIGGER TO RESOURCE;
+GRANT CREATE TYPE TO RESOURCE;
+
+
+CREATE ROLE SCHEDULER_ADMIN NOT IDENTIFIED;
+
+GRANT CREATE ANY JOB TO SCHEDULER_ADMIN WITH ADMIN OPTION;
+GRANT CREATE EXTERNAL JOB TO SCHEDULER_ADMIN WITH ADMIN OPTION;
+GRANT CREATE JOB TO SCHEDULER_ADMIN WITH ADMIN OPTION;
+GRANT EXECUTE ANY CLASS TO SCHEDULER_ADMIN WITH ADMIN OPTION;
+GRANT EXECUTE ANY PROGRAM TO SCHEDULER_ADMIN WITH ADMIN OPTION;
+GRANT MANAGE SCHEDULER TO SCHEDULER_ADMIN WITH ADMIN OPTION;
+
+
+CREATE ROLE SELECT_CATALOG_ROLE NOT IDENTIFIED;
+
+GRANT HS_ADMIN_SELECT_ROLE TO SELECT_CATALOG_ROLE;
+
+
+CREATE ROLE XDBADMIN NOT IDENTIFIED;
+
+
+
+CREATE ROLE XDB_SET_INVOKER NOT IDENTIFIED;
+
+
+
+CREATE ROLE XDB_WEBSERVICES NOT IDENTIFIED;
+
+
+
+CREATE ROLE XDB_WEBSERVICES_OVER_HTTP NOT IDENTIFIED;
+
+
+
+CREATE ROLE XDB_WEBSERVICES_WITH_PUBLIC NOT IDENTIFIED;
+
+
+
+CREATE ROLLBACK SEGMENT SYSTEM
+  TABLESPACE SYSTEM
+  STORAGE    (
+              INITIAL          112K
+              NEXT             56K
+              MINEXTENTS       1
+              MAXEXTENTS       32765
+             );
+ALTER ROLLBACK SEGMENT SYSTEM ONLINE;
+
+
+CREATE OR REPLACE DIRECTORY 
+DATA_PUMP_DIR AS 
+'C:\oraclexe\app\oracle\admin\xe\dpdump\';
+
+
+CREATE OR REPLACE DIRECTORY 
+ORACLECLRDIR AS 
+'C:\oraclexe\app\oracle\product\11.2.0\server\bin\clr';
+
+
+CREATE OR REPLACE DIRECTORY 
+ORACLE_OCM_CONFIG_DIR AS 
+'C:/ADE/jaikrish_xe/oracle\ccr\state';
+
+
+CREATE OR REPLACE DIRECTORY 
+XMLDIR AS 
+'C:\oraclexe\app\oracle\product\11.2.0\server\rdbms\xml';
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'AUTO_TASK_CONSUMER_GROUP'
+     ,comment                      => 'System maintenance task consumer group');
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'DEFAULT_CONSUMER_GROUP'
+     ,comment                      => 'Consumer group for users not assigned to any consumer group');
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager_privs.grant_switch_consumer_group (
+      grantee_name                 => 'PUBLIC'
+     ,consumer_group               => 'DEFAULT_CONSUMER_GROUP'
+     ,grant_option                 => TRUE);
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'LOW_GROUP'
+     ,comment                      => 'Consumer group for low-priority sessions');
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager_privs.grant_switch_consumer_group (
+      grantee_name                 => 'PUBLIC'
+     ,consumer_group               => 'LOW_GROUP'
+     ,grant_option                 => FALSE);
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$APPQOS_4'
+     ,comment                      => 'Consumer group for Application QOS');
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$APPQOS_5'
+     ,comment                      => 'Consumer group for Application QOS');
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$APPQOS_6'
+     ,comment                      => 'Consumer group for Application QOS');
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$APPQOS_7'
+     ,comment                      => 'Consumer group for Application QOS');
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'APPQOS_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Plan for Application QOS Management that provides a fixed set of allocations to the consumer groups that Application QOS uses to manage workload resource allocation.');
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default sub-plan for automated maintenance tasks.  A directive to this sub-plan should be included in every top-level plan to manage the resources consumed by the automated maintenance tasks.');
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default sub-plan for high-priority, automated maintenance tasks.  This sub-plan is referenced by ORA$AUTOTASK_SUB_PLAN and should not be referenced directly.');
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_HEALTH_GROUP'
+     ,comment                      => 'Consumer group for health checks');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_HEALTH_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for health check tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_SQL_GROUP'
+     ,comment                      => 'Consumer group for SQL tuning');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SQL_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for SQL tuning tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_SPACE_GROUP'
+     ,comment                      => 'Consumer group for space management advisors');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SPACE_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for space management advisory tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_STATS_GROUP'
+     ,comment                      => 'Consumer group for gathering optimizer statistics');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_STATS_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for gathering optimizer statistics tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,cpu_p2                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for high-priority automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,comment                      => 'Consumer group for urgent maintenance tasks ');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,cpu_p1                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for urgent automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,comment                      => 'Consumer group for medium-priority maintenance tasks ');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,cpu_p3                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for medium-priority automated tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'APPQOS_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SUB_PLAN'
+     ,cpu_p3                       => 15
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for automated maintenance tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$DIAGNOSTICS'
+     ,comment                      => 'Consumer group for diagnostics');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'APPQOS_PLAN'
+     ,group_or_subplan             => 'ORA$DIAGNOSTICS'
+     ,cpu_p3                       => 5
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for automated diagnostic tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'APPQOS_PLAN'
+     ,group_or_subplan             => 'OTHER_GROUPS'
+     ,cpu_p3                       => 80
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for all other operations'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'APPQOS_PLAN'
+     ,group_or_subplan             => 'SYS_GROUP'
+     ,cpu_p1                       => 75
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for SYS_GROUP'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$APPQOS_0'
+     ,comment                      => 'Consumer group for Application QOS');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'APPQOS_PLAN'
+     ,group_or_subplan             => 'ORA$APPQOS_0'
+     ,cpu_p2                       => 57
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for first QOS group'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$APPQOS_1'
+     ,comment                      => 'Consumer group for Application QOS');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'APPQOS_PLAN'
+     ,group_or_subplan             => 'ORA$APPQOS_1'
+     ,cpu_p2                       => 26
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for second QOS group'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$APPQOS_2'
+     ,comment                      => 'Consumer group for Application QOS');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'APPQOS_PLAN'
+     ,group_or_subplan             => 'ORA$APPQOS_2'
+     ,cpu_p2                       => 12
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for third QOS group'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$APPQOS_3'
+     ,comment                      => 'Consumer group for Application QOS');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'APPQOS_PLAN'
+     ,group_or_subplan             => 'ORA$APPQOS_3'
+     ,cpu_p2                       => 5
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for fourth QOS group'  );
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'DEFAULT_MAINTENANCE_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default plan for maintenance windows that prioritizes SYS_GROUP operations and allocates the remaining 5% to diagnostic operations and 25% to automated maintenance operations.');
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default sub-plan for automated maintenance tasks.  A directive to this sub-plan should be included in every top-level plan to manage the resources consumed by the automated maintenance tasks.');
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default sub-plan for high-priority, automated maintenance tasks.  This sub-plan is referenced by ORA$AUTOTASK_SUB_PLAN and should not be referenced directly.');
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_HEALTH_GROUP'
+     ,comment                      => 'Consumer group for health checks');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_HEALTH_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for health check tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_SQL_GROUP'
+     ,comment                      => 'Consumer group for SQL tuning');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SQL_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for SQL tuning tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_SPACE_GROUP'
+     ,comment                      => 'Consumer group for space management advisors');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SPACE_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for space management advisory tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_STATS_GROUP'
+     ,comment                      => 'Consumer group for gathering optimizer statistics');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_STATS_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for gathering optimizer statistics tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,cpu_p2                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for high-priority automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,comment                      => 'Consumer group for urgent maintenance tasks ');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,cpu_p1                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for urgent automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,comment                      => 'Consumer group for medium-priority maintenance tasks ');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,cpu_p3                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for medium-priority automated tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DEFAULT_MAINTENANCE_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SUB_PLAN'
+     ,cpu_p2                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for automated maintenance tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$DIAGNOSTICS'
+     ,comment                      => 'Consumer group for diagnostics');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DEFAULT_MAINTENANCE_PLAN'
+     ,group_or_subplan             => 'ORA$DIAGNOSTICS'
+     ,cpu_p2                       => 5
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for automated diagnostic tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DEFAULT_MAINTENANCE_PLAN'
+     ,group_or_subplan             => 'OTHER_GROUPS'
+     ,cpu_p2                       => 70
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for all other operations'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DEFAULT_MAINTENANCE_PLAN'
+     ,group_or_subplan             => 'SYS_GROUP'
+     ,cpu_p1                       => 75
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for system operations'  );
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'DEFAULT_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default, basic, pre-defined plan that prioritizes SYS_GROUP operations and allocates minimal resources for automated maintenance and diagnostics operations.');
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default sub-plan for automated maintenance tasks.  A directive to this sub-plan should be included in every top-level plan to manage the resources consumed by the automated maintenance tasks.');
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default sub-plan for high-priority, automated maintenance tasks.  This sub-plan is referenced by ORA$AUTOTASK_SUB_PLAN and should not be referenced directly.');
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_HEALTH_GROUP'
+     ,comment                      => 'Consumer group for health checks');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_HEALTH_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for health check tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_SQL_GROUP'
+     ,comment                      => 'Consumer group for SQL tuning');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SQL_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for SQL tuning tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_SPACE_GROUP'
+     ,comment                      => 'Consumer group for space management advisors');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SPACE_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for space management advisory tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_STATS_GROUP'
+     ,comment                      => 'Consumer group for gathering optimizer statistics');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_STATS_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for gathering optimizer statistics tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,cpu_p2                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for high-priority automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,comment                      => 'Consumer group for urgent maintenance tasks ');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,cpu_p1                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for urgent automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,comment                      => 'Consumer group for medium-priority maintenance tasks ');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,cpu_p3                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for medium-priority automated tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DEFAULT_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SUB_PLAN'
+     ,cpu_p2                       => 5
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for automated maintenance tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$DIAGNOSTICS'
+     ,comment                      => 'Consumer group for diagnostics');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DEFAULT_PLAN'
+     ,group_or_subplan             => 'ORA$DIAGNOSTICS'
+     ,cpu_p2                       => 5
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for automated diagnostic tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DEFAULT_PLAN'
+     ,group_or_subplan             => 'OTHER_GROUPS'
+     ,cpu_p2                       => 90
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for all other operations'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DEFAULT_PLAN'
+     ,group_or_subplan             => 'SYS_GROUP'
+     ,cpu_p1                       => 75
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for system operations'  );
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'DSS_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Example plan for DSS workloads that prioritizes DSS queries over ETL.');
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default sub-plan for automated maintenance tasks.  A directive to this sub-plan should be included in every top-level plan to manage the resources consumed by the automated maintenance tasks.');
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default sub-plan for high-priority, automated maintenance tasks.  This sub-plan is referenced by ORA$AUTOTASK_SUB_PLAN and should not be referenced directly.');
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_HEALTH_GROUP'
+     ,comment                      => 'Consumer group for health checks');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_HEALTH_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for health check tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_SQL_GROUP'
+     ,comment                      => 'Consumer group for SQL tuning');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SQL_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for SQL tuning tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_SPACE_GROUP'
+     ,comment                      => 'Consumer group for space management advisors');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SPACE_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for space management advisory tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_STATS_GROUP'
+     ,comment                      => 'Consumer group for gathering optimizer statistics');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_STATS_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for gathering optimizer statistics tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,cpu_p2                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for high-priority automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,comment                      => 'Consumer group for urgent maintenance tasks ');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,cpu_p1                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for urgent automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,comment                      => 'Consumer group for medium-priority maintenance tasks ');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,cpu_p3                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for medium-priority automated tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DSS_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SUB_PLAN'
+     ,cpu_p2                       => 5
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for Oracle automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'DSS_GROUP'
+     ,comment                      => 'Consumer group for DSS queries');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DSS_PLAN'
+     ,group_or_subplan             => 'DSS_GROUP'
+     ,cpu_p3                       => 75
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for DSS_GROUP'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'DSS_CRITICAL_GROUP'
+     ,comment                      => 'Consumer group for critical DSS queries');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DSS_PLAN'
+     ,group_or_subplan             => 'DSS_CRITICAL_GROUP'
+     ,cpu_p2                       => 75
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for DSS_CRITICAL_GROUP'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'BATCH_GROUP'
+     ,comment                      => 'Consumer group for batch operations');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DSS_PLAN'
+     ,group_or_subplan             => 'BATCH_GROUP'
+     ,cpu_p4                       => 45
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for BATCH_GROUP'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$DIAGNOSTICS'
+     ,comment                      => 'Consumer group for diagnostics');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DSS_PLAN'
+     ,group_or_subplan             => 'ORA$DIAGNOSTICS'
+     ,cpu_p2                       => 5
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for Oracle diagnostics'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DSS_PLAN'
+     ,group_or_subplan             => 'OTHER_GROUPS'
+     ,cpu_p4                       => 10
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for unclassified activity'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DSS_PLAN'
+     ,group_or_subplan             => 'SYS_GROUP'
+     ,cpu_p1                       => 75
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for SYS_GROUP'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ETL_GROUP'
+     ,comment                      => 'Consumer group for ETL');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'DSS_PLAN'
+     ,group_or_subplan             => 'ETL_GROUP'
+     ,cpu_p4                       => 45
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for ETL_GROUP'  );
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'ETL_CRITICAL_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Example plan for DSS workloads that prioritizes ETL and critical DSS queries.');
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default sub-plan for automated maintenance tasks.  A directive to this sub-plan should be included in every top-level plan to manage the resources consumed by the automated maintenance tasks.');
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default sub-plan for high-priority, automated maintenance tasks.  This sub-plan is referenced by ORA$AUTOTASK_SUB_PLAN and should not be referenced directly.');
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_HEALTH_GROUP'
+     ,comment                      => 'Consumer group for health checks');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_HEALTH_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for health check tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_SQL_GROUP'
+     ,comment                      => 'Consumer group for SQL tuning');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SQL_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for SQL tuning tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_SPACE_GROUP'
+     ,comment                      => 'Consumer group for space management advisors');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SPACE_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for space management advisory tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_STATS_GROUP'
+     ,comment                      => 'Consumer group for gathering optimizer statistics');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_STATS_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for gathering optimizer statistics tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,cpu_p2                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for high-priority automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,comment                      => 'Consumer group for urgent maintenance tasks ');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,cpu_p1                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for urgent automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,comment                      => 'Consumer group for medium-priority maintenance tasks ');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,cpu_p3                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for medium-priority automated tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ETL_CRITICAL_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SUB_PLAN'
+     ,cpu_p2                       => 3
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for Oracle automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'DSS_GROUP'
+     ,comment                      => 'Consumer group for DSS queries');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ETL_CRITICAL_PLAN'
+     ,group_or_subplan             => 'DSS_GROUP'
+     ,cpu_p2                       => 10
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for DSS_GROUP'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'DSS_CRITICAL_GROUP'
+     ,comment                      => 'Consumer group for critical DSS queries');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ETL_CRITICAL_PLAN'
+     ,group_or_subplan             => 'DSS_CRITICAL_GROUP'
+     ,cpu_p2                       => 35
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for DSS_CRITICAL_GROUP'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'BATCH_GROUP'
+     ,comment                      => 'Consumer group for batch operations');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ETL_CRITICAL_PLAN'
+     ,group_or_subplan             => 'BATCH_GROUP'
+     ,cpu_p2                       => 10
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for BATCH_GROUP'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$DIAGNOSTICS'
+     ,comment                      => 'Consumer group for diagnostics');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ETL_CRITICAL_PLAN'
+     ,group_or_subplan             => 'ORA$DIAGNOSTICS'
+     ,cpu_p2                       => 3
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for Oracle diagnostics'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ETL_CRITICAL_PLAN'
+     ,group_or_subplan             => 'OTHER_GROUPS'
+     ,cpu_p2                       => 3
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for unclassified activity'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ETL_CRITICAL_PLAN'
+     ,group_or_subplan             => 'SYS_GROUP'
+     ,cpu_p1                       => 75
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for SYS_GROUP'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ETL_GROUP'
+     ,comment                      => 'Consumer group for ETL');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ETL_CRITICAL_PLAN'
+     ,group_or_subplan             => 'ETL_GROUP'
+     ,cpu_p2                       => 35
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for ETL_GROUP'  );
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'INTERNAL_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Internally-used plan for disabling the resource manager.');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'INTERNAL_PLAN'
+     ,group_or_subplan             => 'OTHER_GROUPS'
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for all other operations'  );
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'INTERNAL_QUIESCE'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Plan for quiescing the database.  This plan cannot be activated directly.  To activate, use the quiesce command.');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'INTERNAL_QUIESCE'
+     ,group_or_subplan             => 'OTHER_GROUPS'
+     ,active_sess_pool_p1          => 0
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for all other operations'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'INTERNAL_QUIESCE'
+     ,group_or_subplan             => 'SYS_GROUP'
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for system operations'  );
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+begin
+  sys.dbms_resource_manager.clear_pending_area();
+  sys.dbms_resource_manager.create_pending_area();
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'MIXED_WORKLOAD_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Example plan for a mixed workload that prioritizes interactive operations over batch operations.');
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default sub-plan for automated maintenance tasks.  A directive to this sub-plan should be included in every top-level plan to manage the resources consumed by the automated maintenance tasks.');
+  sys.dbms_resource_manager.create_plan (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,cpu_mth                      => 'EMPHASIS'
+     ,active_sess_pool_mth         => 'ACTIVE_SESS_POOL_ABSOLUTE'
+     ,parallel_degree_limit_mth    => 'PARALLEL_DEGREE_LIMIT_ABSOLUTE'
+     ,queueing_mth                 => 'FIFO_TIMEOUT'
+     ,comment                      => 'Default sub-plan for high-priority, automated maintenance tasks.  This sub-plan is referenced by ORA$AUTOTASK_SUB_PLAN and should not be referenced directly.');
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_HEALTH_GROUP'
+     ,comment                      => 'Consumer group for health checks');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_HEALTH_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for health check tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_SQL_GROUP'
+     ,comment                      => 'Consumer group for SQL tuning');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SQL_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for SQL tuning tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_SPACE_GROUP'
+     ,comment                      => 'Consumer group for space management advisors');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SPACE_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for space management advisory tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_STATS_GROUP'
+     ,comment                      => 'Consumer group for gathering optimizer statistics');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_STATS_GROUP'
+     ,cpu_p1                       => 25
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for gathering optimizer statistics tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_HIGH_SUB_PLAN'
+     ,cpu_p2                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for high-priority automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,comment                      => 'Consumer group for urgent maintenance tasks ');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,cpu_p1                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for urgent automated tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,comment                      => 'Consumer group for medium-priority maintenance tasks ');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'ORA$AUTOTASK_SUB_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,cpu_p3                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for medium-priority automated tasks'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'MIXED_WORKLOAD_PLAN'
+     ,group_or_subplan             => 'ORA$AUTOTASK_SUB_PLAN'
+     ,cpu_p2                       => 5
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for automated maintenance tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'BATCH_GROUP'
+     ,comment                      => 'Consumer group for batch operations');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'MIXED_WORKLOAD_PLAN'
+     ,group_or_subplan             => 'BATCH_GROUP'
+     ,cpu_p3                       => 100
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for batch operations'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'ORA$DIAGNOSTICS'
+     ,comment                      => 'Consumer group for diagnostics');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'MIXED_WORKLOAD_PLAN'
+     ,group_or_subplan             => 'ORA$DIAGNOSTICS'
+     ,cpu_p2                       => 5
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for automated diagnostic tasks'  );
+  sys.dbms_resource_manager.create_consumer_group (
+      consumer_group               => 'INTERACTIVE_GROUP'
+     ,comment                      => 'Consumer group for interactive, OLTP operations');
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'MIXED_WORKLOAD_PLAN'
+     ,group_or_subplan             => 'INTERACTIVE_GROUP'
+     ,cpu_p2                       => 85
+     ,switch_group                 => 'BATCH_GROUP'
+     ,switch_time                  => 60
+     ,switch_estimate              => FALSE
+     ,parallel_degree_limit_p1     => 1
+     ,comment                      => 'Directive for interactive operations'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'MIXED_WORKLOAD_PLAN'
+     ,group_or_subplan             => 'OTHER_GROUPS'
+     ,cpu_p2                       => 5
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for all other operations'  );
+  sys.dbms_resource_manager.create_plan_directive (
+      plan                         => 'MIXED_WORKLOAD_PLAN'
+     ,group_or_subplan             => 'SYS_GROUP'
+     ,cpu_p1                       => 75
+     ,switch_estimate              => FALSE
+     ,comment                      => 'Directive for system operations'  );
+  sys.dbms_resource_manager.submit_pending_area();
+end;
+/
+
+
+CREATE USER ANONYMOUS
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE SYSAUX
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  ACCOUNT UNLOCK;
+  -- 1 System Privilege for ANONYMOUS 
+  GRANT CREATE SESSION TO ANONYMOUS;
+
+
+CREATE USER APEX_040000
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE SYSAUX
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  ACCOUNT LOCK;
+  -- 2 Roles for APEX_040000 
+  GRANT CONNECT TO APEX_040000;
+  GRANT RESOURCE TO APEX_040000 WITH ADMIN OPTION;
+  ALTER USER APEX_040000 DEFAULT ROLE ALL;
+  -- 26 System Privileges for APEX_040000 
+  GRANT ALTER DATABASE TO APEX_040000;
+  GRANT ALTER SESSION TO APEX_040000;
+  GRANT ALTER USER TO APEX_040000;
+  GRANT CREATE ANY CONTEXT TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE CLUSTER TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE DIMENSION TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE INDEXTYPE TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE JOB TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE MATERIALIZED VIEW TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE OPERATOR TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE PROCEDURE TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE PUBLIC SYNONYM TO APEX_040000;
+  GRANT CREATE ROLE TO APEX_040000;
+  GRANT CREATE SEQUENCE TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE SESSION TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE SYNONYM TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE TABLE TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE TABLESPACE TO APEX_040000;
+  GRANT CREATE TRIGGER TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE TYPE TO APEX_040000 WITH ADMIN OPTION;
+  GRANT CREATE USER TO APEX_040000;
+  GRANT CREATE VIEW TO APEX_040000 WITH ADMIN OPTION;
+  GRANT DROP PUBLIC SYNONYM TO APEX_040000;
+  GRANT DROP TABLESPACE TO APEX_040000;
+  GRANT DROP USER TO APEX_040000;
+  GRANT UNLIMITED TABLESPACE TO APEX_040000 WITH ADMIN OPTION;
+
+
+CREATE USER APEX_PUBLIC_USER
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE SYSTEM
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  ACCOUNT LOCK;
+  -- 1 System Privilege for APEX_PUBLIC_USER 
+  GRANT CREATE SESSION TO APEX_PUBLIC_USER;
+
+
+CREATE USER CTXSYS
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE SYSAUX
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  PASSWORD EXPIRE
+  ACCOUNT LOCK;
+  -- 2 Roles for CTXSYS 
+  GRANT CTXAPP TO CTXSYS WITH ADMIN OPTION;
+  GRANT RESOURCE TO CTXSYS;
+  ALTER USER CTXSYS DEFAULT ROLE ALL;
+  -- 9 System Privileges for CTXSYS 
+  GRANT ALTER SESSION TO CTXSYS;
+  GRANT CREATE JOB TO CTXSYS;
+  GRANT CREATE PUBLIC SYNONYM TO CTXSYS;
+  GRANT CREATE SESSION TO CTXSYS;
+  GRANT CREATE SYNONYM TO CTXSYS;
+  GRANT CREATE VIEW TO CTXSYS;
+  GRANT DROP PUBLIC SYNONYM TO CTXSYS;
+  GRANT MANAGE SCHEDULER TO CTXSYS;
+  GRANT UNLIMITED TABLESPACE TO CTXSYS;
+
+
+CREATE USER FLOWS_FILES
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE SYSAUX
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  ACCOUNT LOCK;
+  -- 1 System Privilege for FLOWS_FILES 
+  GRANT CREATE SYNONYM TO FLOWS_FILES;
+  -- 1 Tablespace Quota for FLOWS_FILES 
+  ALTER USER FLOWS_FILES QUOTA UNLIMITED ON SYSAUX;
+
+
+CREATE USER HR
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE USERS
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  PASSWORD EXPIRE
+  ACCOUNT LOCK;
+  -- 2 Roles for HR 
+  GRANT CONNECT TO HR;
+  GRANT RESOURCE TO HR;
+  ALTER USER HR DEFAULT ROLE ALL;
+  -- 7 System Privileges for HR 
+  GRANT ALTER SESSION TO HR;
+  GRANT CREATE DATABASE LINK TO HR;
+  GRANT CREATE SEQUENCE TO HR;
+  GRANT CREATE SESSION TO HR;
+  GRANT CREATE SYNONYM TO HR;
+  GRANT CREATE VIEW TO HR;
+  GRANT UNLIMITED TABLESPACE TO HR;
+  -- 1 Tablespace Quota for HR 
+  ALTER USER HR QUOTA UNLIMITED ON USERS;
+
+
+CREATE USER MDSYS
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE SYSAUX
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  PASSWORD EXPIRE
+  ACCOUNT LOCK;
+  -- 2 Roles for MDSYS 
+  GRANT CONNECT TO MDSYS;
+  GRANT RESOURCE TO MDSYS;
+  ALTER USER MDSYS DEFAULT ROLE ALL;
+  -- 19 System Privileges for MDSYS 
+  GRANT ALTER ANY TABLE TO MDSYS;
+  GRANT CREATE ANY TRIGGER TO MDSYS;
+  GRANT CREATE INDEXTYPE TO MDSYS;
+  GRANT CREATE LIBRARY TO MDSYS;
+  GRANT CREATE OPERATOR TO MDSYS;
+  GRANT CREATE PROCEDURE TO MDSYS;
+  GRANT CREATE PUBLIC SYNONYM TO MDSYS;
+  GRANT CREATE SEQUENCE TO MDSYS;
+  GRANT CREATE SESSION TO MDSYS;
+  GRANT CREATE TABLE TO MDSYS;
+  GRANT CREATE TYPE TO MDSYS;
+  GRANT CREATE VIEW TO MDSYS;
+  GRANT DELETE ANY TABLE TO MDSYS;
+  GRANT DROP ANY TRIGGER TO MDSYS;
+  GRANT DROP PUBLIC SYNONYM TO MDSYS;
+  GRANT FLASHBACK ANY TABLE TO MDSYS;
+  GRANT SELECT ANY TABLE TO MDSYS;
+  GRANT UNLIMITED TABLESPACE TO MDSYS;
+  GRANT UPDATE ANY TABLE TO MDSYS;
+
+
+CREATE USER OUTLN
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE SYSTEM
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  PASSWORD EXPIRE
+  ACCOUNT LOCK;
+  -- 1 Role for OUTLN 
+  GRANT RESOURCE TO OUTLN;
+  ALTER USER OUTLN DEFAULT ROLE ALL;
+  -- 3 System Privileges for OUTLN 
+  GRANT CREATE SESSION TO OUTLN;
+  GRANT EXECUTE ANY PROCEDURE TO OUTLN;
+  GRANT UNLIMITED TABLESPACE TO OUTLN;
+
+
+CREATE USER QQQ
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE SYSTEM
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  ACCOUNT UNLOCK;
+  -- 1 Role for QQQ 
+  GRANT CONNECT TO QQQ;
+  ALTER USER QQQ DEFAULT ROLE ALL;
+  -- 1 System Privilege for QQQ 
+  GRANT CREATE SESSION TO QQQ;
+
+
+CREATE USER SSS
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE SYSTEM
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  ACCOUNT UNLOCK;
+  -- 1 Role for SSS 
+  GRANT CONNECT TO SSS;
+  ALTER USER SSS DEFAULT ROLE ALL;
+  -- 1 System Privilege for SSS 
+  GRANT CREATE SESSION TO SSS;
+
+
+CREATE USER XDB
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE SYSAUX
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  PASSWORD EXPIRE
+  ACCOUNT LOCK;
+  -- 2 Roles for XDB 
+  GRANT CTXAPP TO XDB;
+  GRANT RESOURCE TO XDB;
+  ALTER USER XDB DEFAULT ROLE ALL;
+  -- 10 System Privileges for XDB 
+  GRANT ALTER SESSION TO XDB;
+  GRANT CREATE INDEXTYPE TO XDB;
+  GRANT CREATE LIBRARY TO XDB;
+  GRANT CREATE OPERATOR TO XDB;
+  GRANT CREATE PUBLIC SYNONYM TO XDB;
+  GRANT CREATE SESSION TO XDB;
+  GRANT CREATE VIEW TO XDB;
+  GRANT DROP PUBLIC SYNONYM TO XDB;
+  GRANT QUERY REWRITE TO XDB;
+  GRANT UNLIMITED TABLESPACE TO XDB;
+
+
+CREATE USER XS$NULL
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE SYSTEM
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  PASSWORD EXPIRE
+  ACCOUNT LOCK;
+
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'DEFAULT_JOB_CLASS'
+     ,resource_consumer_group => NULL
+     ,service                 => NULL
+     ,logging_level           => SYS.DBMS_SCHEDULER.LOGGING_RUNS
+     ,log_history             => NULL
+     ,comments                => 'This is the default job class.'
+    );
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'SCHED$_LOG_ON_ERRORS_CLASS'
+     ,resource_consumer_group => NULL
+     ,service                 => NULL
+     ,log_history             => NULL
+     ,comments                => 'This is the default job if you want minimal logging.'
+    );
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'DBMS_JOB$'
+     ,resource_consumer_group => NULL
+     ,service                 => NULL
+     ,logging_level           => SYS.DBMS_SCHEDULER.LOGGING_OFF
+     ,log_history             => NULL
+     ,comments                => 'This is the job class for jobs created through DBMS_JOB.'
+    );
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'ORA$AT_JCURG_OS'
+     ,resource_consumer_group => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,service                 => NULL
+     ,logging_level           => SYS.DBMS_SCHEDULER.LOGGING_FULL
+     ,log_history             => 1000000
+     ,comments                => 'auto optimizer stats collection'
+    );
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'ORA$AT_JCNRM_OS'
+     ,resource_consumer_group => 'ORA$AUTOTASK_STATS_GROUP'
+     ,service                 => NULL
+     ,logging_level           => SYS.DBMS_SCHEDULER.LOGGING_FULL
+     ,log_history             => 1000000
+     ,comments                => 'auto optimizer stats collection'
+    );
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'ORA$AT_JCMED_OS'
+     ,resource_consumer_group => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,service                 => NULL
+     ,logging_level           => SYS.DBMS_SCHEDULER.LOGGING_FULL
+     ,log_history             => 1000000
+     ,comments                => 'auto optimizer stats collection'
+    );
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'ORA$AT_JCURG_SA'
+     ,resource_consumer_group => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,service                 => NULL
+     ,logging_level           => SYS.DBMS_SCHEDULER.LOGGING_FULL
+     ,log_history             => 1000000
+     ,comments                => 'auto space advisor'
+    );
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'ORA$AT_JCNRM_SA'
+     ,resource_consumer_group => 'ORA$AUTOTASK_SPACE_GROUP'
+     ,service                 => NULL
+     ,logging_level           => SYS.DBMS_SCHEDULER.LOGGING_FULL
+     ,log_history             => 1000000
+     ,comments                => 'auto space advisor'
+    );
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'ORA$AT_JCMED_SA'
+     ,resource_consumer_group => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,service                 => NULL
+     ,logging_level           => SYS.DBMS_SCHEDULER.LOGGING_FULL
+     ,log_history             => 1000000
+     ,comments                => 'auto space advisor'
+    );
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'ORA$AT_JCURG_SQ'
+     ,resource_consumer_group => 'ORA$AUTOTASK_URGENT_GROUP'
+     ,service                 => NULL
+     ,logging_level           => SYS.DBMS_SCHEDULER.LOGGING_FULL
+     ,log_history             => 1000000
+     ,comments                => 'sql tuning advisor'
+    );
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'ORA$AT_JCNRM_SQ'
+     ,resource_consumer_group => 'ORA$AUTOTASK_SQL_GROUP'
+     ,service                 => NULL
+     ,logging_level           => SYS.DBMS_SCHEDULER.LOGGING_FULL
+     ,log_history             => 1000000
+     ,comments                => 'sql tuning advisor'
+    );
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'ORA$AT_JCMED_SQ'
+     ,resource_consumer_group => 'ORA$AUTOTASK_MEDIUM_GROUP'
+     ,service                 => NULL
+     ,logging_level           => SYS.DBMS_SCHEDULER.LOGGING_FULL
+     ,log_history             => 1000000
+     ,comments                => 'sql tuning advisor'
+    );
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'AQ$_PROPAGATION_JOB_CLASS'
+     ,resource_consumer_group => NULL
+     ,service                 => NULL
+     ,logging_level           => SYS.DBMS_SCHEDULER.LOGGING_RUNS
+     ,log_history             => NULL
+     ,comments                => 'Default job class for AQ propagation jobs'
+    );
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB_CLASS
+    (
+      job_class_name          => 'XMLDB_NFS_JOBCLASS'
+     ,resource_consumer_group => NULL
+     ,service                 => NULL
+     ,log_history             => NULL
+     ,comments                => NULL
+    );
+END;
+/
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_WINDOW
+    (
+       window_name     => 'MONDAY_WINDOW'
+      ,start_date      => NULL
+      ,repeat_interval => 'freq=daily;byday=MON;byhour=22;byminute=0; bysecond=0'
+      ,end_date        => NULL
+      ,resource_plan   => 'DEFAULT_MAINTENANCE_PLAN'
+      ,duration        => to_dsInterval('+000 04:00:00')
+      ,window_priority => 'LOW'
+      ,comments        => 'Monday window for maintenance tasks'
+    );
+  SYS.DBMS_SCHEDULER.ENABLE
+    (name => 'SYS.MONDAY_WINDOW');
+
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_WINDOW
+    (
+       window_name     => 'TUESDAY_WINDOW'
+      ,start_date      => NULL
+      ,repeat_interval => 'freq=daily;byday=TUE;byhour=22;byminute=0; bysecond=0'
+      ,end_date        => NULL
+      ,resource_plan   => 'DEFAULT_MAINTENANCE_PLAN'
+      ,duration        => to_dsInterval('+000 04:00:00')
+      ,window_priority => 'LOW'
+      ,comments        => 'Tuesday window for maintenance tasks'
+    );
+  SYS.DBMS_SCHEDULER.ENABLE
+    (name => 'SYS.TUESDAY_WINDOW');
+
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_WINDOW
+    (
+       window_name     => 'WEDNESDAY_WINDOW'
+      ,start_date      => NULL
+      ,repeat_interval => 'freq=daily;byday=WED;byhour=22;byminute=0; bysecond=0'
+      ,end_date        => NULL
+      ,resource_plan   => 'DEFAULT_MAINTENANCE_PLAN'
+      ,duration        => to_dsInterval('+000 04:00:00')
+      ,window_priority => 'LOW'
+      ,comments        => 'Wednesday window for maintenance tasks'
+    );
+  SYS.DBMS_SCHEDULER.ENABLE
+    (name => 'SYS.WEDNESDAY_WINDOW');
+
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_WINDOW
+    (
+       window_name     => 'THURSDAY_WINDOW'
+      ,start_date      => NULL
+      ,repeat_interval => 'freq=daily;byday=THU;byhour=22;byminute=0; bysecond=0'
+      ,end_date        => NULL
+      ,resource_plan   => 'DEFAULT_MAINTENANCE_PLAN'
+      ,duration        => to_dsInterval('+000 04:00:00')
+      ,window_priority => 'LOW'
+      ,comments        => 'Thursday window for maintenance tasks'
+    );
+  SYS.DBMS_SCHEDULER.ENABLE
+    (name => 'SYS.THURSDAY_WINDOW');
+
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_WINDOW
+    (
+       window_name     => 'FRIDAY_WINDOW'
+      ,start_date      => NULL
+      ,repeat_interval => 'freq=daily;byday=FRI;byhour=22;byminute=0; bysecond=0'
+      ,end_date        => NULL
+      ,resource_plan   => 'DEFAULT_MAINTENANCE_PLAN'
+      ,duration        => to_dsInterval('+000 04:00:00')
+      ,window_priority => 'LOW'
+      ,comments        => 'Friday window for maintenance tasks'
+    );
+  SYS.DBMS_SCHEDULER.ENABLE
+    (name => 'SYS.FRIDAY_WINDOW');
+
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_WINDOW
+    (
+       window_name     => 'SATURDAY_WINDOW'
+      ,start_date      => NULL
+      ,repeat_interval => 'freq=daily;byday=SAT;byhour=6;byminute=0; bysecond=0'
+      ,end_date        => NULL
+      ,resource_plan   => 'DEFAULT_MAINTENANCE_PLAN'
+      ,duration        => to_dsInterval('+000 20:00:00')
+      ,window_priority => 'LOW'
+      ,comments        => 'Saturday window for maintenance tasks'
+    );
+  SYS.DBMS_SCHEDULER.ENABLE
+    (name => 'SYS.SATURDAY_WINDOW');
+
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_WINDOW
+    (
+       window_name     => 'SUNDAY_WINDOW'
+      ,start_date      => NULL
+      ,repeat_interval => 'freq=daily;byday=SUN;byhour=6;byminute=0; bysecond=0'
+      ,end_date        => NULL
+      ,resource_plan   => 'DEFAULT_MAINTENANCE_PLAN'
+      ,duration        => to_dsInterval('+000 20:00:00')
+      ,window_priority => 'LOW'
+      ,comments        => 'Sunday window for maintenance tasks'
+    );
+  SYS.DBMS_SCHEDULER.ENABLE
+    (name => 'SYS.SUNDAY_WINDOW');
+
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_WINDOW
+    (
+       window_name     => 'WEEKNIGHT_WINDOW'
+      ,start_date      => NULL
+      ,repeat_interval => 'freq=daily;byday=MON,TUE,WED,THU,FRI;byhour=22;byminute=0; bysecond=0'
+      ,end_date        => NULL
+      ,resource_plan   => NULL
+      ,duration        => to_dsInterval('+000 08:00:00')
+      ,window_priority => 'LOW'
+      ,comments        => 'Weeknight window - for compatibility only'
+    );
+  SYS.DBMS_SCHEDULER.DISABLE
+    (name => 'SYS.WEEKNIGHT_WINDOW');
+
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_WINDOW
+    (
+       window_name     => 'WEEKEND_WINDOW'
+      ,start_date      => NULL
+      ,repeat_interval => 'freq=daily;byday=SAT;byhour=0;byminute=0;bysecond=0'
+      ,end_date        => NULL
+      ,resource_plan   => NULL
+      ,duration        => to_dsInterval('+002 00:00:00')
+      ,window_priority => 'LOW'
+      ,comments        => 'Weekend window - for compatibility only'
+    );
+  SYS.DBMS_SCHEDULER.DISABLE
+    (name => 'SYS.WEEKEND_WINDOW');
+
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_WINDOW_GROUP
+    (
+       group_name     => 'MAINTENANCE_WINDOW_GROUP'
+      ,window_list    => NULL
+      ,comments       => 'Window group for Automated Maintenance'
+    );
+  SYS.DBMS_SCHEDULER.ENABLE
+    (name => 'SYS.MAINTENANCE_WINDOW_GROUP');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.MAINTENANCE_WINDOW_GROUP',
+     window_list => 'MONDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.MAINTENANCE_WINDOW_GROUP',
+     window_list => 'TUESDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.MAINTENANCE_WINDOW_GROUP',
+     window_list => 'WEDNESDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.MAINTENANCE_WINDOW_GROUP',
+     window_list => 'THURSDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.MAINTENANCE_WINDOW_GROUP',
+     window_list => 'FRIDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.MAINTENANCE_WINDOW_GROUP',
+     window_list => 'SATURDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.MAINTENANCE_WINDOW_GROUP',
+     window_list => 'SUNDAY_WINDOW');
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_WINDOW_GROUP
+    (
+       group_name     => 'ORA$AT_WGRP_OS'
+      ,window_list    => NULL
+      ,comments       => 'auto optimizer stats collection'
+    );
+  SYS.DBMS_SCHEDULER.ENABLE
+    (name => 'SYS.ORA$AT_WGRP_OS');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_OS',
+     window_list => 'MONDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_OS',
+     window_list => 'TUESDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_OS',
+     window_list => 'WEDNESDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_OS',
+     window_list => 'THURSDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_OS',
+     window_list => 'FRIDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_OS',
+     window_list => 'SATURDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_OS',
+     window_list => 'SUNDAY_WINDOW');
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_WINDOW_GROUP
+    (
+       group_name     => 'ORA$AT_WGRP_SA'
+      ,window_list    => NULL
+      ,comments       => 'auto space advisor'
+    );
+  SYS.DBMS_SCHEDULER.ENABLE
+    (name => 'SYS.ORA$AT_WGRP_SA');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SA',
+     window_list => 'MONDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SA',
+     window_list => 'TUESDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SA',
+     window_list => 'WEDNESDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SA',
+     window_list => 'THURSDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SA',
+     window_list => 'FRIDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SA',
+     window_list => 'SATURDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SA',
+     window_list => 'SUNDAY_WINDOW');
+END;
+/
+
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_WINDOW_GROUP
+    (
+       group_name     => 'ORA$AT_WGRP_SQ'
+      ,window_list    => NULL
+      ,comments       => 'sql tuning advisor'
+    );
+  SYS.DBMS_SCHEDULER.ENABLE
+    (name => 'SYS.ORA$AT_WGRP_SQ');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SQ',
+     window_list => 'MONDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SQ',
+     window_list => 'TUESDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SQ',
+     window_list => 'WEDNESDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SQ',
+     window_list => 'THURSDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SQ',
+     window_list => 'FRIDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SQ',
+     window_list => 'SATURDAY_WINDOW');
+END;
+/
+BEGIN
+  DBMS_SCHEDULER.ADD_WINDOW_GROUP_MEMBER
+    (group_name  => 'SYS.ORA$AT_WGRP_SQ',
+     window_list => 'SUNDAY_WINDOW');
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER MDSYS.sdo_drop_user
+after drop on DATABASE
+declare
+   stmt varchar2(200);
+   cnt number;
+BEGIN
+     if sys.dbms_standard.dictionary_obj_type = 'USER' THEN
+       stmt := 'DELETE FROM SDO_GEOM_METADATA_TABLE ' ||
+     ' WHERE SDO_OWNER = :owner ';
+       EXECUTE IMMEDIATE stmt USING sys.dbms_standard.dictionary_obj_name;
+
+       stmt := 'DELETE FROM SDO_MAPS_TABLE ' ||
+    ' WHERE SDO_OWNER = :owner ';
+       EXECUTE IMMEDIATE stmt USING sys.dbms_standard.dictionary_obj_name;
+
+       stmt := 'DELETE FROM SDO_CACHED_MAPS_TABLE ' ||
+    ' WHERE SDO_OWNER = :owner ';
+       EXECUTE IMMEDIATE stmt USING sys.dbms_standard.dictionary_obj_name;
+
+       stmt := 'DELETE FROM SDO_STYLES_TABLE ' ||
+    ' WHERE SDO_OWNER = :owner ';
+       EXECUTE IMMEDIATE stmt USING sys.dbms_standard.dictionary_obj_name;
+
+       stmt := 'DELETE FROM SDO_THEMES_TABLE ' ||
+   ' WHERE SDO_OWNER = :owner ';
+       EXECUTE IMMEDIATE stmt USING sys.dbms_standard.dictionary_obj_name;
+
+       stmt := 'DELETE FROM SDO_LRS_METADATA_TABLE ' ||
+   ' WHERE SDO_OWNER = :owner ';
+       EXECUTE IMMEDIATE stmt USING sys.dbms_standard.dictionary_obj_name;
+
+       stmt := 'DELETE FROM SDO_TOPO_METADATA_TABLE ' ||
+   ' WHERE SDO_OWNER = :owner ';
+       EXECUTE IMMEDIATE stmt USING sys.dbms_standard.dictionary_obj_name;
+
+       stmt := 'DELETE FROM SDO_ANNOTATION_TEXT_METADATA ' ||
+   ' WHERE F_TABLE_SCHEMA = :owner ';
+       EXECUTE IMMEDIATE stmt USING sys.dbms_standard.dictionary_obj_name;
+    end if;
+end;
+/
+SHOW ERRORS;
+
+
+CREATE OR REPLACE TRIGGER MDSYS.sdo_st_syn_create
+  BEFORE CREATE ON DATABASE
+declare
+ error boolean;
+  st_syn_detected EXCEPTION;
+   PRAGMA EXCEPTION_INIT(st_syn_detected, -995);
+ BEGIN
+   if((sys.dbms_standard.dictionary_obj_type!='SYNONYM')or(sys.dbms_standard.dictionary_obj_owner!='PUBLIC'))
+   then
+     return;
+   end if;
+   error :=
+      CASE sys.dbms_standard.dictionary_obj_name
+         WHEN 'ST_GEOMETRY' THEN TRUE
+         WHEN 'ST_SURFACE' THEN TRUE
+         WHEN 'ST_POLYGON' THEN TRUE
+         WHEN 'ST_POINT' THEN TRUE
+         WHEN 'ST_MULTISURFACE' THEN TRUE
+         WHEN 'ST_MULTIPOINT' THEN TRUE
+         WHEN 'ST_MULTILINESTRING' THEN TRUE
+         WHEN 'ST_MULTICURVE' THEN TRUE
+         WHEN 'ST_LINESTRING' THEN TRUE
+         WHEN 'ST_GEOMCOLLECTION' THEN TRUE
+         WHEN 'ST_CURVE' THEN TRUE
+         WHEN 'ST_CURVEPOLYGON' THEN TRUE
+         WHEN 'ST_COMPOUNDCURVE' THEN TRUE
+         WHEN 'ST_CIRCULARSTRING' THEN TRUE
+         WHEN 'ST_INTERSECTS' THEN TRUE
+         WHEN 'ST_RELATE' THEN TRUE
+         WHEN 'ST_TOUCH' THEN TRUE
+         WHEN 'ST_CONTAINS' THEN TRUE
+         WHEN 'ST_COVERS' THEN TRUE
+         WHEN 'ST_COVEREDBY' THEN TRUE
+         WHEN 'ST_INSIDE' THEN TRUE
+         WHEN 'ST_OVERLAP' THEN TRUE
+         WHEN 'ST_OVERLAPS' THEN TRUE
+         WHEN 'ST_EQUAL' THEN TRUE
+         WHEN 'ST_OVERLAPBDYDISJOINT' THEN TRUE
+         WHEN 'ST_OVERLAPBDYINTERSECT' THEN TRUE
+         WHEN 'ST_GEOMETRY_ARRAY' THEN TRUE
+         WHEN 'ST_POINT_ARRAY' THEN TRUE
+         WHEN 'ST_CURVE_ARRAY' THEN TRUE
+         WHEN 'ST_SURFACE_ARRAY' THEN TRUE
+         WHEN 'ST_LINESTRING_ARRAY' THEN TRUE
+         WHEN 'ST_POLYGON_ARRAY' THEN TRUE
+         ELSE FALSE
+      END;
+
+   if(error) then
+     raise st_syn_detected;
+
+   end if;
+ END;
+/
+SHOW ERRORS;
+
+
+CREATE ROLE EXECUTE_CATALOG_ROLE NOT IDENTIFIED;
+
+GRANT HS_ADMIN_EXECUTE_ROLE TO EXECUTE_CATALOG_ROLE;
+
+
+CREATE ROLE EXP_FULL_DATABASE NOT IDENTIFIED;
+
+BEGIN
+SYS.DBMS_RESOURCE_MANAGER_PRIVS.GRANT_SYSTEM_PRIVILEGE
+  (GRANTEE_NAME   => 'EXP_FULL_DATABASE', 
+   PRIVILEGE_NAME => 'ADMINISTER_RESOURCE_MANAGER',
+   ADMIN_OPTION   => FALSE);
+END;
+/
+GRANT ADMINISTER SQL MANAGEMENT OBJECT TO EXP_FULL_DATABASE;
+GRANT BACKUP ANY TABLE TO EXP_FULL_DATABASE;
+GRANT CREATE SESSION TO EXP_FULL_DATABASE;
+GRANT CREATE TABLE TO EXP_FULL_DATABASE;
+GRANT EXECUTE ANY PROCEDURE TO EXP_FULL_DATABASE;
+GRANT EXECUTE ANY TYPE TO EXP_FULL_DATABASE;
+GRANT READ ANY FILE GROUP TO EXP_FULL_DATABASE;
+GRANT RESUMABLE TO EXP_FULL_DATABASE;
+GRANT SELECT ANY SEQUENCE TO EXP_FULL_DATABASE;
+GRANT SELECT ANY TABLE TO EXP_FULL_DATABASE;
+GRANT EXECUTE_CATALOG_ROLE TO EXP_FULL_DATABASE;
+GRANT SELECT_CATALOG_ROLE TO EXP_FULL_DATABASE;
+
+
+CREATE ROLE HS_ADMIN_ROLE NOT IDENTIFIED;
+
+GRANT HS_ADMIN_EXECUTE_ROLE TO HS_ADMIN_ROLE;
+GRANT HS_ADMIN_SELECT_ROLE TO HS_ADMIN_ROLE;
+
+
+CREATE ROLE IMP_FULL_DATABASE NOT IDENTIFIED;
+
+GRANT ADMINISTER DATABASE TRIGGER TO IMP_FULL_DATABASE;
+BEGIN
+SYS.DBMS_RESOURCE_MANAGER_PRIVS.GRANT_SYSTEM_PRIVILEGE
+  (GRANTEE_NAME   => 'IMP_FULL_DATABASE', 
+   PRIVILEGE_NAME => 'ADMINISTER_RESOURCE_MANAGER',
+   ADMIN_OPTION   => FALSE);
+END;
+/
+GRANT ADMINISTER SQL MANAGEMENT OBJECT TO IMP_FULL_DATABASE;
+GRANT ALTER ANY PROCEDURE TO IMP_FULL_DATABASE;
+GRANT ALTER ANY TABLE TO IMP_FULL_DATABASE;
+GRANT ALTER ANY TRIGGER TO IMP_FULL_DATABASE;
+GRANT ALTER ANY TYPE TO IMP_FULL_DATABASE;
+GRANT ALTER DATABASE TO IMP_FULL_DATABASE;
+GRANT ALTER PROFILE TO IMP_FULL_DATABASE;
+GRANT ALTER RESOURCE COST TO IMP_FULL_DATABASE;
+GRANT ALTER USER TO IMP_FULL_DATABASE;
+GRANT ANALYZE ANY TO IMP_FULL_DATABASE;
+GRANT AUDIT ANY TO IMP_FULL_DATABASE;
+GRANT AUDIT SYSTEM TO IMP_FULL_DATABASE;
+GRANT BECOME USER TO IMP_FULL_DATABASE;
+GRANT COMMENT ANY TABLE TO IMP_FULL_DATABASE;
+GRANT CREATE ANY CLUSTER TO IMP_FULL_DATABASE;
+GRANT CREATE ANY CONTEXT TO IMP_FULL_DATABASE;
+GRANT CREATE ANY DIMENSION TO IMP_FULL_DATABASE;
+GRANT CREATE ANY DIRECTORY TO IMP_FULL_DATABASE;
+GRANT CREATE ANY INDEX TO IMP_FULL_DATABASE;
+GRANT CREATE ANY INDEXTYPE TO IMP_FULL_DATABASE;
+GRANT CREATE ANY LIBRARY TO IMP_FULL_DATABASE;
+GRANT CREATE ANY MATERIALIZED VIEW TO IMP_FULL_DATABASE;
+GRANT CREATE ANY OPERATOR TO IMP_FULL_DATABASE;
+GRANT CREATE ANY PROCEDURE TO IMP_FULL_DATABASE;
+GRANT CREATE ANY SEQUENCE TO IMP_FULL_DATABASE;
+GRANT CREATE ANY SQL PROFILE TO IMP_FULL_DATABASE;
+GRANT CREATE ANY SYNONYM TO IMP_FULL_DATABASE;
+GRANT CREATE ANY TABLE TO IMP_FULL_DATABASE;
+GRANT CREATE ANY TRIGGER TO IMP_FULL_DATABASE;
+GRANT CREATE ANY TYPE TO IMP_FULL_DATABASE;
+GRANT CREATE ANY VIEW TO IMP_FULL_DATABASE;
+GRANT CREATE DATABASE LINK TO IMP_FULL_DATABASE;
+GRANT CREATE PROFILE TO IMP_FULL_DATABASE;
+GRANT CREATE PUBLIC DATABASE LINK TO IMP_FULL_DATABASE;
+GRANT CREATE PUBLIC SYNONYM TO IMP_FULL_DATABASE;
+GRANT CREATE ROLE TO IMP_FULL_DATABASE;
+GRANT CREATE ROLLBACK SEGMENT TO IMP_FULL_DATABASE;
+GRANT CREATE SESSION TO IMP_FULL_DATABASE;
+GRANT CREATE TABLESPACE TO IMP_FULL_DATABASE;
+GRANT CREATE USER TO IMP_FULL_DATABASE;
+GRANT DELETE ANY TABLE TO IMP_FULL_DATABASE;
+GRANT DROP ANY CLUSTER TO IMP_FULL_DATABASE;
+GRANT DROP ANY CONTEXT TO IMP_FULL_DATABASE;
+GRANT DROP ANY DIMENSION TO IMP_FULL_DATABASE;
+GRANT DROP ANY DIRECTORY TO IMP_FULL_DATABASE;
+GRANT DROP ANY INDEX TO IMP_FULL_DATABASE;
+GRANT DROP ANY INDEXTYPE TO IMP_FULL_DATABASE;
+GRANT DROP ANY LIBRARY TO IMP_FULL_DATABASE;
+GRANT DROP ANY MATERIALIZED VIEW TO IMP_FULL_DATABASE;
+GRANT DROP ANY OPERATOR TO IMP_FULL_DATABASE;
+GRANT DROP ANY OUTLINE TO IMP_FULL_DATABASE;
+GRANT DROP ANY PROCEDURE TO IMP_FULL_DATABASE;
+GRANT DROP ANY ROLE TO IMP_FULL_DATABASE;
+GRANT DROP ANY SEQUENCE TO IMP_FULL_DATABASE;
+GRANT DROP ANY SQL PROFILE TO IMP_FULL_DATABASE;
+GRANT DROP ANY SYNONYM TO IMP_FULL_DATABASE;
+GRANT DROP ANY TABLE TO IMP_FULL_DATABASE;
+GRANT DROP ANY TRIGGER TO IMP_FULL_DATABASE;
+GRANT DROP ANY TYPE TO IMP_FULL_DATABASE;
+GRANT DROP ANY VIEW TO IMP_FULL_DATABASE;
+GRANT DROP PROFILE TO IMP_FULL_DATABASE;
+GRANT DROP PUBLIC DATABASE LINK TO IMP_FULL_DATABASE;
+GRANT DROP PUBLIC SYNONYM TO IMP_FULL_DATABASE;
+GRANT DROP ROLLBACK SEGMENT TO IMP_FULL_DATABASE;
+GRANT DROP TABLESPACE TO IMP_FULL_DATABASE;
+GRANT DROP USER TO IMP_FULL_DATABASE;
+GRANT EXECUTE ANY OPERATOR TO IMP_FULL_DATABASE;
+GRANT EXECUTE ANY PROCEDURE TO IMP_FULL_DATABASE;
+GRANT EXECUTE ANY TYPE TO IMP_FULL_DATABASE;
+GRANT GLOBAL QUERY REWRITE TO IMP_FULL_DATABASE;
+GRANT GRANT ANY OBJECT PRIVILEGE TO IMP_FULL_DATABASE;
+GRANT GRANT ANY PRIVILEGE TO IMP_FULL_DATABASE;
+GRANT GRANT ANY ROLE TO IMP_FULL_DATABASE;
+GRANT INSERT ANY TABLE TO IMP_FULL_DATABASE;
+BEGIN
+SYS.DBMS_AQADM.GRANT_SYSTEM_PRIVILEGE (
+  PRIVILEGE    => 'MANAGE_ANY',
+  GRANTEE      => 'IMP_FULL_DATABASE',
+  ADMIN_OPTION => FALSE);
+END;
+/
+GRANT RESUMABLE TO IMP_FULL_DATABASE;
+GRANT SELECT ANY TABLE TO IMP_FULL_DATABASE;
+GRANT UPDATE ANY TABLE TO IMP_FULL_DATABASE;
+GRANT EXECUTE_CATALOG_ROLE TO IMP_FULL_DATABASE;
+GRANT SELECT_CATALOG_ROLE TO IMP_FULL_DATABASE;
+
+
+CREATE ROLE LOGSTDBY_ADMINISTRATOR NOT IDENTIFIED;
+
+GRANT UNLIMITED TABLESPACE TO LOGSTDBY_ADMINISTRATOR;
+GRANT RESOURCE TO LOGSTDBY_ADMINISTRATOR;
+
+
+CREATE ROLE OEM_MONITOR NOT IDENTIFIED;
+
+GRANT ADVISOR TO OEM_MONITOR;
+GRANT ANALYZE ANY TO OEM_MONITOR;
+GRANT ANALYZE ANY DICTIONARY TO OEM_MONITOR;
+GRANT CREATE JOB TO OEM_MONITOR;
+GRANT CREATE SESSION TO OEM_MONITOR;
+BEGIN
+SYS.DBMS_AQADM.GRANT_SYSTEM_PRIVILEGE (
+  PRIVILEGE    => 'MANAGE_ANY',
+  GRANTEE      => 'OEM_MONITOR',
+  ADMIN_OPTION => FALSE);
+END;
+/
+GRANT SELECT ANY DICTIONARY TO OEM_MONITOR;
+GRANT SELECT_CATALOG_ROLE TO OEM_MONITOR;
+
+
+CREATE ROLE DATAPUMP_EXP_FULL_DATABASE NOT IDENTIFIED;
+
+GRANT CREATE SESSION TO DATAPUMP_EXP_FULL_DATABASE;
+GRANT CREATE TABLE TO DATAPUMP_EXP_FULL_DATABASE;
+GRANT EXP_FULL_DATABASE TO DATAPUMP_EXP_FULL_DATABASE;
+
+
+CREATE ROLE DATAPUMP_IMP_FULL_DATABASE NOT IDENTIFIED;
+
+GRANT ALTER DATABASE TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT ALTER PROFILE TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT ALTER RESOURCE COST TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT ALTER USER TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT AUDIT ANY TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT AUDIT SYSTEM TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT CREATE PROFILE TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT CREATE SESSION TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT DELETE ANY TABLE TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT EXECUTE ANY OPERATOR TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT GRANT ANY OBJECT PRIVILEGE TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT GRANT ANY PRIVILEGE TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT GRANT ANY ROLE TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT SELECT ANY TABLE TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT EXP_FULL_DATABASE TO DATAPUMP_IMP_FULL_DATABASE;
+GRANT IMP_FULL_DATABASE TO DATAPUMP_IMP_FULL_DATABASE;
+
+
+CREATE ROLE DBA NOT IDENTIFIED;
+
+GRANT ADMINISTER ANY SQL TUNING SET TO DBA WITH ADMIN OPTION;
+GRANT ADMINISTER DATABASE TRIGGER TO DBA WITH ADMIN OPTION;
+BEGIN
+SYS.DBMS_RESOURCE_MANAGER_PRIVS.GRANT_SYSTEM_PRIVILEGE
+  (GRANTEE_NAME   => 'DBA', 
+   PRIVILEGE_NAME => 'ADMINISTER_RESOURCE_MANAGER',
+   ADMIN_OPTION   => TRUE);
+END;
+/
+GRANT ADMINISTER SQL MANAGEMENT OBJECT TO DBA WITH ADMIN OPTION;
+GRANT ADMINISTER SQL TUNING SET TO DBA WITH ADMIN OPTION;
+GRANT ADVISOR TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY ASSEMBLY TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY CLUSTER TO DBA WITH ADMIN OPTION;
 GRANT ALTER ANY CUBE TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY ASSEMBLY TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY DIMENSION TO DBA WITH ADMIN OPTION;
 GRANT ALTER ANY EDITION TO DBA WITH ADMIN OPTION;
-GRANT ANALYZE ANY DICTIONARY TO DBA WITH ADMIN OPTION;
+BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.ALTER_ANY_EVALUATION_CONTEXT,
+  GRANTEE      => 'DBA',
+  GRANT_OPTION => TRUE);
+END;
+/
+GRANT ALTER ANY INDEX TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY INDEXTYPE TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY LIBRARY TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY MATERIALIZED VIEW TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY MINING MODEL TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY OPERATOR TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY OUTLINE TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY PROCEDURE TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY ROLE TO DBA WITH ADMIN OPTION;
+BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.ALTER_ANY_RULE,
+  GRANTEE      => 'DBA',
+  GRANT_OPTION => TRUE);
+END;
+/
 BEGIN
 SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
   PRIVILEGE    => SYS.DBMS_RULE_ADM.ALTER_ANY_RULE_SET,
@@ -150,42 +2448,57 @@ SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
   GRANT_OPTION => TRUE);
 END;
 /
-BEGIN
-SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
-  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_RULE_SET_OBJ,
-  GRANTEE      => 'DBA',
-  GRANT_OPTION => TRUE);
-END;
-/
-GRANT DEBUG ANY PROCEDURE TO DBA WITH ADMIN OPTION;
-GRANT CREATE DIMENSION TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY LIBRARY TO DBA WITH ADMIN OPTION;
-GRANT UNDER ANY TYPE TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY MATERIALIZED VIEW TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY TRIGGER TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY PROCEDURE TO DBA WITH ADMIN OPTION;
-GRANT FORCE ANY TRANSACTION TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY SEQUENCE TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY SQL PROFILE TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY TABLE TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY TRIGGER TO DBA WITH ADMIN OPTION;
+GRANT ALTER ANY TYPE TO DBA WITH ADMIN OPTION;
 GRANT ALTER DATABASE TO DBA WITH ADMIN OPTION;
-GRANT DELETE ANY TABLE TO DBA WITH ADMIN OPTION;
+GRANT ALTER PROFILE TO DBA WITH ADMIN OPTION;
+GRANT ALTER RESOURCE COST TO DBA WITH ADMIN OPTION;
 GRANT ALTER ROLLBACK SEGMENT TO DBA WITH ADMIN OPTION;
-GRANT UPDATE ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
+GRANT ALTER SESSION TO DBA WITH ADMIN OPTION;
+GRANT ALTER SYSTEM TO DBA WITH ADMIN OPTION;
+GRANT ALTER TABLESPACE TO DBA WITH ADMIN OPTION;
+GRANT ALTER USER TO DBA WITH ADMIN OPTION;
+GRANT ANALYZE ANY TO DBA WITH ADMIN OPTION;
+GRANT ANALYZE ANY DICTIONARY TO DBA WITH ADMIN OPTION;
+GRANT AUDIT ANY TO DBA WITH ADMIN OPTION;
+GRANT AUDIT SYSTEM TO DBA WITH ADMIN OPTION;
+GRANT BACKUP ANY TABLE TO DBA WITH ADMIN OPTION;
+GRANT BECOME USER TO DBA WITH ADMIN OPTION;
+GRANT CHANGE NOTIFICATION TO DBA WITH ADMIN OPTION;
+GRANT COMMENT ANY MINING MODEL TO DBA WITH ADMIN OPTION;
+GRANT COMMENT ANY TABLE TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY ASSEMBLY TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY CLUSTER TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY CONTEXT TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY CUBE TO DBA WITH ADMIN OPTION;
 GRANT CREATE ANY CUBE BUILD PROCESS TO DBA WITH ADMIN OPTION;
-GRANT CREATE CUBE DIMENSION TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY ASSEMBLY TO DBA WITH ADMIN OPTION;
-GRANT CREATE ASSEMBLY TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY DIMENSION TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY DIRECTORY TO DBA WITH ADMIN OPTION;
 GRANT CREATE ANY EDITION TO DBA WITH ADMIN OPTION;
-GRANT EXECUTE ANY PROGRAM TO DBA WITH ADMIN OPTION;
 BEGIN
 SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
-  PRIVILEGE    => SYS.DBMS_RULE_ADM.EXECUTE_ANY_RULE,
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_ANY_EVALUATION_CONTEXT,
   GRANTEE      => 'DBA',
   GRANT_OPTION => TRUE);
 END;
 /
-GRANT IMPORT FULL DATABASE TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY INDEX TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY INDEXTYPE TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY JOB TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY LIBRARY TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY MATERIALIZED VIEW TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY MEASURE FOLDER TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY MINING MODEL TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY OPERATOR TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY OUTLINE TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY PROCEDURE TO DBA WITH ADMIN OPTION;
 BEGIN
 SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
-  PRIVILEGE    => SYS.DBMS_RULE_ADM.EXECUTE_ANY_RULE_SET,
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_ANY_RULE,
   GRANTEE      => 'DBA',
   GRANT_OPTION => TRUE);
 END;
@@ -197,51 +2510,20 @@ SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
   GRANT_OPTION => TRUE);
 END;
 /
-GRANT FLASHBACK ANY TABLE TO DBA WITH ADMIN OPTION;
-GRANT RESUMABLE TO DBA WITH ADMIN OPTION;
-GRANT ADMINISTER DATABASE TRIGGER TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY OUTLINE TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY DIMENSION TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY DIMENSION TO DBA WITH ADMIN OPTION;
-GRANT EXECUTE ANY OPERATOR TO DBA WITH ADMIN OPTION;
-GRANT CREATE TYPE TO DBA WITH ADMIN OPTION;
-GRANT CREATE TRIGGER TO DBA WITH ADMIN OPTION;
-GRANT GRANT ANY ROLE TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY VIEW TO DBA WITH ADMIN OPTION;
-GRANT CREATE VIEW TO DBA WITH ADMIN OPTION;
-GRANT LOCK ANY TABLE TO DBA WITH ADMIN OPTION;
-GRANT ALTER USER TO DBA WITH ADMIN OPTION;
-GRANT CREATE USER TO DBA WITH ADMIN OPTION;
-GRANT ALTER TABLESPACE TO DBA WITH ADMIN OPTION;
-GRANT CREATE TABLESPACE TO DBA WITH ADMIN OPTION;
-GRANT RESTRICTED SESSION TO DBA WITH ADMIN OPTION;
-GRANT UPDATE ANY CUBE BUILD PROCESS TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY CUBE TO DBA WITH ADMIN OPTION;
-GRANT INSERT ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
-GRANT CREATE MINING MODEL TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY JOB TO DBA WITH ADMIN OPTION;
-GRANT CREATE JOB TO DBA WITH ADMIN OPTION;
-BEGIN
-SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
-  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_ANY_RULE,
-  GRANTEE      => 'DBA',
-  GRANT_OPTION => TRUE);
-END;
-/
-BEGIN
-SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
-  PRIVILEGE    => SYS.DBMS_RULE_ADM.DROP_ANY_EVALUATION_CONTEXT,
-  GRANTEE      => 'DBA',
-  GRANT_OPTION => TRUE);
-END;
-/
-BEGIN
-SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
-  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_ANY_EVALUATION_CONTEXT,
-  GRANTEE      => 'DBA',
-  GRANT_OPTION => TRUE);
-END;
-/
+GRANT CREATE ANY SEQUENCE TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY SQL PROFILE TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY SYNONYM TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY TABLE TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY TRIGGER TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY TYPE TO DBA WITH ADMIN OPTION;
+GRANT CREATE ANY VIEW TO DBA WITH ADMIN OPTION;
+GRANT CREATE ASSEMBLY TO DBA WITH ADMIN OPTION;
+GRANT CREATE CLUSTER TO DBA WITH ADMIN OPTION;
+GRANT CREATE CUBE TO DBA WITH ADMIN OPTION;
+GRANT CREATE CUBE BUILD PROCESS TO DBA WITH ADMIN OPTION;
+GRANT CREATE CUBE DIMENSION TO DBA WITH ADMIN OPTION;
+GRANT CREATE DATABASE LINK TO DBA WITH ADMIN OPTION;
+GRANT CREATE DIMENSION TO DBA WITH ADMIN OPTION;
 BEGIN
 SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
   PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_EVALUATION_CONTEXT_OBJ,
@@ -249,120 +2531,81 @@ SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
   GRANT_OPTION => TRUE);
 END;
 /
-GRANT GRANT ANY OBJECT PRIVILEGE TO DBA WITH ADMIN OPTION;
-GRANT SELECT ANY DICTIONARY TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY DIMENSION TO DBA WITH ADMIN OPTION;
-GRANT UNDER ANY TABLE TO DBA WITH ADMIN OPTION;
+GRANT CREATE EXTERNAL JOB TO DBA WITH ADMIN OPTION;
 GRANT CREATE INDEXTYPE TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY OPERATOR TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY LIBRARY TO DBA WITH ADMIN OPTION;
-GRANT ANALYZE ANY TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY ROLE TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY SEQUENCE TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY INDEX TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY TABLE TO DBA WITH ADMIN OPTION;
-GRANT DELETE ANY MEASURE FOLDER TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY MEASURE FOLDER TO DBA WITH ADMIN OPTION;
-GRANT SELECT ANY MINING MODEL TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY MINING MODEL TO DBA WITH ADMIN OPTION;
-GRANT MANAGE FILE GROUP TO DBA WITH ADMIN OPTION;
-GRANT MANAGE SCHEDULER TO DBA WITH ADMIN OPTION;
-BEGIN
-SYS.DBMS_RESOURCE_MANAGER_PRIVS.GRANT_SYSTEM_PRIVILEGE
-  (GRANTEE_NAME   => 'DBA', 
-   PRIVILEGE_NAME => 'ADMINISTER_RESOURCE_MANAGER',
-   ADMIN_OPTION   => TRUE);
-END;
-/
-GRANT ALTER ANY OUTLINE TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY CONTEXT TO DBA WITH ADMIN OPTION;
-GRANT EXECUTE ANY INDEXTYPE TO DBA WITH ADMIN OPTION;
-GRANT UNDER ANY VIEW TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY TYPE TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY TYPE TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY MATERIALIZED VIEW TO DBA WITH ADMIN OPTION;
+GRANT CREATE JOB TO DBA WITH ADMIN OPTION;
+GRANT CREATE LIBRARY TO DBA WITH ADMIN OPTION;
+GRANT CREATE MATERIALIZED VIEW TO DBA WITH ADMIN OPTION;
+GRANT CREATE MEASURE FOLDER TO DBA WITH ADMIN OPTION;
+GRANT CREATE MINING MODEL TO DBA WITH ADMIN OPTION;
+GRANT CREATE OPERATOR TO DBA WITH ADMIN OPTION;
+GRANT CREATE PROCEDURE TO DBA WITH ADMIN OPTION;
 GRANT CREATE PROFILE TO DBA WITH ADMIN OPTION;
-GRANT DROP PUBLIC DATABASE LINK TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY INDEX TO DBA WITH ADMIN OPTION;
-GRANT CREATE CLUSTER TO DBA WITH ADMIN OPTION;
-GRANT COMMENT ANY TABLE TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY TABLE TO DBA WITH ADMIN OPTION;
+GRANT CREATE PUBLIC DATABASE LINK TO DBA WITH ADMIN OPTION;
+GRANT CREATE PUBLIC SYNONYM TO DBA WITH ADMIN OPTION;
+GRANT CREATE ROLE TO DBA WITH ADMIN OPTION;
 GRANT CREATE ROLLBACK SEGMENT TO DBA WITH ADMIN OPTION;
-GRANT UNLIMITED TABLESPACE TO DBA WITH ADMIN OPTION;
-GRANT AUDIT SYSTEM TO DBA WITH ADMIN OPTION;
-GRANT ALTER SYSTEM TO DBA WITH ADMIN OPTION;
-GRANT SELECT ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
-GRANT DELETE ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
-GRANT COMMENT ANY MINING MODEL TO DBA WITH ADMIN OPTION;
-GRANT EXECUTE ASSEMBLY TO DBA WITH ADMIN OPTION;
-GRANT EXECUTE ANY ASSEMBLY TO DBA WITH ADMIN OPTION;
-GRANT MANAGE ANY FILE GROUP TO DBA WITH ADMIN OPTION;
-GRANT EXECUTE ANY CLASS TO DBA WITH ADMIN OPTION;
 BEGIN
 SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
-  PRIVILEGE    => SYS.DBMS_RULE_ADM.DROP_ANY_RULE_SET,
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_RULE_OBJ,
   GRANTEE      => 'DBA',
   GRANT_OPTION => TRUE);
 END;
 /
+BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_RULE_SET_OBJ,
+  GRANTEE      => 'DBA',
+  GRANT_OPTION => TRUE);
+END;
+/
+GRANT CREATE SEQUENCE TO DBA WITH ADMIN OPTION;
+GRANT CREATE SESSION TO DBA WITH ADMIN OPTION;
+GRANT CREATE SYNONYM TO DBA WITH ADMIN OPTION;
+GRANT CREATE TABLE TO DBA WITH ADMIN OPTION;
+GRANT CREATE TABLESPACE TO DBA WITH ADMIN OPTION;
+GRANT CREATE TRIGGER TO DBA WITH ADMIN OPTION;
+GRANT CREATE TYPE TO DBA WITH ADMIN OPTION;
+GRANT CREATE USER TO DBA WITH ADMIN OPTION;
+GRANT CREATE VIEW TO DBA WITH ADMIN OPTION;
+GRANT DEBUG ANY PROCEDURE TO DBA WITH ADMIN OPTION;
 GRANT DEBUG CONNECT SESSION TO DBA WITH ADMIN OPTION;
-GRANT ON COMMIT REFRESH TO DBA WITH ADMIN OPTION;
+GRANT DELETE ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
+GRANT DELETE ANY MEASURE FOLDER TO DBA WITH ADMIN OPTION;
+GRANT DELETE ANY TABLE TO DBA WITH ADMIN OPTION;
 BEGIN
 SYS.DBMS_AQADM.GRANT_SYSTEM_PRIVILEGE (
-  PRIVILEGE    => 'ENQUEUE_ANY',
+  PRIVILEGE    => 'DEQUEUE_ANY',
   GRANTEE      => 'DBA',
   ADMIN_OPTION => TRUE);
 END;
 /
-GRANT CREATE ANY INDEXTYPE TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY OPERATOR TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY TYPE TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY DIRECTORY TO DBA WITH ADMIN OPTION;
-GRANT ALTER RESOURCE COST TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY PROCEDURE TO DBA WITH ADMIN OPTION;
-GRANT CREATE PROCEDURE TO DBA WITH ADMIN OPTION;
-GRANT FORCE TRANSACTION TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY SEQUENCE TO DBA WITH ADMIN OPTION;
-GRANT CREATE SEQUENCE TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY VIEW TO DBA WITH ADMIN OPTION;
-GRANT DROP PUBLIC SYNONYM TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY SYNONYM TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY CLUSTER TO DBA WITH ADMIN OPTION;
-GRANT BACKUP ANY TABLE TO DBA WITH ADMIN OPTION;
-GRANT CREATE TABLE TO DBA WITH ADMIN OPTION;
-GRANT ADMINISTER SQL MANAGEMENT OBJECT TO DBA WITH ADMIN OPTION;
-GRANT INSERT ANY MEASURE FOLDER TO DBA WITH ADMIN OPTION;
-GRANT UPDATE ANY CUBE TO DBA WITH ADMIN OPTION;
-GRANT ADMINISTER SQL TUNING SET TO DBA WITH ADMIN OPTION;
-GRANT MERGE ANY VIEW TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY OUTLINE TO DBA WITH ADMIN OPTION;
-GRANT CREATE OPERATOR TO DBA WITH ADMIN OPTION;
-GRANT CREATE LIBRARY TO DBA WITH ADMIN OPTION;
-GRANT GRANT ANY PRIVILEGE TO DBA WITH ADMIN OPTION;
-GRANT DROP PROFILE TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY TRIGGER TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY TRIGGER TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY PROCEDURE TO DBA WITH ADMIN OPTION;
-GRANT AUDIT ANY TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY ROLE TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY SEQUENCE TO DBA WITH ADMIN OPTION;
-GRANT CREATE PUBLIC SYNONYM TO DBA WITH ADMIN OPTION;
-GRANT CREATE SYNONYM TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY CLUSTER TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY TABLE TO DBA WITH ADMIN OPTION;
-GRANT FLASHBACK ARCHIVE ADMINISTER TO DBA WITH ADMIN OPTION;
-GRANT CREATE CUBE BUILD PROCESS TO DBA WITH ADMIN OPTION;
-GRANT CREATE MEASURE FOLDER TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY CUBE TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
 GRANT DROP ANY ASSEMBLY TO DBA WITH ADMIN OPTION;
-GRANT CREATE EXTERNAL JOB TO DBA WITH ADMIN OPTION;
-GRANT READ ANY FILE GROUP TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY SQL PROFILE TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY SQL PROFILE TO DBA WITH ADMIN OPTION;
-GRANT SELECT ANY TRANSACTION TO DBA WITH ADMIN OPTION;
-GRANT ADVISOR TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY CLUSTER TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY CONTEXT TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY CUBE TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY CUBE BUILD PROCESS TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY DIMENSION TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY DIRECTORY TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY EDITION TO DBA WITH ADMIN OPTION;
+BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.DROP_ANY_EVALUATION_CONTEXT,
+  GRANTEE      => 'DBA',
+  GRANT_OPTION => TRUE);
+END;
+/
+GRANT DROP ANY INDEX TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY INDEXTYPE TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY LIBRARY TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY MATERIALIZED VIEW TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY MEASURE FOLDER TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY MINING MODEL TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY OPERATOR TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY OUTLINE TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY PROCEDURE TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY ROLE TO DBA WITH ADMIN OPTION;
 BEGIN
 SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
   PRIVILEGE    => SYS.DBMS_RULE_ADM.DROP_ANY_RULE,
@@ -372,19 +2615,76 @@ END;
 /
 BEGIN
 SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
-  PRIVILEGE    => SYS.DBMS_RULE_ADM.ALTER_ANY_RULE,
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.DROP_ANY_RULE_SET,
+  GRANTEE      => 'DBA',
+  GRANT_OPTION => TRUE);
+END;
+/
+GRANT DROP ANY SEQUENCE TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY SQL PROFILE TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY SYNONYM TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY TABLE TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY TRIGGER TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY TYPE TO DBA WITH ADMIN OPTION;
+GRANT DROP ANY VIEW TO DBA WITH ADMIN OPTION;
+GRANT DROP PROFILE TO DBA WITH ADMIN OPTION;
+GRANT DROP PUBLIC DATABASE LINK TO DBA WITH ADMIN OPTION;
+GRANT DROP PUBLIC SYNONYM TO DBA WITH ADMIN OPTION;
+GRANT DROP ROLLBACK SEGMENT TO DBA WITH ADMIN OPTION;
+GRANT DROP TABLESPACE TO DBA WITH ADMIN OPTION;
+GRANT DROP USER TO DBA WITH ADMIN OPTION;
+BEGIN
+SYS.DBMS_AQADM.GRANT_SYSTEM_PRIVILEGE (
+  PRIVILEGE    => 'ENQUEUE_ANY',
+  GRANTEE      => 'DBA',
+  ADMIN_OPTION => TRUE);
+END;
+/
+GRANT EXECUTE ANY ASSEMBLY TO DBA WITH ADMIN OPTION;
+GRANT EXECUTE ANY CLASS TO DBA WITH ADMIN OPTION;
+BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.EXECUTE_ANY_EVALUATION_CONTEXT,
+  GRANTEE      => 'DBA',
+  GRANT_OPTION => TRUE);
+END;
+/
+GRANT EXECUTE ANY INDEXTYPE TO DBA WITH ADMIN OPTION;
+GRANT EXECUTE ANY LIBRARY TO DBA WITH ADMIN OPTION;
+GRANT EXECUTE ANY OPERATOR TO DBA WITH ADMIN OPTION;
+GRANT EXECUTE ANY PROCEDURE TO DBA WITH ADMIN OPTION;
+GRANT EXECUTE ANY PROGRAM TO DBA WITH ADMIN OPTION;
+BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.EXECUTE_ANY_RULE,
   GRANTEE      => 'DBA',
   GRANT_OPTION => TRUE);
 END;
 /
 BEGIN
 SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
-  PRIVILEGE    => SYS.DBMS_RULE_ADM.ALTER_ANY_EVALUATION_CONTEXT,
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.EXECUTE_ANY_RULE_SET,
   GRANTEE      => 'DBA',
   GRANT_OPTION => TRUE);
 END;
 /
-GRANT CREATE ANY CONTEXT TO DBA WITH ADMIN OPTION;
+GRANT EXECUTE ANY TYPE TO DBA WITH ADMIN OPTION;
+GRANT EXECUTE ASSEMBLY TO DBA WITH ADMIN OPTION;
+GRANT EXPORT FULL DATABASE TO DBA WITH ADMIN OPTION;
+GRANT FLASHBACK ANY TABLE TO DBA WITH ADMIN OPTION;
+GRANT FLASHBACK ARCHIVE ADMINISTER TO DBA WITH ADMIN OPTION;
+GRANT FORCE ANY TRANSACTION TO DBA WITH ADMIN OPTION;
+GRANT FORCE TRANSACTION TO DBA WITH ADMIN OPTION;
+GRANT GLOBAL QUERY REWRITE TO DBA WITH ADMIN OPTION;
+GRANT GRANT ANY OBJECT PRIVILEGE TO DBA WITH ADMIN OPTION;
+GRANT GRANT ANY PRIVILEGE TO DBA WITH ADMIN OPTION;
+GRANT GRANT ANY ROLE TO DBA WITH ADMIN OPTION;
+GRANT IMPORT FULL DATABASE TO DBA WITH ADMIN OPTION;
+GRANT INSERT ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
+GRANT INSERT ANY MEASURE FOLDER TO DBA WITH ADMIN OPTION;
+GRANT INSERT ANY TABLE TO DBA WITH ADMIN OPTION;
+GRANT LOCK ANY TABLE TO DBA WITH ADMIN OPTION;
+GRANT MANAGE ANY FILE GROUP TO DBA WITH ADMIN OPTION;
 BEGIN
 SYS.DBMS_AQADM.GRANT_SYSTEM_PRIVILEGE (
   PRIVILEGE    => 'MANAGE_ANY',
@@ -392,71 +2692,44 @@ SYS.DBMS_AQADM.GRANT_SYSTEM_PRIVILEGE (
   ADMIN_OPTION => TRUE);
 END;
 /
-GRANT GLOBAL QUERY REWRITE TO DBA WITH ADMIN OPTION;
-GRANT QUERY REWRITE TO DBA WITH ADMIN OPTION;
-GRANT DROP ANY OPERATOR TO DBA WITH ADMIN OPTION;
-GRANT EXECUTE ANY TYPE TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY MATERIALIZED VIEW TO DBA WITH ADMIN OPTION;
-GRANT CREATE MATERIALIZED VIEW TO DBA WITH ADMIN OPTION;
-GRANT CREATE PUBLIC DATABASE LINK TO DBA WITH ADMIN OPTION;
-GRANT CREATE DATABASE LINK TO DBA WITH ADMIN OPTION;
-GRANT CREATE ANY SYNONYM TO DBA WITH ADMIN OPTION;
-GRANT ALTER ANY CLUSTER TO DBA WITH ADMIN OPTION;
-GRANT DROP USER TO DBA WITH ADMIN OPTION;
+GRANT MANAGE FILE GROUP TO DBA WITH ADMIN OPTION;
+GRANT MANAGE SCHEDULER TO DBA WITH ADMIN OPTION;
 GRANT MANAGE TABLESPACE TO DBA WITH ADMIN OPTION;
---
--- DATAPUMP_IMP_FULL_DATABASE  (Role) 
---
-GRANT DATAPUMP_IMP_FULL_DATABASE TO DBA;
---
--- SCHEDULER_ADMIN  (Role) 
---
-GRANT SCHEDULER_ADMIN TO DBA WITH ADMIN OPTION;
---
--- EXECUTE_CATALOG_ROLE  (Role) 
---
-GRANT EXECUTE_CATALOG_ROLE TO DBA WITH ADMIN OPTION;
---
--- DELETE_CATALOG_ROLE  (Role) 
---
-GRANT DELETE_CATALOG_ROLE TO DBA WITH ADMIN OPTION;
---
--- PLUSTRACE  (Role) 
---
-GRANT PLUSTRACE TO DBA WITH ADMIN OPTION;
---
--- SELECT_CATALOG_ROLE  (Role) 
---
-GRANT SELECT_CATALOG_ROLE TO DBA WITH ADMIN OPTION;
---
--- EXP_FULL_DATABASE  (Role) 
---
-GRANT EXP_FULL_DATABASE TO DBA;
---
--- GATHER_SYSTEM_STATISTICS  (Role) 
---
-GRANT GATHER_SYSTEM_STATISTICS TO DBA;
---
--- DATAPUMP_EXP_FULL_DATABASE  (Role) 
---
+GRANT MERGE ANY VIEW TO DBA WITH ADMIN OPTION;
+GRANT ON COMMIT REFRESH TO DBA WITH ADMIN OPTION;
+GRANT QUERY REWRITE TO DBA WITH ADMIN OPTION;
+GRANT READ ANY FILE GROUP TO DBA WITH ADMIN OPTION;
+GRANT RESTRICTED SESSION TO DBA WITH ADMIN OPTION;
+GRANT RESUMABLE TO DBA WITH ADMIN OPTION;
+GRANT SELECT ANY CUBE TO DBA WITH ADMIN OPTION;
+GRANT SELECT ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
+GRANT SELECT ANY DICTIONARY TO DBA WITH ADMIN OPTION;
+GRANT SELECT ANY MINING MODEL TO DBA WITH ADMIN OPTION;
+GRANT SELECT ANY SEQUENCE TO DBA WITH ADMIN OPTION;
+GRANT SELECT ANY TABLE TO DBA WITH ADMIN OPTION;
+GRANT SELECT ANY TRANSACTION TO DBA WITH ADMIN OPTION;
+GRANT UNDER ANY TABLE TO DBA WITH ADMIN OPTION;
+GRANT UNDER ANY TYPE TO DBA WITH ADMIN OPTION;
+GRANT UNDER ANY VIEW TO DBA WITH ADMIN OPTION;
+GRANT UNLIMITED TABLESPACE TO DBA WITH ADMIN OPTION;
+GRANT UPDATE ANY CUBE TO DBA WITH ADMIN OPTION;
+GRANT UPDATE ANY CUBE BUILD PROCESS TO DBA WITH ADMIN OPTION;
+GRANT UPDATE ANY CUBE DIMENSION TO DBA WITH ADMIN OPTION;
+GRANT UPDATE ANY TABLE TO DBA WITH ADMIN OPTION;
 GRANT DATAPUMP_EXP_FULL_DATABASE TO DBA;
---
--- XDB_SET_INVOKER  (Role) 
---
-GRANT XDB_SET_INVOKER TO DBA;
---
--- IMP_FULL_DATABASE  (Role) 
---
+GRANT DATAPUMP_IMP_FULL_DATABASE TO DBA;
+GRANT DELETE_CATALOG_ROLE TO DBA WITH ADMIN OPTION;
+GRANT EXECUTE_CATALOG_ROLE TO DBA WITH ADMIN OPTION;
+GRANT EXP_FULL_DATABASE TO DBA;
+GRANT GATHER_SYSTEM_STATISTICS TO DBA;
 GRANT IMP_FULL_DATABASE TO DBA;
---
--- XDBADMIN  (Role) 
---
+GRANT PLUSTRACE TO DBA WITH ADMIN OPTION;
+GRANT SCHEDULER_ADMIN TO DBA WITH ADMIN OPTION;
+GRANT SELECT_CATALOG_ROLE TO DBA WITH ADMIN OPTION;
 GRANT XDBADMIN TO DBA;
+GRANT XDB_SET_INVOKER TO DBA;
 
 
---
--- ARCH  (User) 
---
 CREATE USER ARCH
   IDENTIFIED BY <password>
   DEFAULT TABLESPACE SYSTEM
@@ -790,7176 +3063,432 @@ END;
   GRANT UPDATE ANY TABLE TO ARCH;
 
 
---
--- ORACLECLRDIR  (Directory) 
---
-CREATE OR REPLACE DIRECTORY 
-ORACLECLRDIR AS 
-'C:\oraclexe\app\oracle\product\11.2.0\server\bin\clr';
-
-
---
--- DATA_PUMP_DIR  (Directory) 
---
-CREATE OR REPLACE DIRECTORY 
-DATA_PUMP_DIR AS 
-'C:\oraclexe\app\oracle\admin\xe\dpdump\';
-
-
---
--- XMLDIR  (Directory) 
---
-CREATE OR REPLACE DIRECTORY 
-XMLDIR AS 
-'C:\oraclexe\app\oracle\product\11.2.0\server\rdbms\xml';
-
-
---
--- ORACLE_OCM_CONFIG_DIR  (Directory) 
---
-CREATE OR REPLACE DIRECTORY 
-ORACLE_OCM_CONFIG_DIR AS 
-'C:/ADE/jaikrish_xe/oracle\ccr\state';
-
-
---
--- ADDRESS_DICTIONARY_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.ADDRESS_DICTIONARY_SEQ
-  START WITH 21
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- ATTRIBUTES_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.ATTRIBUTES_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- ATTRIBUTES_VALUES_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.ATTRIBUTES_VALUES_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- CLIENTS_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.CLIENTS_SEQ
-  START WITH 41
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- COPIES_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.COPIES_SEQ
-  START WITH 21
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- COPY_TYPES_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.COPY_TYPES_SEQ
-  START WITH 21
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- COPY_TYPE_ATTRIBUTES_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.COPY_TYPE_ATTRIBUTES_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- DOCUMENTS_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.DOCUMENTS_SEQ
-  START WITH 41
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- DOCUMENT_HISTORY_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.DOCUMENT_HISTORY_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- DOCUMENT_TYPES_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.DOCUMENT_TYPES_SEQ
-  START WITH 21
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- DOCUMENT_TYPE_ATTRIBUTES_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.DOCUMENT_TYPE_ATTRIBUTES_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- FILES_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.FILES_SEQ
-  START WITH 81
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- MOVEMENT_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.MOVEMENT_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- REFERENCES_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.REFERENCES_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- REFERENCE_TYPES_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.REFERENCE_TYPES_SEQ
-  START WITH 21
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- ROLES_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.ROLES_SEQ
-  START WITH 21
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- ROLE_CLIENT_ACCESS_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.ROLE_CLIENT_ACCESS_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- ROLE_DOCUMENT_ACCESS_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.ROLE_DOCUMENT_ACCESS_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- ROLE_DOCUMENT_TYPE_ACCESS_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.ROLE_DOCUMENT_TYPE_ACCESS_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- USERS_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.USERS_SEQ
-  START WITH 41
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- USER_CLIENT_ACCESS_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.USER_CLIENT_ACCESS_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- USER_DOCUMENT_ACCESS_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.USER_DOCUMENT_ACCESS_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- USER_DOCUMENT_TYPE_ACCESS_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.USER_DOCUMENT_TYPE_ACCESS_SEQ
-  START WITH 1
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- USER_ROLES_SEQ  (Sequence) 
---
-CREATE SEQUENCE ARCH.USER_ROLES_SEQ
-  START WITH 21
-  MAXVALUE 9999999999999999999999999999
-  MINVALUE 1
-  NOCYCLE
-  CACHE 20
-  NOORDER;
-
-
---
--- USERS  (Table) 
---
-CREATE TABLE ARCH.USERS
-(
-  ID                      NUMBER(9)             NOT NULL,
-  NAME                    VARCHAR2(100 BYTE)    NOT NULL,
-  FULL_NAME               NVARCHAR2(500)        NOT NULL,
-  BLOCK                   NUMBER(1)             DEFAULT 0                     NOT NULL,
-  AUD_CREATE_USER_NAME    VARCHAR2(250 BYTE)    NOT NULL,
-  AUD_MODIFY_USER_NAME    VARCHAR2(250 BYTE)    NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- REFERENCE_TYPES  (Table) 
---
-CREATE TABLE ARCH.REFERENCE_TYPES
-(
-  ID                      NUMBER(9)             NOT NULL,
-  NAME                    NVARCHAR2(500)        NOT NULL,
-  DESCRIPTION             NVARCHAR2(2000),
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- REFERENCE_TYPES_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.REFERENCE_TYPES_PK ON ARCH.REFERENCE_TYPES
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- USERS_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.USERS_PK ON ARCH.USERS
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- USERS_UK1  (Index) 
---
-CREATE UNIQUE INDEX ARCH.USERS_UK1 ON ARCH.USERS
-(NAME)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- DML_REFERENCE_TYPES  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_REFERENCE_TYPES IS
-
-  PROCEDURE INS_REFERENCE_TYPES_WI
-    (
-     in_ID                     IN ARCH.REFERENCE_TYPES.ID%TYPE
-    ,in_NAME                   IN ARCH.REFERENCE_TYPES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.REFERENCE_TYPES.DESCRIPTION%TYPE
-    );
-
-    PROCEDURE INS_REFERENCE_TYPES
-    (
-     in_NAME                   IN ARCH.REFERENCE_TYPES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.REFERENCE_TYPES.DESCRIPTION%TYPE
-    );
-
-  PROCEDURE UPD_REFERENCE_TYPES
-    (
-     in_ID                     IN ARCH.REFERENCE_TYPES.ID%TYPE
-    ,in_NAME                   IN ARCH.REFERENCE_TYPES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.REFERENCE_TYPES.DESCRIPTION%TYPE
-    );
-
-  PROCEDURE DEL_REFERENCE_TYPES
-    (
-     in_ID                     IN ARCH.REFERENCE_TYPES.ID%TYPE
-    );
-
-END DML_REFERENCE_TYPES;
+CREATE USER SYS
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE SYSTEM
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  ACCOUNT UNLOCK;
+  -- 32 Roles for SYS 
+  GRANT ADM_PARALLEL_EXECUTE_TASK TO SYS WITH ADMIN OPTION;
+  GRANT APEX_ADMINISTRATOR_ROLE TO SYS WITH ADMIN OPTION;
+  GRANT AQ_ADMINISTRATOR_ROLE TO SYS WITH ADMIN OPTION;
+  GRANT AQ_USER_ROLE TO SYS WITH ADMIN OPTION;
+  GRANT AUTHENTICATEDUSER TO SYS WITH ADMIN OPTION;
+  GRANT CONNECT TO SYS WITH ADMIN OPTION;
+  GRANT CTXAPP TO SYS WITH ADMIN OPTION;
+  GRANT DATAPUMP_EXP_FULL_DATABASE TO SYS WITH ADMIN OPTION;
+  GRANT DATAPUMP_IMP_FULL_DATABASE TO SYS WITH ADMIN OPTION;
+  GRANT DBA TO SYS WITH ADMIN OPTION;
+  GRANT DBFS_ROLE TO SYS WITH ADMIN OPTION;
+  GRANT DELETE_CATALOG_ROLE TO SYS WITH ADMIN OPTION;
+  GRANT EXECUTE_CATALOG_ROLE TO SYS WITH ADMIN OPTION;
+  GRANT EXP_FULL_DATABASE TO SYS WITH ADMIN OPTION;
+  GRANT GATHER_SYSTEM_STATISTICS TO SYS WITH ADMIN OPTION;
+  GRANT HS_ADMIN_EXECUTE_ROLE TO SYS WITH ADMIN OPTION;
+  GRANT HS_ADMIN_ROLE TO SYS WITH ADMIN OPTION;
+  GRANT HS_ADMIN_SELECT_ROLE TO SYS WITH ADMIN OPTION;
+  GRANT IMP_FULL_DATABASE TO SYS WITH ADMIN OPTION;
+  GRANT LOGSTDBY_ADMINISTRATOR TO SYS WITH ADMIN OPTION;
+  GRANT OEM_ADVISOR TO SYS WITH ADMIN OPTION;
+  GRANT OEM_MONITOR TO SYS WITH ADMIN OPTION;
+  GRANT PLUSTRACE TO SYS WITH ADMIN OPTION;
+  GRANT RECOVERY_CATALOG_OWNER TO SYS WITH ADMIN OPTION;
+  GRANT RESOURCE TO SYS WITH ADMIN OPTION;
+  GRANT SCHEDULER_ADMIN TO SYS WITH ADMIN OPTION;
+  GRANT SELECT_CATALOG_ROLE TO SYS WITH ADMIN OPTION;
+  GRANT XDBADMIN TO SYS WITH ADMIN OPTION;
+  GRANT XDB_SET_INVOKER TO SYS WITH ADMIN OPTION;
+  GRANT XDB_WEBSERVICES TO SYS WITH ADMIN OPTION;
+  GRANT XDB_WEBSERVICES_OVER_HTTP TO SYS WITH ADMIN OPTION;
+  GRANT XDB_WEBSERVICES_WITH_PUBLIC TO SYS WITH ADMIN OPTION;
+  ALTER USER SYS DEFAULT ROLE ALL;
+  -- 200 System Privileges for SYS 
+  GRANT ADMINISTER ANY SQL TUNING SET TO SYS;
+  GRANT ADMINISTER DATABASE TRIGGER TO SYS;
+  BEGIN
+SYS.DBMS_RESOURCE_MANAGER_PRIVS.GRANT_SYSTEM_PRIVILEGE
+  (GRANTEE_NAME   => 'SYS', 
+   PRIVILEGE_NAME => 'ADMINISTER_RESOURCE_MANAGER',
+   ADMIN_OPTION   => FALSE);
+END;
 /
-
---
--- DML_USERS  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_USERS IS
-
-  PROCEDURE INS_USERS
-    (
-     in_NAME                   IN ARCH.USERS.NAME%TYPE
-    ,in_FULL_NAME              IN ARCH.USERS.FULL_NAME%TYPE
-    ,in_BLOCK                  IN ARCH.USERS.BLOCK%TYPE
-    );
-
-   PROCEDURE INS_USERS_WI
-    (
-     in_ID                     IN ARCH.USERS.ID%TYPE
-    ,in_NAME                   IN ARCH.USERS.NAME%TYPE
-    ,in_FULL_NAME              IN ARCH.USERS.FULL_NAME%TYPE
-    ,in_BLOCK                  IN ARCH.USERS.BLOCK%TYPE
-    );
-
-  PROCEDURE UPD_USERS
-    (
-     in_ID                     IN ARCH.USERS.ID%TYPE
-    ,in_FULL_NAME              IN ARCH.USERS.FULL_NAME%TYPE
-    ,in_BLOCK                  IN ARCH.USERS.BLOCK%TYPE
-    );
-
-  PROCEDURE DEL_USERS
-    (
-     in_ID                     IN ARCH.USERS.ID%TYPE
-    );
-
- PROCEDURE CHANGE_PASSWORD
-    (
-     in_ID                     IN ARCH.USERS.ID%TYPE
-    ,in_PASSWORD               IN varchar
-    );
-    
-END DML_USERS;
+  GRANT ADMINISTER SQL MANAGEMENT OBJECT TO SYS;
+  GRANT ADMINISTER SQL TUNING SET TO SYS;
+  GRANT ADVISOR TO SYS;
+  GRANT ALTER ANY ASSEMBLY TO SYS;
+  GRANT ALTER ANY CLUSTER TO SYS;
+  GRANT ALTER ANY CUBE TO SYS;
+  GRANT ALTER ANY CUBE DIMENSION TO SYS;
+  GRANT ALTER ANY DIMENSION TO SYS;
+  GRANT ALTER ANY EDITION TO SYS;
+  BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.ALTER_ANY_EVALUATION_CONTEXT,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
 /
-
---
--- DML_REFERENCE_TYPES  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_REFERENCE_TYPES IS
-
-  PROCEDURE INS_REFERENCE_TYPES_WI
-    (
-    in_ID                     IN ARCH.REFERENCE_TYPES.ID%TYPE
-    ,in_NAME                   IN ARCH.REFERENCE_TYPES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.REFERENCE_TYPES.DESCRIPTION%TYPE
-    ) IS
+  GRANT ALTER ANY INDEX TO SYS;
+  GRANT ALTER ANY INDEXTYPE TO SYS;
+  GRANT ALTER ANY LIBRARY TO SYS;
+  GRANT ALTER ANY MATERIALIZED VIEW TO SYS;
+  GRANT ALTER ANY MINING MODEL TO SYS;
+  GRANT ALTER ANY OPERATOR TO SYS;
+  GRANT ALTER ANY OUTLINE TO SYS;
+  GRANT ALTER ANY PROCEDURE TO SYS;
+  GRANT ALTER ANY ROLE TO SYS;
   BEGIN
-    INSERT INTO ARCH.REFERENCE_TYPES
-      (
-      ID
-      ,NAME
-      ,DESCRIPTION
-      )
-    VALUES
-      (
-       in_ID
-      ,in_NAME
-      ,in_DESCRIPTION
-      );
-  END INS_REFERENCE_TYPES_WI;
-
-    PROCEDURE INS_REFERENCE_TYPES
-    (
-     in_NAME                   IN ARCH.REFERENCE_TYPES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.REFERENCE_TYPES.DESCRIPTION%TYPE
-    ) IS
-  BEGIN
-    INS_REFERENCE_TYPES_WI(
-       REFERENCE_TYPES_SEQ.NEXTVAL
-      ,in_NAME
-      ,in_DESCRIPTION
-      );
-  END INS_REFERENCE_TYPES;
-
-  PROCEDURE UPD_REFERENCE_TYPES
-    (
-     in_ID                     IN ARCH.REFERENCE_TYPES.ID%TYPE
-    ,in_NAME                   IN ARCH.REFERENCE_TYPES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.REFERENCE_TYPES.DESCRIPTION%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.REFERENCE_TYPES
-    SET 
-        NAME                     = in_NAME
-       ,DESCRIPTION              = in_DESCRIPTION
-    WHERE
-        ID                       = in_ID;
-  END UPD_REFERENCE_TYPES;
-
-  PROCEDURE DEL_REFERENCE_TYPES
-    (
-     in_ID                     IN ARCH.REFERENCE_TYPES.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.REFERENCE_TYPES
-    WHERE
-        ID                       = in_ID;
-  END DEL_REFERENCE_TYPES;
-
-END DML_REFERENCE_TYPES;
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.ALTER_ANY_RULE,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
 /
-
---
--- DML_USERS  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_USERS IS
-
- PROCEDURE INS_USERS_WI
-    (
-     in_ID                     IN ARCH.USERS.ID%TYPE
-    ,in_NAME                   IN ARCH.USERS.NAME%TYPE
-    ,in_FULL_NAME              IN ARCH.USERS.FULL_NAME%TYPE
-    ,in_BLOCK                  IN ARCH.USERS.BLOCK%TYPE
-    ) IS
   BEGIN
-    INSERT INTO ARCH.USERS
-      (
-       ID
-      ,NAME
-      ,FULL_NAME
-      ,BLOCK
-      )
-    VALUES
-      (
-       in_ID
-      ,in_NAME
-      ,in_FULL_NAME
-      ,in_BLOCK
-      );
-      
-      EXECUTE IMMEDIATE 'CREATE USER ' || in_NAME || ' IDENTIFIED BY '|| in_NAME||'';
-      EXECUTE IMMEDIATE 'GRANT CONNECT TO ' || in_NAME || ''; 
-      EXECUTE IMMEDIATE 'GRANT CREATE SESSION TO ' || in_NAME || ''; 
-    
-  END INS_USERS_WI;
-
-  PROCEDURE INS_USERS
-    (
-     in_NAME                   IN ARCH.USERS.NAME%TYPE
-    ,in_FULL_NAME              IN ARCH.USERS.FULL_NAME%TYPE
-    ,in_BLOCK                  IN ARCH.USERS.BLOCK%TYPE
-    ) IS
-  BEGIN
-    INS_USERS_WI(
-       USERS_SEQ.NEXTVAL
-      ,in_NAME
-      ,in_FULL_NAME
-      ,in_BLOCK
-      );
-    
-  END INS_USERS;
-
-  
-
-  PROCEDURE UPD_USERS
-    (
-     in_ID                     IN ARCH.USERS.ID%TYPE
-    ,in_FULL_NAME              IN ARCH.USERS.FULL_NAME%TYPE
-    ,in_BLOCK                  IN ARCH.USERS.BLOCK%TYPE
-    ) IS
-  BEGIN
-    
-    
-    UPDATE ARCH.USERS
-    SET 
-        FULL_NAME                = in_FULL_NAME
-       ,BLOCK                    = in_BLOCK
-    WHERE
-        ID                       = in_ID;
-            
-    
-  END UPD_USERS;
-  
-   PROCEDURE CHANGE_PASSWORD
-    (
-     in_ID                     IN ARCH.USERS.ID%TYPE
-    ,in_PASSWORD               IN varchar
-    ) IS
-    in_NAME                   varchar2(100); 
-  BEGIN
-    
-    select name into in_NAME from ARCH.USERS where id=in_ID;
-            
-    EXECUTE IMMEDIATE 'ALTER USER ' || in_NAME || ' IDENTIFIED BY '|| in_PASSWORD||'';
-    
-  END CHANGE_PASSWORD;
-
-  PROCEDURE DEL_USERS
-    (
-     in_ID                     IN ARCH.USERS.ID%TYPE
-    ) IS
-    in_NAME                   varchar2(100); 
-  BEGIN    
-    select name into in_NAME from ARCH.USERS where id=in_ID;
-    DELETE FROM ARCH.USERS
-    WHERE
-        ID                       = in_ID;
-    EXECUTE IMMEDIATE 'DROP USER ' || in_NAME;    
-  END DEL_USERS;
-
-END DML_USERS;
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.ALTER_ANY_RULE_SET,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
 /
+  GRANT ALTER ANY SEQUENCE TO SYS;
+  GRANT ALTER ANY SQL PROFILE TO SYS;
+  GRANT ALTER ANY TABLE TO SYS;
+  GRANT ALTER ANY TRIGGER TO SYS;
+  GRANT ALTER ANY TYPE TO SYS;
+  GRANT ALTER DATABASE TO SYS;
+  GRANT ALTER PROFILE TO SYS;
+  GRANT ALTER RESOURCE COST TO SYS;
+  GRANT ALTER ROLLBACK SEGMENT TO SYS;
+  GRANT ALTER SESSION TO SYS;
+  GRANT ALTER SYSTEM TO SYS;
+  GRANT ALTER TABLESPACE TO SYS;
+  GRANT ALTER USER TO SYS;
+  GRANT ANALYZE ANY TO SYS;
+  GRANT AUDIT ANY TO SYS;
+  GRANT AUDIT SYSTEM TO SYS;
+  GRANT BACKUP ANY TABLE TO SYS;
+  GRANT BECOME USER TO SYS;
+  GRANT CHANGE NOTIFICATION TO SYS;
+  GRANT COMMENT ANY MINING MODEL TO SYS;
+  GRANT COMMENT ANY TABLE TO SYS;
+  GRANT CREATE ANY ASSEMBLY TO SYS;
+  GRANT CREATE ANY CLUSTER TO SYS;
+  GRANT CREATE ANY CONTEXT TO SYS;
+  GRANT CREATE ANY CUBE TO SYS;
+  GRANT CREATE ANY CUBE BUILD PROCESS TO SYS;
+  GRANT CREATE ANY CUBE DIMENSION TO SYS;
+  GRANT CREATE ANY DIMENSION TO SYS;
+  GRANT CREATE ANY DIRECTORY TO SYS;
+  GRANT CREATE ANY EDITION TO SYS;
+  BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_ANY_EVALUATION_CONTEXT,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
+/
+  GRANT CREATE ANY INDEX TO SYS;
+  GRANT CREATE ANY INDEXTYPE TO SYS;
+  GRANT CREATE ANY JOB TO SYS;
+  GRANT CREATE ANY LIBRARY TO SYS;
+  GRANT CREATE ANY MATERIALIZED VIEW TO SYS;
+  GRANT CREATE ANY MEASURE FOLDER TO SYS;
+  GRANT CREATE ANY MINING MODEL TO SYS;
+  GRANT CREATE ANY OPERATOR TO SYS;
+  GRANT CREATE ANY OUTLINE TO SYS;
+  GRANT CREATE ANY PROCEDURE TO SYS;
+  BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_ANY_RULE,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
+/
+  BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_ANY_RULE_SET,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
+/
+  GRANT CREATE ANY SEQUENCE TO SYS;
+  GRANT CREATE ANY SQL PROFILE TO SYS;
+  GRANT CREATE ANY SYNONYM TO SYS;
+  GRANT CREATE ANY TABLE TO SYS;
+  GRANT CREATE ANY TRIGGER TO SYS;
+  GRANT CREATE ANY TYPE TO SYS;
+  GRANT CREATE ANY VIEW TO SYS;
+  GRANT CREATE ASSEMBLY TO SYS;
+  GRANT CREATE CLUSTER TO SYS;
+  GRANT CREATE CUBE TO SYS;
+  GRANT CREATE CUBE BUILD PROCESS TO SYS;
+  GRANT CREATE CUBE DIMENSION TO SYS;
+  GRANT CREATE DATABASE LINK TO SYS;
+  GRANT CREATE DIMENSION TO SYS;
+  BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_EVALUATION_CONTEXT_OBJ,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
+/
+  GRANT CREATE EXTERNAL JOB TO SYS;
+  GRANT CREATE INDEXTYPE TO SYS;
+  GRANT CREATE JOB TO SYS;
+  GRANT CREATE LIBRARY TO SYS;
+  GRANT CREATE MATERIALIZED VIEW TO SYS;
+  GRANT CREATE MEASURE FOLDER TO SYS;
+  GRANT CREATE MINING MODEL TO SYS;
+  GRANT CREATE OPERATOR TO SYS;
+  GRANT CREATE PROCEDURE TO SYS;
+  GRANT CREATE PROFILE TO SYS;
+  GRANT CREATE PUBLIC DATABASE LINK TO SYS;
+  GRANT CREATE PUBLIC SYNONYM TO SYS;
+  GRANT CREATE ROLE TO SYS;
+  GRANT CREATE ROLLBACK SEGMENT TO SYS;
+  BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_RULE_OBJ,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
+/
+  BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.CREATE_RULE_SET_OBJ,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
+/
+  GRANT CREATE SEQUENCE TO SYS;
+  GRANT CREATE SESSION TO SYS;
+  GRANT CREATE SYNONYM TO SYS;
+  GRANT CREATE TABLE TO SYS;
+  GRANT CREATE TABLESPACE TO SYS;
+  GRANT CREATE TRIGGER TO SYS;
+  GRANT CREATE TYPE TO SYS;
+  GRANT CREATE USER TO SYS;
+  GRANT CREATE VIEW TO SYS;
+  GRANT DEBUG ANY PROCEDURE TO SYS;
+  GRANT DEBUG CONNECT SESSION TO SYS;
+  GRANT DELETE ANY CUBE DIMENSION TO SYS;
+  GRANT DELETE ANY MEASURE FOLDER TO SYS;
+  GRANT DELETE ANY TABLE TO SYS;
+  BEGIN
+SYS.DBMS_AQADM.GRANT_SYSTEM_PRIVILEGE (
+  PRIVILEGE    => 'DEQUEUE_ANY',
+  GRANTEE      => 'SYS',
+  ADMIN_OPTION => TRUE);
+END;
+/
+  GRANT DROP ANY ASSEMBLY TO SYS;
+  GRANT DROP ANY CLUSTER TO SYS;
+  GRANT DROP ANY CONTEXT TO SYS;
+  GRANT DROP ANY CUBE TO SYS;
+  GRANT DROP ANY CUBE BUILD PROCESS TO SYS;
+  GRANT DROP ANY CUBE DIMENSION TO SYS;
+  GRANT DROP ANY DIMENSION TO SYS;
+  GRANT DROP ANY DIRECTORY TO SYS;
+  GRANT DROP ANY EDITION TO SYS;
+  BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.DROP_ANY_EVALUATION_CONTEXT,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
+/
+  GRANT DROP ANY INDEX TO SYS;
+  GRANT DROP ANY INDEXTYPE TO SYS;
+  GRANT DROP ANY LIBRARY TO SYS;
+  GRANT DROP ANY MATERIALIZED VIEW TO SYS;
+  GRANT DROP ANY MEASURE FOLDER TO SYS;
+  GRANT DROP ANY MINING MODEL TO SYS;
+  GRANT DROP ANY OPERATOR TO SYS;
+  GRANT DROP ANY OUTLINE TO SYS;
+  GRANT DROP ANY PROCEDURE TO SYS;
+  GRANT DROP ANY ROLE TO SYS;
+  BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.DROP_ANY_RULE,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
+/
+  BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.DROP_ANY_RULE_SET,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
+/
+  GRANT DROP ANY SEQUENCE TO SYS;
+  GRANT DROP ANY SQL PROFILE TO SYS;
+  GRANT DROP ANY SYNONYM TO SYS;
+  GRANT DROP ANY TABLE TO SYS;
+  GRANT DROP ANY TRIGGER TO SYS;
+  GRANT DROP ANY TYPE TO SYS;
+  GRANT DROP ANY VIEW TO SYS;
+  GRANT DROP PROFILE TO SYS;
+  GRANT DROP PUBLIC DATABASE LINK TO SYS;
+  GRANT DROP PUBLIC SYNONYM TO SYS;
+  GRANT DROP ROLLBACK SEGMENT TO SYS;
+  GRANT DROP TABLESPACE TO SYS;
+  GRANT DROP USER TO SYS;
+  BEGIN
+SYS.DBMS_AQADM.GRANT_SYSTEM_PRIVILEGE (
+  PRIVILEGE    => 'ENQUEUE_ANY',
+  GRANTEE      => 'SYS',
+  ADMIN_OPTION => TRUE);
+END;
+/
+  GRANT EXECUTE ANY ASSEMBLY TO SYS;
+  GRANT EXECUTE ANY CLASS TO SYS;
+  BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.EXECUTE_ANY_EVALUATION_CONTEXT,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
+/
+  GRANT EXECUTE ANY INDEXTYPE TO SYS;
+  GRANT EXECUTE ANY LIBRARY TO SYS;
+  GRANT EXECUTE ANY OPERATOR TO SYS;
+  GRANT EXECUTE ANY PROCEDURE TO SYS;
+  GRANT EXECUTE ANY PROGRAM TO SYS;
+  BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.EXECUTE_ANY_RULE,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
+/
+  BEGIN
+SYS.DBMS_RULE_ADM.GRANT_SYSTEM_PRIVILEGE(
+  PRIVILEGE    => SYS.DBMS_RULE_ADM.EXECUTE_ANY_RULE_SET,
+  GRANTEE      => 'SYS',
+  GRANT_OPTION => TRUE);
+END;
+/
+  GRANT EXECUTE ANY TYPE TO SYS;
+  GRANT EXECUTE ASSEMBLY TO SYS;
+  GRANT EXPORT FULL DATABASE TO SYS;
+  GRANT FLASHBACK ANY TABLE TO SYS;
+  GRANT FLASHBACK ARCHIVE ADMINISTER TO SYS;
+  GRANT FORCE ANY TRANSACTION TO SYS;
+  GRANT FORCE TRANSACTION TO SYS;
+  GRANT GLOBAL QUERY REWRITE TO SYS;
+  GRANT GRANT ANY OBJECT PRIVILEGE TO SYS;
+  GRANT GRANT ANY PRIVILEGE TO SYS;
+  GRANT GRANT ANY ROLE TO SYS;
+  GRANT IMPORT FULL DATABASE TO SYS;
+  GRANT INSERT ANY CUBE DIMENSION TO SYS;
+  GRANT INSERT ANY MEASURE FOLDER TO SYS;
+  GRANT INSERT ANY TABLE TO SYS;
+  GRANT LOCK ANY TABLE TO SYS;
+  GRANT MANAGE ANY FILE GROUP TO SYS;
+  BEGIN
+SYS.DBMS_AQADM.GRANT_SYSTEM_PRIVILEGE (
+  PRIVILEGE    => 'MANAGE_ANY',
+  GRANTEE      => 'SYS',
+  ADMIN_OPTION => TRUE);
+END;
+/
+  GRANT MANAGE FILE GROUP TO SYS;
+  GRANT MANAGE SCHEDULER TO SYS;
+  GRANT MANAGE TABLESPACE TO SYS;
+  GRANT MERGE ANY VIEW TO SYS;
+  GRANT ON COMMIT REFRESH TO SYS;
+  GRANT QUERY REWRITE TO SYS;
+  GRANT READ ANY FILE GROUP TO SYS;
+  GRANT RESTRICTED SESSION TO SYS;
+  GRANT RESUMABLE TO SYS;
+  GRANT SELECT ANY CUBE TO SYS;
+  GRANT SELECT ANY CUBE DIMENSION TO SYS;
+  GRANT SELECT ANY MINING MODEL TO SYS;
+  GRANT SELECT ANY SEQUENCE TO SYS;
+  GRANT SELECT ANY TABLE TO SYS WITH ADMIN OPTION;
+  GRANT SELECT ANY TRANSACTION TO SYS;
+  GRANT UNDER ANY TABLE TO SYS;
+  GRANT UNDER ANY TYPE TO SYS;
+  GRANT UNDER ANY VIEW TO SYS;
+  GRANT UNLIMITED TABLESPACE TO SYS;
+  GRANT UPDATE ANY CUBE TO SYS;
+  GRANT UPDATE ANY CUBE BUILD PROCESS TO SYS;
+  GRANT UPDATE ANY CUBE DIMENSION TO SYS;
+  GRANT UPDATE ANY TABLE TO SYS;
 
---
--- GET_AUDIT  (Procedure) 
---
-CREATE OR REPLACE PROCEDURE ARCH.GET_AUDIT
-(
-   AUD_USER_ID out NUMBER,
-   AUD_TIME out date,
-   AUD_OS_USER out nvarchar2,
-   AUD_HOST out nvarchar2,
-   AUD_APPLICATION out nvarchar2
-)
-IS
+
+CREATE USER SYSTEM
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE SYSTEM
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  ACCOUNT UNLOCK;
+  -- 2 Roles for SYSTEM 
+  GRANT AQ_ADMINISTRATOR_ROLE TO SYSTEM WITH ADMIN OPTION;
+  GRANT DBA TO SYSTEM WITH ADMIN OPTION;
+  ALTER USER SYSTEM DEFAULT ROLE ALL;
+  -- 5 System Privileges for SYSTEM 
+  GRANT CREATE MATERIALIZED VIEW TO SYSTEM;
+  GRANT CREATE TABLE TO SYSTEM;
+  GRANT GLOBAL QUERY REWRITE TO SYSTEM;
+  GRANT SELECT ANY TABLE TO SYSTEM;
+  GRANT UNLIMITED TABLESPACE TO SYSTEM WITH ADMIN OPTION;
+  -- 1 Resoure Group Privilege for SYSTEM 
 BEGIN
-    AUD_TIME:=SYSDATE;
-    SELECT ID INTO AUD_USER_ID FROM USERS where NAME=USER;
-    SELECT nvl(sys_context('USERENV', 'HOST'),'unknown') into AUD_HOST FROM DUAL;
-    SELECT nvl(sys_context('USERENV', 'MODULE'),'unknown') into AUD_APPLICATION FROM DUAL;
-    SELECT nvl(sys_context('USERENV', 'OS_USER'),'unknown') into AUD_OS_USER FROM DUAL;
+  SYS.DBMS_RESOURCE_MANAGER.clear_pending_area();
+  SYS.DBMS_RESOURCE_MANAGER.create_pending_area();
+  SYS.DBMS_RESOURCE_MANAGER_PRIVS.GRANT_SWITCH_CONSUMER_GROUP
+    ('SYSTEM','SYS_GROUP',FALSE);
+  SYS.DBMS_RESOURCE_MANAGER.submit_pending_area();
+END;
+/
+BEGIN
+  SYS.DBMS_RESOURCE_MANAGER.SET_INITIAL_CONSUMER_GROUP
+    ('SYSTEM','SYS_GROUP');
 END;
 /
 
---
--- REFERENCE_TYPES_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.REFERENCE_TYPES_TRG 
-BEFORE INSERT ON ARCH.REFERENCE_TYPES 
-FOR EACH ROW
+
+CREATE OR REPLACE TRIGGER SYS.aw_drop_trg AFTER DROP ON DATABASE
 BEGIN
-  <<COLUMN_SEQUENCES>>
+  aw_drop_proc(ora_dict_obj_type, ora_dict_obj_name, ora_dict_obj_owner);
+END;
+/
+SHOW ERRORS;
+
+
+CREATE OR REPLACE TRIGGER SYS.aw_ren_trg AFTER RENAME ON DATABASE
+BEGIN
+  aw_ren_proc(ora_dict_obj_type, ora_dict_obj_name, ora_dict_obj_owner);
+END;
+/
+SHOW ERRORS;
+
+
+CREATE OR REPLACE TRIGGER SYS.aw_trunc_trg AFTER TRUNCATE ON DATABASE
+BEGIN
+  aw_trunc_proc(ora_dict_obj_type, ora_dict_obj_name, ora_dict_obj_owner);
+END;
+/
+SHOW ERRORS;
+
+
+CREATE OR REPLACE TRIGGER SYS.XDB_PI_TRIG
+BEFORE DROP OR TRUNCATE on DATABASE
+BEGIN
   BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT REFERENCE_TYPES_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    IF (sys.is_vpd_enabled(sys.dictionary_obj_owner, sys.dictionary_obj_name, xdb.DBMS_XDBZ.IS_ENABLED_CONTENTS)) THEN
+      xdb.XDB_PITRIG_PKG.pitrig_truncate(sys.dictionary_obj_owner, sys.dictionary_obj_name);
+    ELSIF (sys.is_vpd_enabled(sys.dictionary_obj_owner, sys.dictionary_obj_name, xdb.DBMS_XDBZ.IS_ENABLED_RESMETADATA)) THEN
+      xdb.XDB_PITRIG_PKG.pitrig_dropmetadata(sys.dictionary_obj_owner, sys.dictionary_obj_name);
     END IF;
-  END COLUMN_SEQUENCES;
+  EXCEPTION
+    WHEN OTHERS THEN
+     null;
+  END;
 END;
 /
-
-
---
--- USERS_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.USERS_TRG 
-BEFORE INSERT ON ARCH.USERS 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT USERS_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- USERS_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.USERS_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.USERS
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-FOLLOWS USERS_TRG
-DECLARE
-   AUD_USER_NAME nvarchar2(250);
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    AUD_TIME:=SYSDATE;
-    AUD_USER_NAME :=nvl(USER,'unknown');
-    SELECT nvl(sys_context('USERENV', 'HOST'),'unknown') into AUD_HOST FROM DUAL;
-    SELECT nvl(sys_context('USERENV', 'MODULE'),'unknown') into AUD_APPLICATION FROM DUAL;
-    SELECT nvl(sys_context('USERENV', 'OS_USER'),'unknown') into AUD_OS_USER FROM DUAL;
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_NAME := AUD_USER_NAME;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_NAME := AUD_USER_NAME;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END USERS_AUD;
-/
-
-
---
--- REFERENCE_TYPES_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.REFERENCE_TYPES_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.REFERENCE_TYPES
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END REFERENCE_TYPES_AUD;
-/
-
-
---
--- CLIENTS  (Table) 
---
-CREATE TABLE ARCH.CLIENTS
-(
-  ID                      NUMBER(9)             NOT NULL,
-  FULL_NAME               NVARCHAR2(500),
-  FIRST_NAME              NVARCHAR2(100),
-  SUR_NAME                NVARCHAR2(100),
-  LAST_NAME               NVARCHAR2(100),
-  CLIENT_TYPE             INTEGER               NOT NULL,
-  IDENTIFICATION_NUMBER   NVARCHAR2(20)         NOT NULL,
-  ADDRESS                 NVARCHAR2(500),
-  CONTACTS                NVARCHAR2(500),
-  FULL_ACCESS             NUMBER(1)             DEFAULT 1                     NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- ADDRESS_DICTIONARY  (Table) 
---
-CREATE TABLE ARCH.ADDRESS_DICTIONARY
-(
-  ID                      NUMBER(9)             NOT NULL,
-  PARENT_ID               NUMBER(9),
-  NAME                    NVARCHAR2(500)        NOT NULL,
-  DESCRIPTION             NVARCHAR2(2000),
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- DOCUMENT_TYPES  (Table) 
---
-CREATE TABLE ARCH.DOCUMENT_TYPES
-(
-  ID                      NUMBER(9)             NOT NULL,
-  NAME                    NVARCHAR2(500)        NOT NULL,
-  PARENT_ID               NUMBER(9),
-  DESCRIPTION             NVARCHAR2(2000),
-  FULL_ACCESS             NUMBER(1)             DEFAULT 1                     NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- ATTRIBUTES  (Table) 
---
-CREATE TABLE ARCH.ATTRIBUTES
-(
-  ID                      NUMBER(9)             NOT NULL,
-  NAME                    NVARCHAR2(500)        NOT NULL,
-  DESCRIPTION             NVARCHAR2(2000),
-  VALUETYPE               NVARCHAR2(100)        NOT NULL,
-  REFERENCE_TYPE_ID       NUMBER(9),
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- DOCUMENT_TYPE_ATTRIBUTES  (Table) 
---
-CREATE TABLE ARCH.DOCUMENT_TYPE_ATTRIBUTES
-(
-  ID                      NUMBER(9)             NOT NULL,
-  DOCUMENT_TYPE_ID        NUMBER(9)             NOT NULL,
-  ATTRIBUTE_ID            NUMBER(9)             NOT NULL,
-  MANDATORY               NUMBER(1)             DEFAULT 0                     NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- ROLES  (Table) 
---
-CREATE TABLE ARCH.ROLES
-(
-  ID                      NUMBER(9)             NOT NULL,
-  NAME                    NVARCHAR2(500)        NOT NULL,
-  DESCRIPTION             NVARCHAR2(2000),
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- REFERENCES  (Table) 
---
-CREATE TABLE ARCH.REFERENCES
-(
-  ID                      NUMBER(9)             NOT NULL,
-  NAME                    NVARCHAR2(500)        NOT NULL,
-  DESCRIPTION             NVARCHAR2(2000),
-  REFENCE_TYPE_ID         NUMBER(9)             NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- DOCUMENTS  (Table) 
---
-CREATE TABLE ARCH.DOCUMENTS
-(
-  ID                      NUMBER(9)             NOT NULL,
-  DOCUMENT_TYPE_ID        NUMBER(9)             NOT NULL,
-  CLIENT_ID               NUMBER(9)             NOT NULL,
-  DOCUMENT_NUMBER         NVARCHAR2(500)        NOT NULL,
-  DOCUMENT_DATE           DATE                  NOT NULL,
-  ADDRESS_ID              NUMBER(9),
-  FULL_ACCESS             NUMBER(1)             DEFAULT 1                     NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  IS_DIRECTORY            NUMBER(1)             DEFAULT 0                     NOT NULL,
-  PARENT_ID               NUMBER(9)
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- ROLE_CLIENT_ACCESS  (Table) 
---
-CREATE TABLE ARCH.ROLE_CLIENT_ACCESS
-(
-  ID                      NUMBER(9)             NOT NULL,
-  ROLE_ID                 NUMBER(9)             NOT NULL,
-  CLIENT_ID               NUMBER(9)             NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- USER_CLIENT_ACCESS  (Table) 
---
-CREATE TABLE ARCH.USER_CLIENT_ACCESS
-(
-  ID                      NUMBER(9)             NOT NULL,
-  USER_ID                 NUMBER(9)             NOT NULL,
-  CLIENT_ID               NUMBER(9)             NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- ADDRESS_DICTIONARY_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.ADDRESS_DICTIONARY_PK ON ARCH.ADDRESS_DICTIONARY
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- ATTRIBUTES_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.ATTRIBUTES_PK ON ARCH.ATTRIBUTES
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- CLIENTS_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.CLIENTS_PK ON ARCH.CLIENTS
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- DOCUMENT_TYPE_ATTRIBUTES_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.DOCUMENT_TYPE_ATTRIBUTES_PK ON ARCH.DOCUMENT_TYPE_ATTRIBUTES
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- DOCUMENT_TYPES_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.DOCUMENT_TYPES_PK ON ARCH.DOCUMENT_TYPES
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- DOCUMENTS_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.DOCUMENTS_PK ON ARCH.DOCUMENTS
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- REFERENCES_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.REFERENCES_PK ON ARCH.REFERENCES
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- ROLE_CLIENT_ACCESS_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.ROLE_CLIENT_ACCESS_PK ON ARCH.ROLE_CLIENT_ACCESS
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- ROLES_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.ROLES_PK ON ARCH.ROLES
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- USER_CLIENT_ACCESS_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.USER_CLIENT_ACCESS_PK ON ARCH.USER_CLIENT_ACCESS
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- DML_ADDRESS_DICTIONARY  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_ADDRESS_DICTIONARY IS
-
-  PROCEDURE INS_ADDRESS_DICTIONARY_WI
-    (
-    in_ID                     IN ARCH.ADDRESS_DICTIONARY.ID%TYPE,
-     in_PARENT_ID              IN ARCH.ADDRESS_DICTIONARY.PARENT_ID%TYPE
-    ,in_NAME                   IN ARCH.ADDRESS_DICTIONARY.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ADDRESS_DICTIONARY.DESCRIPTION%TYPE
-    );
-    
-     PROCEDURE INS_ADDRESS_DICTIONARY
-    (
-     in_PARENT_ID              IN ARCH.ADDRESS_DICTIONARY.PARENT_ID%TYPE
-    ,in_NAME                   IN ARCH.ADDRESS_DICTIONARY.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ADDRESS_DICTIONARY.DESCRIPTION%TYPE
-    );
-
-
-  PROCEDURE UPD_ADDRESS_DICTIONARY
-    (
-     in_ID                     IN ARCH.ADDRESS_DICTIONARY.ID%TYPE
-    ,in_PARENT_ID              IN ARCH.ADDRESS_DICTIONARY.PARENT_ID%TYPE
-    ,in_NAME                   IN ARCH.ADDRESS_DICTIONARY.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ADDRESS_DICTIONARY.DESCRIPTION%TYPE
-    );
-
-  PROCEDURE DEL_ADDRESS_DICTIONARY
-    (
-     in_ID                     IN ARCH.ADDRESS_DICTIONARY.ID%TYPE
-    );
-
-END DML_ADDRESS_DICTIONARY;
-/
-
---
--- DML_ATTRIBUTES  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_ATTRIBUTES IS
-
-  PROCEDURE INS_ATTRIBUTES_WI
-    (
-     in_ID                     IN ARCH.ATTRIBUTES.ID%TYPE
-     ,in_NAME                   IN ARCH.ATTRIBUTES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ATTRIBUTES.DESCRIPTION%TYPE
-    ,in_VALUETYPE              IN ARCH.ATTRIBUTES.VALUETYPE%TYPE
-    ,in_REFERENCE_TYPE_ID           IN ARCH.ATTRIBUTES.REFERENCE_TYPE_ID%TYPE
-    );
-    
-  PROCEDURE INS_ATTRIBUTES
-    (
-     in_NAME                   IN ARCH.ATTRIBUTES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ATTRIBUTES.DESCRIPTION%TYPE
-    ,in_VALUETYPE              IN ARCH.ATTRIBUTES.VALUETYPE%TYPE
-    ,in_REFERENCE_TYPE_ID           IN ARCH.ATTRIBUTES.REFERENCE_TYPE_ID%TYPE
-    );
-
-  PROCEDURE UPD_ATTRIBUTES
-    (
-     in_ID                     IN ARCH.ATTRIBUTES.ID%TYPE
-    ,in_NAME                   IN ARCH.ATTRIBUTES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ATTRIBUTES.DESCRIPTION%TYPE
-    ,in_VALUETYPE              IN ARCH.ATTRIBUTES.VALUETYPE%TYPE
-    ,in_REFERENCE_TYPE_ID           IN ARCH.ATTRIBUTES.REFERENCE_TYPE_ID%TYPE
-    );
-
-  PROCEDURE DEL_ATTRIBUTES
-    (
-     in_ID                     IN ARCH.ATTRIBUTES.ID%TYPE
-    );
-
-END DML_ATTRIBUTES;
-/
-
---
--- DML_CLIENTS  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_CLIENTS IS
-
-  PROCEDURE INS_CLIENTS_WI
-    (
-     in_ID                     IN ARCH.CLIENTS.ID%TYPE,
-     in_FULL_NAME              IN ARCH.CLIENTS.FULL_NAME%TYPE
-    ,in_FIRST_NAME             IN ARCH.CLIENTS.FIRST_NAME%TYPE
-    ,in_SUR_NAME               IN ARCH.CLIENTS.SUR_NAME%TYPE
-    ,in_LAST_NAME              IN ARCH.CLIENTS.LAST_NAME%TYPE
-    ,in_CLIENT_TYPE            IN ARCH.CLIENTS.CLIENT_TYPE%TYPE
-    ,in_IDENTIFICATION_NUMBER  IN ARCH.CLIENTS.IDENTIFICATION_NUMBER%TYPE
-    ,in_ADDRESS                IN ARCH.CLIENTS.ADDRESS%TYPE
-    ,in_CONTACTS               IN ARCH.CLIENTS.CONTACTS%TYPE
-    ,in_FULL_ACCESS            IN ARCH.CLIENTS.FULL_ACCESS%TYPE
-    );
-
-  PROCEDURE INS_CLIENTS
-    (
-     in_FULL_NAME              IN ARCH.CLIENTS.FULL_NAME%TYPE
-    ,in_FIRST_NAME             IN ARCH.CLIENTS.FIRST_NAME%TYPE
-    ,in_SUR_NAME               IN ARCH.CLIENTS.SUR_NAME%TYPE
-    ,in_LAST_NAME              IN ARCH.CLIENTS.LAST_NAME%TYPE
-    ,in_CLIENT_TYPE            IN ARCH.CLIENTS.CLIENT_TYPE%TYPE
-    ,in_IDENTIFICATION_NUMBER  IN ARCH.CLIENTS.IDENTIFICATION_NUMBER%TYPE
-    ,in_ADDRESS                IN ARCH.CLIENTS.ADDRESS%TYPE
-    ,in_CONTACTS               IN ARCH.CLIENTS.CONTACTS%TYPE
-    ,in_FULL_ACCESS            IN ARCH.CLIENTS.FULL_ACCESS%TYPE
-    );
-  
-  PROCEDURE UPD_CLIENTS
-    (
-     in_ID                     IN ARCH.CLIENTS.ID%TYPE
-    ,in_FULL_NAME              IN ARCH.CLIENTS.FULL_NAME%TYPE
-    ,in_FIRST_NAME             IN ARCH.CLIENTS.FIRST_NAME%TYPE
-    ,in_SUR_NAME               IN ARCH.CLIENTS.SUR_NAME%TYPE
-    ,in_LAST_NAME              IN ARCH.CLIENTS.LAST_NAME%TYPE
-    ,in_CLIENT_TYPE            IN ARCH.CLIENTS.CLIENT_TYPE%TYPE
-    ,in_IDENTIFICATION_NUMBER  IN ARCH.CLIENTS.IDENTIFICATION_NUMBER%TYPE
-    ,in_ADDRESS                IN ARCH.CLIENTS.ADDRESS%TYPE
-    ,in_CONTACTS               IN ARCH.CLIENTS.CONTACTS%TYPE
-    ,in_FULL_ACCESS            IN ARCH.CLIENTS.FULL_ACCESS%TYPE
-    );
-
-  PROCEDURE DEL_CLIENTS
-    (
-     in_ID                     IN ARCH.CLIENTS.ID%TYPE
-    );
-
-END DML_CLIENTS;
-/
-
---
--- DML_DOCUMENT_TYPE_ATTRIBUTES  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_DOCUMENT_TYPE_ATTRIBUTES IS
-
-  PROCEDURE INS_DOC_TYPE_ATTRIBUTES_WI
-    (
-     in_ID                     IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.DOCUMENT_TYPE_ID%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.ATTRIBUTE_ID%TYPE
-    ,in_MANDATORY              IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.MANDATORY%TYPE
-    );
-
-  PROCEDURE INS_DOC_TYPE_ATTRIBUTES
-    (
-     in_DOCUMENT_TYPE_ID       IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.DOCUMENT_TYPE_ID%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.ATTRIBUTE_ID%TYPE
-    ,in_MANDATORY              IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.MANDATORY%TYPE
-    );
-
-  PROCEDURE UPD_DOC_TYPE_ATTRIBUTES
-    (
-     in_ID                     IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.DOCUMENT_TYPE_ID%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.ATTRIBUTE_ID%TYPE
-    ,in_MANDATORY              IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.MANDATORY%TYPE
-    );
-
-  PROCEDURE DEL_DOC_TYPE_ATTRIBUTES
-    (
-     in_ID                     IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.ID%TYPE
-    );
-
-END DML_DOCUMENT_TYPE_ATTRIBUTES;
-/
-
---
--- DML_DOCUMENT_TYPES  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_DOCUMENT_TYPES IS
-
-  PROCEDURE INS_DOCUMENT_TYPES_WI
-    (
-     in_ID                     IN ARCH.DOCUMENT_TYPES.ID%TYPE
-    ,in_NAME                   IN ARCH.DOCUMENT_TYPES.NAME%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENT_TYPES.PARENT_ID%TYPE
-    ,in_DESCRIPTION            IN ARCH.DOCUMENT_TYPES.DESCRIPTION%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENT_TYPES.FULL_ACCESS%TYPE
-    );
-
-  
-  PROCEDURE INS_DOCUMENT_TYPES
-    (
-     in_NAME                   IN ARCH.DOCUMENT_TYPES.NAME%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENT_TYPES.PARENT_ID%TYPE
-    ,in_DESCRIPTION            IN ARCH.DOCUMENT_TYPES.DESCRIPTION%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENT_TYPES.FULL_ACCESS%TYPE
-    );
-    
-  PROCEDURE UPD_DOCUMENT_TYPES
-    (
-     in_ID                     IN ARCH.DOCUMENT_TYPES.ID%TYPE
-    ,in_NAME                   IN ARCH.DOCUMENT_TYPES.NAME%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENT_TYPES.PARENT_ID%TYPE
-    ,in_DESCRIPTION            IN ARCH.DOCUMENT_TYPES.DESCRIPTION%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENT_TYPES.FULL_ACCESS%TYPE
-    );
-
-  PROCEDURE DEL_DOCUMENT_TYPES
-    (
-     in_ID                     IN ARCH.DOCUMENT_TYPES.ID%TYPE
-    );
-
-END DML_DOCUMENT_TYPES;
-/
-
---
--- DML_DOCUMENTS  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_DOCUMENTS IS
-
-  PROCEDURE INS_DOCUMENTS_WI
-    (
-     in_ID                     IN ARCH.DOCUMENTS.ID%TYPE,
-     in_DOCUMENT_TYPE_ID       IN ARCH.DOCUMENTS.DOCUMENT_TYPE_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.DOCUMENTS.CLIENT_ID%TYPE
-    ,in_DOCUMENT_NUMBER        IN ARCH.DOCUMENTS.DOCUMENT_NUMBER%TYPE
-    ,in_DOCUMENT_DATE          IN ARCH.DOCUMENTS.DOCUMENT_DATE%TYPE
-    ,in_ADDRESS_ID             IN ARCH.DOCUMENTS.ADDRESS_ID%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENTS.FULL_ACCESS%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENTS.PARENT_ID%TYPE
-    );
-    
-    PROCEDURE INS_DOCUMENTS
-    (
-     in_DOCUMENT_TYPE_ID       IN ARCH.DOCUMENTS.DOCUMENT_TYPE_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.DOCUMENTS.CLIENT_ID%TYPE
-    ,in_DOCUMENT_NUMBER        IN ARCH.DOCUMENTS.DOCUMENT_NUMBER%TYPE
-    ,in_DOCUMENT_DATE          IN ARCH.DOCUMENTS.DOCUMENT_DATE%TYPE
-    ,in_ADDRESS_ID             IN ARCH.DOCUMENTS.ADDRESS_ID%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENTS.FULL_ACCESS%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENTS.PARENT_ID%TYPE
-    );
-
-    PROCEDURE INS_DIRECTORY_WI
-    (
-        in_ID                     IN ARCH.DOCUMENTS.ID%TYPE
-        ,in_DOCUMENT_NUMBER        IN ARCH.DOCUMENTS.DOCUMENT_NUMBER%TYPE
-        ,in_FULL_ACCESS            IN ARCH.DOCUMENTS.FULL_ACCESS%TYPE
-        ,in_PARENT_ID              IN ARCH.DOCUMENTS.PARENT_ID%TYPE
-    );
-
-  PROCEDURE UPD_DOCUMENTS
-    (
-     in_ID                     IN ARCH.DOCUMENTS.ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.DOCUMENTS.DOCUMENT_TYPE_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.DOCUMENTS.CLIENT_ID%TYPE
-    ,in_DOCUMENT_NUMBER        IN ARCH.DOCUMENTS.DOCUMENT_NUMBER%TYPE
-    ,in_DOCUMENT_DATE          IN ARCH.DOCUMENTS.DOCUMENT_DATE%TYPE
-    ,in_ADDRESS_ID             IN ARCH.DOCUMENTS.ADDRESS_ID%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENTS.FULL_ACCESS%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENTS.PARENT_ID%TYPE
-    );
-    
-    PROCEDURE UPD_DIRECTORY
-    (
-     in_ID                     IN ARCH.DOCUMENTS.ID%TYPE
-    ,in_DOCUMENT_NUMBER        IN ARCH.DOCUMENTS.DOCUMENT_NUMBER%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENTS.FULL_ACCESS%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENTS.PARENT_ID%TYPE
-    );
-
-  PROCEDURE DEL_DOCUMENTS
-    (
-     in_ID                     IN ARCH.DOCUMENTS.ID%TYPE
-    );
-    
-    PROCEDURE DEL_DIRECTORY
-    (
-     in_ID                     IN ARCH.DOCUMENTS.ID%TYPE
-    );
-
-END DML_DOCUMENTS;
-/
-
---
--- DML_REFERENCES  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_REFERENCES IS
-
-  PROCEDURE INS_REFERENCES
-    (
-     in_NAME                   IN ARCH.REFERENCES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.REFERENCES.DESCRIPTION%TYPE
-    ,in_REFENCE_TYPE_ID        IN ARCH.REFERENCES.REFENCE_TYPE_ID%TYPE
-    );
-
- 
-  PROCEDURE INS_REFERENCES_WI
-    (
-     in_ID                     IN ARCH.REFERENCES.ID%TYPE
-    ,in_NAME                   IN ARCH.REFERENCES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.REFERENCES.DESCRIPTION%TYPE
-    ,in_REFENCE_TYPE_ID        IN ARCH.REFERENCES.REFENCE_TYPE_ID%TYPE
-    );
-
-  PROCEDURE UPD_REFERENCES
-    (
-     in_ID                     IN ARCH.REFERENCES.ID%TYPE
-    ,in_NAME                   IN ARCH.REFERENCES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.REFERENCES.DESCRIPTION%TYPE
-    ,in_REFENCE_TYPE_ID        IN ARCH.REFERENCES.REFENCE_TYPE_ID%TYPE
-    );
-
-  PROCEDURE DEL_REFERENCES
-    (
-     in_ID                     IN ARCH.REFERENCES.ID%TYPE
-    );
-
-END DML_REFERENCES;
-/
-
---
--- DML_ROLE_CLIENT_ACCESS  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_ROLE_CLIENT_ACCESS IS
-
-  PROCEDURE INS_ROLE_CLIENT_ACCESS
-    (
-     in_ROLE_ID                IN ARCH.ROLE_CLIENT_ACCESS.ROLE_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.ROLE_CLIENT_ACCESS.CLIENT_ID%TYPE
-    );
-
- PROCEDURE INS_ROLE_CLIENT_ACCESS_WI
-    (
-      in_ID                     IN ARCH.ROLE_CLIENT_ACCESS.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.ROLE_CLIENT_ACCESS.ROLE_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.ROLE_CLIENT_ACCESS.CLIENT_ID%TYPE
-    );
-
-  PROCEDURE UPD_ROLE_CLIENT_ACCESS
-    (
-     in_ID                     IN ARCH.ROLE_CLIENT_ACCESS.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.ROLE_CLIENT_ACCESS.ROLE_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.ROLE_CLIENT_ACCESS.CLIENT_ID%TYPE
-    );
-
-  PROCEDURE DEL_ROLE_CLIENT_ACCESS
-    (
-     in_ID                     IN ARCH.ROLE_CLIENT_ACCESS.ID%TYPE
-    );
-
-END DML_ROLE_CLIENT_ACCESS;
-/
-
---
--- DML_ROLES  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_ROLES IS
-
-  PROCEDURE INS_ROLES_WI
-    (
-     in_ID                     IN ARCH.ROLES.ID%TYPE
-    ,in_NAME                   IN ARCH.ROLES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ROLES.DESCRIPTION%TYPE
-    );
-
-  PROCEDURE INS_ROLES
-    (
-     in_NAME                   IN ARCH.ROLES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ROLES.DESCRIPTION%TYPE
-    );
-
-  PROCEDURE UPD_ROLES
-    (
-     in_ID                     IN ARCH.ROLES.ID%TYPE
-    ,in_NAME                   IN ARCH.ROLES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ROLES.DESCRIPTION%TYPE
-    );
-
-  PROCEDURE DEL_ROLES
-    (
-     in_ID                     IN ARCH.ROLES.ID%TYPE
-    );
-
-END DML_ROLES;
-/
-
---
--- DML_USER_CLIENT_ACCESS  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_USER_CLIENT_ACCESS IS
-
-  PROCEDURE INS_USER_CLIENT_ACCESS
-    (
-     in_USER_ID                IN ARCH.USER_CLIENT_ACCESS.USER_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.USER_CLIENT_ACCESS.CLIENT_ID%TYPE
-    );
-
-  PROCEDURE INS_USER_CLIENT_ACCESS_WI
-    (
-    in_ID                     IN ARCH.USER_CLIENT_ACCESS.ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_CLIENT_ACCESS.USER_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.USER_CLIENT_ACCESS.CLIENT_ID%TYPE
-    );
-
-  PROCEDURE UPD_USER_CLIENT_ACCESS
-    (
-     in_ID                     IN ARCH.USER_CLIENT_ACCESS.ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_CLIENT_ACCESS.USER_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.USER_CLIENT_ACCESS.CLIENT_ID%TYPE
-    );
-
-  PROCEDURE DEL_USER_CLIENT_ACCESS
-    (
-     in_ID                     IN ARCH.USER_CLIENT_ACCESS.ID%TYPE
-    );
-
-END DML_USER_CLIENT_ACCESS;
-/
-
---
--- DML_ADDRESS_DICTIONARY  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_ADDRESS_DICTIONARY IS
-
-  PROCEDURE INS_ADDRESS_DICTIONARY_WI
-    (
-     in_ID                     IN ARCH.ADDRESS_DICTIONARY.ID%TYPE,
-     in_PARENT_ID              IN ARCH.ADDRESS_DICTIONARY.PARENT_ID%TYPE
-    ,in_NAME                   IN ARCH.ADDRESS_DICTIONARY.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ADDRESS_DICTIONARY.DESCRIPTION%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.ADDRESS_DICTIONARY
-      (
-      ID
-      ,PARENT_ID
-      ,NAME
-      ,DESCRIPTION
-      )
-    VALUES
-      (
-      in_ID
-       ,in_PARENT_ID
-      ,in_NAME
-      ,in_DESCRIPTION
-      );
-  END INS_ADDRESS_DICTIONARY_WI;
-
-  PROCEDURE INS_ADDRESS_DICTIONARY
-    (
-     in_PARENT_ID              IN ARCH.ADDRESS_DICTIONARY.PARENT_ID%TYPE
-    ,in_NAME                   IN ARCH.ADDRESS_DICTIONARY.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ADDRESS_DICTIONARY.DESCRIPTION%TYPE
-    ) is
-  begin
-    INS_ADDRESS_DICTIONARY_WI(
-                                ADDRESS_DICTIONARY_SEQ.NEXTVAL
-                                ,in_PARENT_ID
-                                ,in_NAME
-                                ,in_DESCRIPTION
-                                );
-  END INS_ADDRESS_DICTIONARY;  
-
-  PROCEDURE UPD_ADDRESS_DICTIONARY
-    (
-     in_ID                     IN ARCH.ADDRESS_DICTIONARY.ID%TYPE
-    ,in_PARENT_ID              IN ARCH.ADDRESS_DICTIONARY.PARENT_ID%TYPE
-    ,in_NAME                   IN ARCH.ADDRESS_DICTIONARY.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ADDRESS_DICTIONARY.DESCRIPTION%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.ADDRESS_DICTIONARY
-    SET 
-        PARENT_ID                = in_PARENT_ID
-       ,NAME                     = in_NAME
-       ,DESCRIPTION              = in_DESCRIPTION
-    WHERE
-        ID                       = in_ID;
-  END UPD_ADDRESS_DICTIONARY;
-
-  PROCEDURE DEL_ADDRESS_DICTIONARY
-    (
-     in_ID                     IN ARCH.ADDRESS_DICTIONARY.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.ADDRESS_DICTIONARY
-    WHERE
-        ID                       = in_ID;
-  END DEL_ADDRESS_DICTIONARY;
-
-END DML_ADDRESS_DICTIONARY;
-/
-
---
--- DML_ATTRIBUTES  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_ATTRIBUTES IS
-
-  PROCEDURE INS_ATTRIBUTES_WI
-    (
-    in_ID                     IN ARCH.ATTRIBUTES.ID%TYPE
-     ,in_NAME                   IN ARCH.ATTRIBUTES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ATTRIBUTES.DESCRIPTION%TYPE
-    ,in_VALUETYPE              IN ARCH.ATTRIBUTES.VALUETYPE%TYPE
-    ,in_REFERENCE_TYPE_ID           IN ARCH.ATTRIBUTES.REFERENCE_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.ATTRIBUTES
-      (
-      ID
-       ,NAME
-      ,DESCRIPTION
-      ,VALUETYPE
-      ,REFERENCE_TYPE_ID
-      )
-    VALUES
-      (
-      in_ID
-       ,in_NAME
-      ,in_DESCRIPTION
-      ,in_VALUETYPE
-      ,in_REFERENCE_TYPE_ID
-      );
-  END INS_ATTRIBUTES_WI;
-
-  PROCEDURE INS_ATTRIBUTES
-    (
-     in_NAME                   IN ARCH.ATTRIBUTES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ATTRIBUTES.DESCRIPTION%TYPE
-    ,in_VALUETYPE              IN ARCH.ATTRIBUTES.VALUETYPE%TYPE
-    ,in_REFERENCE_TYPE_ID           IN ARCH.ATTRIBUTES.REFERENCE_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    INS_ATTRIBUTES_WI(
-      ATTRIBUTES_SEQ.NEXTVAL
-       ,in_NAME
-      ,in_DESCRIPTION
-      ,in_VALUETYPE
-      ,in_REFERENCE_TYPE_ID
-      );
-  END INS_ATTRIBUTES;
-
-  PROCEDURE UPD_ATTRIBUTES
-    (
-     in_ID                     IN ARCH.ATTRIBUTES.ID%TYPE
-    ,in_NAME                   IN ARCH.ATTRIBUTES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ATTRIBUTES.DESCRIPTION%TYPE
-    ,in_VALUETYPE              IN ARCH.ATTRIBUTES.VALUETYPE%TYPE
-    ,in_REFERENCE_TYPE_ID           IN ARCH.ATTRIBUTES.REFERENCE_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.ATTRIBUTES
-    SET 
-        NAME                     = in_NAME
-       ,DESCRIPTION              = in_DESCRIPTION
-       ,VALUETYPE                = in_VALUETYPE
-       ,REFERENCE_TYPE_ID             = in_REFERENCE_TYPE_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_ATTRIBUTES;
-
-  PROCEDURE DEL_ATTRIBUTES
-    (
-     in_ID                     IN ARCH.ATTRIBUTES.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.ATTRIBUTES
-    WHERE
-        ID                       = in_ID;
-  END DEL_ATTRIBUTES;
-
-END DML_ATTRIBUTES;
-/
-
---
--- DML_CLIENTS  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_CLIENTS IS
-
-  PROCEDURE INS_CLIENTS_WI
-    (
-    in_ID                     IN ARCH.CLIENTS.ID%TYPE,
-     in_FULL_NAME              IN ARCH.CLIENTS.FULL_NAME%TYPE
-    ,in_FIRST_NAME             IN ARCH.CLIENTS.FIRST_NAME%TYPE
-    ,in_SUR_NAME               IN ARCH.CLIENTS.SUR_NAME%TYPE
-    ,in_LAST_NAME              IN ARCH.CLIENTS.LAST_NAME%TYPE
-    ,in_CLIENT_TYPE            IN ARCH.CLIENTS.CLIENT_TYPE%TYPE
-    ,in_IDENTIFICATION_NUMBER  IN ARCH.CLIENTS.IDENTIFICATION_NUMBER%TYPE
-    ,in_ADDRESS                IN ARCH.CLIENTS.ADDRESS%TYPE
-    ,in_CONTACTS               IN ARCH.CLIENTS.CONTACTS%TYPE
-    ,in_FULL_ACCESS            IN ARCH.CLIENTS.FULL_ACCESS%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.CLIENTS
-      (
-      ID,
-       FULL_NAME
-      ,FIRST_NAME
-      ,SUR_NAME
-      ,LAST_NAME
-      ,CLIENT_TYPE
-      ,IDENTIFICATION_NUMBER
-      ,ADDRESS
-      ,CONTACTS
-      ,FULL_ACCESS
-      )
-    VALUES
-      (
-      in_ID,
-       in_FULL_NAME
-      ,in_FIRST_NAME
-      ,in_SUR_NAME
-      ,in_LAST_NAME
-      ,in_CLIENT_TYPE
-      ,in_IDENTIFICATION_NUMBER
-      ,in_ADDRESS
-      ,in_CONTACTS
-      ,in_FULL_ACCESS
-      );
-  END INS_CLIENTS_WI;
-
-   PROCEDURE INS_CLIENTS
-    (
-     in_FULL_NAME              IN ARCH.CLIENTS.FULL_NAME%TYPE
-    ,in_FIRST_NAME             IN ARCH.CLIENTS.FIRST_NAME%TYPE
-    ,in_SUR_NAME               IN ARCH.CLIENTS.SUR_NAME%TYPE
-    ,in_LAST_NAME              IN ARCH.CLIENTS.LAST_NAME%TYPE
-    ,in_CLIENT_TYPE            IN ARCH.CLIENTS.CLIENT_TYPE%TYPE
-    ,in_IDENTIFICATION_NUMBER  IN ARCH.CLIENTS.IDENTIFICATION_NUMBER%TYPE
-    ,in_ADDRESS                IN ARCH.CLIENTS.ADDRESS%TYPE
-    ,in_CONTACTS               IN ARCH.CLIENTS.CONTACTS%TYPE
-    ,in_FULL_ACCESS            IN ARCH.CLIENTS.FULL_ACCESS%TYPE
-    ) IS
-  BEGIN
-    INS_CLIENTS_WI(
-    CLIENTS_SEQ.NEXTVAL,
-       in_FULL_NAME
-      ,in_FIRST_NAME
-      ,in_SUR_NAME
-      ,in_LAST_NAME
-      ,in_CLIENT_TYPE
-      ,in_IDENTIFICATION_NUMBER
-      ,in_ADDRESS
-      ,in_CONTACTS
-      ,in_FULL_ACCESS
-      );
-  END INS_CLIENTS;
-
-  PROCEDURE UPD_CLIENTS
-    (
-     in_ID                     IN ARCH.CLIENTS.ID%TYPE
-    ,in_FULL_NAME              IN ARCH.CLIENTS.FULL_NAME%TYPE
-    ,in_FIRST_NAME             IN ARCH.CLIENTS.FIRST_NAME%TYPE
-    ,in_SUR_NAME               IN ARCH.CLIENTS.SUR_NAME%TYPE
-    ,in_LAST_NAME              IN ARCH.CLIENTS.LAST_NAME%TYPE
-    ,in_CLIENT_TYPE            IN ARCH.CLIENTS.CLIENT_TYPE%TYPE
-    ,in_IDENTIFICATION_NUMBER  IN ARCH.CLIENTS.IDENTIFICATION_NUMBER%TYPE
-    ,in_ADDRESS                IN ARCH.CLIENTS.ADDRESS%TYPE
-    ,in_CONTACTS               IN ARCH.CLIENTS.CONTACTS%TYPE
-    ,in_FULL_ACCESS            IN ARCH.CLIENTS.FULL_ACCESS%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.CLIENTS
-    SET 
-        FULL_NAME                = in_FULL_NAME
-       ,FIRST_NAME               = in_FIRST_NAME
-       ,SUR_NAME                 = in_SUR_NAME
-       ,LAST_NAME                = in_LAST_NAME
-       ,CLIENT_TYPE              = in_CLIENT_TYPE
-       ,IDENTIFICATION_NUMBER    = in_IDENTIFICATION_NUMBER
-       ,ADDRESS                  = in_ADDRESS
-       ,CONTACTS                 = in_CONTACTS
-       ,FULL_ACCESS              = in_FULL_ACCESS
-    WHERE
-        ID                       = in_ID;
-  END UPD_CLIENTS;
-
-  PROCEDURE DEL_CLIENTS
-    (
-     in_ID                     IN ARCH.CLIENTS.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.CLIENTS
-    WHERE
-        ID                       = in_ID;
-  END DEL_CLIENTS;
-
-END DML_CLIENTS;
-/
-
---
--- DML_DOCUMENT_TYPE_ATTRIBUTES  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_DOCUMENT_TYPE_ATTRIBUTES IS
-
-  PROCEDURE INS_DOC_TYPE_ATTRIBUTES_WI
-    (
-     in_ID                     IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.DOCUMENT_TYPE_ID%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.ATTRIBUTE_ID%TYPE
-    ,in_MANDATORY              IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.MANDATORY%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.DOCUMENT_TYPE_ATTRIBUTES
-      (
-       ID
-      ,DOCUMENT_TYPE_ID
-      ,ATTRIBUTE_ID
-      ,MANDATORY
-      )
-    VALUES
-      (
-       in_ID
-      ,in_DOCUMENT_TYPE_ID
-      ,in_ATTRIBUTE_ID
-      ,in_MANDATORY
-      );
-  END INS_DOC_TYPE_ATTRIBUTES_WI;
-
-   PROCEDURE INS_DOC_TYPE_ATTRIBUTES
-    (
-     in_DOCUMENT_TYPE_ID       IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.DOCUMENT_TYPE_ID%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.ATTRIBUTE_ID%TYPE
-    ,in_MANDATORY              IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.MANDATORY%TYPE
-    ) IS
-  BEGIN
-    INS_DOC_TYPE_ATTRIBUTES_WI(
-       DOCUMENT_TYPE_ATTRIBUTES_SEQ.NEXTVAL
-      ,in_DOCUMENT_TYPE_ID
-      ,in_ATTRIBUTE_ID
-      ,in_MANDATORY
-      );
-  END INS_DOC_TYPE_ATTRIBUTES;
-
-  PROCEDURE UPD_DOC_TYPE_ATTRIBUTES
-    (
-     in_ID                     IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.DOCUMENT_TYPE_ID%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.ATTRIBUTE_ID%TYPE
-    ,in_MANDATORY              IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.MANDATORY%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.DOCUMENT_TYPE_ATTRIBUTES
-    SET 
-        DOCUMENT_TYPE_ID         = in_DOCUMENT_TYPE_ID
-       ,ATTRIBUTE_ID             = in_ATTRIBUTE_ID
-       ,MANDATORY                = in_MANDATORY
-    WHERE
-        ID                       = in_ID;
-  END UPD_DOC_TYPE_ATTRIBUTES;
-
-  PROCEDURE DEL_DOC_TYPE_ATTRIBUTES
-    (
-     in_ID                     IN ARCH.DOCUMENT_TYPE_ATTRIBUTES.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.DOCUMENT_TYPE_ATTRIBUTES
-    WHERE
-        ID                       = in_ID;
-  END DEL_DOC_TYPE_ATTRIBUTES;
-
-END DML_DOCUMENT_TYPE_ATTRIBUTES;
-/
-
---
--- DML_DOCUMENT_TYPES  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_DOCUMENT_TYPES IS
-
-  PROCEDURE INS_DOCUMENT_TYPES_WI
-    (
-     in_ID                     IN ARCH.DOCUMENT_TYPES.ID%TYPE
-    ,in_NAME                   IN ARCH.DOCUMENT_TYPES.NAME%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENT_TYPES.PARENT_ID%TYPE
-    ,in_DESCRIPTION            IN ARCH.DOCUMENT_TYPES.DESCRIPTION%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENT_TYPES.FULL_ACCESS%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.DOCUMENT_TYPES
-      (
-       ID
-      ,NAME
-      ,PARENT_ID
-      ,DESCRIPTION
-      ,FULL_ACCESS
-      )
-    VALUES
-      (
-       in_ID
-      ,in_NAME
-      ,in_PARENT_ID
-      ,in_DESCRIPTION
-      ,in_FULL_ACCESS
-      );
-  END INS_DOCUMENT_TYPES_WI;
-
- PROCEDURE INS_DOCUMENT_TYPES
-    (
-     in_NAME                   IN ARCH.DOCUMENT_TYPES.NAME%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENT_TYPES.PARENT_ID%TYPE
-    ,in_DESCRIPTION            IN ARCH.DOCUMENT_TYPES.DESCRIPTION%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENT_TYPES.FULL_ACCESS%TYPE
-    ) IS
-  BEGIN
-    INS_DOCUMENT_TYPES_WI(
-       DOCUMENT_TYPES_SEQ.NEXTVAL
-      ,in_NAME
-      ,in_PARENT_ID
-      ,in_DESCRIPTION
-      ,in_FULL_ACCESS
-      );
-  END INS_DOCUMENT_TYPES;
-
-  PROCEDURE UPD_DOCUMENT_TYPES
-    (
-     in_ID                     IN ARCH.DOCUMENT_TYPES.ID%TYPE
-    ,in_NAME                   IN ARCH.DOCUMENT_TYPES.NAME%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENT_TYPES.PARENT_ID%TYPE
-    ,in_DESCRIPTION            IN ARCH.DOCUMENT_TYPES.DESCRIPTION%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENT_TYPES.FULL_ACCESS%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.DOCUMENT_TYPES
-    SET 
-        NAME                     = in_NAME
-       ,PARENT_ID                = in_PARENT_ID
-       ,DESCRIPTION              = in_DESCRIPTION
-       ,FULL_ACCESS              = in_FULL_ACCESS
-    WHERE
-        ID                       = in_ID;
-  END UPD_DOCUMENT_TYPES;
-
-  PROCEDURE DEL_DOCUMENT_TYPES
-    (
-     in_ID                     IN ARCH.DOCUMENT_TYPES.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.DOCUMENT_TYPES
-    WHERE
-        ID                       = in_ID;
-  END DEL_DOCUMENT_TYPES;
-
-END DML_DOCUMENT_TYPES;
-/
-
---
--- DML_DOCUMENTS  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_DOCUMENTS IS
-
-  PROCEDURE INS_DOCUMENTS_wi
-    (
-    in_ID                     IN ARCH.DOCUMENTS.ID%TYPE,
-     in_DOCUMENT_TYPE_ID       IN ARCH.DOCUMENTS.DOCUMENT_TYPE_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.DOCUMENTS.CLIENT_ID%TYPE
-    ,in_DOCUMENT_NUMBER        IN ARCH.DOCUMENTS.DOCUMENT_NUMBER%TYPE
-    ,in_DOCUMENT_DATE          IN ARCH.DOCUMENTS.DOCUMENT_DATE%TYPE
-    ,in_ADDRESS_ID             IN ARCH.DOCUMENTS.ADDRESS_ID%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENTS.FULL_ACCESS%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENTS.PARENT_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.DOCUMENTS
-      (
-      id,
-       DOCUMENT_TYPE_ID
-      ,CLIENT_ID
-      ,DOCUMENT_NUMBER
-      ,DOCUMENT_DATE
-      ,ADDRESS_ID
-      ,FULL_ACCESS
-      ,PARENT_ID
-      )
-    VALUES
-      (
-      in_id,
-       in_DOCUMENT_TYPE_ID
-      ,in_CLIENT_ID
-      ,in_DOCUMENT_NUMBER
-      ,in_DOCUMENT_DATE
-      ,in_ADDRESS_ID
-      ,in_FULL_ACCESS
-      ,in_PARENT_ID
-      );
-  END INS_DOCUMENTS_wi;
-  
-   PROCEDURE INS_DOCUMENTS
-    (
-     in_DOCUMENT_TYPE_ID       IN ARCH.DOCUMENTS.DOCUMENT_TYPE_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.DOCUMENTS.CLIENT_ID%TYPE
-    ,in_DOCUMENT_NUMBER        IN ARCH.DOCUMENTS.DOCUMENT_NUMBER%TYPE
-    ,in_DOCUMENT_DATE          IN ARCH.DOCUMENTS.DOCUMENT_DATE%TYPE
-    ,in_ADDRESS_ID             IN ARCH.DOCUMENTS.ADDRESS_ID%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENTS.FULL_ACCESS%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENTS.PARENT_ID%TYPE
-    ) IS
-  BEGIN
-    INS_DOCUMENTS_wi(
-     DOCUMENTS_SEQ.NEXTVAL,
-       in_DOCUMENT_TYPE_ID
-      ,in_CLIENT_ID
-      ,in_DOCUMENT_NUMBER
-      ,in_DOCUMENT_DATE
-      ,in_ADDRESS_ID
-      ,in_FULL_ACCESS
-      ,in_PARENT_ID
-      );
-  END INS_DOCUMENTS;
-
-  PROCEDURE INS_DIRECTORY_WI
-    (
-         in_ID                     IN ARCH.DOCUMENTS.ID%TYPE
-        ,in_DOCUMENT_NUMBER        IN ARCH.DOCUMENTS.DOCUMENT_NUMBER%TYPE
-        ,in_FULL_ACCESS            IN ARCH.DOCUMENTS.FULL_ACCESS%TYPE
-        ,in_PARENT_ID              IN ARCH.DOCUMENTS.PARENT_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.DOCUMENTS
-      (
-       ID
-      ,DOCUMENT_TYPE_ID
-      ,CLIENT_ID
-      ,DOCUMENT_NUMBER
-      ,DOCUMENT_DATE
-      ,FULL_ACCESS
-      ,IS_DIRECTORY
-      ,PARENT_ID
-      )
-    VALUES
-      (
-       in_ID
-      ,0
-      ,0
-      ,in_DOCUMENT_NUMBER
-      ,SYSDATE
-      ,in_FULL_ACCESS
-      ,1
-      ,in_PARENT_ID
-      );
-  END INS_DIRECTORY_WI;
-
-  PROCEDURE UPD_DOCUMENTS
-    (
-     in_ID                     IN ARCH.DOCUMENTS.ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.DOCUMENTS.DOCUMENT_TYPE_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.DOCUMENTS.CLIENT_ID%TYPE
-    ,in_DOCUMENT_NUMBER        IN ARCH.DOCUMENTS.DOCUMENT_NUMBER%TYPE
-    ,in_DOCUMENT_DATE          IN ARCH.DOCUMENTS.DOCUMENT_DATE%TYPE
-    ,in_ADDRESS_ID             IN ARCH.DOCUMENTS.ADDRESS_ID%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENTS.FULL_ACCESS%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENTS.PARENT_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.DOCUMENTS
-    SET 
-        DOCUMENT_TYPE_ID         = in_DOCUMENT_TYPE_ID
-       ,CLIENT_ID                = in_CLIENT_ID
-       ,DOCUMENT_NUMBER          = in_DOCUMENT_NUMBER
-       ,DOCUMENT_DATE            = in_DOCUMENT_DATE
-       ,ADDRESS_ID               = in_ADDRESS_ID
-       ,FULL_ACCESS              = in_FULL_ACCESS
-        ,PARENT_ID               = in_PARENT_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_DOCUMENTS;
-  
-  PROCEDURE UPD_DIRECTORY
-    (
-     in_ID                     IN ARCH.DOCUMENTS.ID%TYPE
-    ,in_DOCUMENT_NUMBER        IN ARCH.DOCUMENTS.DOCUMENT_NUMBER%TYPE
-    ,in_FULL_ACCESS            IN ARCH.DOCUMENTS.FULL_ACCESS%TYPE
-    ,in_PARENT_ID              IN ARCH.DOCUMENTS.PARENT_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.DOCUMENTS
-    SET 
-       DOCUMENT_NUMBER          = in_DOCUMENT_NUMBER
-       ,FULL_ACCESS              = in_FULL_ACCESS
-       ,PARENT_ID               = in_PARENT_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_DIRECTORY;
-
-  PROCEDURE DEL_DOCUMENTS
-    (
-     in_ID                     IN ARCH.DOCUMENTS.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.DOCUMENTS
-    WHERE
-        ID                       = in_ID;
-  END DEL_DOCUMENTS;
-  
-    PROCEDURE DEL_DIRECTORY
-    (
-     in_ID                     IN ARCH.DOCUMENTS.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.DOCUMENTS
-    WHERE
-        ID                       = in_ID;
-  END DEL_DIRECTORY;
-
-END DML_DOCUMENTS;
-/
-
---
--- DML_REFERENCES  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_REFERENCES IS
-
-  PROCEDURE INS_REFERENCES_WI
-    (
-     in_ID                     IN ARCH.REFERENCES.ID%TYPE
-    ,in_NAME                   IN ARCH.REFERENCES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.REFERENCES.DESCRIPTION%TYPE
-    ,in_REFENCE_TYPE_ID        IN ARCH.REFERENCES.REFENCE_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.REFERENCES
-      (
-       ID
-      ,NAME
-      ,DESCRIPTION
-      ,REFENCE_TYPE_ID
-      )
-    VALUES
-      (
-       in_ID
-      ,in_NAME
-      ,in_DESCRIPTION
-      ,in_REFENCE_TYPE_ID
-      );
-  END INS_REFERENCES_WI;
-
-  PROCEDURE INS_REFERENCES
-    (
-     in_NAME                   IN ARCH.REFERENCES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.REFERENCES.DESCRIPTION%TYPE
-    ,in_REFENCE_TYPE_ID        IN ARCH.REFERENCES.REFENCE_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    INS_REFERENCES_WI(
-       REFERENCES_SEQ.NEXTVAL
-      ,in_NAME
-      ,in_DESCRIPTION
-      ,in_REFENCE_TYPE_ID
-      );
-  END INS_REFERENCES;
-
-  PROCEDURE UPD_REFERENCES
-    (
-     in_ID                     IN ARCH.REFERENCES.ID%TYPE
-    ,in_NAME                   IN ARCH.REFERENCES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.REFERENCES.DESCRIPTION%TYPE
-    ,in_REFENCE_TYPE_ID        IN ARCH.REFERENCES.REFENCE_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.REFERENCES
-    SET 
-        NAME                     = in_NAME
-       ,DESCRIPTION              = in_DESCRIPTION
-       ,REFENCE_TYPE_ID          = in_REFENCE_TYPE_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_REFERENCES;
-
-  PROCEDURE DEL_REFERENCES
-    (
-     in_ID                     IN ARCH.REFERENCES.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.REFERENCES
-    WHERE
-        ID                       = in_ID;
-  END DEL_REFERENCES;
-
-END DML_REFERENCES;
-/
-
---
--- DML_ROLE_CLIENT_ACCESS  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_ROLE_CLIENT_ACCESS IS
-
-  PROCEDURE INS_ROLE_CLIENT_ACCESS_WI
-    (
-      in_ID                     IN ARCH.ROLE_CLIENT_ACCESS.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.ROLE_CLIENT_ACCESS.ROLE_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.ROLE_CLIENT_ACCESS.CLIENT_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.ROLE_CLIENT_ACCESS
-      (
-       ID
-      ,ROLE_ID
-      ,CLIENT_ID
-      )
-    VALUES
-      (
-       in_ID
-      ,in_ROLE_ID
-      ,in_CLIENT_ID
-      );
-  END INS_ROLE_CLIENT_ACCESS_WI;
-
-    PROCEDURE INS_ROLE_CLIENT_ACCESS
-    (
-     in_ROLE_ID                IN ARCH.ROLE_CLIENT_ACCESS.ROLE_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.ROLE_CLIENT_ACCESS.CLIENT_ID%TYPE
-    ) IS
-  BEGIN
-    INS_ROLE_CLIENT_ACCESS_WI(
-       ROLE_CLIENT_ACCESS_SEQ.NEXTVAL
-      ,in_ROLE_ID
-      ,in_CLIENT_ID
-      );
-  END INS_ROLE_CLIENT_ACCESS;
-
-  PROCEDURE UPD_ROLE_CLIENT_ACCESS
-    (
-     in_ID                     IN ARCH.ROLE_CLIENT_ACCESS.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.ROLE_CLIENT_ACCESS.ROLE_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.ROLE_CLIENT_ACCESS.CLIENT_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.ROLE_CLIENT_ACCESS
-    SET 
-        ROLE_ID                  = in_ROLE_ID
-       ,CLIENT_ID                = in_CLIENT_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_ROLE_CLIENT_ACCESS;
-
-  PROCEDURE DEL_ROLE_CLIENT_ACCESS
-    (
-     in_ID                     IN ARCH.ROLE_CLIENT_ACCESS.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.ROLE_CLIENT_ACCESS
-    WHERE
-        ID                       = in_ID;
-  END DEL_ROLE_CLIENT_ACCESS;
-
-END DML_ROLE_CLIENT_ACCESS;
-/
-
---
--- DML_ROLES  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_ROLES IS
-
-  PROCEDURE INS_ROLES_WI
-    (
-     in_ID                     IN ARCH.ROLES.ID%TYPE
-    ,in_NAME                   IN ARCH.ROLES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ROLES.DESCRIPTION%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.ROLES
-      (
-       ID
-      ,NAME
-      ,DESCRIPTION
-      )
-    VALUES
-      (
-       in_ID
-      ,in_NAME
-      ,in_DESCRIPTION
-      );
-  END INS_ROLES_WI;
-
-   PROCEDURE INS_ROLES
-    (
-     in_NAME                   IN ARCH.ROLES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ROLES.DESCRIPTION%TYPE
-    ) IS
-  BEGIN
-    INS_ROLES_WI(
-       ROLES_SEQ.NEXTVAL
-      ,in_NAME
-      ,in_DESCRIPTION
-      );
-  END INS_ROLES;
-
-  PROCEDURE UPD_ROLES
-    (
-     in_ID                     IN ARCH.ROLES.ID%TYPE
-    ,in_NAME                   IN ARCH.ROLES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.ROLES.DESCRIPTION%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.ROLES
-    SET 
-        NAME                     = in_NAME
-       ,DESCRIPTION              = in_DESCRIPTION
-    WHERE
-        ID                       = in_ID;
-  END UPD_ROLES;
-
-  PROCEDURE DEL_ROLES
-    (
-     in_ID                     IN ARCH.ROLES.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.ROLES
-    WHERE
-        ID                       = in_ID;
-  END DEL_ROLES;
-
-END DML_ROLES;
-/
-
---
--- DML_USER_CLIENT_ACCESS  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_USER_CLIENT_ACCESS IS
-
-  PROCEDURE INS_USER_CLIENT_ACCESS_WI
-    (
-     in_ID                     IN ARCH.USER_CLIENT_ACCESS.ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_CLIENT_ACCESS.USER_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.USER_CLIENT_ACCESS.CLIENT_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.USER_CLIENT_ACCESS
-      (
-       ID
-      ,USER_ID
-      ,CLIENT_ID
-      )
-    VALUES
-      (
-       in_ID
-      ,in_USER_ID
-      ,in_CLIENT_ID
-      );
-  END INS_USER_CLIENT_ACCESS_WI;
-
-  PROCEDURE INS_USER_CLIENT_ACCESS
-    (
-     in_USER_ID                IN ARCH.USER_CLIENT_ACCESS.USER_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.USER_CLIENT_ACCESS.CLIENT_ID%TYPE
-    ) IS
-  BEGIN
-    INS_USER_CLIENT_ACCESS_WI(
-       USER_CLIENT_ACCESS_SEQ.NEXTVAL
-      ,in_USER_ID
-      ,in_CLIENT_ID
-      );
-  END INS_USER_CLIENT_ACCESS;
- 
-
-  PROCEDURE UPD_USER_CLIENT_ACCESS
-    (
-     in_ID                     IN ARCH.USER_CLIENT_ACCESS.ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_CLIENT_ACCESS.USER_ID%TYPE
-    ,in_CLIENT_ID              IN ARCH.USER_CLIENT_ACCESS.CLIENT_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.USER_CLIENT_ACCESS
-    SET 
-        USER_ID                  = in_USER_ID
-       ,CLIENT_ID                = in_CLIENT_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_USER_CLIENT_ACCESS;
-
-  PROCEDURE DEL_USER_CLIENT_ACCESS
-    (
-     in_ID                     IN ARCH.USER_CLIENT_ACCESS.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.USER_CLIENT_ACCESS
-    WHERE
-        ID                       = in_ID;
-  END DEL_USER_CLIENT_ACCESS;
-
-END DML_USER_CLIENT_ACCESS;
-/
-
---
--- GET_REFERENCES  (Function) 
---
-CREATE OR REPLACE FUNCTION ARCH.GET_REFERENCES
- return sys_refcursor
-AS
- c_ sys_refcursor;
-BEGIN
-    OPEN c_ FOR
-      SELECT        
-       ID
-      ,NAME
-      ,DESCRIPTION
-      ,REFENCE_TYPE_ID FROM ARCH.REFERENCES;
-      
-      return c_;
-END;
-/
-
---
--- GET_REFERENCES2  (Function) 
---
-CREATE OR REPLACE FUNCTION ARCH.GET_REFERENCES2
- return sys_refcursor
-AS
- c_ sys_refcursor;
-BEGIN
-    OPEN c_ FOR
-      SELECT        
-       ID
-      ,NAME
-      ,DESCRIPTION
-      ,REFENCE_TYPE_ID FROM ARCH.REFERENCES;
-      
-      return c_;
-END;
-/
-
---
--- CLIENTS_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.CLIENTS_TRG 
-BEFORE INSERT ON ARCH.CLIENTS 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT CLIENTS_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- DOCUMENT_TYPE_ATTRIBUTES_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.DOCUMENT_TYPE_ATTRIBUTES_TRG 
-BEFORE INSERT ON ARCH.DOCUMENT_TYPE_ATTRIBUTES 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT DOCUMENT_TYPE_ATTRIBUTES_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- DOCUMENT_TYPES_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.DOCUMENT_TYPES_TRG 
-BEFORE INSERT ON ARCH.DOCUMENT_TYPES 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT DOCUMENT_TYPES_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- DOCUMENTS_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.DOCUMENTS_TRG 
-BEFORE INSERT ON ARCH.DOCUMENTS 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT DOCUMENTS_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- REFERENCES_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.REFERENCES_TRG 
-BEFORE INSERT ON ARCH.REFERENCES 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT REFERENCES_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- ROLE_CLIENT_ACCESS_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ROLE_CLIENT_ACCESS_TRG 
-BEFORE INSERT ON ARCH.ROLE_CLIENT_ACCESS 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT ROLE_CLIENT_ACCESS_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- ROLES_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ROLES_TRG 
-BEFORE INSERT ON ARCH.ROLES 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT ROLES_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- USER_CLIENT_ACCESS_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.USER_CLIENT_ACCESS_TRG 
-BEFORE INSERT ON ARCH.USER_CLIENT_ACCESS 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT USER_CLIENT_ACCESS_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- DOCUMENT_TYPE_ATTRIBUTES_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.DOCUMENT_TYPE_ATTRIBUTES_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.DOCUMENT_TYPE_ATTRIBUTES
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END DOCUMENT_TYPE_ATTRIBUTES_AUD;
-/
-
-
---
--- ROLE_CLIENT_ACCESS_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ROLE_CLIENT_ACCESS_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.ROLE_CLIENT_ACCESS
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END ROLE_CLIENT_ACCESS_AUD;
-/
-
-
---
--- ADDRESS_DICTIONARY_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ADDRESS_DICTIONARY_TRG 
-BEFORE INSERT ON ARCH.ADDRESS_DICTIONARY 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT ADDRESS_DICTIONARY_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- ATTRIBUTES_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ATTRIBUTES_TRG 
-BEFORE INSERT ON ARCH.ATTRIBUTES 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT ATTRIBUTES_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- ROLES_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ROLES_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.ROLES
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID decimal(18,0);
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-    
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END ROLES_AUD;
-/
-
-
---
--- ADDRESS_DICTIONARY_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ADDRESS_DICTIONARY_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.ADDRESS_DICTIONARY
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END ADDRESS_DICTIONARY_AUD;
-/
-
-
---
--- ATTRIBUTES_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ATTRIBUTES_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.ATTRIBUTES
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END ATTRIBUTES_AUD;
-/
-
-
---
--- CLIENTS_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.CLIENTS_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.CLIENTS
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END CLIENTS_AUD;
-/
-
-
---
--- DOCUMENT_TYPES_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.DOCUMENT_TYPES_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.DOCUMENT_TYPES
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END DOCUMENT_TYPES_AUD;
-/
-
-
---
--- DOCUMENTS_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.DOCUMENTS_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.DOCUMENTS
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END DOCUMENTS_AUD;
-/
-
-
---
--- REFERENCES_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.REFERENCES_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.REFERENCES
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END REFERENCES_AUD;
-/
-
-
---
--- USER_CLIENT_ACCESS_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.USER_CLIENT_ACCESS_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.USER_CLIENT_ACCESS
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-    
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END USER_CLIENT_ACCESS_AUD;
-/
-
-
---
--- COPY_TYPES  (Table) 
---
-CREATE TABLE ARCH.COPY_TYPES
-(
-  ID                      NUMBER(9)             NOT NULL,
-  NAME                    NVARCHAR2(200)        NOT NULL,
-  DESCRIPTION             NVARCHAR2(2000),
-  FULL_ACCESS             NUMBER(1)             DEFAULT 1                     NOT NULL,
-  DOCUMENT_TYPE_ID        NUMBER(9),
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- COPY_TYPE_ATTRIBUTES  (Table) 
---
-CREATE TABLE ARCH.COPY_TYPE_ATTRIBUTES
-(
-  ID                      NUMBER(9)             NOT NULL,
-  COPY_TYPE_ID            NUMBER(9)             NOT NULL,
-  ATTRIBUTE_ID            NUMBER(9)             NOT NULL,
-  MANDATORY               NUMBER(1)             NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- USER_DOC_TYPE_ACCESS  (Table) 
---
-CREATE TABLE ARCH.USER_DOC_TYPE_ACCESS
-(
-  ID                      NUMBER(9)             NOT NULL,
-  USER_ID                 NUMBER(9)             NOT NULL,
-  DOCUMENT_TYPE_ID        NUMBER(9)             NOT NULL,
-  COPY_TYPE_ID            NUMBER(9),
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- USER_ROLES  (Table) 
---
-CREATE TABLE ARCH.USER_ROLES
-(
-  ID                      NUMBER(9)             NOT NULL,
-  ROLE_ID                 NUMBER(9)             NOT NULL,
-  USER_ID                 NUMBER(9)             NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- ROLE_DOC_TYPE_ACCESS  (Table) 
---
-CREATE TABLE ARCH.ROLE_DOC_TYPE_ACCESS
-(
-  ID                      NUMBER(9)             NOT NULL,
-  ROLE_ID                 NUMBER(9)             NOT NULL,
-  DOCUMENT_TYPE_ID        NUMBER(9)             NOT NULL,
-  COPY_TYPE_ID            NUMBER(9),
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- COPIES  (Table) 
---
-CREATE TABLE ARCH.COPIES
-(
-  ID                      NUMBER(9)             NOT NULL,
-  DOCUMENT_ID             NUMBER(9)             NOT NULL,
-  COPY_TYPE_ID            NUMBER(9)             NOT NULL,
-  NAME                    NVARCHAR2(500)        NOT NULL,
-  PAGES_COUNT             INTEGER               DEFAULT 0                     NOT NULL,
-  FULL_ACCESS             NUMBER(1)             DEFAULT 1                     NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- FILES  (Table) 
---
-CREATE TABLE ARCH.FILES
-(
-  ID                      NUMBER(9)             NOT NULL,
-  COPY_ID                 NUMBER(9)             NOT NULL,
-  FILE_NAME               NVARCHAR2(500)        NOT NULL,
-  FILE_EXTENTION          VARCHAR2(500 BYTE)    NOT NULL,
-  FILE_BODY               BLOB,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  FILE_SIZE               NUMBER(18)            NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- COPIES_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.COPIES_PK ON ARCH.COPIES
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- COPY_TYPE_ATTRIBUTES_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.COPY_TYPE_ATTRIBUTES_PK ON ARCH.COPY_TYPE_ATTRIBUTES
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- COPY_TYPES_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.COPY_TYPES_PK ON ARCH.COPY_TYPES
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- ROLE_DOCUMENT_TYPE_ACCESS_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.ROLE_DOCUMENT_TYPE_ACCESS_PK ON ARCH.ROLE_DOC_TYPE_ACCESS
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- USER_DOCUMENT_TYPE_ACCESS_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.USER_DOCUMENT_TYPE_ACCESS_PK ON ARCH.USER_DOC_TYPE_ACCESS
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- USER_ROLES_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.USER_ROLES_PK ON ARCH.USER_ROLES
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- FILES_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.FILES_PK ON ARCH.FILES
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- DML_COPIES  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_COPIES IS
-
-  PROCEDURE INS_COPIES_WI
-    (
-     in_ID                     IN ARCH.COPIES.ID%TYPE,
-     in_DOCUMENT_ID            IN ARCH.COPIES.DOCUMENT_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.COPIES.COPY_TYPE_ID%TYPE
-    ,in_NAME                   IN ARCH.COPIES.NAME%TYPE
-    ,in_PAGES_COUNT            IN ARCH.COPIES.PAGES_COUNT%TYPE
-    ,in_FULL_ACCESS            IN ARCH.COPIES.FULL_ACCESS%TYPE
-    );
-
-  PROCEDURE INS_COPIES
-    (
-     in_DOCUMENT_ID            IN ARCH.COPIES.DOCUMENT_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.COPIES.COPY_TYPE_ID%TYPE
-    ,in_NAME                   IN ARCH.COPIES.NAME%TYPE
-    ,in_PAGES_COUNT            IN ARCH.COPIES.PAGES_COUNT%TYPE
-    ,in_FULL_ACCESS            IN ARCH.COPIES.FULL_ACCESS%TYPE
-    );
-
-  PROCEDURE UPD_COPIES
-    (
-     in_ID                     IN ARCH.COPIES.ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.COPIES.DOCUMENT_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.COPIES.COPY_TYPE_ID%TYPE
-    ,in_NAME                   IN ARCH.COPIES.NAME%TYPE
-    ,in_PAGES_COUNT            IN ARCH.COPIES.PAGES_COUNT%TYPE
-    ,in_FULL_ACCESS            IN ARCH.COPIES.FULL_ACCESS%TYPE
-    );
-
-  PROCEDURE DEL_COPIES
-    (
-     in_ID                     IN ARCH.COPIES.ID%TYPE
-    );
-
-END DML_COPIES;
-/
-
---
--- DML_COPY_TYPE_ATTRIBUTES  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_COPY_TYPE_ATTRIBUTES IS
-
-  PROCEDURE INS_COPY_TYPE_ATTRIBUTES_WI
-    (
-     in_ID                     IN ARCH.COPY_TYPE_ATTRIBUTES.ID%TYPE,
-     in_COPY_TYPE_ID           IN ARCH.COPY_TYPE_ATTRIBUTES.COPY_TYPE_ID%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.COPY_TYPE_ATTRIBUTES.ATTRIBUTE_ID%TYPE
-    ,in_MANDATORY              IN ARCH.COPY_TYPE_ATTRIBUTES.MANDATORY%TYPE
-    );
-
-  PROCEDURE INS_COPY_TYPE_ATTRIBUTES
-    (
-     in_COPY_TYPE_ID           IN ARCH.COPY_TYPE_ATTRIBUTES.COPY_TYPE_ID%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.COPY_TYPE_ATTRIBUTES.ATTRIBUTE_ID%TYPE
-    ,in_MANDATORY              IN ARCH.COPY_TYPE_ATTRIBUTES.MANDATORY%TYPE
-    );
-
-  PROCEDURE UPD_COPY_TYPE_ATTRIBUTES
-    (
-     in_ID                     IN ARCH.COPY_TYPE_ATTRIBUTES.ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.COPY_TYPE_ATTRIBUTES.COPY_TYPE_ID%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.COPY_TYPE_ATTRIBUTES.ATTRIBUTE_ID%TYPE
-    ,in_MANDATORY              IN ARCH.COPY_TYPE_ATTRIBUTES.MANDATORY%TYPE
-    );
-
-  PROCEDURE DEL_COPY_TYPE_ATTRIBUTES
-    (
-     in_ID                     IN ARCH.COPY_TYPE_ATTRIBUTES.ID%TYPE
-    );
-
-END DML_COPY_TYPE_ATTRIBUTES;
-/
-
---
--- DML_COPY_TYPES  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_COPY_TYPES IS
-
-  PROCEDURE INS_COPY_TYPES_WI
-    (
-     in_ID                     IN ARCH.COPY_TYPES.ID%TYPE,
-     in_NAME                   IN ARCH.COPY_TYPES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.COPY_TYPES.DESCRIPTION%TYPE
-    ,in_FULL_ACCESS            IN ARCH.COPY_TYPES.FULL_ACCESS%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.COPY_TYPES.DOCUMENT_TYPE_ID%TYPE
-    );
-    
-    PROCEDURE INS_COPY_TYPES
-    (
-     in_NAME                   IN ARCH.COPY_TYPES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.COPY_TYPES.DESCRIPTION%TYPE
-    ,in_FULL_ACCESS            IN ARCH.COPY_TYPES.FULL_ACCESS%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.COPY_TYPES.DOCUMENT_TYPE_ID%TYPE
-    );
-
-  
-  PROCEDURE UPD_COPY_TYPES
-    (
-     in_ID                     IN ARCH.COPY_TYPES.ID%TYPE
-    ,in_NAME                   IN ARCH.COPY_TYPES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.COPY_TYPES.DESCRIPTION%TYPE
-    ,in_FULL_ACCESS            IN ARCH.COPY_TYPES.FULL_ACCESS%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.COPY_TYPES.DOCUMENT_TYPE_ID%TYPE
-    );
-
-  PROCEDURE DEL_COPY_TYPES
-    (
-     in_ID                     IN ARCH.COPY_TYPES.ID%TYPE
-    );
-
-END DML_COPY_TYPES;
-/
-
---
--- DML_USER_ROLES  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_USER_ROLES IS
-
-  PROCEDURE INS_USER_ROLES_WI
-    (
-     in_ID                     IN ARCH.USER_ROLES.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.USER_ROLES.ROLE_ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_ROLES.USER_ID%TYPE
-    );
-
-  PROCEDURE INS_USER_ROLES
-    (
-     in_ROLE_ID                IN ARCH.USER_ROLES.ROLE_ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_ROLES.USER_ID%TYPE
-    );
-
-  PROCEDURE UPD_USER_ROLES
-    (
-     in_ID                     IN ARCH.USER_ROLES.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.USER_ROLES.ROLE_ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_ROLES.USER_ID%TYPE
-    );
-
-  PROCEDURE DEL_USER_ROLES
-    (
-     in_ID                     IN ARCH.USER_ROLES.ID%TYPE
-    );
-
-END DML_USER_ROLES;
-/
-
---
--- DML_ROLE_DOC_TYPE_ACCESS  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_ROLE_DOC_TYPE_ACCESS IS
-
-  PROCEDURE INS_ROLE_DOC_TYPE_ACCESS
-    (
-     in_ROLE_ID                IN ARCH.ROLE_DOC_TYPE_ACCESS.ROLE_ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.ROLE_DOC_TYPE_ACCESS.DOCUMENT_TYPE_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.ROLE_DOC_TYPE_ACCESS.COPY_TYPE_ID%TYPE
-    );
-
-  PROCEDURE INS_ROLE_DOC_TYPE_ACCESS_WI
-    (
-     in_ID                     IN ARCH.ROLE_DOC_TYPE_ACCESS.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.ROLE_DOC_TYPE_ACCESS.ROLE_ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.ROLE_DOC_TYPE_ACCESS.DOCUMENT_TYPE_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.ROLE_DOC_TYPE_ACCESS.COPY_TYPE_ID%TYPE
-    );
-
-  PROCEDURE UPD_ROLE_DOC_TYPE_ACCESS
-    (
-     in_ID                     IN ARCH.ROLE_DOC_TYPE_ACCESS.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.ROLE_DOC_TYPE_ACCESS.ROLE_ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.ROLE_DOC_TYPE_ACCESS.DOCUMENT_TYPE_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.ROLE_DOC_TYPE_ACCESS.COPY_TYPE_ID%TYPE
-    );
-
-  PROCEDURE DEL_ROLE_DOC_TYPE_ACCESS
-    (
-     in_ID                     IN ARCH.ROLE_DOC_TYPE_ACCESS.ID%TYPE
-    );
-
-END DML_ROLE_DOC_TYPE_ACCESS;
-/
-
---
--- DML_USER_DOC_TYPE_ACCESS  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_USER_DOC_TYPE_ACCESS IS
-
-  PROCEDURE INS_USER_DOC_TYPE_ACCESS_WI
-    (
-     in_ID                     IN ARCH.USER_DOC_TYPE_ACCESS.ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_DOC_TYPE_ACCESS.USER_ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.USER_DOC_TYPE_ACCESS.DOCUMENT_TYPE_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.USER_DOC_TYPE_ACCESS.COPY_TYPE_ID%TYPE
-    );
-
-  PROCEDURE INS_USER_DOC_TYPE_ACCESS
-    (
-     in_USER_ID                IN ARCH.USER_DOC_TYPE_ACCESS.USER_ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.USER_DOC_TYPE_ACCESS.DOCUMENT_TYPE_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.USER_DOC_TYPE_ACCESS.COPY_TYPE_ID%TYPE
-    );
-
-  PROCEDURE UPD_USER_DOC_TYPE_ACCESS
-    (
-     in_ID                     IN ARCH.USER_DOC_TYPE_ACCESS.ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_DOC_TYPE_ACCESS.USER_ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.USER_DOC_TYPE_ACCESS.DOCUMENT_TYPE_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.USER_DOC_TYPE_ACCESS.COPY_TYPE_ID%TYPE
-    );
-
-  PROCEDURE DEL_USER_DOC_TYPE_ACCESS
-    (
-     in_ID                     IN ARCH.USER_DOC_TYPE_ACCESS.ID%TYPE
-    );
-
-END DML_USER_DOC_TYPE_ACCESS;
-/
-
---
--- DML_FILES  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_FILES IS
-
-  PROCEDURE INS_FILES_WI
-    (
-     in_ID                     IN ARCH.FILES.ID%TYPE
-    ,in_COPY_ID                IN ARCH.FILES.COPY_ID%TYPE
-    ,in_FILE_NAME              IN ARCH.FILES.FILE_NAME%TYPE
-    ,in_FILE_EXTENTION         IN ARCH.FILES.FILE_EXTENTION%TYPE
-    ,in_FILE_BODY              IN ARCH.FILES.FILE_BODY%TYPE
-    ,in_FILE_SIZE              IN ARCH.FILES.FILE_SIZE%TYPE
-    );
-    
-  PROCEDURE INS_FILES
-    (
-     in_COPY_ID                IN ARCH.FILES.COPY_ID%TYPE
-    ,in_FILE_NAME              IN ARCH.FILES.FILE_NAME%TYPE
-    ,in_FILE_EXTENTION         IN ARCH.FILES.FILE_EXTENTION%TYPE
-    ,in_FILE_BODY              IN ARCH.FILES.FILE_BODY%TYPE
-    ,in_FILE_SIZE              IN ARCH.FILES.FILE_SIZE%TYPE
-    );
-
-  PROCEDURE UPD_FILES
-    (
-     in_ID                     IN ARCH.FILES.ID%TYPE
-    ,in_COPY_ID                IN ARCH.FILES.COPY_ID%TYPE
-    ,in_FILE_NAME              IN ARCH.FILES.FILE_NAME%TYPE
-    ,in_FILE_EXTENTION         IN ARCH.FILES.FILE_EXTENTION%TYPE
-    ,in_FILE_BODY              IN ARCH.FILES.FILE_BODY%TYPE
-    ,in_FILE_SIZE              IN ARCH.FILES.FILE_SIZE%TYPE
-    );
-
-  PROCEDURE DEL_FILES
-    (
-     in_ID                     IN ARCH.FILES.ID%TYPE
-    );
-
-END DML_FILES;
-/
-
---
--- DML_COPIES  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_COPIES IS
-
-  PROCEDURE INS_COPIES_WI
-    (
-    in_ID                     IN ARCH.COPIES.ID%TYPE,
-     in_DOCUMENT_ID            IN ARCH.COPIES.DOCUMENT_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.COPIES.COPY_TYPE_ID%TYPE
-    ,in_NAME                   IN ARCH.COPIES.NAME%TYPE
-    ,in_PAGES_COUNT            IN ARCH.COPIES.PAGES_COUNT%TYPE
-    ,in_FULL_ACCESS            IN ARCH.COPIES.FULL_ACCESS%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.COPIES
-      (
-      id,
-       DOCUMENT_ID
-      ,COPY_TYPE_ID
-      ,NAME
-      ,PAGES_COUNT
-      ,FULL_ACCESS
-      )
-    VALUES
-      (
-      in_id,
-       in_DOCUMENT_ID
-      ,in_COPY_TYPE_ID
-      ,in_NAME
-      ,in_PAGES_COUNT
-      ,in_FULL_ACCESS
-      );
-  END INS_COPIES_WI;
-
- 
-  PROCEDURE INS_COPIES
-    (
-     in_DOCUMENT_ID            IN ARCH.COPIES.DOCUMENT_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.COPIES.COPY_TYPE_ID%TYPE
-    ,in_NAME                   IN ARCH.COPIES.NAME%TYPE
-    ,in_PAGES_COUNT            IN ARCH.COPIES.PAGES_COUNT%TYPE
-    ,in_FULL_ACCESS            IN ARCH.COPIES.FULL_ACCESS%TYPE
-    ) IS
-  BEGIN
-    INS_COPIES_WI(
-    COPIES_SEQ.NEXTVAL,
-       in_DOCUMENT_ID
-      ,in_COPY_TYPE_ID
-      ,in_NAME
-      ,in_PAGES_COUNT
-      ,in_FULL_ACCESS
-      );
-  END INS_COPIES;
-
-  PROCEDURE UPD_COPIES
-    (
-     in_ID                     IN ARCH.COPIES.ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.COPIES.DOCUMENT_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.COPIES.COPY_TYPE_ID%TYPE
-    ,in_NAME                   IN ARCH.COPIES.NAME%TYPE
-    ,in_PAGES_COUNT            IN ARCH.COPIES.PAGES_COUNT%TYPE
-    ,in_FULL_ACCESS            IN ARCH.COPIES.FULL_ACCESS%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.COPIES
-    SET 
-        DOCUMENT_ID              = in_DOCUMENT_ID
-       ,COPY_TYPE_ID             = in_COPY_TYPE_ID
-       ,NAME                     = in_NAME
-       ,PAGES_COUNT              = in_PAGES_COUNT
-       ,FULL_ACCESS              = in_FULL_ACCESS
-    WHERE
-        ID                       = in_ID;
-  END UPD_COPIES;
-
-  PROCEDURE DEL_COPIES
-    (
-     in_ID                     IN ARCH.COPIES.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.COPIES
-    WHERE
-        ID                       = in_ID;
-  END DEL_COPIES;
-
-END DML_COPIES;
-/
-
---
--- DML_COPY_TYPE_ATTRIBUTES  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_COPY_TYPE_ATTRIBUTES IS
-
-  PROCEDURE INS_COPY_TYPE_ATTRIBUTES_wi
-    (
-    in_ID                     IN ARCH.COPY_TYPE_ATTRIBUTES.ID%TYPE,
-     in_COPY_TYPE_ID           IN ARCH.COPY_TYPE_ATTRIBUTES.COPY_TYPE_ID%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.COPY_TYPE_ATTRIBUTES.ATTRIBUTE_ID%TYPE
-    ,in_MANDATORY              IN ARCH.COPY_TYPE_ATTRIBUTES.MANDATORY%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.COPY_TYPE_ATTRIBUTES
-      (
-      id,
-       COPY_TYPE_ID
-      ,ATTRIBUTE_ID
-      ,MANDATORY
-      )
-    VALUES
-      (in_id,
-       in_COPY_TYPE_ID
-      ,in_ATTRIBUTE_ID
-      ,in_MANDATORY
-      );
-  END INS_COPY_TYPE_ATTRIBUTES_wi;
-
-  PROCEDURE INS_COPY_TYPE_ATTRIBUTES
-    (
-     in_COPY_TYPE_ID           IN ARCH.COPY_TYPE_ATTRIBUTES.COPY_TYPE_ID%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.COPY_TYPE_ATTRIBUTES.ATTRIBUTE_ID%TYPE
-    ,in_MANDATORY              IN ARCH.COPY_TYPE_ATTRIBUTES.MANDATORY%TYPE
-    ) IS
-  BEGIN
-    INS_COPY_TYPE_ATTRIBUTES_wi(
-     COPY_TYPE_ATTRIBUTES_SEQ.NEXTVAL,
-       in_COPY_TYPE_ID
-      ,in_ATTRIBUTE_ID
-      ,in_MANDATORY
-      );
-  END INS_COPY_TYPE_ATTRIBUTES;
-
-  PROCEDURE UPD_COPY_TYPE_ATTRIBUTES
-    (
-     in_ID                     IN ARCH.COPY_TYPE_ATTRIBUTES.ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.COPY_TYPE_ATTRIBUTES.COPY_TYPE_ID%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.COPY_TYPE_ATTRIBUTES.ATTRIBUTE_ID%TYPE
-    ,in_MANDATORY              IN ARCH.COPY_TYPE_ATTRIBUTES.MANDATORY%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.COPY_TYPE_ATTRIBUTES
-    SET 
-        COPY_TYPE_ID             = in_COPY_TYPE_ID
-       ,ATTRIBUTE_ID             = in_ATTRIBUTE_ID
-       ,MANDATORY                = in_MANDATORY
-    WHERE
-        ID                       = in_ID;
-  END UPD_COPY_TYPE_ATTRIBUTES;
-
-  PROCEDURE DEL_COPY_TYPE_ATTRIBUTES
-    (
-     in_ID                     IN ARCH.COPY_TYPE_ATTRIBUTES.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.COPY_TYPE_ATTRIBUTES
-    WHERE
-        ID                       = in_ID;
-  END DEL_COPY_TYPE_ATTRIBUTES;
-
-END DML_COPY_TYPE_ATTRIBUTES;
-/
-
---
--- DML_COPY_TYPES  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_COPY_TYPES IS
-
-  PROCEDURE INS_COPY_TYPES_wi
-    (
-    in_ID                     IN ARCH.COPY_TYPES.ID%TYPE,
-     in_NAME                   IN ARCH.COPY_TYPES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.COPY_TYPES.DESCRIPTION%TYPE
-    ,in_FULL_ACCESS            IN ARCH.COPY_TYPES.FULL_ACCESS%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.COPY_TYPES.DOCUMENT_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.COPY_TYPES
-      (
-      id
-       ,NAME
-      ,DESCRIPTION
-      ,FULL_ACCESS
-      ,DOCUMENT_TYPE_ID
-      )
-    VALUES
-      (in_id,
-       in_NAME
-      ,in_DESCRIPTION
-      ,in_FULL_ACCESS
-      ,in_DOCUMENT_TYPE_ID
-      );
-  END INS_COPY_TYPES_wi;
-
-  PROCEDURE INS_COPY_TYPES
-    (
-     in_NAME                   IN ARCH.COPY_TYPES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.COPY_TYPES.DESCRIPTION%TYPE
-    ,in_FULL_ACCESS            IN ARCH.COPY_TYPES.FULL_ACCESS%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.COPY_TYPES.DOCUMENT_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    INS_COPY_TYPES_wi(
-     COPY_TYPES_SEQ.NEXTVAL,
-       in_NAME
-      ,in_DESCRIPTION
-      ,in_FULL_ACCESS
-      ,in_DOCUMENT_TYPE_ID
-      );
-  END INS_COPY_TYPES;
-
-  PROCEDURE UPD_COPY_TYPES
-    (
-     in_ID                     IN ARCH.COPY_TYPES.ID%TYPE
-    ,in_NAME                   IN ARCH.COPY_TYPES.NAME%TYPE
-    ,in_DESCRIPTION            IN ARCH.COPY_TYPES.DESCRIPTION%TYPE
-    ,in_FULL_ACCESS            IN ARCH.COPY_TYPES.FULL_ACCESS%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.COPY_TYPES.DOCUMENT_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.COPY_TYPES
-    SET 
-        NAME                     = in_NAME
-       ,DESCRIPTION              = in_DESCRIPTION
-       ,FULL_ACCESS              = in_FULL_ACCESS
-       ,DOCUMENT_TYPE_ID         = in_DOCUMENT_TYPE_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_COPY_TYPES;
-
-  PROCEDURE DEL_COPY_TYPES
-    (
-     in_ID                     IN ARCH.COPY_TYPES.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.COPY_TYPES
-    WHERE
-        ID                       = in_ID;
-  END DEL_COPY_TYPES;
-
-END DML_COPY_TYPES;
-/
-
---
--- DML_USER_ROLES  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_USER_ROLES IS
-
-  PROCEDURE INS_USER_ROLES_WI
-    (
-     in_ID                     IN ARCH.USER_ROLES.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.USER_ROLES.ROLE_ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_ROLES.USER_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.USER_ROLES
-      (
-       ID
-      ,ROLE_ID
-      ,USER_ID
-      )
-    VALUES
-      (
-       in_ID
-      ,in_ROLE_ID
-      ,in_USER_ID
-      );
-  END INS_USER_ROLES_WI;
-
-  PROCEDURE INS_USER_ROLES
-    (
-     in_ROLE_ID                IN ARCH.USER_ROLES.ROLE_ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_ROLES.USER_ID%TYPE
-    ) IS
-  BEGIN
-    INS_USER_ROLES_WI(
-       USER_ROLES_SEQ.NEXTVAL
-      ,in_ROLE_ID
-      ,in_USER_ID
-      );
-  END INS_USER_ROLES;
-
-  PROCEDURE UPD_USER_ROLES
-    (
-     in_ID                     IN ARCH.USER_ROLES.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.USER_ROLES.ROLE_ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_ROLES.USER_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.USER_ROLES
-    SET 
-        ROLE_ID                  = in_ROLE_ID
-       ,USER_ID                  = in_USER_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_USER_ROLES;
-
-  PROCEDURE DEL_USER_ROLES
-    (
-     in_ID                     IN ARCH.USER_ROLES.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.USER_ROLES
-    WHERE
-        ID                       = in_ID;
-  END DEL_USER_ROLES;
-
-END DML_USER_ROLES;
-/
-
---
--- DML_ROLE_DOC_TYPE_ACCESS  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_ROLE_DOC_TYPE_ACCESS IS
-
-  PROCEDURE INS_ROLE_DOC_TYPE_ACCESS_WI
-    (
-     in_ID                     IN ARCH.ROLE_DOC_TYPE_ACCESS.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.ROLE_DOC_TYPE_ACCESS.ROLE_ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.ROLE_DOC_TYPE_ACCESS.DOCUMENT_TYPE_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.ROLE_DOC_TYPE_ACCESS.COPY_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.ROLE_DOC_TYPE_ACCESS
-      (
-       ID
-      ,ROLE_ID
-      ,DOCUMENT_TYPE_ID
-      ,COPY_TYPE_ID
-      )
-    VALUES
-      (
-       in_ID
-      ,in_ROLE_ID
-      ,in_DOCUMENT_TYPE_ID
-      ,in_COPY_TYPE_ID
-      );
-  END INS_ROLE_DOC_TYPE_ACCESS_WI;
-
-  PROCEDURE INS_ROLE_DOC_TYPE_ACCESS
-    (
-     in_ROLE_ID                IN ARCH.ROLE_DOC_TYPE_ACCESS.ROLE_ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.ROLE_DOC_TYPE_ACCESS.DOCUMENT_TYPE_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.ROLE_DOC_TYPE_ACCESS.COPY_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    INS_ROLE_DOC_TYPE_ACCESS_WI(
-       ROLE_DOCUMENT_TYPE_ACCESS_SEQ.NEXTVAL
-      ,in_ROLE_ID
-      ,in_DOCUMENT_TYPE_ID
-      ,in_COPY_TYPE_ID
-      );
-  END INS_ROLE_DOC_TYPE_ACCESS;
-
-  PROCEDURE UPD_ROLE_DOC_TYPE_ACCESS
-    (
-     in_ID                     IN ARCH.ROLE_DOC_TYPE_ACCESS.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.ROLE_DOC_TYPE_ACCESS.ROLE_ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.ROLE_DOC_TYPE_ACCESS.DOCUMENT_TYPE_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.ROLE_DOC_TYPE_ACCESS.COPY_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.ROLE_DOC_TYPE_ACCESS
-    SET 
-        ROLE_ID                  = in_ROLE_ID
-       ,DOCUMENT_TYPE_ID         = in_DOCUMENT_TYPE_ID
-       ,COPY_TYPE_ID             = in_COPY_TYPE_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_ROLE_DOC_TYPE_ACCESS;
-
-  PROCEDURE DEL_ROLE_DOC_TYPE_ACCESS
-    (
-     in_ID                     IN ARCH.ROLE_DOC_TYPE_ACCESS.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.ROLE_DOC_TYPE_ACCESS
-    WHERE
-        ID                       = in_ID;
-  END DEL_ROLE_DOC_TYPE_ACCESS;
-
-END DML_ROLE_DOC_TYPE_ACCESS;
-/
-
---
--- DML_USER_DOC_TYPE_ACCESS  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_USER_DOC_TYPE_ACCESS IS
-
-  PROCEDURE INS_USER_DOC_TYPE_ACCESS_WI
-    (
-     in_ID                     IN ARCH.USER_DOC_TYPE_ACCESS.ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_DOC_TYPE_ACCESS.USER_ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.USER_DOC_TYPE_ACCESS.DOCUMENT_TYPE_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.USER_DOC_TYPE_ACCESS.COPY_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.USER_DOC_TYPE_ACCESS
-      (
-       ID
-      ,USER_ID
-      ,DOCUMENT_TYPE_ID
-      ,COPY_TYPE_ID
-      )
-    VALUES
-      (
-       in_ID
-      ,in_USER_ID
-      ,in_DOCUMENT_TYPE_ID
-      ,in_COPY_TYPE_ID
-      );
-  END INS_USER_DOC_TYPE_ACCESS_WI;
-
-
-  PROCEDURE INS_USER_DOC_TYPE_ACCESS
-    (
-     in_USER_ID                IN ARCH.USER_DOC_TYPE_ACCESS.USER_ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.USER_DOC_TYPE_ACCESS.DOCUMENT_TYPE_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.USER_DOC_TYPE_ACCESS.COPY_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    INS_USER_DOC_TYPE_ACCESS_WI(
-       USER_DOCUMENT_TYPE_ACCESS_SEQ.NEXTVAL
-      ,in_USER_ID
-      ,in_DOCUMENT_TYPE_ID
-      ,in_COPY_TYPE_ID
-      );
-  END INS_USER_DOC_TYPE_ACCESS;
-  
-  PROCEDURE UPD_USER_DOC_TYPE_ACCESS
-    (
-     in_ID                     IN ARCH.USER_DOC_TYPE_ACCESS.ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_DOC_TYPE_ACCESS.USER_ID%TYPE
-    ,in_DOCUMENT_TYPE_ID       IN ARCH.USER_DOC_TYPE_ACCESS.DOCUMENT_TYPE_ID%TYPE
-    ,in_COPY_TYPE_ID           IN ARCH.USER_DOC_TYPE_ACCESS.COPY_TYPE_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.USER_DOC_TYPE_ACCESS
-    SET 
-        USER_ID                  = in_USER_ID
-       ,DOCUMENT_TYPE_ID         = in_DOCUMENT_TYPE_ID
-       ,COPY_TYPE_ID             = in_COPY_TYPE_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_USER_DOC_TYPE_ACCESS;
-
-  PROCEDURE DEL_USER_DOC_TYPE_ACCESS
-    (
-     in_ID                     IN ARCH.USER_DOC_TYPE_ACCESS.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.USER_DOC_TYPE_ACCESS
-    WHERE
-        ID                       = in_ID;
-  END DEL_USER_DOC_TYPE_ACCESS;
-
-END DML_USER_DOC_TYPE_ACCESS;
-/
-
---
--- DML_FILES  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_FILES IS
-
-  PROCEDURE INS_FILES_WI
-    (
-     in_ID                     IN ARCH.FILES.ID%TYPE
-    ,in_COPY_ID                IN ARCH.FILES.COPY_ID%TYPE
-    ,in_FILE_NAME              IN ARCH.FILES.FILE_NAME%TYPE
-    ,in_FILE_EXTENTION         IN ARCH.FILES.FILE_EXTENTION%TYPE
-    ,in_FILE_BODY              IN ARCH.FILES.FILE_BODY%TYPE
-    ,in_FILE_SIZE              IN ARCH.FILES.FILE_SIZE%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.FILES
-      (
-       ID
-      ,COPY_ID
-      ,FILE_NAME
-      ,FILE_EXTENTION
-      ,FILE_BODY
-      ,FILE_SIZE
-      )
-    VALUES
-      (
-       in_ID
-      ,in_COPY_ID
-      ,in_FILE_NAME
-      ,in_FILE_EXTENTION
-      ,in_FILE_BODY
-      ,in_FILE_SIZE
-      );
-  END INS_FILES_WI;
-  
-  
-  PROCEDURE INS_FILES
-    (
-     in_COPY_ID                IN ARCH.FILES.COPY_ID%TYPE
-    ,in_FILE_NAME              IN ARCH.FILES.FILE_NAME%TYPE
-    ,in_FILE_EXTENTION         IN ARCH.FILES.FILE_EXTENTION%TYPE
-    ,in_FILE_BODY              IN ARCH.FILES.FILE_BODY%TYPE
-    ,in_FILE_SIZE              IN ARCH.FILES.FILE_SIZE%TYPE
-    ) IS
-  BEGIN
-    INS_FILES_WI(
-       FILES_SEQ.NEXTVAL
-      ,in_COPY_ID
-      ,in_FILE_NAME
-      ,in_FILE_EXTENTION
-      ,in_FILE_BODY
-      ,in_FILE_SIZE
-      );
-  END INS_FILES;
-
-  PROCEDURE UPD_FILES
-    (
-     in_ID                     IN ARCH.FILES.ID%TYPE
-    ,in_COPY_ID                IN ARCH.FILES.COPY_ID%TYPE
-    ,in_FILE_NAME              IN ARCH.FILES.FILE_NAME%TYPE
-    ,in_FILE_EXTENTION         IN ARCH.FILES.FILE_EXTENTION%TYPE
-    ,in_FILE_BODY              IN ARCH.FILES.FILE_BODY%TYPE
-    ,in_FILE_SIZE              IN ARCH.FILES.FILE_SIZE%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.FILES
-    SET 
-        COPY_ID                  = in_COPY_ID
-       ,FILE_NAME                = in_FILE_NAME
-       ,FILE_EXTENTION           = in_FILE_EXTENTION
-       ,FILE_BODY                = in_FILE_BODY
-       ,FILE_SIZE                = in_FILE_SIZE
-    WHERE
-        ID                       = in_ID;
-  END UPD_FILES;
-
-  PROCEDURE DEL_FILES
-    (
-     in_ID                     IN ARCH.FILES.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.FILES
-    WHERE
-        ID                       = in_ID;
-  END DEL_FILES;
-
-END DML_FILES;
-/
-
---
--- COPIES_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.COPIES_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.COPIES
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END COPIES_AUD;
-/
-
-
---
--- COPIES_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.COPIES_TRG 
-BEFORE INSERT ON ARCH.COPIES 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT COPIES_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- COPY_TYPE_ATTRIBUTES_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.COPY_TYPE_ATTRIBUTES_TRG 
-BEFORE INSERT ON ARCH.COPY_TYPE_ATTRIBUTES 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT COPY_TYPE_ATTRIBUTES_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- COPY_TYPES_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.COPY_TYPES_TRG 
-BEFORE INSERT ON ARCH.COPY_TYPES 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT COPY_TYPES_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- ROLE_DOCUMENT_TYPE_ACCESS_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ROLE_DOCUMENT_TYPE_ACCESS_TRG 
-BEFORE INSERT ON ARCH.ROLE_DOC_TYPE_ACCESS 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT ROLE_DOCUMENT_TYPE_ACCESS_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- USER_DOCUMENT_TYPE_ACCESS_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.USER_DOCUMENT_TYPE_ACCESS_TRG 
-BEFORE INSERT ON ARCH.USER_DOC_TYPE_ACCESS 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT USER_DOCUMENT_TYPE_ACCESS_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- USER_ROLES_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.USER_ROLES_TRG 
-BEFORE INSERT ON ARCH.USER_ROLES 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT USER_ROLES_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- USER_DOCUMENT_TYPE_ACCESS_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.USER_DOCUMENT_TYPE_ACCESS_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.USER_DOC_TYPE_ACCESS
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END USER_DOCUMENT_TYPE_ACCESS_AUD;
-/
-
-
---
--- USER_ROLES_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.USER_ROLES_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.USER_ROLES
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END USER_ROLES_AUD;
-/
-
-
---
--- COPY_TYPE_ATTRIBUTES_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.COPY_TYPE_ATTRIBUTES_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.COPY_TYPE_ATTRIBUTES
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END COPY_TYPE_ATTRIBUTES_AUD;
-/
-
-
---
--- COPY_TYPES_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.COPY_TYPES_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.COPY_TYPES
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END COPY_TYPES_AUD;
-/
-
-
---
--- ROLE_DOCUMENT_TYPE_ACCESS_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ROLE_DOCUMENT_TYPE_ACCESS_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.ROLE_DOC_TYPE_ACCESS
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END ROLE_DOCUMENT_TYPE_ACCESS_AUD;
-/
-
-
---
--- FILES_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.FILES_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.FILES
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END FILES_AUD;
-/
-
-
---
--- FILES_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.FILES_TRG 
-BEFORE INSERT ON ARCH.FILES 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT FILES_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- MOVEMENT  (Table) 
---
-CREATE TABLE ARCH.MOVEMENT
-(
-  ID                      NUMBER(9)             NOT NULL,
-  COPY_ID                 NUMBER(9),
-  CLINET_ID               NUMBER(9)             NOT NULL,
-  MOVEMENT_DATE           DATE                  NOT NULL,
-  PLAN_RETURN_DATE        DATE                  NOT NULL,
-  ACTUAL_RETURN_DATE      DATE,
-  TAKE_DESCRIPTION        NVARCHAR2(2000),
-  RETURN_DESCRIPTION      NVARCHAR2(2000),
-  DOCUMENT_ID             NUMBER(9)             NOT NULL,
-  TAKE_ADDRESS_ID         NUMBER(9)             NOT NULL,
-  RETURN_ADDRESS_ID       NUMBER(9),
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- ATTRIBUTES_VALUES  (Table) 
---
-CREATE TABLE ARCH.ATTRIBUTES_VALUES
-(
-  ID                      NUMBER(9),
-  DOCUMENT_ID             NUMBER(9)             NOT NULL,
-  COPY_ID                 NUMBER(9),
-  STRING_VALUE            NVARCHAR2(2000),
-  DECIMAL_VALUE           NUMBER(18,4),
-  INT_VALUE               INTEGER,
-  DATE_VALUE              DATE,
-  BOOLEAN_VALUE           NUMBER(1),
-  REFERENCE_VALUE         NUMBER(9),
-  ATTRIBUTE_ID            NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  VALUE                   NVARCHAR2(2000)
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- USER_DOCUMENT_ACCESS  (Table) 
---
-CREATE TABLE ARCH.USER_DOCUMENT_ACCESS
-(
-  ID                      NUMBER(9)             NOT NULL,
-  USER_ID                 NUMBER(9)             NOT NULL,
-  DOCUMENT_ID             NUMBER(9)             NOT NULL,
-  COPY_ID                 NUMBER(9),
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- ROLE_DOCUMENT_ACCESS  (Table) 
---
-CREATE TABLE ARCH.ROLE_DOCUMENT_ACCESS
-(
-  ID                      NUMBER(9)             NOT NULL,
-  ROLE_ID                 NUMBER(9)             NOT NULL,
-  DOCUMENT_ID             NUMBER(9)             NOT NULL,
-  COPY_ID                 NUMBER(9),
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- DOCUMENT_HISTORY  (Table) 
---
-CREATE TABLE ARCH.DOCUMENT_HISTORY
-(
-  ID                      NUMBER(9)             NOT NULL,
-  DOCUMENT_ID             NUMBER(9)             NOT NULL,
-  USER_ID                 NUMBER(9)             NOT NULL,
-  COPY_ID                 NUMBER(9),
-  ACTION                  NVARCHAR2(100)        NOT NULL,
-  ACTION_DATE             DATE                  NOT NULL,
-  AUD_CREATE_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_MODIFY_USER_ID      NUMBER(9)             NOT NULL,
-  AUD_CREATE_TIME         DATE                  NOT NULL,
-  AUD_MODIFY_TIME         DATE                  NOT NULL,
-  AUD_CREATE_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_OS_USER      NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_HOST         NVARCHAR2(250)        NOT NULL,
-  AUD_CREATE_APPLICATION  NVARCHAR2(250)        NOT NULL,
-  AUD_MODIFY_APPLICATION  NVARCHAR2(250)        NOT NULL
-)
-TABLESPACE SYSTEM
-RESULT_CACHE (MODE DEFAULT)
-PCTUSED    40
-PCTFREE    10
-INITRANS   1
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           )
-NOCOMPRESS ;
-
-
---
--- ATTRIBUTES_VALUES_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.ATTRIBUTES_VALUES_PK ON ARCH.ATTRIBUTES_VALUES
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- DOCUMENT_HISTORY_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.DOCUMENT_HISTORY_PK ON ARCH.DOCUMENT_HISTORY
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- MOVEMENT_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.MOVEMENT_PK ON ARCH.MOVEMENT
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- ROLE_DOCUMENT_ACCESS_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.ROLE_DOCUMENT_ACCESS_PK ON ARCH.ROLE_DOCUMENT_ACCESS
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- USER_DOCUMENT_ACCESS_PK  (Index) 
---
-CREATE UNIQUE INDEX ARCH.USER_DOCUMENT_ACCESS_PK ON ARCH.USER_DOCUMENT_ACCESS
-(ID)
-TABLESPACE SYSTEM
-PCTFREE    10
-INITRANS   2
-MAXTRANS   255
-STORAGE    (
-            INITIAL          64K
-            NEXT             1M
-            MINEXTENTS       1
-            MAXEXTENTS       UNLIMITED
-            PCTINCREASE      0
-            FREELISTS        1
-            FREELIST GROUPS  1
-            BUFFER_POOL      DEFAULT
-            FLASH_CACHE      DEFAULT
-            CELL_FLASH_CACHE DEFAULT
-           );
-
-
---
--- DML_ATTRIBUTES_VALUES  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_ATTRIBUTES_VALUES IS
-
-  PROCEDURE INS_ATTRIBUTES_VALUES
-    (
-     in_DOCUMENT_ID            IN ARCH.ATTRIBUTES_VALUES.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.ATTRIBUTES_VALUES.COPY_ID%TYPE
-    ,in_STRING_VALUE           IN ARCH.ATTRIBUTES_VALUES.STRING_VALUE%TYPE
-    ,in_DECIMAL_VALUE          IN ARCH.ATTRIBUTES_VALUES.DECIMAL_VALUE%TYPE
-    ,in_INT_VALUE              IN ARCH.ATTRIBUTES_VALUES.INT_VALUE%TYPE
-    ,in_DATE_VALUE             IN ARCH.ATTRIBUTES_VALUES.DATE_VALUE%TYPE
-    ,in_BOOLEAN_VALUE          IN ARCH.ATTRIBUTES_VALUES.BOOLEAN_VALUE%TYPE
-    ,in_REFERENCE_VALUE        IN ARCH.ATTRIBUTES_VALUES.REFERENCE_VALUE%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.ATTRIBUTES_VALUES.ATTRIBUTE_ID%TYPE
-    );
-
-   PROCEDURE INS_ATTRIBUTES_VALUES_WI
-    (
-     in_ID                     IN ARCH.ATTRIBUTES_VALUES.ID%TYPE,
-     in_DOCUMENT_ID            IN ARCH.ATTRIBUTES_VALUES.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.ATTRIBUTES_VALUES.COPY_ID%TYPE
-    ,in_STRING_VALUE           IN ARCH.ATTRIBUTES_VALUES.STRING_VALUE%TYPE
-    ,in_DECIMAL_VALUE          IN ARCH.ATTRIBUTES_VALUES.DECIMAL_VALUE%TYPE
-    ,in_INT_VALUE              IN ARCH.ATTRIBUTES_VALUES.INT_VALUE%TYPE
-    ,in_DATE_VALUE             IN ARCH.ATTRIBUTES_VALUES.DATE_VALUE%TYPE
-    ,in_BOOLEAN_VALUE          IN ARCH.ATTRIBUTES_VALUES.BOOLEAN_VALUE%TYPE
-    ,in_REFERENCE_VALUE        IN ARCH.ATTRIBUTES_VALUES.REFERENCE_VALUE%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.ATTRIBUTES_VALUES.ATTRIBUTE_ID%TYPE
-    );
-
-  PROCEDURE UPD_ATTRIBUTES_VALUES
-    (
-     in_ID                     IN ARCH.ATTRIBUTES_VALUES.ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.ATTRIBUTES_VALUES.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.ATTRIBUTES_VALUES.COPY_ID%TYPE
-    ,in_STRING_VALUE           IN ARCH.ATTRIBUTES_VALUES.STRING_VALUE%TYPE
-    ,in_DECIMAL_VALUE          IN ARCH.ATTRIBUTES_VALUES.DECIMAL_VALUE%TYPE
-    ,in_INT_VALUE              IN ARCH.ATTRIBUTES_VALUES.INT_VALUE%TYPE
-    ,in_DATE_VALUE             IN ARCH.ATTRIBUTES_VALUES.DATE_VALUE%TYPE
-    ,in_BOOLEAN_VALUE          IN ARCH.ATTRIBUTES_VALUES.BOOLEAN_VALUE%TYPE
-    ,in_REFERENCE_VALUE        IN ARCH.ATTRIBUTES_VALUES.REFERENCE_VALUE%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.ATTRIBUTES_VALUES.ATTRIBUTE_ID%TYPE
-    );
-
-  PROCEDURE DEL_ATTRIBUTES_VALUES
-    (
-     in_ID                     IN ARCH.ATTRIBUTES_VALUES.ID%TYPE
-    );
-
-END DML_ATTRIBUTES_VALUES;
-/
-
---
--- DML_DOCUMENT_HISTORY  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_DOCUMENT_HISTORY IS
-
-  PROCEDURE INS_DOCUMENT_HISTORY_wi
-    (
-    in_ID                     IN ARCH.DOCUMENT_HISTORY.ID%TYPE,
-     in_DOCUMENT_ID            IN ARCH.DOCUMENT_HISTORY.DOCUMENT_ID%TYPE
-    ,in_USER_ID                IN ARCH.DOCUMENT_HISTORY.USER_ID%TYPE
-    ,in_COPY_ID                IN ARCH.DOCUMENT_HISTORY.COPY_ID%TYPE
-    ,in_ACTION                 IN ARCH.DOCUMENT_HISTORY.ACTION%TYPE
-    ,in_ACTION_DATE            IN ARCH.DOCUMENT_HISTORY.ACTION_DATE%TYPE
-    );
-
-    PROCEDURE INS_DOCUMENT_HISTORY
-    (
-     in_DOCUMENT_ID            IN ARCH.DOCUMENT_HISTORY.DOCUMENT_ID%TYPE
-    ,in_USER_ID                IN ARCH.DOCUMENT_HISTORY.USER_ID%TYPE
-    ,in_COPY_ID                IN ARCH.DOCUMENT_HISTORY.COPY_ID%TYPE
-    ,in_ACTION                 IN ARCH.DOCUMENT_HISTORY.ACTION%TYPE
-    ,in_ACTION_DATE            IN ARCH.DOCUMENT_HISTORY.ACTION_DATE%TYPE
-    );
-
-  PROCEDURE UPD_DOCUMENT_HISTORY
-    (
-     in_ID                     IN ARCH.DOCUMENT_HISTORY.ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.DOCUMENT_HISTORY.DOCUMENT_ID%TYPE
-    ,in_USER_ID                IN ARCH.DOCUMENT_HISTORY.USER_ID%TYPE
-    ,in_COPY_ID                IN ARCH.DOCUMENT_HISTORY.COPY_ID%TYPE
-    ,in_ACTION                 IN ARCH.DOCUMENT_HISTORY.ACTION%TYPE
-    ,in_ACTION_DATE            IN ARCH.DOCUMENT_HISTORY.ACTION_DATE%TYPE
-    
-    );
-
-  PROCEDURE DEL_DOCUMENT_HISTORY
-    (
-     in_ID                     IN ARCH.DOCUMENT_HISTORY.ID%TYPE
-    );
-
-END DML_DOCUMENT_HISTORY;
-/
-
---
--- DML_MOVEMENT  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_MOVEMENT IS
-
-  PROCEDURE INS_MOVEMENT_WI
-    (
-     in_ID                     IN ARCH.MOVEMENT.ID%TYPE
-    ,in_COPY_ID                IN ARCH.MOVEMENT.COPY_ID%TYPE
-    ,in_CLINET_ID              IN ARCH.MOVEMENT.CLINET_ID%TYPE
-    ,in_MOVEMENT_DATE          IN ARCH.MOVEMENT.MOVEMENT_DATE%TYPE
-    ,in_PLAN_RETURN_DATE       IN ARCH.MOVEMENT.PLAN_RETURN_DATE%TYPE
-    ,in_ACTUAL_RETURN_DATE     IN ARCH.MOVEMENT.ACTUAL_RETURN_DATE%TYPE
-    ,in_TAKE_DESCRIPTION       IN ARCH.MOVEMENT.TAKE_DESCRIPTION%TYPE
-    ,in_RETURN_DESCRIPTION     IN ARCH.MOVEMENT.RETURN_DESCRIPTION%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.MOVEMENT.DOCUMENT_ID%TYPE
-    ,in_TAKE_ADDRESS_ID        IN ARCH.MOVEMENT.TAKE_ADDRESS_ID%TYPE
-    ,in_RETURN_ADDRESS_ID      IN ARCH.MOVEMENT.RETURN_ADDRESS_ID%TYPE
-    );
-
-    PROCEDURE INS_MOVEMENT
-    (
-     in_COPY_ID                IN ARCH.MOVEMENT.COPY_ID%TYPE
-    ,in_CLINET_ID              IN ARCH.MOVEMENT.CLINET_ID%TYPE
-    ,in_MOVEMENT_DATE          IN ARCH.MOVEMENT.MOVEMENT_DATE%TYPE
-    ,in_PLAN_RETURN_DATE       IN ARCH.MOVEMENT.PLAN_RETURN_DATE%TYPE
-    ,in_ACTUAL_RETURN_DATE     IN ARCH.MOVEMENT.ACTUAL_RETURN_DATE%TYPE
-    ,in_TAKE_DESCRIPTION       IN ARCH.MOVEMENT.TAKE_DESCRIPTION%TYPE
-    ,in_RETURN_DESCRIPTION     IN ARCH.MOVEMENT.RETURN_DESCRIPTION%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.MOVEMENT.DOCUMENT_ID%TYPE
-    ,in_TAKE_ADDRESS_ID        IN ARCH.MOVEMENT.TAKE_ADDRESS_ID%TYPE
-    ,in_RETURN_ADDRESS_ID      IN ARCH.MOVEMENT.RETURN_ADDRESS_ID%TYPE
-    );
-
-  PROCEDURE UPD_MOVEMENT
-    (
-     in_ID                     IN ARCH.MOVEMENT.ID%TYPE
-    ,in_COPY_ID                IN ARCH.MOVEMENT.COPY_ID%TYPE
-    ,in_CLINET_ID              IN ARCH.MOVEMENT.CLINET_ID%TYPE
-    ,in_MOVEMENT_DATE          IN ARCH.MOVEMENT.MOVEMENT_DATE%TYPE
-    ,in_PLAN_RETURN_DATE       IN ARCH.MOVEMENT.PLAN_RETURN_DATE%TYPE
-    ,in_ACTUAL_RETURN_DATE     IN ARCH.MOVEMENT.ACTUAL_RETURN_DATE%TYPE
-    ,in_TAKE_DESCRIPTION       IN ARCH.MOVEMENT.TAKE_DESCRIPTION%TYPE
-    ,in_RETURN_DESCRIPTION     IN ARCH.MOVEMENT.RETURN_DESCRIPTION%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.MOVEMENT.DOCUMENT_ID%TYPE
-    ,in_TAKE_ADDRESS_ID        IN ARCH.MOVEMENT.TAKE_ADDRESS_ID%TYPE
-    ,in_RETURN_ADDRESS_ID      IN ARCH.MOVEMENT.RETURN_ADDRESS_ID%TYPE
-    );
-
-  PROCEDURE DEL_MOVEMENT
-    (
-     in_ID                     IN ARCH.MOVEMENT.ID%TYPE
-    );
-
-END DML_MOVEMENT;
-/
-
---
--- DML_ROLE_DOCUMENT_ACCESS  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_ROLE_DOCUMENT_ACCESS IS
-
-  PROCEDURE INS_ROLE_DOCUMENT_ACCESS
-    (
-     in_ROLE_ID                IN ARCH.ROLE_DOCUMENT_ACCESS.ROLE_ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.ROLE_DOCUMENT_ACCESS.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.ROLE_DOCUMENT_ACCESS.COPY_ID%TYPE
-    );
-
-  PROCEDURE INS_ROLE_DOCUMENT_ACCESS_WI
-    (
-      in_ID                    IN ARCH.ROLE_DOCUMENT_ACCESS.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.ROLE_DOCUMENT_ACCESS.ROLE_ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.ROLE_DOCUMENT_ACCESS.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.ROLE_DOCUMENT_ACCESS.COPY_ID%TYPE
-    );
-
-  PROCEDURE UPD_ROLE_DOCUMENT_ACCESS
-    (
-     in_ID                     IN ARCH.ROLE_DOCUMENT_ACCESS.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.ROLE_DOCUMENT_ACCESS.ROLE_ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.ROLE_DOCUMENT_ACCESS.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.ROLE_DOCUMENT_ACCESS.COPY_ID%TYPE
-    );
-
-  PROCEDURE DEL_ROLE_DOCUMENT_ACCESS
-    (
-     in_ID                     IN ARCH.ROLE_DOCUMENT_ACCESS.ID%TYPE
-    );
-
-END DML_ROLE_DOCUMENT_ACCESS;
-/
-
---
--- DML_USER_DOCUMENT_ACCESS  (Package) 
---
-CREATE OR REPLACE PACKAGE ARCH.DML_USER_DOCUMENT_ACCESS IS
-
-  PROCEDURE INS_USER_DOCUMENT_ACCESS_WI
-    (in_ID                     IN ARCH.USER_DOCUMENT_ACCESS.ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_DOCUMENT_ACCESS.USER_ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.USER_DOCUMENT_ACCESS.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.USER_DOCUMENT_ACCESS.COPY_ID%TYPE
-    );
-
-  PROCEDURE INS_USER_DOCUMENT_ACCESS
-    (in_USER_ID                IN ARCH.USER_DOCUMENT_ACCESS.USER_ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.USER_DOCUMENT_ACCESS.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.USER_DOCUMENT_ACCESS.COPY_ID%TYPE
-    );
-
-  PROCEDURE UPD_USER_DOCUMENT_ACCESS
-    (
-     in_ID                     IN ARCH.USER_DOCUMENT_ACCESS.ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_DOCUMENT_ACCESS.USER_ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.USER_DOCUMENT_ACCESS.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.USER_DOCUMENT_ACCESS.COPY_ID%TYPE
-    );
-
-  PROCEDURE DEL_USER_DOCUMENT_ACCESS
-    (
-     in_ID                     IN ARCH.USER_DOCUMENT_ACCESS.ID%TYPE
-    );
-
-END DML_USER_DOCUMENT_ACCESS;
-/
-
---
--- DML_ATTRIBUTES_VALUES  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_ATTRIBUTES_VALUES IS
-
-  PROCEDURE INS_ATTRIBUTES_VALUES_WI
-    (
-    in_ID                     IN ARCH.ATTRIBUTES_VALUES.ID%TYPE,
-     in_DOCUMENT_ID            IN ARCH.ATTRIBUTES_VALUES.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.ATTRIBUTES_VALUES.COPY_ID%TYPE
-    ,in_STRING_VALUE           IN ARCH.ATTRIBUTES_VALUES.STRING_VALUE%TYPE
-    ,in_DECIMAL_VALUE          IN ARCH.ATTRIBUTES_VALUES.DECIMAL_VALUE%TYPE
-    ,in_INT_VALUE              IN ARCH.ATTRIBUTES_VALUES.INT_VALUE%TYPE
-    ,in_DATE_VALUE             IN ARCH.ATTRIBUTES_VALUES.DATE_VALUE%TYPE
-    ,in_BOOLEAN_VALUE          IN ARCH.ATTRIBUTES_VALUES.BOOLEAN_VALUE%TYPE
-    ,in_REFERENCE_VALUE        IN ARCH.ATTRIBUTES_VALUES.REFERENCE_VALUE%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.ATTRIBUTES_VALUES.ATTRIBUTE_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.ATTRIBUTES_VALUES
-      (
-      ID
-       ,DOCUMENT_ID
-      ,COPY_ID
-      ,STRING_VALUE
-      ,DECIMAL_VALUE
-      ,INT_VALUE
-      ,DATE_VALUE
-      ,BOOLEAN_VALUE
-      ,REFERENCE_VALUE
-      ,ATTRIBUTE_ID
-      )
-    VALUES
-      (
-      in_ID
-       ,in_DOCUMENT_ID
-      ,in_COPY_ID
-      ,in_STRING_VALUE
-      ,in_DECIMAL_VALUE
-      ,in_INT_VALUE
-      ,in_DATE_VALUE
-      ,in_BOOLEAN_VALUE
-      ,in_REFERENCE_VALUE
-      ,in_ATTRIBUTE_ID
-      );
-  END INS_ATTRIBUTES_VALUES_WI;
-
-  PROCEDURE INS_ATTRIBUTES_VALUES
-    (
-     in_DOCUMENT_ID            IN ARCH.ATTRIBUTES_VALUES.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.ATTRIBUTES_VALUES.COPY_ID%TYPE
-    ,in_STRING_VALUE           IN ARCH.ATTRIBUTES_VALUES.STRING_VALUE%TYPE
-    ,in_DECIMAL_VALUE          IN ARCH.ATTRIBUTES_VALUES.DECIMAL_VALUE%TYPE
-    ,in_INT_VALUE              IN ARCH.ATTRIBUTES_VALUES.INT_VALUE%TYPE
-    ,in_DATE_VALUE             IN ARCH.ATTRIBUTES_VALUES.DATE_VALUE%TYPE
-    ,in_BOOLEAN_VALUE          IN ARCH.ATTRIBUTES_VALUES.BOOLEAN_VALUE%TYPE
-    ,in_REFERENCE_VALUE        IN ARCH.ATTRIBUTES_VALUES.REFERENCE_VALUE%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.ATTRIBUTES_VALUES.ATTRIBUTE_ID%TYPE
-    ) IS
-  BEGIN
-    INS_ATTRIBUTES_VALUES_WI(
-     ATTRIBUTES_VALUES_SEQ.NEXTVAL
-       ,in_DOCUMENT_ID
-      ,in_COPY_ID
-      ,in_STRING_VALUE
-      ,in_DECIMAL_VALUE
-      ,in_INT_VALUE
-      ,in_DATE_VALUE
-      ,in_BOOLEAN_VALUE
-      ,in_REFERENCE_VALUE
-      ,in_ATTRIBUTE_ID
-      );
-  END INS_ATTRIBUTES_VALUES;
-
-  PROCEDURE UPD_ATTRIBUTES_VALUES
-    (
-     in_ID                     IN ARCH.ATTRIBUTES_VALUES.ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.ATTRIBUTES_VALUES.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.ATTRIBUTES_VALUES.COPY_ID%TYPE
-    ,in_STRING_VALUE           IN ARCH.ATTRIBUTES_VALUES.STRING_VALUE%TYPE
-    ,in_DECIMAL_VALUE          IN ARCH.ATTRIBUTES_VALUES.DECIMAL_VALUE%TYPE
-    ,in_INT_VALUE              IN ARCH.ATTRIBUTES_VALUES.INT_VALUE%TYPE
-    ,in_DATE_VALUE             IN ARCH.ATTRIBUTES_VALUES.DATE_VALUE%TYPE
-    ,in_BOOLEAN_VALUE          IN ARCH.ATTRIBUTES_VALUES.BOOLEAN_VALUE%TYPE
-    ,in_REFERENCE_VALUE        IN ARCH.ATTRIBUTES_VALUES.REFERENCE_VALUE%TYPE
-    ,in_ATTRIBUTE_ID           IN ARCH.ATTRIBUTES_VALUES.ATTRIBUTE_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.ATTRIBUTES_VALUES
-    SET 
-        DOCUMENT_ID              = in_DOCUMENT_ID
-       ,COPY_ID                  = in_COPY_ID
-       ,STRING_VALUE             = in_STRING_VALUE
-       ,DECIMAL_VALUE            = in_DECIMAL_VALUE
-       ,INT_VALUE                = in_INT_VALUE
-       ,DATE_VALUE               = in_DATE_VALUE
-       ,BOOLEAN_VALUE            = in_BOOLEAN_VALUE
-       ,REFERENCE_VALUE          = in_REFERENCE_VALUE
-       ,ATTRIBUTE_ID             = in_ATTRIBUTE_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_ATTRIBUTES_VALUES;
-
-  PROCEDURE DEL_ATTRIBUTES_VALUES
-    (
-     in_ID                     IN ARCH.ATTRIBUTES_VALUES.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.ATTRIBUTES_VALUES
-    WHERE
-        ID                       = in_ID;
-  END DEL_ATTRIBUTES_VALUES;
-
-END DML_ATTRIBUTES_VALUES;
-/
-
---
--- DML_DOCUMENT_HISTORY  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_DOCUMENT_HISTORY IS
-
-  PROCEDURE INS_DOCUMENT_HISTORY_wi
-    (
-    in_ID                     IN ARCH.DOCUMENT_HISTORY.ID%TYPE,
-     in_DOCUMENT_ID            IN ARCH.DOCUMENT_HISTORY.DOCUMENT_ID%TYPE
-    ,in_USER_ID                IN ARCH.DOCUMENT_HISTORY.USER_ID%TYPE
-    ,in_COPY_ID                IN ARCH.DOCUMENT_HISTORY.COPY_ID%TYPE
-    ,in_ACTION                 IN ARCH.DOCUMENT_HISTORY.ACTION%TYPE
-    ,in_ACTION_DATE            IN ARCH.DOCUMENT_HISTORY.ACTION_DATE%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.DOCUMENT_HISTORY
-      (id,
-       DOCUMENT_ID
-      ,USER_ID
-      ,COPY_ID
-      ,ACTION
-      ,ACTION_DATE
-      )
-    VALUES
-      (in_id,
-       in_DOCUMENT_ID
-      ,in_USER_ID
-      ,in_COPY_ID
-      ,in_ACTION
-      ,in_ACTION_DATE
-      );
-  END INS_DOCUMENT_HISTORY_wi;
-
-  PROCEDURE INS_DOCUMENT_HISTORY
-    (
-     in_DOCUMENT_ID            IN ARCH.DOCUMENT_HISTORY.DOCUMENT_ID%TYPE
-    ,in_USER_ID                IN ARCH.DOCUMENT_HISTORY.USER_ID%TYPE
-    ,in_COPY_ID                IN ARCH.DOCUMENT_HISTORY.COPY_ID%TYPE
-    ,in_ACTION                 IN ARCH.DOCUMENT_HISTORY.ACTION%TYPE
-    ,in_ACTION_DATE            IN ARCH.DOCUMENT_HISTORY.ACTION_DATE%TYPE
-    ) IS
-  BEGIN
-    INS_DOCUMENT_HISTORY_wi(
-     DOCUMENT_HISTORY_SEQ.NEXTVAL,
-       in_DOCUMENT_ID
-      ,in_USER_ID
-      ,in_COPY_ID
-      ,in_ACTION
-      ,in_ACTION_DATE
-      );
-  END INS_DOCUMENT_HISTORY;
-
-  PROCEDURE UPD_DOCUMENT_HISTORY
-    (
-     in_ID                     IN ARCH.DOCUMENT_HISTORY.ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.DOCUMENT_HISTORY.DOCUMENT_ID%TYPE
-    ,in_USER_ID                IN ARCH.DOCUMENT_HISTORY.USER_ID%TYPE
-    ,in_COPY_ID                IN ARCH.DOCUMENT_HISTORY.COPY_ID%TYPE
-    ,in_ACTION                 IN ARCH.DOCUMENT_HISTORY.ACTION%TYPE
-    ,in_ACTION_DATE            IN ARCH.DOCUMENT_HISTORY.ACTION_DATE%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.DOCUMENT_HISTORY
-    SET 
-        DOCUMENT_ID              = in_DOCUMENT_ID
-       ,USER_ID                  = in_USER_ID
-       ,COPY_ID                  = in_COPY_ID
-       ,ACTION                   = in_ACTION
-       ,ACTION_DATE              = in_ACTION_DATE
-    WHERE
-        ID                       = in_ID;
-  END UPD_DOCUMENT_HISTORY;
-
-  PROCEDURE DEL_DOCUMENT_HISTORY
-    (
-     in_ID                     IN ARCH.DOCUMENT_HISTORY.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.DOCUMENT_HISTORY
-    WHERE
-        ID                       = in_ID;
-  END DEL_DOCUMENT_HISTORY;
-
-END DML_DOCUMENT_HISTORY;
-/
-
---
--- DML_MOVEMENT  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_MOVEMENT IS
-
-  PROCEDURE INS_MOVEMENT_WI
-    (
-     in_ID                     IN ARCH.MOVEMENT.ID%TYPE
-    ,in_COPY_ID                IN ARCH.MOVEMENT.COPY_ID%TYPE
-    ,in_CLINET_ID              IN ARCH.MOVEMENT.CLINET_ID%TYPE
-    ,in_MOVEMENT_DATE          IN ARCH.MOVEMENT.MOVEMENT_DATE%TYPE
-    ,in_PLAN_RETURN_DATE       IN ARCH.MOVEMENT.PLAN_RETURN_DATE%TYPE
-    ,in_ACTUAL_RETURN_DATE     IN ARCH.MOVEMENT.ACTUAL_RETURN_DATE%TYPE
-    ,in_TAKE_DESCRIPTION       IN ARCH.MOVEMENT.TAKE_DESCRIPTION%TYPE
-    ,in_RETURN_DESCRIPTION     IN ARCH.MOVEMENT.RETURN_DESCRIPTION%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.MOVEMENT.DOCUMENT_ID%TYPE
-    ,in_TAKE_ADDRESS_ID        IN ARCH.MOVEMENT.TAKE_ADDRESS_ID%TYPE
-    ,in_RETURN_ADDRESS_ID      IN ARCH.MOVEMENT.RETURN_ADDRESS_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.MOVEMENT
-      (
-       ID
-      ,COPY_ID
-      ,CLINET_ID
-      ,MOVEMENT_DATE
-      ,PLAN_RETURN_DATE
-      ,ACTUAL_RETURN_DATE
-      ,TAKE_DESCRIPTION
-      ,RETURN_DESCRIPTION
-      ,DOCUMENT_ID
-      ,TAKE_ADDRESS_ID
-      ,RETURN_ADDRESS_ID
-      )
-    VALUES
-      (
-       in_ID
-      ,in_COPY_ID
-      ,in_CLINET_ID
-      ,in_MOVEMENT_DATE
-      ,in_PLAN_RETURN_DATE
-      ,in_ACTUAL_RETURN_DATE
-      ,in_TAKE_DESCRIPTION
-      ,in_RETURN_DESCRIPTION
-      ,in_DOCUMENT_ID
-      ,in_TAKE_ADDRESS_ID
-      ,in_RETURN_ADDRESS_ID
-      );
-  END INS_MOVEMENT_WI;
-
-  PROCEDURE INS_MOVEMENT
-    (
-     in_COPY_ID                IN ARCH.MOVEMENT.COPY_ID%TYPE
-    ,in_CLINET_ID              IN ARCH.MOVEMENT.CLINET_ID%TYPE
-    ,in_MOVEMENT_DATE          IN ARCH.MOVEMENT.MOVEMENT_DATE%TYPE
-    ,in_PLAN_RETURN_DATE       IN ARCH.MOVEMENT.PLAN_RETURN_DATE%TYPE
-    ,in_ACTUAL_RETURN_DATE     IN ARCH.MOVEMENT.ACTUAL_RETURN_DATE%TYPE
-    ,in_TAKE_DESCRIPTION       IN ARCH.MOVEMENT.TAKE_DESCRIPTION%TYPE
-    ,in_RETURN_DESCRIPTION     IN ARCH.MOVEMENT.RETURN_DESCRIPTION%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.MOVEMENT.DOCUMENT_ID%TYPE
-    ,in_TAKE_ADDRESS_ID        IN ARCH.MOVEMENT.TAKE_ADDRESS_ID%TYPE
-    ,in_RETURN_ADDRESS_ID      IN ARCH.MOVEMENT.RETURN_ADDRESS_ID%TYPE
-    ) IS
-  BEGIN
-    INS_MOVEMENT_WI(
-       MOVEMENT_SEQ.NEXTVAL
-      ,in_COPY_ID
-      ,in_CLINET_ID
-      ,in_MOVEMENT_DATE
-      ,in_PLAN_RETURN_DATE
-      ,in_ACTUAL_RETURN_DATE
-      ,in_TAKE_DESCRIPTION
-      ,in_RETURN_DESCRIPTION
-      ,in_DOCUMENT_ID
-      ,in_TAKE_ADDRESS_ID
-      ,in_RETURN_ADDRESS_ID
-      );
-  END INS_MOVEMENT;
-
-  PROCEDURE UPD_MOVEMENT
-    (
-     in_ID                     IN ARCH.MOVEMENT.ID%TYPE
-    ,in_COPY_ID                IN ARCH.MOVEMENT.COPY_ID%TYPE
-    ,in_CLINET_ID              IN ARCH.MOVEMENT.CLINET_ID%TYPE
-    ,in_MOVEMENT_DATE          IN ARCH.MOVEMENT.MOVEMENT_DATE%TYPE
-    ,in_PLAN_RETURN_DATE       IN ARCH.MOVEMENT.PLAN_RETURN_DATE%TYPE
-    ,in_ACTUAL_RETURN_DATE     IN ARCH.MOVEMENT.ACTUAL_RETURN_DATE%TYPE
-    ,in_TAKE_DESCRIPTION       IN ARCH.MOVEMENT.TAKE_DESCRIPTION%TYPE
-    ,in_RETURN_DESCRIPTION     IN ARCH.MOVEMENT.RETURN_DESCRIPTION%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.MOVEMENT.DOCUMENT_ID%TYPE
-    ,in_TAKE_ADDRESS_ID        IN ARCH.MOVEMENT.TAKE_ADDRESS_ID%TYPE
-    ,in_RETURN_ADDRESS_ID      IN ARCH.MOVEMENT.RETURN_ADDRESS_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.MOVEMENT
-    SET 
-        COPY_ID                  = in_COPY_ID
-       ,CLINET_ID                = in_CLINET_ID
-       ,MOVEMENT_DATE            = in_MOVEMENT_DATE
-       ,PLAN_RETURN_DATE         = in_PLAN_RETURN_DATE
-       ,ACTUAL_RETURN_DATE       = in_ACTUAL_RETURN_DATE
-       ,TAKE_DESCRIPTION         = in_TAKE_DESCRIPTION
-       ,RETURN_DESCRIPTION       = in_RETURN_DESCRIPTION
-       ,DOCUMENT_ID              = in_DOCUMENT_ID
-       ,TAKE_ADDRESS_ID          = in_TAKE_ADDRESS_ID
-       ,RETURN_ADDRESS_ID        = in_RETURN_ADDRESS_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_MOVEMENT;
-
-  PROCEDURE DEL_MOVEMENT
-    (
-     in_ID                     IN ARCH.MOVEMENT.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.MOVEMENT
-    WHERE
-        ID                       = in_ID;
-  END DEL_MOVEMENT;
-
-END DML_MOVEMENT;
-/
-
---
--- DML_ROLE_DOCUMENT_ACCESS  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_ROLE_DOCUMENT_ACCESS IS
-
-  PROCEDURE INS_ROLE_DOCUMENT_ACCESS_WI
-    (
-     in_ID                    IN ARCH.ROLE_DOCUMENT_ACCESS.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.ROLE_DOCUMENT_ACCESS.ROLE_ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.ROLE_DOCUMENT_ACCESS.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.ROLE_DOCUMENT_ACCESS.COPY_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.ROLE_DOCUMENT_ACCESS
-      (
-       ID
-      ,ROLE_ID
-      ,DOCUMENT_ID
-      ,COPY_ID
-      )
-    VALUES
-      (
-       in_ID
-      ,in_ROLE_ID
-      ,in_DOCUMENT_ID
-      ,in_COPY_ID
-      );
-  END INS_ROLE_DOCUMENT_ACCESS_WI;
-
-PROCEDURE INS_ROLE_DOCUMENT_ACCESS
-    (
-     in_ROLE_ID                IN ARCH.ROLE_DOCUMENT_ACCESS.ROLE_ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.ROLE_DOCUMENT_ACCESS.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.ROLE_DOCUMENT_ACCESS.COPY_ID%TYPE
-    ) IS
-  BEGIN
-    INS_ROLE_DOCUMENT_ACCESS_WI(
-       ROLE_DOCUMENT_ACCESS_SEQ.NEXTVAL
-      ,in_ROLE_ID
-      ,in_DOCUMENT_ID
-      ,in_COPY_ID
-      );
-  END INS_ROLE_DOCUMENT_ACCESS;
-
-  PROCEDURE UPD_ROLE_DOCUMENT_ACCESS
-    (
-     in_ID                     IN ARCH.ROLE_DOCUMENT_ACCESS.ID%TYPE
-    ,in_ROLE_ID                IN ARCH.ROLE_DOCUMENT_ACCESS.ROLE_ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.ROLE_DOCUMENT_ACCESS.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.ROLE_DOCUMENT_ACCESS.COPY_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.ROLE_DOCUMENT_ACCESS
-    SET 
-        ROLE_ID                  = in_ROLE_ID
-       ,DOCUMENT_ID              = in_DOCUMENT_ID
-       ,COPY_ID                  = in_COPY_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_ROLE_DOCUMENT_ACCESS;
-
-  PROCEDURE DEL_ROLE_DOCUMENT_ACCESS
-    (
-     in_ID                     IN ARCH.ROLE_DOCUMENT_ACCESS.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.ROLE_DOCUMENT_ACCESS
-    WHERE
-        ID                       = in_ID;
-  END DEL_ROLE_DOCUMENT_ACCESS;
-
-END DML_ROLE_DOCUMENT_ACCESS;
-/
-
---
--- DML_USER_DOCUMENT_ACCESS  (Package Body) 
---
-CREATE OR REPLACE PACKAGE BODY ARCH.DML_USER_DOCUMENT_ACCESS IS
-
-  PROCEDURE INS_USER_DOCUMENT_ACCESS_WI
-    (
-     in_ID                     IN ARCH.USER_DOCUMENT_ACCESS.ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_DOCUMENT_ACCESS.USER_ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.USER_DOCUMENT_ACCESS.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.USER_DOCUMENT_ACCESS.COPY_ID%TYPE
-    ) IS
-  BEGIN
-    INSERT INTO ARCH.USER_DOCUMENT_ACCESS
-      (
-       ID
-      ,USER_ID
-      ,DOCUMENT_ID
-      ,COPY_ID
-      )
-    VALUES
-      (
-       in_ID
-      ,in_USER_ID
-      ,in_DOCUMENT_ID
-      ,in_COPY_ID
-      );
-  END INS_USER_DOCUMENT_ACCESS_WI;
-
-   PROCEDURE INS_USER_DOCUMENT_ACCESS
-    (
-     in_USER_ID                IN ARCH.USER_DOCUMENT_ACCESS.USER_ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.USER_DOCUMENT_ACCESS.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.USER_DOCUMENT_ACCESS.COPY_ID%TYPE
-    ) IS
-  BEGIN
-    INS_USER_DOCUMENT_ACCESS_WI(
-       USER_DOCUMENT_ACCESS_SEQ.NEXTVAL
-      ,in_USER_ID
-      ,in_DOCUMENT_ID
-      ,in_COPY_ID
-      );
-  END INS_USER_DOCUMENT_ACCESS;
- 
-
-  PROCEDURE UPD_USER_DOCUMENT_ACCESS
-    (
-     in_ID                     IN ARCH.USER_DOCUMENT_ACCESS.ID%TYPE
-    ,in_USER_ID                IN ARCH.USER_DOCUMENT_ACCESS.USER_ID%TYPE
-    ,in_DOCUMENT_ID            IN ARCH.USER_DOCUMENT_ACCESS.DOCUMENT_ID%TYPE
-    ,in_COPY_ID                IN ARCH.USER_DOCUMENT_ACCESS.COPY_ID%TYPE
-    ) IS
-  BEGIN
-    UPDATE ARCH.USER_DOCUMENT_ACCESS
-    SET 
-        USER_ID                  = in_USER_ID
-       ,DOCUMENT_ID              = in_DOCUMENT_ID
-       ,COPY_ID                  = in_COPY_ID
-    WHERE
-        ID                       = in_ID;
-  END UPD_USER_DOCUMENT_ACCESS;
-
-  PROCEDURE DEL_USER_DOCUMENT_ACCESS
-    (
-     in_ID                     IN ARCH.USER_DOCUMENT_ACCESS.ID%TYPE
-    ) IS
-  BEGIN
-    DELETE FROM ARCH.USER_DOCUMENT_ACCESS
-    WHERE
-        ID                       = in_ID;
-  END DEL_USER_DOCUMENT_ACCESS;
-
-END DML_USER_DOCUMENT_ACCESS;
-/
-
---
--- DOCUMENT_HISTORY_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.DOCUMENT_HISTORY_TRG 
-BEFORE INSERT ON ARCH.DOCUMENT_HISTORY 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT DOCUMENT_HISTORY_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- MOVEMENT_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.MOVEMENT_TRG 
-BEFORE INSERT ON ARCH.MOVEMENT 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT MOVEMENT_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- ROLE_DOCUMENT_ACCESS_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ROLE_DOCUMENT_ACCESS_TRG 
-BEFORE INSERT ON ARCH.ROLE_DOCUMENT_ACCESS 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT ROLE_DOCUMENT_ACCESS_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- USER_DOCUMENT_ACCESS_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.USER_DOCUMENT_ACCESS_TRG 
-BEFORE INSERT ON ARCH.USER_DOCUMENT_ACCESS 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT USER_DOCUMENT_ACCESS_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- ATTRIBUTES_VALUES_TRG  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ATTRIBUTES_VALUES_TRG 
-BEFORE INSERT ON ARCH.ATTRIBUTES_VALUES 
-FOR EACH ROW
-BEGIN
-  <<COLUMN_SEQUENCES>>
-  BEGIN
-    IF INSERTING AND :NEW.ID IS NULL THEN
-      SELECT ATTRIBUTES_VALUES_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
-    END IF;
-  END COLUMN_SEQUENCES;
-END;
-/
-
-
---
--- ATTRIBUTES_VALUES_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ATTRIBUTES_VALUES_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.ATTRIBUTES_VALUES
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END ATTRIBUTES_VALUES_AUD;
-/
-
-
---
--- DOCUMENT_HISTORY_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.DOCUMENT_HISTORY_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.DOCUMENT_HISTORY
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END DOCUMENT_HISTORY_AUD;
-/
-
-
---
--- MOVEMENT_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.MOVEMENT_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.MOVEMENT
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END MOVEMENT_AUD;
-/
-
-
---
--- ROLE_DOCUMENT_ACCESS_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.ROLE_DOCUMENT_ACCESS_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.ROLE_DOCUMENT_ACCESS
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END ROLE_DOCUMENT_ACCESS_AUD;
-/
-
-
---
--- USER_DOCUMENT_ACCESS_AUD  (Trigger) 
---
-CREATE OR REPLACE TRIGGER ARCH.USER_DOCUMENT_ACCESS_AUD
-BEFORE INSERT OR UPDATE
-ON ARCH.USER_DOCUMENT_ACCESS
-REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-DECLARE
-   AUD_USER_ID NUMBER;
-   AUD_TIME date;
-   AUD_OS_USER nvarchar2(500);
-   AUD_HOST nvarchar2(500);
-   AUD_APPLICATION nvarchar2(500);
-BEGIN
-    GET_AUDIT(AUD_USER_ID,AUD_TIME,AUD_OS_USER,AUD_HOST,AUD_APPLICATION);
-
-    if inserting then
-        :NEW.AUD_CREATE_USER_ID := AUD_USER_ID;
-        :NEW.AUD_CREATE_TIME := AUD_TIME;
-        :NEW.AUD_CREATE_OS_USER := AUD_OS_USER;
-        :NEW.AUD_CREATE_HOST := AUD_HOST;
-        :NEW.AUD_CREATE_APPLICATION := AUD_APPLICATION;
-    end if;    
-   
-   :NEW.AUD_MODIFY_USER_ID := AUD_USER_ID;   
-   :NEW.AUD_MODIFY_TIME := AUD_TIME;   
-   :NEW.AUD_MODIFY_OS_USER := AUD_OS_USER;   
-   :NEW.AUD_MODIFY_HOST := AUD_HOST;   
-   :NEW.AUD_MODIFY_APPLICATION := AUD_APPLICATION;
-   
-END USER_DOCUMENT_ACCESS_AUD;
-/
-
-
--- 
--- Non Foreign Key Constraints for Table USERS 
--- 
-ALTER TABLE ARCH.USERS ADD (
-  CONSTRAINT USERS_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.USERS_PK
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USERS ADD (
-  CONSTRAINT USERS_UK1
-  UNIQUE (NAME)
-  USING INDEX ARCH.USERS_UK1
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table REFERENCE_TYPES 
--- 
-ALTER TABLE ARCH.REFERENCE_TYPES ADD (
-  CONSTRAINT REFERENCE_TYPES_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.REFERENCE_TYPES_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table CLIENTS 
--- 
-ALTER TABLE ARCH.CLIENTS ADD (
-  CONSTRAINT CLIENTS_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.CLIENTS_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table ADDRESS_DICTIONARY 
--- 
-ALTER TABLE ARCH.ADDRESS_DICTIONARY ADD (
-  CONSTRAINT ADDRESS_DICTIONARY_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.ADDRESS_DICTIONARY_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table DOCUMENT_TYPES 
--- 
-ALTER TABLE ARCH.DOCUMENT_TYPES ADD (
-  CONSTRAINT DOCUMENT_TYPES_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.DOCUMENT_TYPES_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table ATTRIBUTES 
--- 
-ALTER TABLE ARCH.ATTRIBUTES ADD (
-  CONSTRAINT ATTRIBUTES_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.ATTRIBUTES_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table DOCUMENT_TYPE_ATTRIBUTES 
--- 
-ALTER TABLE ARCH.DOCUMENT_TYPE_ATTRIBUTES ADD (
-  CONSTRAINT DOCUMENT_TYPE_ATTRIBUTES_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.DOCUMENT_TYPE_ATTRIBUTES_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table ROLES 
--- 
-ALTER TABLE ARCH.ROLES ADD (
-  CONSTRAINT ROLES_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.ROLES_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table REFERENCES 
--- 
-ALTER TABLE ARCH.REFERENCES ADD (
-  CONSTRAINT REFERENCES_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.REFERENCES_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table DOCUMENTS 
--- 
-ALTER TABLE ARCH.DOCUMENTS ADD (
-  CONSTRAINT DOCUMENTS_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.DOCUMENTS_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table ROLE_CLIENT_ACCESS 
--- 
-ALTER TABLE ARCH.ROLE_CLIENT_ACCESS ADD (
-  CONSTRAINT ROLE_CLIENT_ACCESS_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.ROLE_CLIENT_ACCESS_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table USER_CLIENT_ACCESS 
--- 
-ALTER TABLE ARCH.USER_CLIENT_ACCESS ADD (
-  CONSTRAINT USER_CLIENT_ACCESS_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.USER_CLIENT_ACCESS_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table COPY_TYPES 
--- 
-ALTER TABLE ARCH.COPY_TYPES ADD (
-  CONSTRAINT COPY_TYPES_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.COPY_TYPES_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table COPY_TYPE_ATTRIBUTES 
--- 
-ALTER TABLE ARCH.COPY_TYPE_ATTRIBUTES ADD (
-  CONSTRAINT COPY_TYPE_ATTRIBUTES_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.COPY_TYPE_ATTRIBUTES_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table USER_DOC_TYPE_ACCESS 
--- 
-ALTER TABLE ARCH.USER_DOC_TYPE_ACCESS ADD (
-  CONSTRAINT USER_DOCUMENT_TYPE_ACCESS_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.USER_DOCUMENT_TYPE_ACCESS_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table USER_ROLES 
--- 
-ALTER TABLE ARCH.USER_ROLES ADD (
-  CONSTRAINT USER_ROLES_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.USER_ROLES_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table ROLE_DOC_TYPE_ACCESS 
--- 
-ALTER TABLE ARCH.ROLE_DOC_TYPE_ACCESS ADD (
-  CONSTRAINT ROLE_DOCUMENT_TYPE_ACCESS_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.ROLE_DOCUMENT_TYPE_ACCESS_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table COPIES 
--- 
-ALTER TABLE ARCH.COPIES ADD (
-  CONSTRAINT COPIES_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.COPIES_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table FILES 
--- 
-ALTER TABLE ARCH.FILES ADD (
-  CONSTRAINT FILES_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.FILES_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table MOVEMENT 
--- 
-ALTER TABLE ARCH.MOVEMENT ADD (
-  CONSTRAINT MOVEMENT_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.MOVEMENT_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table ATTRIBUTES_VALUES 
--- 
-ALTER TABLE ARCH.ATTRIBUTES_VALUES ADD (
-  CONSTRAINT ATTRIBUTES_VALUES_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.ATTRIBUTES_VALUES_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table USER_DOCUMENT_ACCESS 
--- 
-ALTER TABLE ARCH.USER_DOCUMENT_ACCESS ADD (
-  CONSTRAINT USER_DOCUMENT_ACCESS_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.USER_DOCUMENT_ACCESS_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table ROLE_DOCUMENT_ACCESS 
--- 
-ALTER TABLE ARCH.ROLE_DOCUMENT_ACCESS ADD (
-  CONSTRAINT ROLE_DOCUMENT_ACCESS_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.ROLE_DOCUMENT_ACCESS_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Non Foreign Key Constraints for Table DOCUMENT_HISTORY 
--- 
-ALTER TABLE ARCH.DOCUMENT_HISTORY ADD (
-  CONSTRAINT DOCUMENT_HISTORY_PK
-  PRIMARY KEY
-  (ID)
-  USING INDEX ARCH.DOCUMENT_HISTORY_PK
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table USERS 
--- 
-ALTER TABLE ARCH.USERS ADD (
-  CONSTRAINT USERS_FK1 
-  FOREIGN KEY (AUD_CREATE_USER_NAME) 
-  REFERENCES ARCH.USERS (NAME)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USERS ADD (
-  CONSTRAINT USERS_FK2 
-  FOREIGN KEY (AUD_MODIFY_USER_NAME) 
-  REFERENCES ARCH.USERS (NAME)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table REFERENCE_TYPES 
--- 
-ALTER TABLE ARCH.REFERENCE_TYPES ADD (
-  CONSTRAINT REFERENCE_TYPES_FK1 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.REFERENCE_TYPES ADD (
-  CONSTRAINT REFERENCE_TYPES_FK2 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table CLIENTS 
--- 
-ALTER TABLE ARCH.CLIENTS ADD (
-  CONSTRAINT CLIENTS_FK1 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.CLIENTS ADD (
-  CONSTRAINT CLIENTS_FK2 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table ADDRESS_DICTIONARY 
--- 
-ALTER TABLE ARCH.ADDRESS_DICTIONARY ADD (
-  CONSTRAINT ADDRESS_DICTIONARY_FK2 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ADDRESS_DICTIONARY ADD (
-  CONSTRAINT ADDRESS_DICTIONARY_FK3 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ADDRESS_DICTIONARY ADD (
-  CONSTRAINT ADDRESS_DICTIONARY_FK1 
-  FOREIGN KEY (PARENT_ID) 
-  REFERENCES ARCH.ADDRESS_DICTIONARY (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table DOCUMENT_TYPES 
--- 
-ALTER TABLE ARCH.DOCUMENT_TYPES ADD (
-  CONSTRAINT DOCUMENT_TYPES_FK2 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.DOCUMENT_TYPES ADD (
-  CONSTRAINT DOCUMENT_TYPES_FK3 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.DOCUMENT_TYPES ADD (
-  CONSTRAINT DOCUMENT_TYPES_FK1 
-  FOREIGN KEY (PARENT_ID) 
-  REFERENCES ARCH.DOCUMENT_TYPES (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table ATTRIBUTES 
--- 
-ALTER TABLE ARCH.ATTRIBUTES ADD (
-  CONSTRAINT ATTRIBUTES_R01 
-  FOREIGN KEY (REFERENCE_TYPE_ID) 
-  REFERENCES ARCH.REFERENCE_TYPES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ATTRIBUTES ADD (
-  CONSTRAINT ATTRIBUTES_FK2 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ATTRIBUTES ADD (
-  CONSTRAINT ATTRIBUTES_FK3 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table DOCUMENT_TYPE_ATTRIBUTES 
--- 
-ALTER TABLE ARCH.DOCUMENT_TYPE_ATTRIBUTES ADD (
-  CONSTRAINT DOCUMENT_TYPE_ATTRIBUTES_FK3 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.DOCUMENT_TYPE_ATTRIBUTES ADD (
-  CONSTRAINT DOCUMENT_TYPE_ATTRIBUTES_FK4 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.DOCUMENT_TYPE_ATTRIBUTES ADD (
-  CONSTRAINT DOCUMENT_TYPE_ATTRIBUTES_FK2 
-  FOREIGN KEY (ATTRIBUTE_ID) 
-  REFERENCES ARCH.ATTRIBUTES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.DOCUMENT_TYPE_ATTRIBUTES ADD (
-  CONSTRAINT DOCUMENT_TYPE_ATTRIBUTES_FK1 
-  FOREIGN KEY (DOCUMENT_TYPE_ID) 
-  REFERENCES ARCH.DOCUMENT_TYPES (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table ROLES 
--- 
-ALTER TABLE ARCH.ROLES ADD (
-  CONSTRAINT ROLES_FK1 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ROLES ADD (
-  CONSTRAINT ROLES_FK2 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table REFERENCES 
--- 
-ALTER TABLE ARCH.REFERENCES ADD (
-  CONSTRAINT REFERENCES_FK1 
-  FOREIGN KEY (REFENCE_TYPE_ID) 
-  REFERENCES ARCH.REFERENCE_TYPES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.REFERENCES ADD (
-  CONSTRAINT REFERENCES_FK2 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.REFERENCES ADD (
-  CONSTRAINT REFERENCES_FK3 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table DOCUMENTS 
--- 
-ALTER TABLE ARCH.DOCUMENTS ADD (
-  CONSTRAINT DOCUMENTS_FK4 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.DOCUMENTS ADD (
-  CONSTRAINT DOCUMENTS_FK5 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.DOCUMENTS ADD (
-  CONSTRAINT DOCUMENTS_FK3 
-  FOREIGN KEY (DOCUMENT_TYPE_ID) 
-  REFERENCES ARCH.DOCUMENT_TYPES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.DOCUMENTS ADD (
-  CONSTRAINT DOCUMENTS_FK2 
-  FOREIGN KEY (ADDRESS_ID) 
-  REFERENCES ARCH.ADDRESS_DICTIONARY (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.DOCUMENTS ADD (
-  CONSTRAINT DOCUMENTS_FK1 
-  FOREIGN KEY (CLIENT_ID) 
-  REFERENCES ARCH.CLIENTS (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table ROLE_CLIENT_ACCESS 
--- 
-ALTER TABLE ARCH.ROLE_CLIENT_ACCESS ADD (
-  CONSTRAINT ROLE_CLIENT_ACCESS_FK3 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ROLE_CLIENT_ACCESS ADD (
-  CONSTRAINT ROLE_CLIENT_ACCESS_FK4 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ROLE_CLIENT_ACCESS ADD (
-  CONSTRAINT ROLE_CLIENT_ACCESS_FK2 
-  FOREIGN KEY (ROLE_ID) 
-  REFERENCES ARCH.ROLES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ROLE_CLIENT_ACCESS ADD (
-  CONSTRAINT ROLE_CLIENT_ACCESS_FK1 
-  FOREIGN KEY (CLIENT_ID) 
-  REFERENCES ARCH.CLIENTS (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table USER_CLIENT_ACCESS 
--- 
-ALTER TABLE ARCH.USER_CLIENT_ACCESS ADD (
-  CONSTRAINT USER_CLIENT_ACCESS_FK2 
-  FOREIGN KEY (USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_CLIENT_ACCESS ADD (
-  CONSTRAINT USER_CLIENT_ACCESS_FK3 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_CLIENT_ACCESS ADD (
-  CONSTRAINT USER_CLIENT_ACCESS_FK4 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_CLIENT_ACCESS ADD (
-  CONSTRAINT USER_CLIENT_ACCESS_FK1 
-  FOREIGN KEY (CLIENT_ID) 
-  REFERENCES ARCH.CLIENTS (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table COPY_TYPES 
--- 
-ALTER TABLE ARCH.COPY_TYPES ADD (
-  CONSTRAINT COPY_TYPES_FK2 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.COPY_TYPES ADD (
-  CONSTRAINT COPY_TYPES_FK3 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.COPY_TYPES ADD (
-  CONSTRAINT COPY_TYPES_FK1 
-  FOREIGN KEY (DOCUMENT_TYPE_ID) 
-  REFERENCES ARCH.DOCUMENT_TYPES (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table COPY_TYPE_ATTRIBUTES 
--- 
-ALTER TABLE ARCH.COPY_TYPE_ATTRIBUTES ADD (
-  CONSTRAINT COPY_TYPE_ATTRIBUTES_FK3 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.COPY_TYPE_ATTRIBUTES ADD (
-  CONSTRAINT COPY_TYPE_ATTRIBUTES_FK4 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.COPY_TYPE_ATTRIBUTES ADD (
-  CONSTRAINT COPY_TYPE_ATTRIBUTES_FK2 
-  FOREIGN KEY (ATTRIBUTE_ID) 
-  REFERENCES ARCH.ATTRIBUTES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.COPY_TYPE_ATTRIBUTES ADD (
-  CONSTRAINT COPY_TYPE_ATTRIBUTES_FK1 
-  FOREIGN KEY (COPY_TYPE_ID) 
-  REFERENCES ARCH.COPY_TYPES (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table USER_DOC_TYPE_ACCESS 
--- 
-ALTER TABLE ARCH.USER_DOC_TYPE_ACCESS ADD (
-  CONSTRAINT USER_DOCUMENT_TYPE_ACCESS_FK3 
-  FOREIGN KEY (USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_DOC_TYPE_ACCESS ADD (
-  CONSTRAINT USER_DOCUMENT_TYPE_ACCESS_FK4 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_DOC_TYPE_ACCESS ADD (
-  CONSTRAINT USER_DOCUMENT_TYPE_ACCESS_FK5 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_DOC_TYPE_ACCESS ADD (
-  CONSTRAINT USER_DOCUMENT_TYPE_ACCESS_FK2 
-  FOREIGN KEY (DOCUMENT_TYPE_ID) 
-  REFERENCES ARCH.DOCUMENT_TYPES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_DOC_TYPE_ACCESS ADD (
-  CONSTRAINT USER_DOCUMENT_TYPE_ACCESS_FK1 
-  FOREIGN KEY (COPY_TYPE_ID) 
-  REFERENCES ARCH.COPY_TYPES (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table USER_ROLES 
--- 
-ALTER TABLE ARCH.USER_ROLES ADD (
-  CONSTRAINT USER_ROLES_FK2 
-  FOREIGN KEY (USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_ROLES ADD (
-  CONSTRAINT USER_ROLES_FK3 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_ROLES ADD (
-  CONSTRAINT USER_ROLES_FK4 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_ROLES ADD (
-  CONSTRAINT USER_ROLES_FK1 
-  FOREIGN KEY (ROLE_ID) 
-  REFERENCES ARCH.ROLES (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table ROLE_DOC_TYPE_ACCESS 
--- 
-ALTER TABLE ARCH.ROLE_DOC_TYPE_ACCESS ADD (
-  CONSTRAINT ROLE_DOCUMENT_TYPE_ACCESS_FK4 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ROLE_DOC_TYPE_ACCESS ADD (
-  CONSTRAINT ROLE_DOCUMENT_TYPE_ACCESS_FK5 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ROLE_DOC_TYPE_ACCESS ADD (
-  CONSTRAINT ROLE_DOCUMENT_TYPE_ACCESS_FK3 
-  FOREIGN KEY (ROLE_ID) 
-  REFERENCES ARCH.ROLES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ROLE_DOC_TYPE_ACCESS ADD (
-  CONSTRAINT ROLE_DOCUMENT_TYPE_ACCESS_FK1 
-  FOREIGN KEY (DOCUMENT_TYPE_ID) 
-  REFERENCES ARCH.DOCUMENT_TYPES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ROLE_DOC_TYPE_ACCESS ADD (
-  CONSTRAINT ROLE_DOCUMENT_TYPE_ACCESS_FK2 
-  FOREIGN KEY (COPY_TYPE_ID) 
-  REFERENCES ARCH.COPY_TYPES (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table COPIES 
--- 
-ALTER TABLE ARCH.COPIES ADD (
-  CONSTRAINT COPIES_FK2 
-  FOREIGN KEY (DOCUMENT_ID) 
-  REFERENCES ARCH.DOCUMENTS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.COPIES ADD (
-  CONSTRAINT COPIES_FK3 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.COPIES ADD (
-  CONSTRAINT COPIES_FK4 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.COPIES ADD (
-  CONSTRAINT COPIES_FK1 
-  FOREIGN KEY (COPY_TYPE_ID) 
-  REFERENCES ARCH.COPY_TYPES (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table FILES 
--- 
-ALTER TABLE ARCH.FILES ADD (
-  CONSTRAINT FILES_FK2 
-  FOREIGN KEY (COPY_ID) 
-  REFERENCES ARCH.COPIES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.FILES ADD (
-  CONSTRAINT FILES_FK3 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.FILES ADD (
-  CONSTRAINT FILES_FK4 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table MOVEMENT 
--- 
-ALTER TABLE ARCH.MOVEMENT ADD (
-  CONSTRAINT MOVEMENT_FK2 
-  FOREIGN KEY (COPY_ID) 
-  REFERENCES ARCH.COPIES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.MOVEMENT ADD (
-  CONSTRAINT MOVEMENT_FK3 
-  FOREIGN KEY (DOCUMENT_ID) 
-  REFERENCES ARCH.DOCUMENTS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.MOVEMENT ADD (
-  CONSTRAINT MOVEMENT_FK6 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.MOVEMENT ADD (
-  CONSTRAINT MOVEMENT_FK7 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.MOVEMENT ADD (
-  CONSTRAINT MOVEMENT_FK4 
-  FOREIGN KEY (TAKE_ADDRESS_ID) 
-  REFERENCES ARCH.ADDRESS_DICTIONARY (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.MOVEMENT ADD (
-  CONSTRAINT MOVEMENT_FK5 
-  FOREIGN KEY (RETURN_ADDRESS_ID) 
-  REFERENCES ARCH.ADDRESS_DICTIONARY (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.MOVEMENT ADD (
-  CONSTRAINT MOVEMENT_FK1 
-  FOREIGN KEY (CLINET_ID) 
-  REFERENCES ARCH.CLIENTS (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table ATTRIBUTES_VALUES 
--- 
-ALTER TABLE ARCH.ATTRIBUTES_VALUES ADD (
-  CONSTRAINT ATTRIBUTES_VALUES_FK2 
-  FOREIGN KEY (COPY_ID) 
-  REFERENCES ARCH.COPIES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ATTRIBUTES_VALUES ADD (
-  CONSTRAINT ATTRIBUTES_VALUES_FK3 
-  FOREIGN KEY (DOCUMENT_ID) 
-  REFERENCES ARCH.DOCUMENTS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ATTRIBUTES_VALUES ADD (
-  CONSTRAINT ATTRIBUTES_VALUES_FK4 
-  FOREIGN KEY (REFERENCE_VALUE) 
-  REFERENCES ARCH.REFERENCES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ATTRIBUTES_VALUES ADD (
-  CONSTRAINT ATTRIBUTES_VALUES_FK5 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ATTRIBUTES_VALUES ADD (
-  CONSTRAINT ATTRIBUTES_VALUES_FK6 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ATTRIBUTES_VALUES ADD (
-  CONSTRAINT ATTRIBUTES_VALUES_FK1 
-  FOREIGN KEY (ATTRIBUTE_ID) 
-  REFERENCES ARCH.ATTRIBUTES (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table USER_DOCUMENT_ACCESS 
--- 
-ALTER TABLE ARCH.USER_DOCUMENT_ACCESS ADD (
-  CONSTRAINT USER_DOCUMENT_ACCESS_FK1 
-  FOREIGN KEY (COPY_ID) 
-  REFERENCES ARCH.COPIES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_DOCUMENT_ACCESS ADD (
-  CONSTRAINT USER_DOCUMENT_ACCESS_FK2 
-  FOREIGN KEY (DOCUMENT_ID) 
-  REFERENCES ARCH.DOCUMENTS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_DOCUMENT_ACCESS ADD (
-  CONSTRAINT USER_DOCUMENT_ACCESS_FK3 
-  FOREIGN KEY (USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_DOCUMENT_ACCESS ADD (
-  CONSTRAINT USER_DOCUMENT_ACCESS_FK4 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.USER_DOCUMENT_ACCESS ADD (
-  CONSTRAINT USER_DOCUMENT_ACCESS_FK5 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table ROLE_DOCUMENT_ACCESS 
--- 
-ALTER TABLE ARCH.ROLE_DOCUMENT_ACCESS ADD (
-  CONSTRAINT ROLE_DOCUMENT_ACCESS_FK1 
-  FOREIGN KEY (COPY_ID) 
-  REFERENCES ARCH.COPIES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ROLE_DOCUMENT_ACCESS ADD (
-  CONSTRAINT ROLE_DOCUMENT_ACCESS_FK2 
-  FOREIGN KEY (DOCUMENT_ID) 
-  REFERENCES ARCH.DOCUMENTS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ROLE_DOCUMENT_ACCESS ADD (
-  CONSTRAINT ROLE_DOCUMENT_ACCESS_FK4 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ROLE_DOCUMENT_ACCESS ADD (
-  CONSTRAINT ROLE_DOCUMENT_ACCESS_FK5 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.ROLE_DOCUMENT_ACCESS ADD (
-  CONSTRAINT ROLE_DOCUMENT_ACCESS_FK3 
-  FOREIGN KEY (ROLE_ID) 
-  REFERENCES ARCH.ROLES (ID)
-  ENABLE VALIDATE);
-
-
--- 
--- Foreign Key Constraints for Table DOCUMENT_HISTORY 
--- 
-ALTER TABLE ARCH.DOCUMENT_HISTORY ADD (
-  CONSTRAINT DOCUMENT_HISTORY_FK2 
-  FOREIGN KEY (COPY_ID) 
-  REFERENCES ARCH.COPIES (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.DOCUMENT_HISTORY ADD (
-  CONSTRAINT DOCUMENT_HISTORY_FK1 
-  FOREIGN KEY (DOCUMENT_ID) 
-  REFERENCES ARCH.DOCUMENTS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.DOCUMENT_HISTORY ADD (
-  CONSTRAINT DOCUMENT_HISTORY_FK3 
-  FOREIGN KEY (USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.DOCUMENT_HISTORY ADD (
-  CONSTRAINT DOCUMENT_HISTORY_FK4 
-  FOREIGN KEY (AUD_CREATE_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-ALTER TABLE ARCH.DOCUMENT_HISTORY ADD (
-  CONSTRAINT DOCUMENT_HISTORY_FK5 
-  FOREIGN KEY (AUD_MODIFY_USER_ID) 
-  REFERENCES ARCH.USERS (ID)
-  ENABLE VALIDATE);
-
-
-GRANT READ, WRITE ON DIRECTORY DATA_PUMP_DIR TO EXP_FULL_DATABASE;
-
-GRANT READ, WRITE ON DIRECTORY DATA_PUMP_DIR TO IMP_FULL_DATABASE;
+SHOW ERRORS;

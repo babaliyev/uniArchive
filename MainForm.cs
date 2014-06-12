@@ -114,6 +114,8 @@ namespace UniArchive
             {
                 searchManager = new UniArchive.search.SearchManager();
                 searchManager.Tag = caption;
+                searchManager.OnDocumentClick += OpenDocument;
+                searchManager.OnCopyClick += OpenCopy;
             }
 
             searchManager.loadData();

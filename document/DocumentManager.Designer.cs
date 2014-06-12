@@ -57,6 +57,7 @@
             this.colNAME = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDESCRIPTION = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.attributesEditor1 = new UniArchive.attributes.AttributesEditor();
             this.clientSearchLookUpEdit = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -80,7 +81,6 @@
             this.directoriesTableAdapter = new UniArchive.FullDataSetTableAdapters.DIRECTORIESTableAdapter();
             this.addressDictionaryTableAdapter = new UniArchive.FullDataSetTableAdapters.ADDRESS_DICTIONARYTableAdapter();
             this.documentsTableAdapter = new UniArchive.FullDataSetTableAdapters.DOCUMENTSTableAdapter();
-            this.attributesEditor1 = new UniArchive.attributes.AttributesEditor();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
@@ -166,12 +166,14 @@
             this.giveGarButtonItem.Caption = "Başqa adama vermək";
             this.giveGarButtonItem.Id = 2;
             this.giveGarButtonItem.Name = "giveGarButtonItem";
+            this.giveGarButtonItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
             // returnBarButtonItem
             // 
             this.returnBarButtonItem.Caption = "Geri qaytarmaq";
             this.returnBarButtonItem.Id = 3;
             this.returnBarButtonItem.Name = "returnBarButtonItem";
+            this.returnBarButtonItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
             // showFilesBarButtonItem
             // 
@@ -385,6 +387,16 @@
             this.groupControl3.TabIndex = 0;
             this.groupControl3.Text = "Xassələri";
             // 
+            // attributesEditor1
+            // 
+            this.attributesEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.attributesEditor1.Editable = true;
+            this.attributesEditor1.Location = new System.Drawing.Point(2, 21);
+            this.attributesEditor1.Name = "attributesEditor1";
+            this.attributesEditor1.ReadOnly = false;
+            this.attributesEditor1.Size = new System.Drawing.Size(255, 148);
+            this.attributesEditor1.TabIndex = 0;
+            // 
             // clientSearchLookUpEdit
             // 
             this.clientSearchLookUpEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.documentsBindingSource, "CLIENT_ID", true));
@@ -542,12 +554,14 @@
             // xtraTabPage2
             // 
             this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.PageVisible = false;
             this.xtraTabPage2.Size = new System.Drawing.Size(801, 361);
             this.xtraTabPage2.Text = "Məxfilik";
             // 
             // xtraTabPage3
             // 
             this.xtraTabPage3.Name = "xtraTabPage3";
+            this.xtraTabPage3.PageVisible = false;
             this.xtraTabPage3.Size = new System.Drawing.Size(801, 361);
             this.xtraTabPage3.Text = "Tarix";
             // 
@@ -570,16 +584,6 @@
             // documentsTableAdapter
             // 
             this.documentsTableAdapter.ClearBeforeFill = true;
-            // 
-            // attributesEditor1
-            // 
-            this.attributesEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.attributesEditor1.Editable = true;
-            this.attributesEditor1.Location = new System.Drawing.Point(2, 21);
-            this.attributesEditor1.Name = "attributesEditor1";
-            this.attributesEditor1.ReadOnly = false;
-            this.attributesEditor1.Size = new System.Drawing.Size(255, 148);
-            this.attributesEditor1.TabIndex = 0;
             // 
             // DocumentManager
             // 

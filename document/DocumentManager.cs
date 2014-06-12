@@ -113,8 +113,9 @@ namespace UniArchive.document
             {
                 FullDataSet.DOCUMENTSRow row = (FullDataSet.DOCUMENTSRow)((DataRowView)documentsBindingSource.Current).Row;
                 copy.PreviewFilesForm previewForm = new copy.PreviewFilesForm();
+                previewForm.TopMost = true;
                 previewForm.loadByDocument(row.ID);
-                previewForm.ShowDialog();
+                previewForm.Show();
             }
         }
 

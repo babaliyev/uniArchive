@@ -8,7 +8,7 @@ namespace UniArchive.attributes
     public enum AttributeType
     {
         String,
-        DateTime,
+        Date,
         Boolean,
         Decimal,
         Integer,
@@ -55,23 +55,7 @@ namespace UniArchive.attributes
 
         public static AttributeType GetAttributeType(string valueType)
         {
-            if (valueType.Equals(AttributeType.String.ToString().ToLower()))
-                return AttributeType.String;
-            else
-                if (valueType.Equals(AttributeType.DateTime.ToString().ToLower()))
-                    return AttributeType.DateTime;
-                else
-                    if (valueType.Equals(AttributeType.Decimal.ToString().ToLower()))
-                        return AttributeType.Decimal;
-                    else
-                        if (valueType.Equals(AttributeType.Integer.ToString().ToLower()))
-                            return AttributeType.Integer;
-                        else
-                            if (valueType.Equals(AttributeType.Boolean.ToString().ToLower()))
-                                return AttributeType.Boolean;
-                            else
-                                return AttributeType.Reference;
-
+            return (AttributeType)Enum.Parse(typeof(AttributeType),valueType);
         }
 
         public override string ToString()

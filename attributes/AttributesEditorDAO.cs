@@ -68,7 +68,7 @@ namespace UniArchive.attributes
                 case AttributeType.Integer:
                     insertAttributeCmd.Parameters[":INT_VALUE"].Value = value.Value;
                     break;
-                case AttributeType.DateTime:
+                case AttributeType.Date:
                     insertAttributeCmd.Parameters[":DATE_VALUE"].Value = value.Value;
                     break;
                 case AttributeType.Boolean:
@@ -155,7 +155,7 @@ namespace UniArchive.attributes
                         case AttributeType.Integer:
                             value.Value = reader["INT_VALUE"];
                             break;
-                        case AttributeType.DateTime:
+                        case AttributeType.Date:
                             value.Value = reader["DATE_VALUE"];
                             break;
                         case AttributeType.Boolean:
@@ -219,7 +219,7 @@ namespace UniArchive.attributes
                         case AttributeType.Integer:
                             value.Value = reader["INT_VALUE"];
                             break;
-                        case AttributeType.DateTime:
+                        case AttributeType.Date:
                             value.Value = reader["DATE_VALUE"];
                             break;
                         case AttributeType.Boolean:
@@ -242,7 +242,7 @@ namespace UniArchive.attributes
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
                 conn.Open();
-                OracleCommand cmd = new OracleCommand(@"SELECT ATTRIBUTE_ID as A_ID,MANDATORY,NAME, DESCRIPTION, VALUETYPE,REFERENCE_TYPE_ID
+                OracleCommand cmd = new OracleCommand(@"SELECT ATTRIBUTE_ID as A_ID,MANDATORY,NAME, DESCRIPTION, VALUETYPE, REFERENCE_TYPE_ID
                                                         FROM ARCH.DOCUMENT_TYPE_ATTRIBUTES dtattr inner join ARCH.ATTRIBUTES att 
                                                         on dtattr.ATTRIBUTE_ID = att.ID
                                                         where DOCUMENT_TYPE_ID=:ID", conn);
