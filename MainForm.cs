@@ -199,6 +199,7 @@ namespace UniArchive
             document.DocumentManager document = new UniArchive.document.DocumentManager(id);
             document.Tag = DataHelper.getDocNum(id);
             document.OnDocumentDeleted += CloseDocument;
+            document.OnDocumentDeleted += RealoadNvigation;
             openDocument(document);
         }
 
@@ -207,6 +208,7 @@ namespace UniArchive
             document.DocumentManager document = new UniArchive.document.DocumentManager();
             document.Tag = "Yeni sənəd";
             document.OnDocumentDeleted += CloseDocument;
+            document.OnDocumentDeleted += RealoadNvigation;
             openDocument(document);
         }
 
@@ -308,6 +310,12 @@ namespace UniArchive
             _doc.Dispose();
         }
 
+         public void RealoadNvigation(object sender, EventArgs args)
+         {
+             addressTree1.load();
+             directoryTree1.load();
+         }
+
          public void OpenCopy(object sender, EventArgs args)
          {
              showCopy(Convert.ToDecimal(sender));
@@ -318,8 +326,7 @@ namespace UniArchive
              ImportForm impForm = new ImportForm();
              if (impForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
              {
-                 addressTree1.load();
-                 directoryTree1.load();
+                 RealoadNvigation(null, null);
              }
          }
        

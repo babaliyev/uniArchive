@@ -22,9 +22,11 @@ namespace UniArchive.directoryTree
 
         public void load()
         {
+            this.fullDataSet.EnforceConstraints = false;
             this.directoriesTableAdapter.Fill(this.fullDataSet.DIRECTORIES);
             this.documentsTableAdapter.Fill(this.fullDataSet.DOCUMENTS);
             this.copiesTableAdapter.Fill(this.fullDataSet.COPIES);
+            this.fullDataSet.EnforceConstraints = true;
 
             directoryTreeView.Nodes.Clear();
 

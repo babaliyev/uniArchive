@@ -89,8 +89,18 @@ namespace UniArchive.document
 
             if (res == DialogResult.Yes)
             {
-                this.documentsBindingSource.RemoveCurrent();
-                this.saveBarButtonItem_ItemClick(null, null);
+                try
+                {
+                    this.documentsBindingSource.RemoveCurrent();
+                    this.documentsBindingSource.EndEdit();
+                    this.documentsTableAdapter.Update(this.fullDataSet.DOCUMENTS);
+                    if (OnDocumentDeleted != null)
+                        OnDocumentDeleted(this, null);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Səhv", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }           
         }
 

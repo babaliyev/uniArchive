@@ -80,8 +80,6 @@ namespace UniArchive
                         filesTableAdapter.Update(fullDataSet.FILES);
                         fullDataSet.FILES.Clear();
                     }
-
-
                 }
                 else
                 {

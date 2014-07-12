@@ -22,9 +22,11 @@ namespace UniArchive.addressTree
 
         public void load()
         {
+            this.fullDataSet.EnforceConstraints = false;
             this.addressDictionaryTableAdapter.Fill(this.fullDataSet.ADDRESS_DICTIONARY);
             this.documentsTableAdapter.Fill(this.fullDataSet.DOCUMENTS);
             this.copiesTableAdapter.Fill(this.fullDataSet.COPIES);
+            this.fullDataSet.EnforceConstraints = true;
 
             addressTreeView.Nodes.Clear();
 

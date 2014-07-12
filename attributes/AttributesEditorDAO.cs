@@ -94,18 +94,18 @@ namespace UniArchive.attributes
         public List<AttributeValue> getDocumentAttributes(decimal docId, decimal docTypeID)
         {
             List<AttributeValue> values = new List<AttributeValue>();
+            List<AttributeValue> savedValues = new List<AttributeValue>();
             fillDocSavedAttributes(ref values, docId);
-            if (values.Count == 0)
-                fillDocTypeAttributes(ref values, docId, docTypeID);
+            fillDocTypeAttributes(savedValues, ref values, docId, docTypeID);
             return values;
         }
 
         public List<AttributeValue> getCopyAttributes(decimal docId, decimal copyId, decimal copyTypeID)
         {
             List<AttributeValue> values = new List<AttributeValue>();
+            List<AttributeValue> savedValues = new List<AttributeValue>();
             fillCopySavedAttributes(ref values, copyId);
-            if (values.Count == 0)
-                fillCopyTypeAttributes(ref values,docId,copyId,copyTypeID);
+            fillCopyTypeAttributes(savedValues, ref values,docId,copyId,copyTypeID);
             return values;
         }
 
@@ -237,7 +237,7 @@ namespace UniArchive.attributes
             }
         }
 
-        private void fillDocTypeAttributes(ref List<AttributeValue> values,decimal docId, decimal docTypeID)
+        private void fillDocTypeAttributes(List<AttributeValue> savedValues, ref List<AttributeValue> values, decimal docId, decimal docTypeID)
         {
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
@@ -251,7 +251,7 @@ namespace UniArchive.attributes
                 OracleDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    AttributeValue value = new AttributeValue();
+                    AttributeValue value = null;
 
                     Attribute attr = new Attribute();
                     attr.ID = reader.GetDecimal(0);
@@ -261,9 +261,25 @@ namespace UniArchive.attributes
                     if (attr.ValueType == AttributeType.Reference)
                         attr.ReferenceType = reader.GetDecimal(5);
 
-                    value.Attribute = attr;
-                    value.ID = DataHelper.GET_ATTRIBUTES_VALUES_ID();
-                    value.DocumentID = docId;
+                    bool savedAttribute = false;
+
+                    foreach (AttributeValue av in savedValues)
+                    {
+                        if (av.Attribute.ID == attr.ID)
+                        {
+                            value = av;
+                            savedAttribute = true;
+                            break;
+                        }
+                    }
+
+                    if (!savedAttribute)
+                    {
+                        value = new AttributeValue();
+                        value.Attribute = attr;
+                        value.ID = DataHelper.GET_ATTRIBUTES_VALUES_ID();
+                        value.DocumentID = docId;
+                    }
 
                     values.Add(value);
                 }
@@ -272,7 +288,7 @@ namespace UniArchive.attributes
             }
         }
 
-        private void fillCopyTypeAttributes(ref List<AttributeValue> values, decimal docId, decimal copyId, decimal copyTypeID)
+        private void fillCopyTypeAttributes(List<AttributeValue> savedValues, ref List<AttributeValue> values, decimal docId, decimal copyId, decimal copyTypeID)
         {
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
@@ -286,20 +302,38 @@ namespace UniArchive.attributes
                 OracleDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    AttributeValue value = new AttributeValue();
+                    AttributeValue value = null;
 
+                    
                     Attribute attr = new Attribute();
-                    attr.ID = reader.GetDecimal(0);
+                    attr.ID = reader.GetDecimal(0);;
                     attr.Name = reader.GetString(2);
                     //attr.Description = reader.GetString(3);
                     attr.ValueTypeName = reader.GetString(4);
                     if (attr.ValueType == AttributeType.Reference)
                         attr.ReferenceType = reader.GetDecimal(5);
 
-                    value.Attribute = attr;
-                    value.ID = DataHelper.GET_ATTRIBUTES_VALUES_ID();
-                    value.DocumentID = docId;
-                    value.CopyID = copyId;
+
+                    bool savedAttribute = false;
+
+                    foreach (AttributeValue av in savedValues)
+                    {
+                        if (av.Attribute.ID == attr.ID)
+                        {
+                            value = av;
+                            savedAttribute = true;
+                            break;
+                        }
+                    }
+
+                    if (!savedAttribute)
+                    {
+                        value = new AttributeValue();
+                        value.Attribute = attr;
+                        value.ID = DataHelper.GET_ATTRIBUTES_VALUES_ID();
+                        value.DocumentID = docId;
+                        value.CopyID = copyId;
+                    }
 
                     values.Add(value);
                 }
