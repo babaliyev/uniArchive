@@ -95,7 +95,7 @@ namespace UniArchive.attributes
         {
             List<AttributeValue> values = new List<AttributeValue>();
             List<AttributeValue> savedValues = new List<AttributeValue>();
-            fillDocSavedAttributes(ref values, docId);
+            fillDocSavedAttributes(ref savedValues, docId);
             fillDocTypeAttributes(savedValues, ref values, docId, docTypeID);
             return values;
         }
@@ -104,7 +104,7 @@ namespace UniArchive.attributes
         {
             List<AttributeValue> values = new List<AttributeValue>();
             List<AttributeValue> savedValues = new List<AttributeValue>();
-            fillCopySavedAttributes(ref values, copyId);
+            fillCopySavedAttributes(ref savedValues, copyId);
             fillCopyTypeAttributes(savedValues, ref values,docId,copyId,copyTypeID);
             return values;
         }
