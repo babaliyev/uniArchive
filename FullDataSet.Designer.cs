@@ -76,19 +76,15 @@ namespace UniArchive {
         
         private SEARCHDataTable tableSEARCH;
         
-        private global::System.Data.DataRelation relationATTRIBUTES_VALUES_FK3;
-        
         private global::System.Data.DataRelation relationATTRIBUTES_VALUES_FK2;
         
-        private global::System.Data.DataRelation relationCOPIES_FK2;
-        
-        private global::System.Data.DataRelation relationDOCUMENT_HISTORY_FK1;
+        private global::System.Data.DataRelation relationATTRIBUTES_VALUES_FK3;
         
         private global::System.Data.DataRelation relationDOCUMENT_HISTORY_FK2;
         
-        private global::System.Data.DataRelation relationROLE_DOCUMENT_ACCESS_FK1;
+        private global::System.Data.DataRelation relationDOCUMENT_HISTORY_FK1;
         
-        private global::System.Data.DataRelation relationFILES_FK2;
+        private global::System.Data.DataRelation relationROLE_DOCUMENT_ACCESS_FK1;
         
         private global::System.Data.DataRelation relationADDRESS_DICTIONARY_FK1;
         
@@ -169,6 +165,10 @@ namespace UniArchive {
         private global::System.Data.DataRelation relationDIRECTORIES_DIRECTORIES;
         
         private global::System.Data.DataRelation relationDIRECTORIES_DIRECTORIES1;
+        
+        private global::System.Data.DataRelation relationFILES_FK2;
+        
+        private global::System.Data.DataRelation relationCOPIES_FK2;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -888,13 +888,11 @@ namespace UniArchive {
                     this.tableSEARCH.InitVars();
                 }
             }
-            this.relationATTRIBUTES_VALUES_FK3 = this.Relations["ATTRIBUTES_VALUES_FK3"];
             this.relationATTRIBUTES_VALUES_FK2 = this.Relations["ATTRIBUTES_VALUES_FK2"];
-            this.relationCOPIES_FK2 = this.Relations["COPIES_FK2"];
-            this.relationDOCUMENT_HISTORY_FK1 = this.Relations["DOCUMENT_HISTORY_FK1"];
+            this.relationATTRIBUTES_VALUES_FK3 = this.Relations["ATTRIBUTES_VALUES_FK3"];
             this.relationDOCUMENT_HISTORY_FK2 = this.Relations["DOCUMENT_HISTORY_FK2"];
+            this.relationDOCUMENT_HISTORY_FK1 = this.Relations["DOCUMENT_HISTORY_FK1"];
             this.relationROLE_DOCUMENT_ACCESS_FK1 = this.Relations["ROLE_DOCUMENT_ACCESS_FK1"];
-            this.relationFILES_FK2 = this.Relations["FILES_FK2"];
             this.relationADDRESS_DICTIONARY_FK1 = this.Relations["ADDRESS_DICTIONARY_FK1"];
             this.relationATTRIBUTES_VALUES_FK1 = this.Relations["ATTRIBUTES_VALUES_FK1"];
             this.relationCOPIES_FK1 = this.Relations["COPIES_FK1"];
@@ -935,6 +933,8 @@ namespace UniArchive {
             this.relationDIRECTORIES_DOCUMENTS = this.Relations["DIRECTORIES_DOCUMENTS"];
             this.relationDIRECTORIES_DIRECTORIES = this.Relations["DIRECTORIES_DIRECTORIES"];
             this.relationDIRECTORIES_DIRECTORIES1 = this.Relations["DIRECTORIES_DIRECTORIES1"];
+            this.relationFILES_FK2 = this.Relations["FILES_FK2"];
+            this.relationCOPIES_FK2 = this.Relations["COPIES_FK2"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -998,13 +998,6 @@ namespace UniArchive {
             this.tableSEARCH = new SEARCHDataTable();
             base.Tables.Add(this.tableSEARCH);
             global::System.Data.ForeignKeyConstraint fkc;
-            fkc = new global::System.Data.ForeignKeyConstraint("ATTRIBUTES_VALUES_FK3", new global::System.Data.DataColumn[] {
-                        this.tableDOCUMENTS.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableATTRIBUTES_VALUES.DOCUMENT_IDColumn});
-            this.tableATTRIBUTES_VALUES.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.Cascade;
-            fkc.DeleteRule = global::System.Data.Rule.Cascade;
-            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             fkc = new global::System.Data.ForeignKeyConstraint("ATTRIBUTES_VALUES_FK2", new global::System.Data.DataColumn[] {
                         this.tableCOPIES.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableATTRIBUTES_VALUES.COPY_IDColumn});
@@ -1012,23 +1005,23 @@ namespace UniArchive {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("COPIES_FK2", new global::System.Data.DataColumn[] {
+            fkc = new global::System.Data.ForeignKeyConstraint("ATTRIBUTES_VALUES_FK3", new global::System.Data.DataColumn[] {
                         this.tableDOCUMENTS.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCOPIES.DOCUMENT_IDColumn});
-            this.tableCOPIES.Constraints.Add(fkc);
+                        this.tableATTRIBUTES_VALUES.DOCUMENT_IDColumn});
+            this.tableATTRIBUTES_VALUES.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.Cascade;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
+            fkc = new global::System.Data.ForeignKeyConstraint("DOCUMENT_HISTORY_FK2", new global::System.Data.DataColumn[] {
+                        this.tableCOPIES.IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDOCUMENT_HISTORY.COPY_IDColumn});
+            this.tableDOCUMENT_HISTORY.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
             fkc = new global::System.Data.ForeignKeyConstraint("DOCUMENT_HISTORY_FK1", new global::System.Data.DataColumn[] {
                         this.tableDOCUMENTS.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableDOCUMENT_HISTORY.DOCUMENT_IDColumn});
-            this.tableDOCUMENT_HISTORY.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.Cascade;
-            fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("DOCUMENT_HISTORY_FK2", new global::System.Data.DataColumn[] {
-                        this.tableCOPIES.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableDOCUMENT_HISTORY.COPY_IDColumn});
             this.tableDOCUMENT_HISTORY.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
@@ -1040,41 +1033,26 @@ namespace UniArchive {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FILES_FK2", new global::System.Data.DataColumn[] {
-                        this.tableCOPIES.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableFILES.COPY_IDColumn});
-            this.tableFILES.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.Cascade;
-            fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            this.relationATTRIBUTES_VALUES_FK3 = new global::System.Data.DataRelation("ATTRIBUTES_VALUES_FK3", new global::System.Data.DataColumn[] {
-                        this.tableDOCUMENTS.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableATTRIBUTES_VALUES.DOCUMENT_IDColumn}, false);
-            this.Relations.Add(this.relationATTRIBUTES_VALUES_FK3);
             this.relationATTRIBUTES_VALUES_FK2 = new global::System.Data.DataRelation("ATTRIBUTES_VALUES_FK2", new global::System.Data.DataColumn[] {
                         this.tableCOPIES.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableATTRIBUTES_VALUES.COPY_IDColumn}, false);
             this.Relations.Add(this.relationATTRIBUTES_VALUES_FK2);
-            this.relationCOPIES_FK2 = new global::System.Data.DataRelation("COPIES_FK2", new global::System.Data.DataColumn[] {
+            this.relationATTRIBUTES_VALUES_FK3 = new global::System.Data.DataRelation("ATTRIBUTES_VALUES_FK3", new global::System.Data.DataColumn[] {
                         this.tableDOCUMENTS.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCOPIES.DOCUMENT_IDColumn}, false);
-            this.Relations.Add(this.relationCOPIES_FK2);
-            this.relationDOCUMENT_HISTORY_FK1 = new global::System.Data.DataRelation("DOCUMENT_HISTORY_FK1", new global::System.Data.DataColumn[] {
-                        this.tableDOCUMENTS.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableDOCUMENT_HISTORY.DOCUMENT_IDColumn}, false);
-            this.Relations.Add(this.relationDOCUMENT_HISTORY_FK1);
+                        this.tableATTRIBUTES_VALUES.DOCUMENT_IDColumn}, false);
+            this.Relations.Add(this.relationATTRIBUTES_VALUES_FK3);
             this.relationDOCUMENT_HISTORY_FK2 = new global::System.Data.DataRelation("DOCUMENT_HISTORY_FK2", new global::System.Data.DataColumn[] {
                         this.tableCOPIES.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableDOCUMENT_HISTORY.COPY_IDColumn}, false);
             this.Relations.Add(this.relationDOCUMENT_HISTORY_FK2);
+            this.relationDOCUMENT_HISTORY_FK1 = new global::System.Data.DataRelation("DOCUMENT_HISTORY_FK1", new global::System.Data.DataColumn[] {
+                        this.tableDOCUMENTS.IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDOCUMENT_HISTORY.DOCUMENT_IDColumn}, false);
+            this.Relations.Add(this.relationDOCUMENT_HISTORY_FK1);
             this.relationROLE_DOCUMENT_ACCESS_FK1 = new global::System.Data.DataRelation("ROLE_DOCUMENT_ACCESS_FK1", new global::System.Data.DataColumn[] {
                         this.tableCOPIES.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableROLE_DOCUMENT_ACCESS.COPY_IDColumn}, false);
             this.Relations.Add(this.relationROLE_DOCUMENT_ACCESS_FK1);
-            this.relationFILES_FK2 = new global::System.Data.DataRelation("FILES_FK2", new global::System.Data.DataColumn[] {
-                        this.tableCOPIES.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableFILES.COPY_IDColumn}, false);
-            this.Relations.Add(this.relationFILES_FK2);
             this.relationADDRESS_DICTIONARY_FK1 = new global::System.Data.DataRelation("ADDRESS_DICTIONARY_FK1", new global::System.Data.DataColumn[] {
                         this.tableADDRESS_DICTIONARY.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableADDRESS_DICTIONARY.PARENT_IDColumn}, false);
@@ -1235,6 +1213,14 @@ namespace UniArchive {
                         this.tableDIRECTORIES.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableDIRECTORIES.PARENT_IDColumn}, false);
             this.Relations.Add(this.relationDIRECTORIES_DIRECTORIES1);
+            this.relationFILES_FK2 = new global::System.Data.DataRelation("FILES_FK2", new global::System.Data.DataColumn[] {
+                        this.tableCOPIES.IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableFILES.COPY_IDColumn}, false);
+            this.Relations.Add(this.relationFILES_FK2);
+            this.relationCOPIES_FK2 = new global::System.Data.DataRelation("COPIES_FK2", new global::System.Data.DataColumn[] {
+                        this.tableDOCUMENTS.IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCOPIES.DOCUMENT_IDColumn}, false);
+            this.Relations.Add(this.relationCOPIES_FK2);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10543,23 +10529,23 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DOCUMENTSRow DOCUMENTSRow {
-                get {
-                    return ((DOCUMENTSRow)(this.GetParentRow(this.Table.ParentRelations["ATTRIBUTES_VALUES_FK3"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["ATTRIBUTES_VALUES_FK3"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public COPIESRow COPIESRow {
                 get {
                     return ((COPIESRow)(this.GetParentRow(this.Table.ParentRelations["ATTRIBUTES_VALUES_FK2"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["ATTRIBUTES_VALUES_FK2"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DOCUMENTSRow DOCUMENTSRow {
+                get {
+                    return ((DOCUMENTSRow)(this.GetParentRow(this.Table.ParentRelations["ATTRIBUTES_VALUES_FK3"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["ATTRIBUTES_VALUES_FK3"]);
                 }
             }
             
@@ -11023,17 +11009,6 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DOCUMENTSRow DOCUMENTSRow {
-                get {
-                    return ((DOCUMENTSRow)(this.GetParentRow(this.Table.ParentRelations["COPIES_FK2"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["COPIES_FK2"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public COPY_TYPESRow COPY_TYPESRow {
                 get {
                     return ((COPY_TYPESRow)(this.GetParentRow(this.Table.ParentRelations["COPIES_FK1"])));
@@ -11045,12 +11020,12 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public FILESRow[] GetFILESRows() {
-                if ((this.Table.ChildRelations["FILES_FK2"] == null)) {
-                    return new FILESRow[0];
+            public DOCUMENTSRow DOCUMENTSRow {
+                get {
+                    return ((DOCUMENTSRow)(this.GetParentRow(this.Table.ParentRelations["COPIES_FK2"])));
                 }
-                else {
-                    return ((FILESRow[])(base.GetChildRows(this.Table.ChildRelations["FILES_FK2"])));
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["COPIES_FK2"]);
                 }
             }
             
@@ -11106,6 +11081,17 @@ namespace UniArchive {
                 }
                 else {
                     return ((USER_DOCUMENT_ACCESSRow[])(base.GetChildRows(this.Table.ChildRelations["USER_DOCUMENT_ACCESS_FK1"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FILESRow[] GetFILESRows() {
+                if ((this.Table.ChildRelations["FILES_FK2"] == null)) {
+                    return new FILESRow[0];
+                }
+                else {
+                    return ((FILESRow[])(base.GetChildRows(this.Table.ChildRelations["FILES_FK2"])));
                 }
             }
         }
@@ -11437,23 +11423,23 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DOCUMENTSRow DOCUMENTSRow {
-                get {
-                    return ((DOCUMENTSRow)(this.GetParentRow(this.Table.ParentRelations["DOCUMENT_HISTORY_FK1"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["DOCUMENT_HISTORY_FK1"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public COPIESRow COPIESRow {
                 get {
                     return ((COPIESRow)(this.GetParentRow(this.Table.ParentRelations["DOCUMENT_HISTORY_FK2"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["DOCUMENT_HISTORY_FK2"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DOCUMENTSRow DOCUMENTSRow {
+                get {
+                    return ((DOCUMENTSRow)(this.GetParentRow(this.Table.ParentRelations["DOCUMENT_HISTORY_FK1"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["DOCUMENT_HISTORY_FK1"]);
                 }
             }
             
@@ -11936,17 +11922,6 @@ namespace UniArchive {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public COPIESRow[] GetCOPIESRows() {
-                if ((this.Table.ChildRelations["COPIES_FK2"] == null)) {
-                    return new COPIESRow[0];
-                }
-                else {
-                    return ((COPIESRow[])(base.GetChildRows(this.Table.ChildRelations["COPIES_FK2"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ATTRIBUTES_VALUESRow[] GetATTRIBUTES_VALUESRows() {
                 if ((this.Table.ChildRelations["ATTRIBUTES_VALUES_FK3"] == null)) {
                     return new ATTRIBUTES_VALUESRow[0];
@@ -11986,6 +11961,17 @@ namespace UniArchive {
                 }
                 else {
                     return ((USER_DOCUMENT_ACCESSRow[])(base.GetChildRows(this.Table.ChildRelations["USER_DOCUMENT_ACCESS_FK2"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public COPIESRow[] GetCOPIESRows() {
+                if ((this.Table.ChildRelations["COPIES_FK2"] == null)) {
+                    return new COPIESRow[0];
+                }
+                else {
+                    return ((COPIESRow[])(base.GetChildRows(this.Table.ChildRelations["COPIES_FK2"])));
                 }
             }
         }

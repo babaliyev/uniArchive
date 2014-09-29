@@ -329,6 +329,31 @@ namespace UniArchive
                  RealoadNvigation(null, null);
              }
          }
+
+         private bool showLogin()
+         {
+             LoginForm login = new LoginForm();
+             if (login.ShowDialog() != DialogResult.Yes)
+             {
+                 Close();
+                 return false;
+             }
+             else
+             {
+                 login.Dispose();
+                 return true;
+             }
+         }
+
+         private void MainForm_Load(object sender, EventArgs e)
+         {
+             if (!showLogin()) Close();
+             else
+             {
+                 directoryTree1.load();
+                 addressTree1.load();
+             }
+         }
        
     }
 }

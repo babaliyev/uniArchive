@@ -17,7 +17,6 @@ namespace UniArchive.directoryTree
         public DirectoryTree()
         {
             InitializeComponent();
-            load();
         }
 
         public void load()
@@ -108,8 +107,7 @@ namespace UniArchive.directoryTree
         {
             TreeNode selectedNode = directoryTreeView.SelectedNode;
             if (selectedNode != null && (selectedNode.ImageIndex == 0 || selectedNode.ImageIndex == 1))
-            {
-                
+            {                
                     DirectoryForm directoryForm = new DirectoryForm(Convert.ToInt32(selectedNode.Tag));
                     if (directoryForm.ShowDialog() == DialogResult.OK)
                     {

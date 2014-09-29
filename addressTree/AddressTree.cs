@@ -17,7 +17,6 @@ namespace UniArchive.addressTree
         public AddressTree()
         {
             InitializeComponent();
-            load();
         }
 
         public void load()

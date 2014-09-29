@@ -42,6 +42,7 @@
             this.iExit = new DevExpress.XtraBars.BarButtonItem();
             this.ChangePassword = new DevExpress.XtraBars.BarButtonItem();
             this.actionsBarSubItem = new DevExpress.XtraBars.BarSubItem();
+            this.importBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             this.executeBarSubItem = new DevExpress.XtraBars.BarSubItem();
             this.Clients = new DevExpress.XtraBars.BarButtonItem();
             this.Users = new DevExpress.XtraBars.BarButtonItem();
@@ -85,7 +86,6 @@
             this.returnCopy = new DevExpress.XtraBars.BarButtonItem();
             this.documentManager = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
-            this.importBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
             this.hideContainerLeft.SuspendLayout();
@@ -248,6 +248,7 @@
             this.ChangePassword.Caption = "Şifrəni dəyişmək";
             this.ChangePassword.Id = 56;
             this.ChangePassword.Name = "ChangePassword";
+            this.ChangePassword.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.ChangePassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ChangePassword_ItemClick);
             // 
             // actionsBarSubItem
@@ -260,6 +261,14 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.importBarButtonItem),
             new DevExpress.XtraBars.LinkPersistInfo(this.Search, true)});
             this.actionsBarSubItem.Name = "actionsBarSubItem";
+            // 
+            // importBarButtonItem
+            // 
+            this.importBarButtonItem.Caption = "Import";
+            this.importBarButtonItem.CategoryGuid = new System.Guid("6c82e277-637f-4052-bc27-3ba2af92f37f");
+            this.importBarButtonItem.Id = 64;
+            this.importBarButtonItem.Name = "importBarButtonItem";
+            this.importBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.importBarButtonItem_ItemClick);
             // 
             // executeBarSubItem
             // 
@@ -617,14 +626,6 @@
             this.tabbedView.UseDocumentSelector = DevExpress.Utils.DefaultBoolean.True;
             this.tabbedView.DocumentAdded += new DevExpress.XtraBars.Docking2010.Views.DocumentEventHandler(this.tabbedView_DocumentAdded);
             // 
-            // importBarButtonItem
-            // 
-            this.importBarButtonItem.Caption = "Import";
-            this.importBarButtonItem.CategoryGuid = new System.Guid("6c82e277-637f-4052-bc27-3ba2af92f37f");
-            this.importBarButtonItem.Id = 64;
-            this.importBarButtonItem.Name = "importBarButtonItem";
-            this.importBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.importBarButtonItem_ItemClick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -640,6 +641,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UniArchive";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
             this.hideContainerLeft.ResumeLayout(false);
